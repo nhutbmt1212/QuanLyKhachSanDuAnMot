@@ -1,0 +1,33 @@
+﻿@model QuanLyKhachSan.Models.TaiKhoan;
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <form asp-controller="Access" asp-action="Login" method="post">
+        <h1>Login</h1>
+        <input type="text" placeholder="Tên đăng nhập" asp-for="TenDangNhap" />
+        <input type="password" placeholder="Mật khẩu" asp-for="MatKhau" />
+        <label>
+            <input type="checkbox" asp-for="LuuMatKhau"/>
+            Lưu mật khẩu.
+        </label>
+        <button type="submit">
+            Login
+        </button>
+        @if (ViewData["ValidateMessage"] != null)
+        {
+            <br/>
+            <br />
+            <label>@ViewData["ValidateMessage"]</label>
+        }
+    </form>
+</body>
+</html>

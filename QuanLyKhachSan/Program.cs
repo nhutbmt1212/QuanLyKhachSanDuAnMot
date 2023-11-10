@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
+//using library for authentication
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         builder.Configuration.GetConnectionString("DefaultConnection")
         )
     );
+//start write code authentication
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Access/Login";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,10 +37,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+//write app
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Login}/{action=Index}/{id?}");
+    pattern: "{controller=Access}/{action=Login}/{id?}");
 
 app.Run();

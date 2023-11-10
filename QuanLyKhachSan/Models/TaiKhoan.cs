@@ -13,5 +13,7 @@ namespace QuanLyKhachSan.Models
         public string Email { get; set; }
         [Required]
         public string MatKhau { get; set; }
+
+        public bool LuuMatKhau { get; set; }
     }
 }
