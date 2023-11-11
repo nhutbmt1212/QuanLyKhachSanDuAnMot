@@ -1,95 +1,214 @@
-﻿<style>
-    .container-with-border {
-        border: 2px solid #000;
-        padding: 10px;
-    }
-
-    .table-container {
-        max-height: 300px;
-        overflow: auto;
-    }
-
-    .table th,
-    .table td {
-        padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
-    }
-
-    .table th {
-        font-size: 14px; /* Kích thước chữ của tiêu đề */
-    }
-
-    .table td {
-        font-size: 12px; /* Kích thước chữ của nội dung */
-    }
-
-    .employee-column {
-        display: flex;
-        align-items: center;
-    }
-
-    .employee-image {
-        width: 40px; /* Đặt kích thước của ảnh */
-        height: 40px; /* Đặt kích thước của ảnh */
-        border-radius: 50%; /* Tạo hình tròn cho ảnh */
-        margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
-    }
-
-    .employee-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-        .employee-info span {
-            text-align: center;
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <style>
+        .container-with-border {
+            border: 2px solid #000;
+            padding: 10px;
+            position: relative;
         }
 
-            .employee-info span:first-child {
-                color: orange;
-            }
-</style>
+        .table-container {
+            max-height: 300px;
+            overflow: auto;
+        }
 
-<div class="container-with-border mt-5">
-    <div class="table-container">
-        <table class="table">
-            <thead class="thead-dark">
+        .table th,
+        .table td {
+            padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+        }
+
+        .table th {
+            font-size: 14px; /* Kích thước chữ của tiêu đề */
+        }
+
+        .table td {
+            font-size: 12px; /* Kích thước chữ của nội dung */
+          
+        }
+
+        .employee-column {
+            display: flex;
+            align-items: center;
+        }
+
+        .employee-image {
+            width: 40px; /* Đặt kích thước của ảnh */
+            height: 40px; /* Đặt kích thước của ảnh */
+            border-radius: 50%; /* Tạo hình tròn cho ảnh */
+            margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
+        }
+
+        .employee-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .employee-info span {
+                text-align: center;
+            }
+
+                .employee-info span:first-child {
+                    color: orange;
+                }
+
+        .table td.employee-info-column {
+            position:relative;
+            top:25px;
+        }
+
+        .table td.employee-info-column-button {
+            position: relative;
+            top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div style="border:1px solid #343A40">
+            <table class="table">
+            <thead class="thead-dark" >
+                    <tr>
+                        <th scope="col">Nhân Viên</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Địa Chỉ</th>
+                        <th scope="col">Số Điện Thoại</th>
+                        <th scope="col">CCCD</th>
+                        <th scope="col">Giới Tính</th>
+                        <th scope="col">Ngày Sinh</th>
+                        <th scope="col">Ngày Đăng Ký</th>
+                        <th scope="col">Chức Vụ</th>
+                        <th scope="col">Ngày Vào Làm</th>
+                        <th scope="col">Sửa</th>
+                        <th scope="col">Xóa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr >
+                        <td class="employee-column">
+                            <div class="employee-info">
+                                <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                                <span>#GS-2234</span>
+                                <span>Nguyen Van A</span>
+                            </div>
+                        </td>
+                    <td class="employee-info-column">nva@example.com</td>
+                    <td class="employee-info-column">123 XYZ Street</td>
+                    <td class="employee-info-column">0123456789</td>
+                    <td class="employee-info-column">123456789012</td>
+                    <td class="employee-info-column">Nam</td>
+                    <td class="employee-info-column">1995-05-15</td>
+                    <td class="employee-info-column">2023-01-01</td>
+                    <td class="employee-info-column">Quản lý</td>
+                    <td class="employee-info-column">2023-01-02</td>
+
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
+                    </tr>
                 <tr>
-                    <th scope="col">Nhân Viên</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Địa Chỉ</th>
-                    <th scope="col">Số Điện Thoại</th>
-                    <th scope="col">CCCD</th>
-                    <th scope="col">Giới Tính</th>
-                    <th scope="col">Ngày Sinh</th>
-                    <th scope="col">Ngày Đăng Ký</th>
-                    <th scope="col">Chức Vụ</th>
-                    <th scope="col">Ngày Vào Làm</th>
-                    <th scope="col">Xóa</th>
-                    <th scope="col">Sửa</th>
+                    <td class="employee-column">
+                        <div class="employee-info">
+                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                            <span>#GS-2234</span>
+                            <span>Nguyen Van A</span>
+                        </div>
+                    </td>
+                    <td class="employee-info-column">nva@example.com</td>
+                    <td class="employee-info-column">123 XYZ Street</td>
+                    <td class="employee-info-column">0123456789</td>
+                    <td class="employee-info-column">123456789012</td>
+                    <td class="employee-info-column">Nam</td>
+                    <td class="employee-info-column">1995-05-15</td>
+                    <td class="employee-info-column">2023-01-01</td>
+                    <td class="employee-info-column">Quản lý</td>
+                    <td class="employee-info-column">2023-01-02</td>
+
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
                 </tr>
-            </thead>
-            <tbody>
-            <td class="employee-column">
-                <div class="employee-info">
-                    <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                    <span>#GS-2234</span>
-                    <span>Nguyen Van A</span>
-                </div>
-            </td>
-                    <td>nva@example.com</td>
-                    <td>123 XYZ Street</td>
-                    <td>0123456789</td>
-                    <td>123456789012</td>
-                    <td>Nam</td>
-                    <td>1995-05-15</td>
-                    <td>2023-01-01</td>
-                    <td>Quản lý</td>
-                    <td>2023-01-02</td>
-                    <td>Xóa</td>
-                    <td>Sửa</td>
+                <tr>
+                    <td class="employee-column">
+                        <div class="employee-info">
+                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                            <span>#GS-2234</span>
+                            <span>Nguyen Van A</span>
+                        </div>
+                    </td>
+                    <td class="employee-info-column">nva@example.com</td>
+                    <td class="employee-info-column">123 XYZ Street</td>
+                    <td class="employee-info-column">0123456789</td>
+                    <td class="employee-info-column">123456789012</td>
+                    <td class="employee-info-column">Nam</td>
+                    <td class="employee-info-column">1995-05-15</td>
+                    <td class="employee-info-column">2023-01-01</td>
+                    <td class="employee-info-column">Quản lý</td>
+                    <td class="employee-info-column">2023-01-02</td>
+
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
                 </tr>
-            
-            </tbody>
-        </table>
-    </div>
-</div>
+                <tr>
+                    <td class="employee-column">
+                        <div class="employee-info">
+                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                            <span>#GS-2234</span>
+                            <span>Nguyen Van A</span>
+                        </div>
+                    </td>
+                    <td class="employee-info-column">nva@example.com</td>
+                    <td class="employee-info-column">123 XYZ Street</td>
+                    <td class="employee-info-column">0123456789</td>
+                    <td class="employee-info-column">123456789012</td>
+                    <td class="employee-info-column">Nam</td>
+                    <td class="employee-info-column">1995-05-15</td>
+                    <td class="employee-info-column">2023-01-01</td>
+                    <td class="employee-info-column">Quản lý</td>
+                    <td class="employee-info-column">2023-01-02</td>
+
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
+                </tr>
+                <tr>
+                    <td class="employee-column">
+                        <div class="employee-info">
+                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                            <span>#GS-2234</span>
+                            <span>Nguyen Van A</span>
+                        </div>
+                    </td>
+                    <td class="employee-info-column">nva@example.com</td>
+                    <td class="employee-info-column">123 XYZ Street</td>
+                    <td class="employee-info-column">0123456789</td>
+                    <td class="employee-info-column">123456789012</td>
+                    <td class="employee-info-column">Nam</td>
+                    <td class="employee-info-column">1995-05-15</td>
+                    <td class="employee-info-column">2023-01-01</td>
+                    <td class="employee-info-column">Quản lý</td>
+                    <td class="employee-info-column">2023-01-02</td>
+
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
+                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+</body>
+</html>
