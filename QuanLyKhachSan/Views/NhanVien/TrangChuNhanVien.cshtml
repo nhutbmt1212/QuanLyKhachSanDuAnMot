@@ -1,0 +1,95 @@
+﻿<style>
+    .container-with-border {
+        border: 2px solid #000;
+        padding: 10px;
+    }
+
+    .table-container {
+        max-height: 300px;
+        overflow: auto;
+    }
+
+    .table th,
+    .table td {
+        padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+    }
+
+    .table th {
+        font-size: 14px; /* Kích thước chữ của tiêu đề */
+    }
+
+    .table td {
+        font-size: 12px; /* Kích thước chữ của nội dung */
+    }
+
+    .employee-column {
+        display: flex;
+        align-items: center;
+    }
+
+    .employee-image {
+        width: 40px; /* Đặt kích thước của ảnh */
+        height: 40px; /* Đặt kích thước của ảnh */
+        border-radius: 50%; /* Tạo hình tròn cho ảnh */
+        margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
+    }
+
+    .employee-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+        .employee-info span {
+            text-align: center;
+        }
+
+            .employee-info span:first-child {
+                color: orange;
+            }
+</style>
+
+<div class="container-with-border mt-5">
+    <div class="table-container">
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nhân Viên</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Địa Chỉ</th>
+                    <th scope="col">Số Điện Thoại</th>
+                    <th scope="col">CCCD</th>
+                    <th scope="col">Giới Tính</th>
+                    <th scope="col">Ngày Sinh</th>
+                    <th scope="col">Ngày Đăng Ký</th>
+                    <th scope="col">Chức Vụ</th>
+                    <th scope="col">Ngày Vào Làm</th>
+                    <th scope="col">Xóa</th>
+                    <th scope="col">Sửa</th>
+                </tr>
+            </thead>
+            <tbody>
+            <td class="employee-column">
+                <div class="employee-info">
+                    <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                    <span>#GS-2234</span>
+                    <span>Nguyen Van A</span>
+                </div>
+            </td>
+                    <td>nva@example.com</td>
+                    <td>123 XYZ Street</td>
+                    <td>0123456789</td>
+                    <td>123456789012</td>
+                    <td>Nam</td>
+                    <td>1995-05-15</td>
+                    <td>2023-01-01</td>
+                    <td>Quản lý</td>
+                    <td>2023-01-02</td>
+                    <td>Xóa</td>
+                    <td>Sửa</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+</div>
