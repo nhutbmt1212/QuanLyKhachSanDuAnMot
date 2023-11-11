@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<QuanLyKhachSan.Models.NhanVien>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -42,6 +43,7 @@
             height: 40px; /* Đặt kích thước của ảnh */
             border-radius: 50%; /* Tạo hình tròn cho ảnh */
             margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
+            margin-left:8px;
         }
 
         .employee-info {
@@ -67,16 +69,35 @@
             position: relative;
             top: 15px;
         }
+
+        .btn_themNv{
+            margin-bottom:10px;
+        }
+
+        .btn_threeDotDropDown{
+            border:none;
+            background-color:none;
+        }
+
+        #dropdownMenuButton{
+            background-color: #FFFFFF;
+            border:none;
+        }
+
+        .icon_threeDot{
+            color:black;
+            font-size:18px;
+        }
     </style>
 </head>
 <body>
 
-
+    <a class="btn btn-primary btn_themNv">Thêm nhân viên</a>
     <div style="border:1px solid #343A40">
             <table class="table">
-            <thead class="thead-dark" >
+            <thead class="thead-dark align-middle" >
                     <tr>
-                        <th scope="col">Nhân Viên</th>
+                        <th scope="col" class="text-center">Nhân Viên</th>
                         <th scope="col">Email</th>
                         <th scope="col">Địa Chỉ</th>
                         <th scope="col">Số Điện Thoại</th>
@@ -86,117 +107,45 @@
                         <th scope="col">Ngày Đăng Ký</th>
                         <th scope="col">Chức Vụ</th>
                         <th scope="col">Ngày Vào Làm</th>
-                        <th scope="col">Sửa</th>
-                        <th scope="col">Xóa</th>
+                        <th scope="col">Xử lý</th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    <tr >
-                        <td class="employee-column">
+                @foreach (var nv in Model)
+                {
+                <tr >
+                        <td class="employee-column align-middle">
                             <div class="employee-info">
                                 <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                                <span>#GS-2234</span>
-                                <span>Nguyen Van A</span>
+                                <span>@nv.MaNhanVien</span>
+                                <span>@nv.TenNhanVien</span>
                             </div>
                         </td>
-                    <td class="employee-info-column">nva@example.com</td>
-                    <td class="employee-info-column">123 XYZ Street</td>
-                    <td class="employee-info-column">0123456789</td>
-                    <td class="employee-info-column">123456789012</td>
-                    <td class="employee-info-column">Nam</td>
-                    <td class="employee-info-column">1995-05-15</td>
-                    <td class="employee-info-column">2023-01-01</td>
-                    <td class="employee-info-column">Quản lý</td>
-                    <td class="employee-info-column">2023-01-02</td>
+                    <td class="employee-info-column ">@nv.Email</td>
+                    <td class="employee-info-column">@nv.DiaChi</td>
+                    <td class="employee-info-column">@nv.SoDienThoai</td>
+                    <td class="employee-info-column">@nv.CCCD</td>
+                    <td class="employee-info-column">@nv.GioiTinh</td>
+                        <td class="employee-info-column">@nv.NgaySinh.ToShortDateString()</td>
+                        <td class="employee-info-column">@nv.NgayDangKy.ToShortDateString()</td>
+                    <td class="employee-info-column">@nv.ChucVu</td>
+                    <td class="employee-info-column">@nv.NgayVaoLam.ToShortDateString()</td>
 
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
-                    </tr>
-                <tr>
-                    <td class="employee-column">
-                        <div class="employee-info">
-                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                            <span>#GS-2234</span>
-                            <span>Nguyen Van A</span>
+                    <td style="font-size:20px" class="employee-info-column-button">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Xóa</a>
+                                <a class="dropdown-item" href="#">Sửa</a>
+                            </div>
                         </div>
                     </td>
-                    <td class="employee-info-column">nva@example.com</td>
-                    <td class="employee-info-column">123 XYZ Street</td>
-                    <td class="employee-info-column">0123456789</td>
-                    <td class="employee-info-column">123456789012</td>
-                    <td class="employee-info-column">Nam</td>
-                    <td class="employee-info-column">1995-05-15</td>
-                    <td class="employee-info-column">2023-01-01</td>
-                    <td class="employee-info-column">Quản lý</td>
-                    <td class="employee-info-column">2023-01-02</td>
-
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
-                </tr>
-                <tr>
-                    <td class="employee-column">
-                        <div class="employee-info">
-                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                            <span>#GS-2234</span>
-                            <span>Nguyen Van A</span>
-                        </div>
-                    </td>
-                    <td class="employee-info-column">nva@example.com</td>
-                    <td class="employee-info-column">123 XYZ Street</td>
-                    <td class="employee-info-column">0123456789</td>
-                    <td class="employee-info-column">123456789012</td>
-                    <td class="employee-info-column">Nam</td>
-                    <td class="employee-info-column">1995-05-15</td>
-                    <td class="employee-info-column">2023-01-01</td>
-                    <td class="employee-info-column">Quản lý</td>
-                    <td class="employee-info-column">2023-01-02</td>
-
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
-                </tr>
-                <tr>
-                    <td class="employee-column">
-                        <div class="employee-info">
-                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                            <span>#GS-2234</span>
-                            <span>Nguyen Van A</span>
-                        </div>
-                    </td>
-                    <td class="employee-info-column">nva@example.com</td>
-                    <td class="employee-info-column">123 XYZ Street</td>
-                    <td class="employee-info-column">0123456789</td>
-                    <td class="employee-info-column">123456789012</td>
-                    <td class="employee-info-column">Nam</td>
-                    <td class="employee-info-column">1995-05-15</td>
-                    <td class="employee-info-column">2023-01-01</td>
-                    <td class="employee-info-column">Quản lý</td>
-                    <td class="employee-info-column">2023-01-02</td>
-
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
-                </tr>
-                <tr>
-                    <td class="employee-column">
-                        <div class="employee-info">
-                            <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
-                            <span>#GS-2234</span>
-                            <span>Nguyen Van A</span>
-                        </div>
-                    </td>
-                    <td class="employee-info-column">nva@example.com</td>
-                    <td class="employee-info-column">123 XYZ Street</td>
-                    <td class="employee-info-column">0123456789</td>
-                    <td class="employee-info-column">123456789012</td>
-                    <td class="employee-info-column">Nam</td>
-                    <td class="employee-info-column">1995-05-15</td>
-                    <td class="employee-info-column">2023-01-01</td>
-                    <td class="employee-info-column">Quản lý</td>
-                    <td class="employee-info-column">2023-01-02</td>
-
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-primary"><i class="bi bi-pencil-fill"></i></a></td>
-                    <td style="font-size:20px" class="employee-info-column-button"><a class="btn btn-danger"> <i class="bi bi-trash3"></i></a></td>
 
                 </tr>
+                }
                 </tbody>
             </table>
         </div>
