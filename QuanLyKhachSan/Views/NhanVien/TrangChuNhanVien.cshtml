@@ -100,7 +100,7 @@
     <div class="form-popup" id="myForm">
         <form class="form-container">
             <h1>Thêm nhân viên</h1>
-            @* --- *@
+            @* ---popup_Addnhanvien *@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -132,7 +132,11 @@
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
-                        <input class="form-control" />
+                        @* <input class="form-control" /> *@
+                        <select class="form-control">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
                     </div> 
                     <div class="form-group">
                         <label>Chức vụ</label>
@@ -158,8 +162,11 @@
             </div>
 
             @* --- *@
-            <button type="submit" class="btn">Login</button>
-            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+         <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25  cancel " onclick="closeForm()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px">Thêm nhân viên</button>
+               
+            </div> 
         </form>
     </div>
     @* -- *@
