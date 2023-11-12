@@ -71,8 +71,10 @@
             top: 15px;
         }
 
-        .btn_themNv{
+        #btn_themNv{
             margin-bottom:10px;
+            max-width:180px;
+            max-height:40px;
         }
 
         .btn_threeDotDropDown{
@@ -97,24 +99,101 @@
 
     <!-- The form -->
     <div class="form-popup" id="myForm">
-        <form action="/action_page.php" class="form-container">
-            <h1>Login</h1>
-
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
+        <form class="form-container">
+            <h1>Thêm nhân viên</h1>
+            @* --- *@
+            <div class="container">
+                <div class="row align-items-start">
+                    <div class="col">
+                        <label>
+                            <strong>Mã nhân viên</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control col-10 w-50" />
+                    </div>
+                    <div class="col">
+                        <label>
+                            <strong>Tên nhân viên</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    </div>
+                    <div class="col">
+                        <label>
+                            <strong>Email</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col">
+                        <label>
+                            <strong>Địa chỉ</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    </div>
+                    <div class="col">
+                        <label>
+                            <strong>Số điện thoại</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    </div>
+                    <div class="col">
+                        <label>
+                            <strong>CCCD</strong>
+                        </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    </div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="col">
+                            <label>
+                                <strong>Giới tính</strong>
+                            </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                       
+                    </div>
+                    <div class="col">
+                            <label>
+                                <strong>Ngày sinh</strong>
+                            </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                       
+                    </div>
+                    <div class="col">
+                            <label>
+                                <strong>Ngày đăng ký</strong>
+                            </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                        </div>
+                   
+                </div>
+                <div class="row align-items-end">
+                    <div class="col">
+                            <label>
+                                <strong>Chức vụ</strong>
+                            </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                 
+                    </div>
+                    <div class="col">
+                            <label>
+                                <strong>Ngày vào làm</strong>
+                            </label>
+                        <input type="text" class="btn-them-popup form-control w-50" />
+                    
+                    </div>
+                </div>
+            </div>
+          
+            @* --- *@
             <button type="submit" class="btn">Login</button>
             <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
         </form>
     </div>
     @* -- *@
-    <a class="btn btn-primary btn_themNv" onclick="openForm()">Thêm nhân viên</a>
+    <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
     <div style="border:1px solid #343A40">
             <table class="table">
-            <thead class="thead-dark align-middle" >
+            <thead class="thead-dark " >
                     <tr>
                         <th scope="col" class="text-center">Nhân Viên</th>
                         <th scope="col">Email</th>
@@ -134,7 +213,7 @@
                 @foreach (var nv in Model)
                 {
                 <tr >
-                        <td class="employee-column align-middle">
+                        <td class="employee-column ">
                             <div class="employee-info">
                                 <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
                                 <span>@nv.MaNhanVien</span>
