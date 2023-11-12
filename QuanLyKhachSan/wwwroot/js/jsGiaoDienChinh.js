@@ -27,18 +27,49 @@ menuBar.addEventListener('click', function () {
 
 
 
-if (window.innerWidth < 768) {
-	sidebar.classList.add('hide');
-} else if (window.innerWidth > 576) {
-	searchButtonIcon.classList.replace('bx-x', 'bx-search');
-	searchForm.classList.remove('show');
-}
+
+//if (window.innerWidth < 768) {
+//	sidebar.classList.add('hide');
+//} else if (window.innerWidth > 576) {
+//	searchButtonIcon.classList.replace('bx-x', 'bx-search');
+//	searchForm.classList.remove('show');
+//}
 
 
-window.addEventListener('resize', function () {
-	if (this.innerWidth > 576) {
-		searchButtonIcon.classList.replace('bx-x', 'bx-search');
-		searchForm.classList.remove('show');
+//window.addEventListener('resize', function () {
+//	if (this.innerWidth > 576) {
+//		searchButtonIcon.classList.replace('bx-x', 'bx-search');
+//		searchForm.classList.remove('show');
+//	}
+//})
+
+//add attribute when the width < 768px
+
+function thuGonNav() {
+	var handleBtn = document.getElementById('HandleButton');
+		var element = document.getElementById('sidebar');
+	if (window.innerWidth < 768) {
+		element.setAttribute('class', 'hide');
+		handleBtn.style.display = 'none';
+
 	}
-})
+	else {
+		handleBtn.style.display = 'block';
+		element.removeAttribute('class');
+	}
+}
+window.onload = thuGonNav;
+window.onresize = thuGonNav;
 
+
+
+
+
+
+
+
+
+
+
+
+	
