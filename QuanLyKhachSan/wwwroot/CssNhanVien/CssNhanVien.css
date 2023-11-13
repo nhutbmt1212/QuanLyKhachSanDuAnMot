@@ -65,3 +65,64 @@
     .form-container .btn:hover, .open-button:hover {
         opacity: 1;
     }
+/*EditPopUp*/
+
+.form-popupEdit {
+    display: none;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+
+@media only screen and (max-width: 1230px) {
+    .thead_ngaydangky {
+        display: none;
+    }
+    .tbody_ngaydangky{
+        display:none;
+    }
+}
+@media only screen and (max-width:1140px){
+    .thead_ngayvaolam{
+        display:none;
+    }
+    .tbody_ngayvaolam {
+        display: none;
+    }
+}
+@media only screen and (max-width:1063px){
+    .thead_diachi {
+        display: none;
+    }
+    .tbody_diachi {
+        display: none;
+    }
+}
+@media only screen and (max-width:1001px) {
+    .thead_ngaysinh {
+        display: none;
+    }
+
+    .tbody_ngaysinh {
+        display: none;
+    }
+
+    @media only screen and (max-width:914px) {
+        .thead_sdt {
+            display: none;
+        }
+
+        .tbody_sdt {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width:823px) {
+        .thead_gioitinh {
+            display: none;
+        }
+
+        .tbody_gioitinh {
+            display: none;
+        }
+    }

@@ -93,11 +93,11 @@
     </style>
 </head>
 <body>
-    @* -- *@
+    @* -- popup -addEmployee *@
 
 
     <!-- The form -->
-    <div class="form-popup" id="myForm">
+    <div class="form-popup mb-2" id="myForm">
         <form class="form-container">
             <h1>Thêm nhân viên</h1>
             @* ---popup_Addnhanvien *@
@@ -144,7 +144,14 @@
                     </div>
                     <div class="form-group">
                         <label>Chức vụ</label>
-                        <input class="form-control" />
+                        <select class="form-control">
+                            <option value="Nhân viên">
+                                Nhân viên
+                            </option>
+                            <option value="Quản lý">
+                                Quản lý
+                            </option>
+                        </select>
                     </div>
 
                 </div>
@@ -161,7 +168,12 @@
                         <label>Ngày vào làm</label>
                         <input class="form-control" type="date" />
                     </div>
-
+                    <div class="form-group">
+                     
+                            <label for="formFile" class="form-label">Ảnh nhân viên</label>
+                            <input  type="file" id="formFile">
+                      
+                    </div>
                 </div>
             </div>
 
@@ -174,22 +186,117 @@
         </form>
     </div>
     @* -- *@
+
+    @* --popup Edit Employee *@
+    @* -- popup -addEmployee *@
+
+
+ 
+    <div class="form-popupEdit mb-2" id="myFormEdit">
+        <form class="form-container">
+            <h1>Sửa nhân viên</h1>
+            @* ---popup_Addnhanvien *@
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã Nhân Viên</label>
+                        <input class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên Nhân Viên</label>
+                        <input class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" />
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>CCCD</label>
+                        <input class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select class="form-control">
+                            <option value="nam">
+                                Nam
+                            </option>
+                            <option value="Nữ">
+                                Nữ
+                            </option>
+                        </select>
+
+                    </div>
+                    <div class="form-group">
+                        <label>Chức vụ</label>
+                        <select class="form-control">
+                            <option value="Nhân viên">
+                                Nhân viên
+                            </option>
+                            <option value="Quản lý">
+                                Quản lý
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày đăng ký</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày vào làm</label>
+                        <input class="form-control" type="date" />
+                    </div>
+                    <div class="form-group">
+
+                        <label for="formFile" class="form-label">Ảnh nhân viên</label>
+                        <input type="file" id="formFile">
+
+                    </div>
+                </div>
+            </div>
+
+            @* --- *@
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25  cancel " onclick="CloseFormEdit()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px">Sửa nhân viên</button>
+
+            </div>
+        </form>
+    </div>
+    @* -- *@
     <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
-    <div style="border:1px solid #343A40">
-        <table class="table">
+    <div  class="table-responsive">
+        <table class="table" style="border:1px solid #343A40">
             <thead class="thead-dark ">
                 <tr>
-                    <th scope="col" class="text-center">Nhân Viên</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Địa Chỉ</th>
-                    <th scope="col">Số Điện Thoại</th>
-                    <th scope="col">CCCD</th>
-                    <th scope="col">Giới Tính</th>
-                    <th scope="col">Ngày Sinh</th>
-                    <th scope="col">Ngày Đăng Ký</th>
-                    <th scope="col">Chức Vụ</th>
-                    <th scope="col">Ngày Vào Làm</th>
-                    <th scope="col">Xử lý</th>
+                    <th scope="col" class="text-center thead_nhanvien">Nhân Viên</th>
+                    <th scope="col" class="thead_email">Email</th>
+                    <th scope="col" class="thead_diachi">Địa Chỉ</th>
+                    <th scope="col" class="thead_sdt">Số Điện Thoại</th>
+                    <th scope="col" class="thead_cccd">CCCD</th>
+                    <th scope="col" class="thead_gioitinh">Giới Tính</th>
+                    <th scope="col" class="thead_ngaysinh">Ngày Sinh</th>
+                    <th scope="col" class="thead_ngaydangky">Ngày Đăng Ký</th>
+                    <th scope="col" class="thead_chucvu">Chức Vụ</th>
+                    <th scope="col" class="thead_ngayvaolam">Ngày Vào Làm</th>
+                    <th scope="col" class="thead_xuly">Xử lý</th>
 
                 </tr>
             </thead>
@@ -205,14 +312,14 @@
                             </div>
                         </td>
                         <td class="employee-info-column ">@nv.Email</td>
-                        <td class="employee-info-column">@nv.DiaChi</td>
-                        <td class="employee-info-column">@nv.SoDienThoai</td>
+                        <td class="employee-info-column tbody_diachi">@nv.DiaChi</td>
+                        <td class="employee-info-column tbody_sdt">@nv.SoDienThoai</td>
                         <td class="employee-info-column">@nv.CCCD</td>
-                        <td class="employee-info-column">@nv.GioiTinh</td>
-                        <td class="employee-info-column">@nv.NgaySinh.ToShortDateString()</td>
-                        <td class="employee-info-column">@nv.NgayDangKy.ToShortDateString()</td>
+                        <td class="employee-info-column tbody_gioitinh">@nv.GioiTinh</td>
+                        <td class="employee-info-column tbody_ngaysinh">@nv.NgaySinh.ToShortDateString()</td>
+                        <td class="employee-info-column tbody_ngaydangky">@nv.NgayDangKy.ToShortDateString()</td>
                         <td class="employee-info-column">@nv.ChucVu</td>
-                        <td class="employee-info-column">@nv.NgayVaoLam.ToShortDateString()</td>
+                        <td class="employee-info-column tbody_ngayvaolam">@nv.NgayVaoLam.ToShortDateString()</td>
 
                         <td style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
@@ -220,7 +327,7 @@
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="#">Sửa</a>
+                                    <a class="dropdown-item" onclick="OpenFormEdit()">Sửa</a>
                                     <a class="dropdown-item" href="#">Xóa</a>
                                 </div>
                             </div>

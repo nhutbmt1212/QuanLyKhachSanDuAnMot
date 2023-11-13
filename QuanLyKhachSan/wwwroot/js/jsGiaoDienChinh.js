@@ -48,7 +48,7 @@ menuBar.addEventListener('click', function () {
 function thuGonNav() {
 	var handleBtn = document.getElementById('HandleButton');
 		var element = document.getElementById('sidebar');
-	if (window.innerWidth < 768) {
+	if (window.innerWidth < 769) {
 		element.setAttribute('class', 'hide');
 		handleBtn.style.display = 'none';
 
