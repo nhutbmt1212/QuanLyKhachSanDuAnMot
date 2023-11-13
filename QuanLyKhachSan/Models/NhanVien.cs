@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Drawing;
 
 namespace QuanLyKhachSan.Models
 {
@@ -40,11 +41,10 @@ namespace QuanLyKhachSan.Models
 
         [DataType(DataType.Date)]
         public DateTime NgayVaoLam { get; set; }
+        [NotMapped]
+        public IFormFile AnhNhanVien { get; set; }
 
-        public string AnhNhanVien { get; set; }
-
-
-        public IFormFile UploadFile { get; set; }
+        public string AnhNhanVienBase64 { get; set; }
 
     }
 }

@@ -12,8 +12,8 @@ using QuanLyKhachSan.Models;
 namespace QuanLyKhachSan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20231111022102_AddtoDb")]
-    partial class AddtoDb
+    [Migration("20231113082838_AddToDb")]
+    partial class AddToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,7 +31,7 @@ namespace QuanLyKhachSan.Migrations
                         .HasMaxLength(6)
                         .HasColumnType("nvarchar(6)");
 
-                    b.Property<string>("AnhNhanVien")
+                    b.Property<string>("AnhNhanVienBase64")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -82,23 +82,6 @@ namespace QuanLyKhachSan.Migrations
                     b.HasKey("MaNhanVien");
 
                     b.ToTable("NhanVien");
-
-                    b.HasData(
-                        new
-                        {
-                            MaNhanVien = "NV0001",
-                            AnhNhanVien = "123",
-                            CCCD = "123456789012",
-                            ChucVu = "Quản lý",
-                            DiaChi = "Hòa Thuận",
-                            Email = "nhutbmt82@gmail.com",
-                            GioiTinh = "Nam",
-                            NgayDangKy = new DateTime(2022, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgaySinh = new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SoDienThoai = "0938485965",
-                            TenNhanVien = "Trương Minh Nhựt"
-                        });
                 });
 
             modelBuilder.Entity("QuanLyKhachSan.Models.TaiKhoan", b =>
@@ -150,7 +133,7 @@ namespace QuanLyKhachSan.Migrations
                             LuuMatKhau = false,
                             MatKhau = "admin",
                             NgaySinh = new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTaoTaiKhoan = new DateTime(2023, 11, 11, 9, 21, 2, 19, DateTimeKind.Local).AddTicks(6472),
+                            NgayTaoTaiKhoan = new DateTime(2023, 11, 13, 15, 28, 38, 118, DateTimeKind.Local).AddTicks(2728),
                             SoDienThoai = "0394858697",
                             TenNguoiSuDung = "Trương Minh Nhựt"
                         },
@@ -162,7 +145,7 @@ namespace QuanLyKhachSan.Migrations
                             LuuMatKhau = false,
                             MatKhau = "user",
                             NgaySinh = new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTaoTaiKhoan = new DateTime(2023, 11, 11, 9, 21, 2, 19, DateTimeKind.Local).AddTicks(6487),
+                            NgayTaoTaiKhoan = new DateTime(2023, 11, 13, 15, 28, 38, 118, DateTimeKind.Local).AddTicks(2746),
                             SoDienThoai = "0394858697",
                             TenNguoiSuDung = "Trương Minh Nhựt"
                         });

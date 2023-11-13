@@ -98,7 +98,7 @@
 
     <!-- The form -->
     <div class="form-popup mb-2" id="myForm">
-        <form class="form-container" method="post">
+        <form class="form-container" method="post" enctype="multipart/form-data">
             <h1>Thêm nhân viên</h1>
             @* ---popup_Addnhanvien *@
             <div class="row">
@@ -171,7 +171,7 @@
                     <div class="form-group">
                      
                             <label for="formFile" class="form-label">Ảnh nhân viên</label>
-                            <input  type="file" id="formFile" name="anhnhanvien">
+                            <input  type="file" id="formFile" name="anhnhanvien" >
                       
                     </div>
                 </div>
@@ -266,7 +266,7 @@
                     <div class="form-group">
 
                         <label for="formFile" class="form-label">Ảnh nhân viên</label>
-                        <input type="file" id="formFile">
+                        <input type="file" id="formFile" >
 
                     </div>
                 </div>
@@ -315,9 +315,9 @@
                         <td class="employee-info-column ">
                                 @stt
                         </td>
-                        <td class="employee-column ">
-                            <div class="employee-info">
-                                <img src="~/Images/AnhTest.jpg" alt="Employee Image" class="employee-image">
+                        <td class="employee-column d-flex justify-content-center">
+                            <div class="employee-info ">
+                                <img src="~/@nv.AnhNhanVienBase64" alt="Employee Image" class="employee-image">
                                 <span>@nv.MaNhanVien</span>
                                 <span>@nv.TenNhanVien</span>
                             </div>
@@ -339,7 +339,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item" onclick="OpenFormEdit()">Sửa</a>
-                                    <a class="dropdown-item" href="#">Xóa</a>
+                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien">Xóa</a>
                                 </div>
                             </div>
                         </td>

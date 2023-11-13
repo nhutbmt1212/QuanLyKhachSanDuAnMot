@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuanLyKhachSan.Migrations
 {
     /// <inheritdoc />
-    public partial class AddtoDb : Migration
+    public partial class AddToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -28,7 +28,7 @@ namespace QuanLyKhachSan.Migrations
                     NgayDangKy = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ChucVu = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     NgayVaoLam = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    AnhNhanVien = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    AnhNhanVienBase64 = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -55,17 +55,12 @@ namespace QuanLyKhachSan.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "NhanVien",
-                columns: new[] { "MaNhanVien", "AnhNhanVien", "CCCD", "ChucVu", "DiaChi", "Email", "GioiTinh", "NgayDangKy", "NgaySinh", "NgayVaoLam", "SoDienThoai", "TenNhanVien" },
-                values: new object[] { "NV0001", "123", "123456789012", "Quản lý", "Hòa Thuận", "nhutbmt82@gmail.com", "Nam", new DateTime(2022, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), "0938485965", "Trương Minh Nhựt" });
-
-            migrationBuilder.InsertData(
                 table: "TaiKhoan",
                 columns: new[] { "TenDangNhap", "Email", "GioiTinh", "LuuMatKhau", "MatKhau", "NgaySinh", "NgayTaoTaiKhoan", "SoDienThoai", "TenNguoiSuDung" },
                 values: new object[,]
                 {
-                    { "admin", "admin123@gmai.com", "Nam", false, "admin", new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 11, 11, 9, 21, 2, 19, DateTimeKind.Local).AddTicks(6472), "0394858697", "Trương Minh Nhựt" },
-                    { "user", "user123@gmai.com", "Nam", false, "user", new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 11, 11, 9, 21, 2, 19, DateTimeKind.Local).AddTicks(6487), "0394858697", "Trương Minh Nhựt" }
+                    { "admin", "admin123@gmai.com", "Nam", false, "admin", new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 11, 13, 15, 28, 38, 118, DateTimeKind.Local).AddTicks(2728), "0394858697", "Trương Minh Nhựt" },
+                    { "user", "user123@gmai.com", "Nam", false, "user", new DateTime(2004, 9, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 11, 13, 15, 28, 38, 118, DateTimeKind.Local).AddTicks(2746), "0394858697", "Trương Minh Nhựt" }
                 });
         }
 

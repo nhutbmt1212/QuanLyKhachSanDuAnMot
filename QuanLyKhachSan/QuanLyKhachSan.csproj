@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\UploadImage\da297298-e201-47ed-b5de-6adee69e9646_quatIgnite.png" />
+    <Content Remove="wwwroot\UploadImage\quatIgnite.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
@@ -24,6 +29,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\UploadImage\da297298-e201-47ed-b5de-6adee69e9646_quatIgnite.png" />
+    <None Include="wwwroot\UploadImage\quatIgnite.png" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
 using System.Drawing;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -17,9 +19,32 @@ namespace QuanLyKhachSan.Controllers
             return View(listNhanVien);
         }
         [HttpPost]
-        public IActionResult ThemNhanVien(string manhanvien,string tennhanvien,string email, string diachi, string sodienthoai, string cccd, string gioitinh, string chucvu, string ngaysinh, DateTime ngaydangky, DateTime ngayvaolam,IFormFile anhnhanvien)
+        public IActionResult ThemNhanVien(NhanVien nv, [FromServices] IWebHostEnvironment hostingEnvironment)
         {
-            return RedirectToAction("Index","NhanVien");
+            if (nv.AnhNhanVien != null && nv.AnhNhanVien.Length > 0)
+            {
+                var uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "UploadImage");
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + nv.AnhNhanVien.FileName;
+                var filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    nv.AnhNhanVien.CopyTo(stream);
+                }
+
+                // Save the relative file path to the database
+                nv.AnhNhanVienBase64 = Path.Combine("UploadImage", uniqueFileName);
+
+                _db.NhanVien.Add(nv);
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("TrangChuNhanVien", "NhanVien");
         }
     }
 }
