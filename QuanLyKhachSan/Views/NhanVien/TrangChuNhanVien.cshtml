@@ -286,6 +286,7 @@
         <table class="table" style="border:1px solid #343A40">
             <thead class="thead-dark ">
                 <tr>
+                    <th scope="col" class="text-center">#</th>
                     <th scope="col" class="text-center thead_nhanvien">Nhân Viên</th>
                     <th scope="col" class="thead_email">Email</th>
                     <th scope="col" class="thead_diachi">Địa Chỉ</th>
@@ -301,12 +302,30 @@
                 </tr>
             </thead>
             <tbody>
+                @{
+                    int stt = 0;
+                    
+                }
                 @foreach (var nv in Model)
                 {
+
+                    stt = stt + 1;  
+
                     <tr>
+                        
+
+                        <td class="employee-info-column ">
+                            <div class="row">
+                                <div class="col-sm"> @stt</div>
+                                <div class="col-sm"><i class="bi bi-plus-circle"></i></div>
+                           
+                            </div>
+                           
+                        </td>
+                       
                         <td class="employee-column ">
                             <div class="employee-info">
-                                <img src="https://www.gettyimages.com/gi-resources/images/500px/983703508.jpg" alt="Employee Image" class="employee-image">
+                                <img src="~/Images/AnhTest.jpg" alt="Employee Image" class="employee-image">
                                 <span>@nv.MaNhanVien</span>
                                 <span>@nv.TenNhanVien</span>
                             </div>
