@@ -98,41 +98,41 @@
 
     <!-- The form -->
     <div class="form-popup mb-2" id="myForm">
-        <form class="form-container">
+        <form class="form-container" method="post">
             <h1>Thêm nhân viên</h1>
             @* ---popup_Addnhanvien *@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã Nhân Viên</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="manhanvien" />
                     </div>
                     <div class="form-group">
                         <label>Tên Nhân Viên</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="tennhanvien"/>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="email"/>
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="diachi"/>
                     </div>
 
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="sodienthoai"/>
                     </div>
                     <div class="form-group">
                         <label>CCCD</label>
-                        <input class="form-control" />
+                        <input class="form-control" name="cccd"/>
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
-                        <select class="form-control">
+                        <select class="form-control" name="gioitinh">
                             <option value="nam">
                                 Nam
                             </option>
@@ -144,7 +144,7 @@
                     </div>
                     <div class="form-group">
                         <label>Chức vụ</label>
-                        <select class="form-control">
+                        <select class="form-control" name="chucvu">
                             <option value="Nhân viên">
                                 Nhân viên
                             </option>
@@ -158,20 +158,20 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input class="form-control" type="date" />
+                        <input class="form-control" type="date" name="ngaysinh" />
                     </div>
                     <div class="form-group">
                         <label>Ngày đăng ký</label>
-                        <input class="form-control" type="date" />
+                        <input class="form-control" type="date" name="ngaydangky"/>
                     </div>
                     <div class="form-group">
                         <label>Ngày vào làm</label>
-                        <input class="form-control" type="date" />
+                        <input class="form-control" type="date" name="ngayvaolam"/>
                     </div>
                     <div class="form-group">
                      
                             <label for="formFile" class="form-label">Ảnh nhân viên</label>
-                            <input  type="file" id="formFile">
+                            <input  type="file" id="formFile" name="anhnhanvien">
                       
                     </div>
                 </div>
@@ -180,7 +180,7 @@
             @* --- *@
          <div class="clearfix">
                 <button type="button" class="btn float-right m-2 w-25  cancel " onclick="closeForm()">Đóng</button>
-                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px">Thêm nhân viên</button>
+                <button  class="btn float-right m-2 w-25 " style="min-width:200px" asp-action="ThemNhanVien" asp-controller="NhanVien">Thêm nhân viên</button>
                
             </div> 
         </form>
@@ -312,17 +312,9 @@
                     stt = stt + 1;  
 
                     <tr>
-                        
-
                         <td class="employee-info-column ">
-                            <div class="row">
-                                <div class="col-sm"> @stt</div>
-                                <div class="col-sm"><i class="bi bi-plus-circle"></i></div>
-                           
-                            </div>
-                           
+                                @stt
                         </td>
-                       
                         <td class="employee-column ">
                             <div class="employee-info">
                                 <img src="~/Images/AnhTest.jpg" alt="Employee Image" class="employee-image">
@@ -351,8 +343,9 @@
                                 </div>
                             </div>
                         </td>
-
+                      <tr></tr>
                     </tr>
+                    
                 }
             </tbody>
         </table>

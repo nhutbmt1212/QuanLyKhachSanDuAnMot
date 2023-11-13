@@ -43,5 +43,8 @@ namespace QuanLyKhachSan.Models
 
         public string AnhNhanVien { get; set; }
 
+
+        public IFormFile UploadFile { get; set; }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
+using System.Drawing;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -14,6 +15,11 @@ namespace QuanLyKhachSan.Controllers
         {
             var listNhanVien = _db.NhanVien.ToList();
             return View(listNhanVien);
+        }
+        [HttpPost]
+        public IActionResult ThemNhanVien(string manhanvien,string tennhanvien,string email, string diachi, string sodienthoai, string cccd, string gioitinh, string chucvu, string ngaysinh, DateTime ngaydangky, DateTime ngayvaolam,IFormFile anhnhanvien)
+        {
+            return RedirectToAction("Index","NhanVien");
         }
     }
 }
