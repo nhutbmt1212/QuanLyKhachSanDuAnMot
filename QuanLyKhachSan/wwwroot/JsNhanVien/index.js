@@ -21,3 +21,78 @@ function CloseFormEdit() {
     document.getElementById('myFormEdit').style.display = "none";
 
 }
+
+//turn off popup if both open
+document.getElementById('btn_themNv').addEventListener('click', hidePopUpEditNhanVien);
+
+function hidePopUpEditNhanVien() {
+    document.getElementById('myFormEdit').style.display = 'none';
+}
+
+document.getElementById('btn_Sua').addEventListener('click', hidePopUpAddNhanVien);
+
+function hidePopUpAddNhanVien() {
+    document.getElementById('myForm').style.display = 'none';
+    btn_them.style.display = 'block';
+
+}
+
+//take data from table and fill to form popup edit employee
+var getValue = document.querySelector('#table_detail');
+
+getValue.addEventListener('click', function (e) {
+    const cell = e.target.closest('td');
+    if (!cell) { return; }
+    const row = cell.parentElement;
+
+    var MaNv = row.dataset.maNv;
+    var TenNv = row.dataset.tenNv;
+    var email = row.dataset.email;
+    var diaChiNv = row.dataset.diaChi;
+    var sdtNv = row.dataset.soDienThoai;
+    var cccdNv = row.dataset.cccd;
+    var gioiTinhNv = row.dataset.gioiTinh;
+    var ngaySinhNv = row.dataset.ngaySinh;
+    var ngayDangKyNv = row.dataset.ngayDangKy;
+    var chucVuNv = row.dataset.chucVu;
+    var ngayVaoLamNv = row.dataset.ngayVaoLam;
+
+    console.log(ngayVaoLamNv);
+    document.querySelector('.manvEdit').value = MaNv;
+    document.querySelector('.tennvEdit').value = TenNv;
+    document.querySelector('.emailEdit').value = email;
+    document.querySelector('.diaChiEdit').value = diaChiNv;
+    document.querySelector('.soDienThoaiEdit').value = sdtNv;
+    document.querySelector('.cccdEdit').value = cccdNv;
+    document.querySelector('.gioiTinhEdit').value = gioiTinhNv;
+
+    //convert time
+    var ngaySinhParts = ngaySinhNv.split('/');
+    var ngaySinhFormatted = ngaySinhParts[2] + '-' + ngaySinhParts[1] + '-' + ngaySinhParts[0];
+    document.querySelector('.ngaySinhEdit').value = ngaySinhFormatted; document.querySelector('.manvEdit').value = MaNv;
+
+
+    var ngayDangKyParts = ngayDangKyNv.split('/');
+    var ngayDangKyFormatted = ngayDangKyParts[2] + '-' + ngayDangKyParts[1] + '-' + ngayDangKyParts[0];
+    document.querySelector('.ngayDangKyEdit').value = ngayDangKyFormatted;
+
+    document.querySelector('.chucVuEdit').value = chucVuNv;
+
+
+    var ngayVaoLamParts = ngayVaoLamNv.split('/');
+    var ngayVaoLamFomatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
+    document.querySelector('.ngayVaoLamEdit').value = ngayDangKyFormatted;
+});
+document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
+
+function TickedAllCheckBox() {
+    var type_checkbox = document.getElementById('thead_checkbox').checked;
+    var elements_checkbox_content = document.querySelectorAll('.tbody_checkbox');
+
+    elements_checkbox_content.forEach(function (checkbox) {
+        checkbox.checked = type_checkbox;
+        
+});
+}
+
+
