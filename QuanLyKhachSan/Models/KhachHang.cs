@@ -19,6 +19,8 @@ namespace QuanLyKhachSan.Models
         public DateTime NgaySinh { get; set; }
         [StringLength(3)]
         public string GioiTinh { get; set; }
+        [StringLength(50)]
+        public string Email { get; set; }
         [StringLength(20)]
         public string TinhTrang { get; set; }
         [StringLength(30)]

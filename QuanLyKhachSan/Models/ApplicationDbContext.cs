@@ -128,6 +128,7 @@ namespace QuanLyKhachSan.Models
                     CCCD = "123456789012",
                     NgaySinh = new DateTime(1992, 3, 15),
                     GioiTinh = "Nam",
+                    Email = "khachhang1@example.com",
                     TinhTrang = "Active",
                     MatKhau = "password1",
                     NgayDangKy = DateTime.Now
@@ -141,6 +142,7 @@ namespace QuanLyKhachSan.Models
                     CCCD = "987654321098",
                     NgaySinh = new DateTime(1995, 7, 20),
                     GioiTinh = "Nu",
+                    Email = "khachhang2@example.com",
                     TinhTrang = "Active",
                     MatKhau = "password2",
                     NgayDangKy = DateTime.Now
@@ -154,6 +156,7 @@ namespace QuanLyKhachSan.Models
                     CCCD = "111223344055",
                     NgaySinh = new DateTime(1988, 10, 5),
                     GioiTinh = "Nam",
+                    Email = "khachhang3@example.com",
                     TinhTrang = "Inactive",
                     MatKhau = "password3",
                     NgayDangKy = DateTime.Now
@@ -167,6 +170,7 @@ namespace QuanLyKhachSan.Models
                     CCCD = "555666777044",
                     NgaySinh = new DateTime(1990, 12, 25),
                     GioiTinh = "Nu",
+                    Email = "khachhang4@example.com",
                     TinhTrang = "Active",
                     MatKhau = "password4",
                     NgayDangKy = DateTime.Now
@@ -180,6 +184,7 @@ namespace QuanLyKhachSan.Models
                     CCCD = "999888777033",
                     NgaySinh = new DateTime(1985, 5, 1),
                     GioiTinh = "Nam",
+                    Email = "khachhang5@example.com",
                     TinhTrang = "Active",
                     MatKhau = "password5",
                     NgayDangKy = DateTime.Now
