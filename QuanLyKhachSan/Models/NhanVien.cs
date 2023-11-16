@@ -11,28 +11,20 @@ namespace QuanLyKhachSan.Models
         [Key]
         [StringLength(6)]
         public string MaNhanVien { get; set; }
-
         [StringLength(50)]
-        public string Email { get; set; }
-
-        [StringLength(55)]
         public string TenNhanVien { get; set; }
-
-        [StringLength(55)]
-        public string DiaChi { get; set; }
-
         [StringLength(10)]
-        public string SoDienThoai { get; set; }
-
+        public int SoDienThoai { get; set; }
+        [StringLength(50)]
+        public string DiaChi { get; set; }
         [StringLength(12)]
-        public string CCCD { get; set; }
-
-        [StringLength(3)]
-        public string GioiTinh { get; set; }
-
+        public int CCCD { get; set; }
         [DataType(DataType.Date)]
         public DateTime NgaySinh { get; set; }
-
+        [StringLength(50)]
+        public string Email { get; set; }
+        [StringLength(3)]
+        public string GioiTinh { get; set; }
         [DataType(DataType.Date)]
         public DateTime NgayDangKy { get; set; }
 
@@ -45,6 +37,14 @@ namespace QuanLyKhachSan.Models
         public IFormFile AnhNhanVien { get; set; }
 
         public string AnhNhanVienBase64 { get; set; }
+        [StringLength(20)]
+        public string TinhTrang {  get; set; }
+        [StringLength(30)]
+        public string TenDangNhap {  get; set; }
+        [StringLength(30)]
+        [DataType(DataType.Password)]
+        public string MatKhau {  get; set; }
 
+    
     }
 }
