@@ -41,7 +41,7 @@ namespace QuanLyKhachSan.Controllers
 
                 // Lưu đường dẫn tương đối của file vào cơ sở dữ liệu
                 nv.AnhNhanVienBase64 = Path.Combine("UploadImage", nv.AnhNhanVien.FileName);
-
+                nv.TinhTrang = "Hoat Dong";
                 _db.NhanVien.Add(nv); // Thêm nhân viên mới vào cơ sở dữ liệu
                 _db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
             }

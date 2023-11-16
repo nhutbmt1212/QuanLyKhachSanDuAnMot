@@ -120,7 +120,10 @@
                         <label>Địa chỉ</label>
                         <input class="form-control" name="diachi"/>
                     </div>
-
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input class="form-control" name="tendangnhap" />
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -154,7 +157,10 @@
                             </option>
                         </select>
                     </div>
-
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input class="form-control" name="matkhau" />
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
@@ -163,12 +169,14 @@
                     </div>
                     <div class="form-group">
                         <label>Ngày đăng ký</label>
-                        <input class="form-control" type="date" name="ngaydangky"/>
+                        <input class="form-control" type="date" name="ngaydangky" />
                     </div>
                     <div class="form-group">
                         <label>Ngày vào làm</label>
                         <input class="form-control" type="date" name="ngayvaolam"/>
                     </div>
+
+                   
                     <div class="form-group">
 
                         <label for="formFile" class="form-label">Ảnh nhân viên</label>
@@ -177,7 +185,6 @@
                     </div>
                 </div>
             </div>
-
             @* --- *@
          <div class="clearfix">
                 <button type="button" class="btn float-right m-2 w-25  cancel " onclick="closeForm()">Đóng</button>
@@ -187,12 +194,9 @@
         </form>
     </div>
     @* -- *@
-
     @* --popup Edit Employee *@
     @* -- popup -addEmployee *@
 
-
- 
     <div class="form-popupEdit mb-2" id="myFormEdit">
         <form class="form-container" method="post" enctype="multipart/form-data">
             <h1>Sửa nhân viên</h1>
@@ -214,6 +218,10 @@
                     <div class="form-group">
                         <label>Địa chỉ</label>
                         <input class="form-control diaChiEdit" name="DiaChi"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input class="form-control tenDangNhapEdit" name="TenDangNhap" />
                     </div>
 
                 </div>
@@ -249,6 +257,10 @@
                             </option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input class="form-control matKhauEdit" name="MatKhau" />
+                    </div>
 
                 </div>
                 <div class="col-md-4">
@@ -264,6 +276,11 @@
                         <label>Ngày vào làm</label>
                         <input class="form-control ngayVaoLamEdit" type="date" name="NgayVaoLam"/>
                     </div>
+                  
+                    <div class="form-group">
+                        <label>Tình trạng</label>
+                        <input class="form-control tinhTrangEdit" name="TinhTrang" />
+                    </div>                   
                     <div class="form-group">
 
                         <label for="formFile" class="form-label">Ảnh nhân viên</label>
@@ -297,9 +314,12 @@
                     <th scope="col" class="thead_cccd">CCCD</th>
                     <th scope="col" class="thead_gioitinh">Giới Tính</th>
                     <th scope="col" class="thead_ngaysinh">Ngày Sinh</th>
-                    <th scope="col" class="thead_ngaydangky">Ngày Đăng Ký</th>
                     <th scope="col" class="thead_chucvu">Chức Vụ</th>
                     <th scope="col" class="thead_ngayvaolam">Ngày Vào Làm</th>
+                    <th scope="col" class="thead_tendangnhap">Tên đăng nhập</th>
+                    <th scope="col" class="thead_matkhau">Mật khẩu</th>
+                    <th scope="col" class="thead_tinhtrang">Tình trạng</th>
+
                     <th scope="col" class="thead_xuly">Xử lý</th>
 
                 </tr>
@@ -315,7 +335,7 @@
 
                     stt = stt + 1;
                     
-                    <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()">
+                    <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()" data-tendangnhap="@nv.TenDangNhap" data-matkhau="@nv.MatKhau" data-tinhtrang="@nv.TinhTrang">
                         <td style="position:relative;top:27px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column ">
                                 @stt
@@ -333,9 +353,11 @@
                         <td class="employee-info-column">@nv.CCCD</td>
                         <td class="employee-info-column tbody_gioitinh">@nv.GioiTinh</td>
                         <td class="employee-info-column tbody_ngaysinh">@nv.NgaySinh.ToShortDateString()</td>
-                        <td class="employee-info-column tbody_ngaydangky">@nv.NgayDangKy.ToShortDateString()</td>
                         <td class="employee-info-column">@nv.ChucVu</td>
                         <td class="employee-info-column tbody_ngayvaolam">@nv.NgayVaoLam.ToShortDateString()</td>
+                        <td class="employee-info-column">@nv.TenDangNhap</td>
+                        <td class="employee-info-column">@nv.MatKhau</td>
+                        <td class="employee-info-column">@nv.TinhTrang</td>
 
                         <td style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
