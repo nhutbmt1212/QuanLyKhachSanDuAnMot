@@ -57,7 +57,6 @@ getValue.addEventListener('click', function (e) {
     var chucVuNv = row.dataset.chucVu;
     var ngayVaoLamNv = row.dataset.ngayVaoLam;
 
-    console.log(ngayVaoLamNv);
     document.querySelector('.manvEdit').value = MaNv;
     document.querySelector('.tennvEdit').value = TenNv;
     document.querySelector('.emailEdit').value = email;
@@ -81,7 +80,7 @@ getValue.addEventListener('click', function (e) {
 
     var ngayVaoLamParts = ngayVaoLamNv.split('/');
     var ngayVaoLamFomatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
-    document.querySelector('.ngayVaoLamEdit').value = ngayDangKyFormatted;
+    document.querySelector('.ngayVaoLamEdit').value = ngayVaoLamFomatted;
 });
 document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
 
@@ -91,8 +90,26 @@ function TickedAllCheckBox() {
 
     elements_checkbox_content.forEach(function (checkbox) {
         checkbox.checked = type_checkbox;
+        KiemTraCheckBox();
         
 });
 }
 
+
+
+function KiemTraCheckBox() {
+    var x = document.querySelectorAll('input[name="checkBox_Name"]:checked');
+    var btn = document.querySelectorAll(".check_checkbox");
+
+    for (const btn_element of btn) {
+        if (x.length > 1) {
+            btn_element.classList.add('hide_edit');
+
+    }
+        else {
+            btn_element.classList.remove('hide_edit');
+    }
+    }
+  
+}
 

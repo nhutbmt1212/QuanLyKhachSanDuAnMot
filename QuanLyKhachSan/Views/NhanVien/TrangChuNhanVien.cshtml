@@ -285,6 +285,7 @@
     <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
     <div>
         <table class="table" id="table_detail" style="border:1px solid #343A40">
+          
             <thead class="thead-dark ">
                 <tr>
                     <th scope="col"><input type="checkbox" id="thead_checkbox" /></th>
@@ -303,6 +304,7 @@
 
                 </tr>
             </thead>
+            <form name="main">
             <tbody >
                 @{
                     int stt = 0;
@@ -314,7 +316,7 @@
                     stt = stt + 1;
                     
                     <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()">
-                        <td  style="position:relative;top:27px"><input type="checkbox" class="tbody_checkbox" /></td>
+                        <td style="position:relative;top:27px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column ">
                                 @stt
                         </td>
@@ -337,11 +339,11 @@
 
                         <td style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
-                                <button class="btn btn-secondary " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item"  onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
                                     <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@nv.MaNhanVien">Xóa</a>
                                 </div>
                             </div>
@@ -351,6 +353,7 @@
                     
                 }
             </tbody>
+            </form>
         </table>
         
     </div>
