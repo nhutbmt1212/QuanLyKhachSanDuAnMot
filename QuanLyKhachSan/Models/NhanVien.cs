@@ -14,11 +14,11 @@ namespace QuanLyKhachSan.Models
         [StringLength(50)]
         public string TenNhanVien { get; set; }
         [StringLength(10)]
-        public int SoDienThoai { get; set; }
+        public string SoDienThoai { get; set; }
         [StringLength(50)]
         public string DiaChi { get; set; }
         [StringLength(12)]
-        public int CCCD { get; set; }
+        public string CCCD { get; set; }
         [DataType(DataType.Date)]
         public DateTime NgaySinh { get; set; }
         [StringLength(50)]
