@@ -16,6 +16,8 @@ namespace QuanLyKhachSan.Models
         public DateTime NgayTao { get; set; }
         [StringLength(20)]
         public string TinhTrang { get; set; }
+        [StringLength(20)]
+        public string KhuVuc { get; set; }
         public byte[] AnhPhong { get; set; }
     }
 }

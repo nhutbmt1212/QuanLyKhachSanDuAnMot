@@ -1,0 +1,310 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.Phong>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/CssNhanVien/CssNhanVien.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+    <style>
+        .container-with-border {
+            border: 2px solid #000;
+            padding: 10px;
+            position: relative;
+        }
+
+        .table-container {
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+        }
+
+        .table th {
+            font-size: 14px; /* Kích thước chữ của tiêu đề */
+        }
+
+        .table td {
+            font-size: 12px; /* Kích thước chữ của nội dung */
+        }
+
+        .room-column {
+            display: flex;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 40px; /* Đặt kích thước của ảnh */
+            height: 40px; /* Đặt kích thước của ảnh */
+            border-radius: 50%; /* Tạo hình tròn cho ảnh */
+            margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin phòng */
+            margin-left: 8px;
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .room-info span {
+                text-align: center;
+            }
+
+                .room-info span:first-child {
+                    color: orange;
+                }
+
+        .table td.room-info-column {
+            position: relative;
+            top: 25px;
+        }
+
+        .table td.room-info-column-button {
+            position: relative;
+            top: 15px;
+        }
+
+        #btn_themPhong {
+            margin-bottom: 10px;
+            max-width: 180px;
+            max-height: 40px;
+        }
+
+        .btn_threeDotDropDown {
+            border: none;
+            background-color: none;
+        }
+
+        #dropdownMenuButton {
+            background-color: #FFFFFF;
+            border: none;
+        }
+
+        .icon_threeDot {
+            color: black;
+            font-size: 18px;
+        }
+
+        #preview {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .preview-image {
+            max-width: 100px;
+            max-height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup Thêm Phòng -->
+    <div class="form-popup mb-2" id="myForm">
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Thêm phòng</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã phòng</label>
+                        <input class="form-control" name="maphong" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên loại phòng</label>
+                        <select class="form-control" name="maLoaiPhong">
+                            <option value="">Chọn loại phòng</option>
+                            @foreach (var phong in ViewBag.DanhSachPhong)
+                            {
+                                <option value="@phong.LoaiPhong.MaLoaiPhong">@phong.LoaiPhong.TenLoaiPhong</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ngày tạo</label>
+                        <input class="form-control" name="ngaytao" type="datetime-local"/>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Giá theo giờ</label>
+                        <input class="form-control" name="giatheogio" type="number" min="0"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Giá theo ngày</label>
+                        <input class="form-control" name="giatheongay" type="number" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label>Phụ thu trả muộn</label>
+                        <input class="form-control" name="phuthutramuon" type="number" min="0" />
+                    </div>              
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label>Số lượng người lớn</label>
+                        <input class="form-control" name="soluonnguoilon" type="number" min="0" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số lượng trẻ em</label>
+                        <input class="form-control" name="soluongtreem" type="number" min="0" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Ảnh phòng</label>
+                        <input type="file" id="formFile" name="files[]" multiple>
+                    </div>
+                    <div id="preview"></div>
+                </div>
+                    
+            </div>
+
+            <div class="clearfix">
+                <button class="btn align-middle m-2 w-25 " style="min-width:200px" asp-action="ThemPhong" asp-controller="Phong">Thêm phòng</button>
+                <button type="button" class="btn align-middle m-2 w-25  cancel" onclick="closeForm()">Đóng</button>
+            </div>
+        </form>
+    </div>
+    <!-- Popup Sửa Phòng -->
+    <div class="form-popupEdit mb-2" id="myFormEdit">
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Sửa phòng</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mã phòng</label>
+                        <input class="form-control" name="maphong" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên loại phòng</label>
+                        <select class="form-control" name="maLoaiPhong">
+                            <option value="">Chọn loại phòng</option>
+                            @foreach (var phong in ViewBag.DanhSachPhong)
+                            {
+                                <option value="@phong.LoaiPhong.MaLoaiPhong">@phong.LoaiPhong.TenLoaiPhong</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Ngày tạo</label>
+                        <input class="form-control" name="ngaytao" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tình trạng</label>
+                        <input class="form-control" name="tinhtrang" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Ảnh phòng</label>
+                        <input type="file" id="formFile" name="files[]" multiple>
+                    </div>
+
+                    <div id="preview"></div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25  cancel " onclick="CloseFormEdit()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px" asp-action="SuaPhong" asp-controller="Phong">Sửa phòng</button>
+            </div>
+        </form>
+    </div>
+    <!-- Nút Thêm Phòng -->
+    <a class="btn btn-primary" id="btn_themPhong" onclick="openForm()">Thêm phòng</a>
+    <!-- Bảng Hiển Thị Danh Sách Phòng -->
+    <div>
+        <table class="table" id="table_detail" style="border:1px solid #343A40">
+            <thead class="thead-dark ">
+                <tr>
+                    <th scope="col"><input type="checkbox" id="thead_checkbox" /></th>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col">Mã phòng</th>
+                    <th scope="col">Tên loại phòng</th>
+                    <th scope="col">Ngày tạo</th>
+                    <th scope="col">Tình trạng</th>
+                    <th scope="col">Ảnh phòng</th>
+                    <th scope="col" class="thead_xuly">Xử lý</th>
+                </tr>
+            </thead>
+            <form name="main">
+            <tbody>
+                    @{
+                        int stt = 0;
+                    }
+                    @foreach (var phong in Model)
+                    {
+                        stt = stt + 1;
+                    <tr data-ma-phong="@phong.MaPhong" data-ma-loai-phong="@phong.MaLoaiPhong" data-ngay-tao="@phong.NgayTao" data-tinh-trang="@phong.TinhTrang">
+                        <td style="position:relative;top:27px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="employee-info-column ">
+                                @stt
+                        </td>
+                        <td>@phong.MaPhong</td>
+                        <td>@phong.LoaiPhong.TenLoaiPhong</td>
+                        <td>@phong.NgayTao</td>
+                        <td>@phong.TinhTrang</td>
+  
+                        <td>
+                            <img src="data:image/png;base64,@Convert.ToBase64String(phong.AnhPhong)" alt="Ảnh Phòng" />
+                        </td>
+                        <td style="font-size:20px" class="employee-info-column-button">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@phong.MaLoaiPhong">Xóa</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+            </form>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/JsNhanVien/index.js"></script>
+</body>
+</html>
+
+<script>
+    document.getElementById('formFile').addEventListener('change', function (event) {
+        var preview = document.getElementById('preview');
+        preview.innerHTML = ''; // Xóa bất kỳ hình ảnh nào đã hiển thị trước đó
+
+        var files = event.target.files;
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var img = document.createElement('img');
+                img.src = e.target.result;
+                img.className = 'preview-image';
+                preview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

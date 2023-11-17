@@ -1,0 +1,254 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.LoaiPhong>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/CssLoaiPhong/CssLoaiPhong.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        .container-with-border {
+            border: 2px solid #000;
+            padding: 10px;
+            position: relative;
+        }
+
+        .table-container {
+            max-height: 300px;
+            overflow: auto;
+        }
+
+        .table th,
+        .table td {
+            padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+        }
+
+        .table th {
+            font-size: 14px; /* Kích thước chữ của tiêu đề */
+        }
+
+        .table td {
+            font-size: 12px; /* Kích thước chữ của nội dung */
+        }
+
+        .room-column {
+            display: flex;
+            align-items: center;
+        }
+
+        .room-image {
+            width: 40px; /* Đặt kích thước của ảnh */
+            height: 40px; /* Đặt kích thước của ảnh */
+            border-radius: 50%; /* Tạo hình tròn cho ảnh */
+            margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin loại phòng */
+            margin-left: 8px;
+        }
+
+        .room-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .room-info span {
+                text-align: center;
+            }
+
+                .room-info span:first-child {
+                    color: orange;
+                }
+
+        .table td.room-info-column {
+            position: relative;
+            top: 25px;
+        }
+
+        .table td.room-info-column-button {
+            position: relative;
+            top: 15px;
+        }
+
+        #btn_themLoaiPhong {
+            margin-bottom: 10px;
+            max-width: 180px;
+            max-height: 40px;
+        }
+
+        .btn_threeDotDropDown {
+            border: none;
+            background-color: none;
+        }
+
+        #dropdownMenuButton {
+            background-color: #FFFFFF;
+            border: none;
+        }
+
+        .icon_threeDot {
+            color: black;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Popup Thêm Loại Phòng -->
+    <div class="form-popup mb-2" id="myForm">
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Thêm loại phòng</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Mã loại phòng</label>
+                        <input class="form-control" name="maloaiphong" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên loại phòng</label>
+                        <input class="form-control" name="tenloaiphong" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giá theo giờ</label>
+                        <input class="form-control" name="giatheogio" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giá theo ngày</label>
+                        <input class="form-control" name="giatheongay" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Phụ thu trả muộn</label>
+                        <input class="form-control" name="phuthutramuon" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số người lớn</label>
+                        <input class="form-control" name="songuoilon" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số trẻ em</label>
+                        <input class="form-control" name="sotreem" />
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25  cancel" onclick="closeForm()">Đóng</button>
+                <button class="btn float-right m-2 w-25 " style="min-width:200px" asp-action="ThemLoaiPhong" asp-controller="LoaiPhong">Thêm loại phòng</button>
+            </div>
+        </form>
+    </div>
+    <!-- Popup Sửa Loại Phòng -->
+    <div class="form-popupEdit mb-2" id="myFormEdit">
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Sửa loại phòng</h1>
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Mã loại phòng</label>
+                            <input class="form-control maLPEdit" name="maloaiphong" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tên loại phòng</label>
+                            <input class="form-control tenLPEdit" name="tenloaiphong" />
+                        </div>
+                        <div class="form-group">
+                            <label>Giá theo giờ</label>
+                            <input class="form-control GiaTheoGioEdit" name="giatheogio" />
+                        </div>
+                        <div class="form-group">
+                            <label>Giá theo ngày</label>
+                        <input class="form-control GiaTheoNgayEdit" name="giatheongay" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Phụ thu trả muộn</label>
+                            <input class="form-control PhuThuEdit" name="phuthutramuon" />
+                        </div>
+                        <div class="form-group">
+                            <label>Số người lớn</label>
+                            <input class="form-control SoNguoiLonEdit" name="songuoilon" />
+                        </div>
+                        <div class="form-group">
+                            <label>Số trẻ em</label>
+                            <input class="form-control SoTreEmEdit" name="sotreem" />
+                        </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25  cancel " onclick="CloseFormEdit()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px" asp-action="SuaLoaiPhong" asp-controller="LoaiPhong">Sửa loại phòng</button>
+            </div>
+        </form>
+    </div>
+    <!-- Nút Thêm Loại Phòng -->
+    <a class="btn btn-primary" id="btn_themLoaiPhong" onclick="openForm()">Thêm loại phòng</a>
+    <!-- Bảng Hiển Thị Danh Sách Loại Phòng -->
+    <div>
+        <table class="table" id="table_detail" style="border:1px solid #343A40">
+            <thead class="thead-dark ">
+                <tr>
+                    <th scope="col"><input type="checkbox" id="thead_checkbox" /></th>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope ="col">Mã Loại Phòng</th>
+                    <th scope="col">Tên Loại Phòng</th>
+                    <th scope="col">Giá Theo Giờ</th>
+                    <th scope="col">Giá Phòng Theo Ngày</th>
+                    <th scope="col">Phụ Thu Trả Muộn</th>
+                    <th scope="col">Số Lượng Người Lớn</th>
+                    <th scope="col">Số Lượng Trẻ Em</th>
+                    <th scope="col" class="thead_xuly">Xử lý</th>
+                </tr>
+            </thead>
+            <form name="main">
+            <tbody>
+                    @{
+                        int stt = 0;
+                    }
+                    @foreach (var loaiPhong in Model)
+                    {
+                        stt = stt + 1;
+                    <tr data-ma-loai-phong="@loaiPhong.MaLoaiPhong" data-ten-loai-phong="@loaiPhong.TenLoaiPhong" data-gia-theo-gio="@loaiPhong.GiaTheoGio" data-gia-phong-theo-ngay="@loaiPhong.GiaPhongTheoNgay" data-phu-thu-tra-muon="@loaiPhong.PhuThuTraMuon" data-so-luong-nguoi-lon="@loaiPhong.SoLuongNguoiLon" data-so-luong-tre-em="@loaiPhong.SoLuongTreEm">
+                        <td style="position:relative;top:27px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="employee-info-column ">
+                                @stt
+                        </td>
+                        <td>@loaiPhong.MaLoaiPhong</td>
+                        <td>@loaiPhong.TenLoaiPhong</td>
+                        <td>@loaiPhong.GiaTheoGio</td>
+                        <td>@loaiPhong.GiaPhongTheoNgay</td>
+                        <td>@loaiPhong.PhuThuTraMuon</td>
+                        <td>@loaiPhong.SoLuongNguoiLon</td>
+                        <td>@loaiPhong.SoLuongTreEm</td>
+                        <td style="font-size:20px" class="employee-info-column-button">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@loaiPhong.MaLoaiPhong">Xóa</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+            </tbody>
+            </form>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+            @* Đang là js nhân viên để test *@
+    <script src="~/JsNhanVien/index.js"></script>
+</body>
+</html>
