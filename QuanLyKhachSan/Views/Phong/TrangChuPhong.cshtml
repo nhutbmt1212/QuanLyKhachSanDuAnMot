@@ -119,7 +119,7 @@
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
-                        <select class="form-control" name="maLoaiPhong">
+                        <select class="form-control" name="maloaiphong">
                             <option value="">Chọn loại phòng</option>
                             @foreach (var phong in ViewBag.DanhSachPhong)
                             {
@@ -244,14 +244,14 @@
                     {
                         stt = stt + 1;
                     <tr data-ma-phong="@phong.MaPhong" data-ma-loai-phong="@phong.MaLoaiPhong" data-ngay-tao="@phong.NgayTao" data-tinh-trang="@phong.TinhTrang">
-                        <td style="position:relative;top:7px"><input type="checkbox" name="checkBox_Name" class="align-middle tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td style="position:relative;top:9px"><input type="checkbox" name="checkBox_Name" class="align-middle tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column align-middle ">
                                 @stt
                         </td>
                         <td class=" align-middle">@phong.MaPhong</td>
                         <td class=" align-middle">@phong.LoaiPhong.TenLoaiPhong</td>
                         <td class=" align-middle">@phong.NgayTao</td>
-                        <td class="">@phong.TinhTrang</td>
+                        <td class="align-middle">@phong.TinhTrang</td>
   
                         <td>
                             <img src="data:image/png;base64,@Convert.ToBase64String(phong.AnhPhong)" alt="Ảnh Phòng" />
