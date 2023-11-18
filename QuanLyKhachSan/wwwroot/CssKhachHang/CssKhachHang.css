@@ -1,0 +1,246 @@
+﻿body{
+    box-sizing: border-box;
+}
+.container-with-border {
+    border: 2px solid #000;
+    padding: 10px;
+    position: relative;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow: auto;
+}
+
+.table th,
+.table td {
+    padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+}
+
+.table th {
+    font-size: 14px; /* Kích thước chữ của tiêu đề */
+}
+
+.table td {
+    font-size: 12px; /* Kích thước chữ của nội dung */
+}
+
+.employee-column {
+    display: flex;
+    align-items: center;
+}
+
+.employee-image {
+    width: 40px; /* Đặt kích thước của ảnh */
+    height: 40px; /* Đặt kích thước của ảnh */
+    border-radius: 50%; /* Tạo hình tròn cho ảnh */
+    margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
+    margin-left: 8px;
+}
+
+.employee-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    .employee-info span {
+        text-align: center;
+    }
+
+        .employee-info span:first-child {
+            color: orange;
+        }
+
+.table td.employee-info-column {
+    position: relative;
+    top: 10px;
+}
+
+.table td.employee-info-column-button {
+   
+}
+
+#btn_themNv {
+    margin-bottom: 10px;
+    max-width: 180px;
+    max-height: 40px;
+}
+
+.btn_threeDotDropDown {
+    border: none;
+    background-color: none;
+}
+
+#dropdownMenuButton {
+    background-color: #FFFFFF;
+    border: none;
+}
+
+.icon_threeDot {
+    color: black;
+    font-size: 18px;
+}
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+    background-color: #555;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    opacity: 0.8;
+    position: fixed;
+    bottom: 23px;
+    right: 28px;
+    width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+    display: none;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+    max-width: 100%;
+    padding: 10px;
+    background-color: white;
+}
+
+    /* Full-width input fields */
+    .form-container input[type=text], .form-container input[type=password] {
+        width: 20%;
+        padding: 15px;
+        margin: 5px 0 22px 0;
+        border: none;
+        background: #f1f1f1;
+    }
+
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+            background-color: #ddd;
+            outline: none;
+        }
+
+    /* Set a style for the submit/login button */
+    .form-container .btn {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 100%; /* Thay đổi từ 100% thành 100% */
+        margin-bottom: 10px;
+        opacity: 0.8;
+    }
+    /* Add a red background color to the cancel button */
+    .form-container .cancel {
+        background-color: red;
+    }
+
+    /* Add some hover effects to buttons */
+    .form-container .btn:hover, .open-button:hover {
+        opacity: 1;
+    }
+/*EditPopUp*/
+
+.form-popupEdit {
+    display: none;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+}
+
+.hide_edit{
+    display:none;
+}
+@media only screen and (max-width: 1390px) {
+    .thead_ngaydangky {
+        display: none;
+    }
+    .tbody_ngaydangky{
+        display:none;
+    }
+    .thead_tinhtrang{
+        display:none;
+    }
+    #tbody_tinhtrang {
+        display: none;
+    }
+}
+@media only screen and (max-width:1300px){
+    .thead_ngayvaolam{
+        display:none;
+    }
+    .tbody_ngayvaolam {
+        display: none;
+    }
+}
+@media only screen and (max-width:1213px){
+    .thead_diachi {
+        display: none;
+    }
+    .tbody_diachi {
+        display: none;
+    }
+}
+@media only screen and (max-width:1160px) {
+    .thead_ngaysinh {
+        display: none;
+    }
+
+    .tbody_ngaysinh {
+        display: none;
+    }
+}
+
+    @media only screen and (max-width:1079px) {
+        .thead_sdt {
+            display: none;
+        }
+
+        .tbody_sdt {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width:1007px) {
+        .thead_gioitinh {
+            display: none;
+        }
+
+        .tbody_gioitinh {
+            display: none;
+        }
+    }
+@media only screen and (max-width:946px) {
+    .thead_matkhau {
+        display: none;
+    }
+
+    .tbody_matkhau {
+        display: none;
+    }
+}
+@media only screen and (max-width:881px) {
+    .thead_tendangnhap {
+        display: none;
+    }
+
+    .tbody_tendangnhap {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:806px) {
+    .thead_cccd {
+        display: none;
+    }
+
+    .tbody_cccd {
+        display: none;
+    }
+}
+
+
