@@ -69,7 +69,6 @@ getValue.addEventListener('click', function (e) {
     document.querySelector('.tenDangNhapEdit').value = tenDangNhapNv;
     document.querySelector('.matKhauEdit').value = matKhauNv;
     document.querySelector('.tinhTrangEdit').value = tinhTrangNv;
-
     //convert time
     var ngaySinhParts = ngaySinhNv.split('/');
     var ngaySinhFormatted = ngaySinhParts[2] + '-' + ngaySinhParts[1] + '-' + ngaySinhParts[0];
@@ -101,7 +100,10 @@ function TickedAllCheckBox() {
 }
 
 
-
+//sự kiện onload để chỉnh ui hoatdong
+window.addEventListener('load', (event) => {
+        
+});
 function KiemTraCheckBox() {
     var x = document.querySelectorAll('input[name="checkBox_Name"]:checked');
     var btn = document.querySelectorAll(".check_checkbox");
