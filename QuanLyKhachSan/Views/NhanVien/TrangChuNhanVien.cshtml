@@ -121,12 +121,10 @@
     </div>
     @* -- *@
     @* --popup Edit Employee *@
-    @* -- popup -addEmployee *@
 
     <div class="form-popupEdit mb-2" id="myFormEdit">
         <form class="form-container" method="post" enctype="multipart/form-data">
             <h1>Sửa nhân viên</h1>
-            @* ---popup_Addnhanvien *@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -226,6 +224,9 @@
     </div>
     @* -- *@
     <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
+    <a class="btn btn-success" id="btn_import">Import from Excel</a>
+    <a class="btn btn-success" id="btn_export">Export to Excel</a>
+
     <div id="detailNhanVien" >
         <table class="table" id="table_detail" style="border:1px solid #343A40">
 
@@ -260,7 +261,7 @@
                     {
                         stt = stt + 1;
                     <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()" data-tendangnhap="@nv.TenDangNhap" data-matkhau="@nv.MatKhau" data-tinhtrang="@nv.TinhTrang">
-                        <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td style="position:relative;top:12px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
                                 @stt
                         </td>
@@ -299,7 +300,6 @@
                                 </div>
                             </div>
                         </td>
-                     
                     </tr>
                     
                 }
