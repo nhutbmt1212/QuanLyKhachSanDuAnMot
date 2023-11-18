@@ -15,7 +15,7 @@
     <!-- Popup - Thêm Khách Hàng -->
     <div class="form-popup mb-2" id="myForm">
         <!-- Form Thêm Khách Hàng -->
-        <form class="form-container" method="post" enctype="multipart/form-data">
+        <form class="form-container" method="post">
             <h1>Thêm khách hàng</h1>
             <div class="row">
                 <div class="col-md-4">
@@ -79,40 +79,40 @@
     <!-- Popup - Sửa Khách Hàng -->
     <div class="form-popupEdit mb-2" id="myFormEdit">
         <!-- Form Sửa Khách Hàng -->
-        <form class="form-container" method="post" enctype="multipart/form-data">
+        <form class="form-container" method="post">
             <h1>Sửa khách hàng</h1>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã khách hàng</label>
-                        <input class="form-control" name="makhachhang" />
+                        <input class="form-control MaKhachHangEdit" name="makhachhang" />
                     </div>
                     <div class="form-group">
                         <label>Tên khách hàng</label>
-                        <input class="form-control" name="tenkhachhang" />
+                        <input class="form-control TenKhachHangEdit" name="tenkhachhang" />
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input class="form-control" name="sodienthoai" />
+                        <input class="form-control SdtEdit" name="sodienthoai" />
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input class="form-control" name="diachi" />
+                        <input class="form-control DiaChiEdit" name="diachi" />
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>CCCD</label>
-                        <input class="form-control" name="cccd" />
+                        <input class="form-control CccdEdit" name="cccd" />
                     </div>
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input class="form-control" type="date" name="ngaysinh" />
+                        <input class="form-control NgaySinhEdit" type="date" name="ngaysinh" />
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
-                        <select class="form-control" name="gioitinh">
-                            <option value="nam">
+                        <select class="form-control GioiTinhEdit" name="gioitinh">
+                            <option value="Nam">
                                 Nam
                             </option>
                             <option value="Nữ">
@@ -124,11 +124,11 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control" name="email" />
+                        <input class="form-control EmailEdit" name="email" />
                     </div>
                     <div class="form-group">
                         <label>Tình trạng</label>
-                        <select class="form-control" name="chucvu">
+                        <select class="form-control TinhTrangEdit" name="tinhtrang">
                             <option value="Đang hoạt động">
                                 Đang hoạt động
                             </option>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input class="form-control" name="matkhau" />
+                        <input class="form-control MatKhauEdit" name="matkhau" />
                     </div>
                 </div>
             </div>
@@ -186,7 +186,7 @@
                     @foreach (var kh in Model)
                     {
                         stt = stt + 1;
-                    <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang">
+                    <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang" data-email="@kh.Email">
                         <td class="align-middle"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
                                 @stt
@@ -217,7 +217,7 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
-                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@kh.MaKhachHang">Xóa</a>
+                                    <a class="dropdown-item" asp-action="XoaKhachHang" asp-controller="KhachHang" asp-route-id="@kh.MaKhachHang">Xóa</a>
                                 </div>
                             </div>
                         </td>
@@ -239,6 +239,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
-    <script src="~/JsNhanVien/index.js"></script>
+    <script src="~/JsKhachHang/khachhang.js"></script>
 </body>
 </html>

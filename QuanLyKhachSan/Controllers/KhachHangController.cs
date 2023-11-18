@@ -15,5 +15,49 @@ namespace QuanLyKhachSan.Controllers
             var listKhachHang = _db.KhachHang.ToList();
             return View(listKhachHang);
         }
+        public IActionResult XoaKhachHang(string id)
+        {
+            var qr_MaKh = _db.KhachHang.Find(id);
+            if (qr_MaKh != null)
+            {
+                _db.KhachHang.Remove(qr_MaKh);
+                _db.SaveChanges();
+
+            }
+            else
+            {
+                return NotFound();
+            }
+
+            return RedirectToAction("DanhSachKhachHang", "KhachHang");
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult ThemKhachHang(KhachHang kh)
+        { 
+            
+            kh.TinhTrang = "Đang hoạt động";
+            kh.NgayDangKy = DateTime.Now;
+        
+              
+                _db.KhachHang.Add(kh);
+                _db.SaveChanges();
+       
+
+            return RedirectToAction("DanhSachKhachHang", "KhachHang");
+
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult SuaKhachHang(KhachHang kh)
+        {
+           //còn lỗi ngày đăng ký chưa lấy từ đb
+                _db.KhachHang.Update(kh);
+               _db.SaveChanges();
+            
+
+            return RedirectToAction("DanhSachKhachHang", "KhachHang");
+
+        }
     }
 }
