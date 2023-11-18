@@ -1,0 +1,244 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.KhachHang>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/CssKhachHang/CssKhachHang.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Popup - Thêm Khách Hàng -->
+    <div class="form-popup mb-2" id="myForm">
+        <!-- Form Thêm Khách Hàng -->
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Thêm khách hàng</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã khách hàng</label>
+                        <input class="form-control" name="makhachhang" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên khách hàng</label>
+                        <input class="form-control" name="tenkhachhang" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input class="form-control" name="sodienthoai" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" name="diachi" />
+                    </div>
+                    <div class="form-group">
+                        <label>CCCD</label>
+                        <input class="form-control" name="cccd" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select class="form-control" name="gioitinh">
+                            <option value="nam">
+                                Nam
+                            </option>
+                            <option value="Nữ">
+                                Nữ
+                            </option>
+                        </select>
+                    </div>                  
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input class="form-control" type="date" name="ngaysinh" />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" name="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input class="form-control" name="matkhau" />
+                    </div>
+                </div>
+            </div>
+            <!-- Nút Đóng và Thêm Khách Hàng -->
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="closeForm()">Đóng</button>
+                <button class="btn float-right m-2 w-25" style="min-width:200px" asp-action="ThemKhachHang" asp-controller="KhachHang">Thêm khách hàng</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Popup - Sửa Khách Hàng -->
+    <div class="form-popupEdit mb-2" id="myFormEdit">
+        <!-- Form Sửa Khách Hàng -->
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Sửa khách hàng</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã khách hàng</label>
+                        <input class="form-control" name="makhachhang" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên khách hàng</label>
+                        <input class="form-control" name="tenkhachhang" />
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input class="form-control" name="sodienthoai" />
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" name="diachi" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>CCCD</label>
+                        <input class="form-control" name="cccd" />
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày sinh</label>
+                        <input class="form-control" type="date" name="ngaysinh" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giới tính</label>
+                        <select class="form-control" name="gioitinh">
+                            <option value="nam">
+                                Nam
+                            </option>
+                            <option value="Nữ">
+                                Nữ
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" name="email" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tình trạng</label>
+                        <select class="form-control" name="chucvu">
+                            <option value="Đang hoạt động">
+                                Đang hoạt động
+                            </option>
+                            <option value="Không hoạt động">
+                                Không hoạt động
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mật khẩu</label>
+                        <input class="form-control" name="matkhau" />
+                    </div>
+                </div>
+            </div>
+            <!-- Nút Đóng và Sửa Khách Hàng -->
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="CloseFormEdit()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25" style="min-width:200px" asp-action="SuaKhachHang" asp-controller="KhachHang">Sửa khách hàng</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Nút Thêm Khách Hàng -->
+    <a class="btn btn-primary mb-2" id="btn_themKh" onclick="openForm()">Thêm khách hàng</a>
+
+    <!-- Bảng Hiển Thị Danh Sách Khách Hàng -->
+    <div id="detailKhachHang">
+        <table class="table" id="table_detail" style="border:1px solid #343A40">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="align-middle text-center">
+                        <input type="checkbox" id="thead_checkbox" />
+                    </th>
+                    <th scope="col" class="align-middle text-center"> #</th>
+                    <th scope="col" class="align-middle text-center">Khách hàng</th>
+                    <th scope="col" class="align-middle text-center">Giới tính</th>
+                    <th scope="col" class="align-middle text-center">Số điện thoại</th>
+                    <th scope="col" class="align-middle text-center">Địa chỉ</th>
+                    <th scope="col" class="align-middle text-center">CCCD</th>
+                    <th scope="col" class="align-middle text-center">Email</th>
+                    <th scope="col" class="align-middle text-center">Ngày sinh</th>
+                    <th scope="col" class="align-middle text-center">Mật khẩu</th>
+                    <th scope="col" class="align-middle text-center">Ngày đăng ký</th>
+                    <th scope="col" class="align-middle text-center">Tình trạng</th>
+                    <th scope="col" class="align-middle text-center thead_xuly">Xử lý</th>
+                </tr>
+            </thead>
+
+            <!-- Dữ liệu Khách Hàng -->
+            <form name="main">
+            <tbody>
+                    @{
+                        int stt = 0;
+                    }
+                    @foreach (var kh in Model)
+                    {
+                        stt = stt + 1;
+                    <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang">
+                        <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="employee-info-column">
+                                @stt
+                        </td>
+                        <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
+                            <div class="row">
+                                <div class="col-12 col-sm-8">
+                                    <span class="d-block d-sm-inline text-warning">- @kh.MaKhachHang</span>
+                                    <br>
+                                    <p class="d-block d-sm-inline">@kh.TenKhachHang</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="employee-info-column">@kh.GioiTinh</td>
+                        <td class="employee-info-column">@kh.SoDienThoai</td>
+                        <td class="employee-info-column">@kh.DiaChi</td>
+                        <td class="employee-info-column">@kh.CCCD</td>
+                        <td class="employee-info-column">@kh.Email</td>
+                        <td class="employee-info-column">@kh.NgaySinh.ToShortDateString()</td>
+                        <td class="employee-info-column">@kh.MatKhau</td>
+                        <td class="employee-info-column">@kh.NgayDangKy.ToShortDateString()</td>
+                        <td class="employee-info-column">@kh.TinhTrang</td>
+
+                        <td style="font-size:20px" class="employee-info-column-button">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@kh.MaKhachHang">Xóa</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
+                    }
+            </tbody>
+            </form>
+        </table>
+    </div>
+
+    <!-- Các Thư Viện JavaScript Cần Thiết -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/JsNhanVien/index.js"></script>
+</body>
+</html>
