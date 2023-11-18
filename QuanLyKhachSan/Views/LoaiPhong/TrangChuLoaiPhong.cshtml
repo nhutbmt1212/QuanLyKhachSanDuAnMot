@@ -96,7 +96,7 @@
 <body>
     <!-- Popup Thêm Loại Phòng -->
     <div class="form-popup mb-2" id="myForm">
-        <form class="form-container" method="post" enctype="multipart/form-data">
+        <form class="form-container" method="post" >
             <h1>Thêm loại phòng</h1>
             <div class="row">
                 <div class="col-md-6">
@@ -158,7 +158,7 @@
                         </div>
                         <div class="form-group">
                             <label>Giá theo ngày</label>
-                        <input class="form-control GiaTheoNgayEdit" name="giatheongay" />
+                        <input class="form-control GiaTheoNgayEdit" name="giaphongtheongay" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -168,11 +168,11 @@
                         </div>
                         <div class="form-group">
                             <label>Số người lớn</label>
-                            <input class="form-control SoNguoiLonEdit" name="songuoilon" />
+                            <input class="form-control SoNguoiLonEdit" name="soluongnguoilon" />
                         </div>
                         <div class="form-group">
                             <label>Số trẻ em</label>
-                            <input class="form-control SoTreEmEdit" name="sotreem" />
+                            <input class="form-control SoTreEmEdit" name="soluongtreem" />
                         </div>
                 </div>
             </div>
@@ -209,26 +209,26 @@
                     @foreach (var loaiPhong in Model)
                     {
                         stt = stt + 1;
-                    <tr data-ma-loai-phong="@loaiPhong.MaLoaiPhong" data-ten-loai-phong="@loaiPhong.TenLoaiPhong" data-gia-theo-gio="@loaiPhong.GiaTheoGio" data-gia-phong-theo-ngay="@loaiPhong.GiaPhongTheoNgay" data-phu-thu-tra-muon="@loaiPhong.PhuThuTraMuon" data-so-luong-nguoi-lon="@loaiPhong.SoLuongNguoiLon" data-so-luong-tre-em="@loaiPhong.SoLuongTreEm">
-                        <td style="position:relative;top:27px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
-                        <td class="employee-info-column ">
+                    <tr data-ma-loai-phong="@loaiPhong.MaLoaiPhong" data-ten-loai-phong="@loaiPhong.TenLoaiPhong" data-gia-theo-gio="@loaiPhong.GiaTheoGio" data-gia-theo-ngay="@loaiPhong.GiaPhongTheoNgay" data-phu-thu-tra-muon="@loaiPhong.PhuThuTraMuon" data-so-luong-nguoi-lon="@loaiPhong.SoLuongNguoiLon" data-so-luong-tre-em="@loaiPhong.SoLuongTreEm">
+                        <td style="position:relative;top:13px" class="loaiPhong_detail"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="align-middle loaiPhong_detail">
                                 @stt
                         </td>
-                        <td>@loaiPhong.MaLoaiPhong</td>
-                        <td>@loaiPhong.TenLoaiPhong</td>
-                        <td>@loaiPhong.GiaTheoGio</td>
-                        <td>@loaiPhong.GiaPhongTheoNgay</td>
-                        <td>@loaiPhong.PhuThuTraMuon</td>
-                        <td>@loaiPhong.SoLuongNguoiLon</td>
-                        <td>@loaiPhong.SoLuongTreEm</td>
-                        <td style="font-size:20px" class="employee-info-column-button">
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.MaLoaiPhong</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.TenLoaiPhong</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.GiaTheoGio</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.GiaPhongTheoNgay</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.PhuThuTraMuon</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.SoLuongNguoiLon</td>
+                        <td class="align-middle loaiPhong_detail">@loaiPhong.SoLuongTreEm</td>
+                        <td  style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
                                 <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
-                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@loaiPhong.MaLoaiPhong">Xóa</a>
+                                <div class="dropdown-menu xuly_dropdown" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua" >Sửa</a>
+                                    <a class="dropdown-item" asp-action="XoaLoaiPhong" asp-controller="LoaiPhong" asp-route-id="@loaiPhong.MaLoaiPhong">Xóa</a>
                                 </div>
                             </div>
                         </td>
@@ -238,7 +238,7 @@
             </form>
         </table>
     </div>
-
+    <script src="~/jsLoaiPhong/LoaiPhong.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
@@ -249,6 +249,5 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
             @* Đang là js nhân viên để test *@
-    <script src="~/JsNhanVien/index.js"></script>
 </body>
 </html>
