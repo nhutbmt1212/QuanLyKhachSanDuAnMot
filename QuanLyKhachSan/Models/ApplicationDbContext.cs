@@ -293,52 +293,58 @@ namespace QuanLyKhachSan.Models
             );
 
             modelBuilder.Entity<DichVu>().HasData(
-                new DichVu
-                {
-                    MaDichVu = "DV001",
-                    TenDichVu = "Dịch Vụ 1",
-                    DonViTinh = "Cái",
-                    GiaTien = 50000,
-                    TinhTrang = "Hoạt động",
-                    GioDichVu = DateTime.Now
-                },
-                new DichVu
-                {
-                    MaDichVu = "DV002",
-                    TenDichVu = "Dịch Vụ 2",
-                    DonViTinh = "Cái",
-                    GiaTien = 80000,
-                    TinhTrang = "Hoạt động",
-                    GioDichVu = DateTime.Now
-                },
-                new DichVu
-                {
-                    MaDichVu = "DV003",
-                    TenDichVu = "Dịch Vụ 3",
-                    DonViTinh = "Bộ",
-                    GiaTien = 120000,
-                    TinhTrang = "Ngừng hoạt động",
-                    GioDichVu = DateTime.Now
-                },
-                new DichVu
-                {
-                    MaDichVu = "DV004",
-                    TenDichVu = "Dịch Vụ 4",
-                    DonViTinh = "Lần sử dụng",
-                    GiaTien = 150000,
-                    TinhTrang = "Hoạt động",
-                    GioDichVu = DateTime.Now
-                },
-                new DichVu
-                {
-                    MaDichVu = "DV005",
-                    TenDichVu = "Dịch Vụ 5",
-                    DonViTinh = "Bộ",
-                    GiaTien = 200000,
-                    TinhTrang = "Hoạt động",
-                    GioDichVu = DateTime.Now
-                }
-            );
+      new DichVu
+      {
+          MaDichVu = "DV001",
+          TenDichVu = "Dịch Vụ 1",
+          DonViTinh = "Cái",
+          GiaTien = 50000,
+          TinhTrang = "Hoạt động",
+          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+      },
+      new DichVu
+      {
+          MaDichVu = "DV002",
+          TenDichVu = "Dịch Vụ 2",
+          DonViTinh = "Cái",
+          GiaTien = 80000,
+          TinhTrang = "Hoạt động",
+          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+      },
+      new DichVu
+      {
+          MaDichVu = "DV003",
+          TenDichVu = "Dịch Vụ 3",
+          DonViTinh = "Bộ",
+          GiaTien = 120000,
+          TinhTrang = "Ngừng hoạt động",
+          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+      },
+      new DichVu
+      {
+          MaDichVu = "DV004",
+          TenDichVu = "Dịch Vụ 4",
+          DonViTinh = "Lần sử dụng",
+          GiaTien = 150000,
+          TinhTrang = "Hoạt động",
+          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+      },
+      new DichVu
+      {
+          MaDichVu = "DV005",
+          TenDichVu = "Dịch Vụ 5",
+          DonViTinh = "Bộ",
+          GiaTien = 200000,
+          TinhTrang = "Hoạt động",
+          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+      }
+ );
+
             modelBuilder.Entity<HoaDon>().HasData(
                new HoaDon
                {

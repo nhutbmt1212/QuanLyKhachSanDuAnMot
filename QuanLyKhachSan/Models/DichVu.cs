@@ -14,7 +14,12 @@ namespace QuanLyKhachSan.Models
         public int GiaTien { get; set; }
         [StringLength(30)]
         public string TinhTrang { get; set; }
-        [DataType(DataType.DateTime)]
-        public DateTime GioDichVu { get; set; }
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm}")]
+        public TimeSpan GioBatDauDichVu { get; set; }
+
+        [DataType(DataType.Time)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:hh\\:mm}")]
+        public TimeSpan GioKetThucDichVu { get; set; }
     }
 }
