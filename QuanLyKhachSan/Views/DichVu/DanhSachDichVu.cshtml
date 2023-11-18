@@ -1,0 +1,200 @@
+﻿@model IEnumerable<QuanLyKhachSan.Models.DichVu>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="~/CssDichVu/CssDichVu.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+<body>
+    <!-- Popup - Thêm Dịch Vụ -->
+    <div class="form-popup mb-2" id="myForm">
+        <!-- Form Thêm Dịch Vụ -->
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Thêm dịch vụ</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã dịch vụ</label>
+                        <input class="form-control" name="madichvu" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên dịch vụ</label>
+                        <input class="form-control" name="tendichvu" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Đơn vị tính</label>
+                        <input class="form-control" name="donvitinh" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giá tiền</label>
+                        <input class="form-control" name="giatien" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Giờ BD phục vụ</label>
+                        <input class="form-control" name="giodichvu" type="time" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giờ KT phục vụ</label>
+                        <input class="form-control" name="giodichvu" type="time" />
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="closeForm()">Đóng</button>
+                <button class="btn float-right m-2 w-25" style="min-width:200px" asp-action="ThemDichVu" asp-controller="DichVu">Thêm dịch vụ</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Popup - Sửa Dịch Vụ -->
+    <div class="form-popupEdit mb-2" id="myFormEdit">
+        <!-- Form Sửa Dịch Vụ -->
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1>Sửa dịch vụ</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã dịch vụ</label>
+                        <input class="form-control" name="madichvu" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tên dịch vụ</label>
+                        <input class="form-control" name="tendichvu" />
+                    </div>
+                    <div class="form-group">
+                        <label>Đơn vị tính</label>
+                        <input class="form-control" name="donvitinh" />
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    
+                    <div class="form-group">
+                        <label>Giá tiền</label>
+                        <input class="form-control" name="giatien" />
+                    </div>
+                    <div class="form-group">
+                        <label>Tình trạng</label>
+                        <select class="form-control" name="tinhtrang">
+                            <option value="Còn hàng">
+                                Còn hàng
+                            </option>
+                            <option value="Hết hàng">
+                                Hết hàng
+                            </option>
+                            <option value="Ngưng hoạt động">
+                                Ngưng hoạt động
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                   
+                    <div class="form-group">
+                        <label>Giờ BD phục vụ</label>
+                        <input class="form-control" name="giodichvu" type="time" />
+                    </div>
+                    <div class="form-group">
+                        <label>Giờ KT phục vụ</label>
+                        <input class="form-control" name="giodichvu" type="time" />
+                    </div>
+                </div>
+            </div>
+            <!-- Nút Đóng và Sửa Dịch Vụ -->
+            <div class="clearfix">
+                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="CloseFormEdit()">Đóng</button>
+                <button type="submit" class="btn float-right m-2 w-25" style="min-width:200px" asp-action="SuaDichVu" asp-controller="DichVu">Sửa dịch vụ</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Nút Thêm Dịch Vụ -->
+    <a class="btn btn-primary mb-2" id="btn_themDv" onclick="openForm()">Thêm dịch vụ</a>
+
+    <!-- Bảng Hiển Thị Danh Sách Dịch Vụ -->
+    <div id="detailDichVu">
+        <table class="table" id="table_detail" style="border:1px solid #343A40">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="align-middle ">
+                        <input type="checkbox" id="thead_checkbox" />
+                    </th>
+                    <th scope="col" class="align-middle "> #</th>
+                    <th scope="col" class="align-middle ">Dịch vụ</th>
+                    <th scope="col" class="align-middle ">Đơn vị tính</th>
+                    <th scope="col" class="align-middle ">Giá tiền</th>
+                    <th scope="col" class="align-middle ">Tình trạng</th>
+                    <th scope="col" class="align-middle ">Giờ BD phục vụ</th>
+                    <th scope="col" class="align-middle ">Giờ KT phục vụ</th>
+                    <th scope="col" class="align-middle  thead_xuly">Xử lý</th>
+                </tr>
+            </thead>
+
+            <!-- Dữ liệu Dịch Vụ -->
+            <form name="main">
+            <tbody>
+                    @{
+                        int stt = 0;
+                    }
+                    @foreach (var dv in Model)
+                    {
+                    <tr data-ma-dv="@dv.MaDichVu" data-ten-dv="@dv.TenDichVu" data-donViTinh="@dv.DonViTinh" data-giaTien="@dv.GiaTien" data-tinhTrang="@dv.TinhTrang" data-gioBatDauDichVu="@dv.GioBatDauDichVu" data-gioKetThucDichVu="@dv.GioKetThucDichVu">
+                        <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="employee-info-column">
+                        @stt
+                        </td>
+                        <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
+                            <div class="row">
+                                <div class="col-12 col-sm-12">
+                                    <span class="d-block d-sm-inline text-warning"> @dv.MaDichVu</span>
+                                    <br>
+                                    <p class="d-block d-sm-inline">@dv.TenDichVu</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="employee-info-column">@dv.DonViTinh</td>
+                        <td class="employee-info-column">@dv.GiaTien</td>
+                        <td class="employee-info-column">@dv.TinhTrang</td>
+                        <td class="employee-info-column">@dv.GioBatDauDichVu</td>
+                        <td class="employee-info-column">@dv.GioKetThucDichVu</td>
+
+                        <td style="font-size:20px" class="employee-info-column-button">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@dv.MaDichVu">Xóa</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+                </form>
+            </table>
+        </div>
+
+        <!-- Các Thư Viện JavaScript Cần Thiết -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        <script src="~/JsNhanVien/index.js"></script>
+    </body>
+    </html>
