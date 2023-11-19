@@ -16,6 +16,7 @@ namespace QuanLyKhachSan.Models
         public DbSet<KhachHang> KhachHang { get; set; }
         public DbSet<LoaiPhong> LoaiPhong { get; set; }
         public DbSet<Phong> Phong { get; set; }
+        public DbSet<ImageLink> imglink { get; set; }
         public DbSet<NhanVien> NhanVien { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -252,7 +253,6 @@ namespace QuanLyKhachSan.Models
                     NgayTao = DateTime.Now,
                     TinhTrang = "Trong",
                     KhuVuc = "Khu A",
-                    AnhPhong = new byte[] { 0x1, 0x2, 0x3 } // Dữ liệu hình ảnh ở đây là một mảng byte mẫu, hãy thay đổi theo dữ liệu thực tế của bạn
                 },
                 new Phong
                 {
@@ -261,7 +261,6 @@ namespace QuanLyKhachSan.Models
                     NgayTao = DateTime.Now,
                     TinhTrang = "Trong",
                     KhuVuc = "Khu A",
-                    AnhPhong = new byte[] { 0x4, 0x5, 0x6 }
                 },
                 new Phong
                 {
@@ -270,7 +269,6 @@ namespace QuanLyKhachSan.Models
                     NgayTao = DateTime.Now,
                     TinhTrang = "Da Dat",
                     KhuVuc = "Khu B",
-                    AnhPhong = new byte[] { 0x7, 0x8, 0x9 }
                 },
                 new Phong
                 {
@@ -279,7 +277,6 @@ namespace QuanLyKhachSan.Models
                     NgayTao = DateTime.Now,
                     TinhTrang = "Trong",
                     KhuVuc = "Khu C",
-                    AnhPhong = new byte[] { 0xA, 0xB, 0xC }
                 },
                 new Phong
                 {
@@ -288,7 +285,6 @@ namespace QuanLyKhachSan.Models
                     NgayTao = DateTime.Now,
                     TinhTrang = "Da Dat",
                     KhuVuc = "Khu C",
-                    AnhPhong = new byte[] { 0xD, 0xE, 0xF }
                 }
             );
 

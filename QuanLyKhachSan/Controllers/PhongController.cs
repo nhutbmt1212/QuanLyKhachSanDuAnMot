@@ -13,39 +13,84 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult TrangChuPhong()
         {
-            var listPhong = _db.Phong.Include(p => p.LoaiPhong).ToList();
+            var listPhong = _db.Phong.Include(p => p.ImageLinks).ToList();
             ViewBag.DanhSachPhong = listPhong;
+            var listLoaiPhong = _db.LoaiPhong.ToList();
+            ViewBag.DanhSachLoaiPhong = listLoaiPhong;
             return View(listPhong);
-
         }
-        [HttpPost]
-        public IActionResult ThemPhong(Phong phong, IFormFileCollection files)
+
+        public async Task<IActionResult> GetImages(string phongId)
         {
-            if (ModelState.IsValid)
+            var phong = await _db.Phong
+                .Include(p => p.ImageLinks)
+                .FirstOrDefaultAsync(p => p.MaPhong == phongId);
+
+            if (phong == null)
             {
-                // Lưu thông tin phòng vào cơ sở dữ liệu
-                _db.Phong.Add(phong);
-                _db.SaveChanges();
-
-                // Lưu ảnh vào thư mục Upload với tên trùng với mã phòng
-                foreach (var file in files)
-                {
-                    if (file.Length > 0)
-                    {
-                        var filePath = Path.Combine("Upload", $"{phong.MaPhong}_{file.FileName}");
-
-                        using (var fileStream = new FileStream(filePath, FileMode.Create))
-                        {
-                            file.CopyTo(fileStream);
-                        }
-                    }
-                }
-
-                return RedirectToAction("TrangChuPhong");
+                return NotFound();
             }
 
-            // Nếu ModelState không hợp lệ, quay lại trang thêm phòng với thông tin đã nhập
-            return View(phong);
+            // Return the URLs of the images as a JSON array
+            return Json(phong.ImageLinks.Select(il => il.Url));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> LuuAnh(Phong phong, List<IFormFile> Imageurl)
+        { 
+                var images = new List<ImageLink>();
+
+                foreach (var image in Imageurl)
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    var path = Path.Combine("wwwroot", "UploadImage", fileName);
+
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await image.CopyToAsync(stream);
+                    }
+
+                    var relativePath = $"{fileName}";
+                    images.Add(new ImageLink { Url = relativePath });
+                }
+            phong.TinhTrang = "Đang hoạt động";
+            phong.KhuVuc = "A";
+
+                phong.ImageLinks = images;
+
+                _db.Phong.Add(phong);
+                await _db.SaveChangesAsync();
+
+                return RedirectToAction("TrangChuPhong", "Phong");
+    
+
+            
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
+        {
+            var phong = await _db.Phong
+                .Include(p => p.ImageLinks)
+                .FirstOrDefaultAsync(p => p.MaPhong == phongId);
+
+            if (phong == null)
+            {
+                return NotFound();
+            }
+
+            // Update the existing images with the edited URLs
+            phong.ImageLinks.Clear();
+
+            foreach (var editedImageUrl in editedImageUrls)
+            {
+                phong.ImageLinks.Add(new ImageLink { Url = editedImageUrl });
+            }
+
+            await _db.SaveChangesAsync();
+
+            return View("Index");
         }
     }
 }

@@ -18,6 +18,6 @@ namespace QuanLyKhachSan.Models
         public string TinhTrang { get; set; }
         [StringLength(20)]
         public string KhuVuc { get; set; }
-        public byte[] AnhPhong { get; set; }
+        public ICollection<ImageLink> ImageLinks { get; set; }
     }
 }

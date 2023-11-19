@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanLyKhachSan.Models;
 
@@ -11,9 +12,11 @@ using QuanLyKhachSan.Models;
 namespace QuanLyKhachSan.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231119084136_ChangeImage")]
+    partial class ChangeImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +67,7 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH001",
                             MaNhanVien = "NV001",
                             SoLuong = 2,
-                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5736),
+                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(751),
                             TrangThai = "Hoàn thành"
                         },
                         new
@@ -73,7 +76,7 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH002",
                             MaNhanVien = "NV002",
                             SoLuong = 1,
-                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5739),
+                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(753),
                             TrangThai = "Chưa hoàn thành"
                         },
                         new
@@ -82,7 +85,7 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH003",
                             MaNhanVien = "NV003",
                             SoLuong = 3,
-                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5741),
+                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(755),
                             TrangThai = "Hoàn thành"
                         },
                         new
@@ -91,7 +94,7 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH004",
                             MaNhanVien = "NV004",
                             SoLuong = 2,
-                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5743),
+                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(756),
                             TrangThai = "Chưa hoàn thành"
                         },
                         new
@@ -100,7 +103,7 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH005",
                             MaNhanVien = "NV005",
                             SoLuong = 1,
-                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5822),
+                            ThoiGianDichVu = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(758),
                             TrangThai = "Hoàn thành"
                         });
                 });
@@ -139,7 +142,7 @@ namespace QuanLyKhachSan.Migrations
                             BinhLuan = "Dịch vụ tốt, phòng sạch sẽ.",
                             DiemDanhGia = 5,
                             MaKhachHang = "KH001",
-                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5716)
+                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(682)
                         },
                         new
                         {
@@ -147,7 +150,7 @@ namespace QuanLyKhachSan.Migrations
                             BinhLuan = "Không hài lòng với dịch vụ nhân viên.",
                             DiemDanhGia = 2,
                             MaKhachHang = "KH002",
-                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5718)
+                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(684)
                         },
                         new
                         {
@@ -155,7 +158,7 @@ namespace QuanLyKhachSan.Migrations
                             BinhLuan = "Phòng ốc quá ồn ào, không yên tĩnh.",
                             DiemDanhGia = 3,
                             MaKhachHang = "KH003",
-                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5720)
+                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(686)
                         },
                         new
                         {
@@ -163,7 +166,7 @@ namespace QuanLyKhachSan.Migrations
                             BinhLuan = "Dịch vụ và phòng ốc đều rất tốt.",
                             DiemDanhGia = 5,
                             MaKhachHang = "KH004",
-                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5722)
+                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(687)
                         },
                         new
                         {
@@ -171,7 +174,7 @@ namespace QuanLyKhachSan.Migrations
                             BinhLuan = "Giá cả hợp lý, nhân viên nhiệt tình.",
                             DiemDanhGia = 4,
                             MaKhachHang = "KH005",
-                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5723)
+                            NgayDanhGia = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(688)
                         });
                 });
 
@@ -239,8 +242,8 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH001",
                             MaNhanVien = "NV001",
                             MaPhong = "P001",
-                            NgayNhan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5677),
-                            NgayTra = new DateTime(2023, 11, 20, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5678),
+                            NgayNhan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(652),
+                            NgayTra = new DateTime(2023, 11, 20, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(652),
                             SoLuongNguoiLon = 2,
                             SoLuongTreEm = 1,
                             SoTienTraTruoc = 50000,
@@ -254,8 +257,8 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH002",
                             MaNhanVien = "NV002",
                             MaPhong = "P002",
-                            NgayNhan = new DateTime(2023, 11, 21, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5690),
-                            NgayTra = new DateTime(2023, 11, 23, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5690),
+                            NgayNhan = new DateTime(2023, 11, 21, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(660),
+                            NgayTra = new DateTime(2023, 11, 23, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(660),
                             SoLuongNguoiLon = 1,
                             SoLuongTreEm = 0,
                             SoTienTraTruoc = 80000,
@@ -269,8 +272,8 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH003",
                             MaNhanVien = "NV003",
                             MaPhong = "P003",
-                            NgayNhan = new DateTime(2023, 11, 22, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5694),
-                            NgayTra = new DateTime(2023, 11, 24, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5695),
+                            NgayNhan = new DateTime(2023, 11, 22, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(663),
+                            NgayTra = new DateTime(2023, 11, 24, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(663),
                             SoLuongNguoiLon = 3,
                             SoLuongTreEm = 2,
                             SoTienTraTruoc = 120000,
@@ -284,8 +287,8 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH004",
                             MaNhanVien = "NV004",
                             MaPhong = "P004",
-                            NgayNhan = new DateTime(2023, 11, 23, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5697),
-                            NgayTra = new DateTime(2023, 11, 25, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5698),
+                            NgayNhan = new DateTime(2023, 11, 23, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(666),
+                            NgayTra = new DateTime(2023, 11, 25, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(666),
                             SoLuongNguoiLon = 2,
                             SoLuongTreEm = 0,
                             SoTienTraTruoc = 150000,
@@ -299,8 +302,8 @@ namespace QuanLyKhachSan.Migrations
                             MaKhachHang = "KH005",
                             MaNhanVien = "NV005",
                             MaPhong = "P005",
-                            NgayNhan = new DateTime(2023, 11, 24, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5700),
-                            NgayTra = new DateTime(2023, 11, 26, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5701),
+                            NgayNhan = new DateTime(2023, 11, 24, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(669),
+                            NgayTra = new DateTime(2023, 11, 26, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(669),
                             SoLuongNguoiLon = 1,
                             SoLuongTreEm = 1,
                             SoTienTraTruoc = 200000,
@@ -436,7 +439,7 @@ namespace QuanLyKhachSan.Migrations
                             MaDatPhong = "DP001",
                             MaNhanVien = "NV001",
                             SoTienThanhToan = 150000,
-                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5652),
+                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(624),
                             TongTienDichVu = 50000,
                             TongTienPhong = 100000
                         },
@@ -446,7 +449,7 @@ namespace QuanLyKhachSan.Migrations
                             MaDatPhong = "DP002",
                             MaNhanVien = "NV002",
                             SoTienThanhToan = 230000,
-                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5655),
+                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(629),
                             TongTienDichVu = 80000,
                             TongTienPhong = 150000
                         },
@@ -456,7 +459,7 @@ namespace QuanLyKhachSan.Migrations
                             MaDatPhong = "DP003",
                             MaNhanVien = "NV003",
                             SoTienThanhToan = 320000,
-                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5657),
+                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(632),
                             TongTienDichVu = 120000,
                             TongTienPhong = 200000
                         },
@@ -466,7 +469,7 @@ namespace QuanLyKhachSan.Migrations
                             MaDatPhong = "DP004",
                             MaNhanVien = "NV004",
                             SoTienThanhToan = 400000,
-                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5659),
+                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(633),
                             TongTienDichVu = 150000,
                             TongTienPhong = 250000
                         },
@@ -476,7 +479,7 @@ namespace QuanLyKhachSan.Migrations
                             MaDatPhong = "DP005",
                             MaNhanVien = "NV005",
                             SoTienThanhToan = 500000,
-                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5661),
+                            ThoiGianThanhToan = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(635),
                             TongTienDichVu = 200000,
                             TongTienPhong = 300000
                         });
@@ -501,7 +504,7 @@ namespace QuanLyKhachSan.Migrations
 
                     b.HasIndex("PhongMaPhong");
 
-                    b.ToTable("imglink");
+                    b.ToTable("ImageLink");
                 });
 
             modelBuilder.Entity("QuanLyKhachSan.Models.KhachHang", b =>
@@ -569,7 +572,7 @@ namespace QuanLyKhachSan.Migrations
                             Email = "khachhang1@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password1",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5550),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(531),
                             NgaySinh = new DateTime(1992, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SoDienThoai = "123456789",
                             TenKhachHang = "Nguyen Van X",
@@ -583,7 +586,7 @@ namespace QuanLyKhachSan.Migrations
                             Email = "khachhang2@example.com",
                             GioiTinh = "Nu",
                             MatKhau = "password2",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5554),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(535),
                             NgaySinh = new DateTime(1995, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SoDienThoai = "987654321",
                             TenKhachHang = "Tran Thi Y",
@@ -597,7 +600,7 @@ namespace QuanLyKhachSan.Migrations
                             Email = "khachhang3@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password3",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5557),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(537),
                             NgaySinh = new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SoDienThoai = "111223344",
                             TenKhachHang = "Le Van Z",
@@ -611,7 +614,7 @@ namespace QuanLyKhachSan.Migrations
                             Email = "khachhang4@example.com",
                             GioiTinh = "Nu",
                             MatKhau = "password4",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5560),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(540),
                             NgaySinh = new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SoDienThoai = "555666777",
                             TenKhachHang = "Pham Thi K",
@@ -625,7 +628,7 @@ namespace QuanLyKhachSan.Migrations
                             Email = "khachhang5@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password5",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5563),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(542),
                             NgaySinh = new DateTime(1985, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             SoDienThoai = "999888777",
                             TenKhachHang = "Hoang Van M",
@@ -800,9 +803,9 @@ namespace QuanLyKhachSan.Migrations
                             Email = "nhanvien1@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password1",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5416),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(430),
                             NgaySinh = new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2021, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5426),
+                            NgayVaoLam = new DateTime(2021, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(440),
                             SoDienThoai = "123456789",
                             TenDangNhap = "user1",
                             TenNhanVien = "Nguyen Van A",
@@ -818,9 +821,9 @@ namespace QuanLyKhachSan.Migrations
                             Email = "nhanvien2@example.com",
                             GioiTinh = "Nu",
                             MatKhau = "password2",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5437),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(450),
                             NgaySinh = new DateTime(1995, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2022, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5438),
+                            NgayVaoLam = new DateTime(2022, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(451),
                             SoDienThoai = "987654321",
                             TenDangNhap = "user2",
                             TenNhanVien = "Tran Thi B",
@@ -836,9 +839,9 @@ namespace QuanLyKhachSan.Migrations
                             Email = "nhanvien3@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password3",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5442),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(455),
                             NgaySinh = new DateTime(1985, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2020, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5443),
+                            NgayVaoLam = new DateTime(2020, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(456),
                             SoDienThoai = "111223344",
                             TenDangNhap = "user3",
                             TenNhanVien = "Le Van C",
@@ -854,9 +857,9 @@ namespace QuanLyKhachSan.Migrations
                             Email = "nhanvien4@example.com",
                             GioiTinh = "Nu",
                             MatKhau = "password4",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5447),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(459),
                             NgaySinh = new DateTime(1988, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2018, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5448),
+                            NgayVaoLam = new DateTime(2018, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(460),
                             SoDienThoai = "555666777",
                             TenDangNhap = "user4",
                             TenNhanVien = "Pham Thi D",
@@ -872,9 +875,9 @@ namespace QuanLyKhachSan.Migrations
                             Email = "nhanvien5@example.com",
                             GioiTinh = "Nam",
                             MatKhau = "password5",
-                            NgayDangKy = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5452),
+                            NgayDangKy = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(463),
                             NgaySinh = new DateTime(1980, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayVaoLam = new DateTime(2019, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5452),
+                            NgayVaoLam = new DateTime(2019, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(463),
                             SoDienThoai = "999888777",
                             TenDangNhap = "user5",
                             TenNhanVien = "Hoang Van E",
@@ -917,7 +920,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "P001",
                             KhuVuc = "Khu A",
                             MaLoaiPhong = "LP001",
-                            NgayTao = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5603),
+                            NgayTao = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(581),
                             TinhTrang = "Trong"
                         },
                         new
@@ -925,7 +928,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "P002",
                             KhuVuc = "Khu A",
                             MaLoaiPhong = "LP002",
-                            NgayTao = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5606),
+                            NgayTao = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(583),
                             TinhTrang = "Trong"
                         },
                         new
@@ -933,7 +936,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "P003",
                             KhuVuc = "Khu B",
                             MaLoaiPhong = "LP003",
-                            NgayTao = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5608),
+                            NgayTao = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(585),
                             TinhTrang = "Da Dat"
                         },
                         new
@@ -941,7 +944,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "P004",
                             KhuVuc = "Khu C",
                             MaLoaiPhong = "LP004",
-                            NgayTao = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5609),
+                            NgayTao = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(586),
                             TinhTrang = "Trong"
                         },
                         new
@@ -949,7 +952,7 @@ namespace QuanLyKhachSan.Migrations
                             MaPhong = "P005",
                             KhuVuc = "Khu C",
                             MaLoaiPhong = "LP005",
-                            NgayTao = new DateTime(2023, 11, 19, 15, 45, 49, 208, DateTimeKind.Local).AddTicks(5611),
+                            NgayTao = new DateTime(2023, 11, 19, 15, 41, 35, 867, DateTimeKind.Local).AddTicks(587),
                             TinhTrang = "Da Dat"
                         });
                 });
