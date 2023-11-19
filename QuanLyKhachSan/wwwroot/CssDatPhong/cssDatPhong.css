@@ -1,0 +1,73 @@
+﻿body {
+    background-color: #F6F6F6;
+}
+.container {
+    max-width: 100%; /* Đảm bảo .container không vượt quá chiều rộng của màn hình */
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+.room {
+    margin-top: 10px;
+    height: 19rem;
+    width: 210px;
+    border-radius: 10px;
+    border: 1px solid grey;
+    background-color: #FFFFFF;
+}
+.image_room {
+    width: 93%;
+    height: 70%;
+    background-color: antiquewhite;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-items:center;
+    margin-left:8px;
+}
+.trangthai {
+    position: relative;
+    bottom: 90px;
+    left: 25px;
+    color: whitesmoke;
+    font-size: 12px;
+    background-color: #78D69D;
+    height:30px;
+    width:80px;
+    border-radius:7px;
+    align-items:center;
+    justify-content:center;
+    justify-items:center;
+    text-align:center;
+    display:flex;
+}
+.maphong {
+    position: relative;
+    bottom: 88px;
+    left: 25px;
+    color: whitesmoke;
+    font-size: 17px;
+}
+.loaiphong {
+    position: relative;
+    bottom: 65px;
+    left: -15px;
+    color: whitesmoke;
+    font-size: 14px;
+}
+.giatheogio {
+    position: relative;
+    bottom: 45px;
+    left: -15px;
+    color: black;
+    font-size: 14px;
+}
+.giatheongay {
+    position: relative;
+    bottom: 35px;
+    left: -15px;
+    color: black;
+    font-size: 14px;
+}
