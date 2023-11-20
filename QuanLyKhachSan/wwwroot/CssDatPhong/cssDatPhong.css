@@ -11,7 +11,7 @@
 .room {
     margin-top: 10px;
     height: 19rem;
-    width: 210px;
+    width: 225px;
     border-radius: 10px;
     border: 1px solid grey;
     background-color: #FFFFFF;
@@ -35,7 +35,7 @@
     font-size: 12px;
     background-color: #78D69D;
     height:30px;
-    width:80px;
+    width:120px;
     border-radius:7px;
     align-items:center;
     justify-content:center;
@@ -57,17 +57,64 @@
     color: whitesmoke;
     font-size: 14px;
 }
-.giatheogio {
-    position: relative;
-    bottom: 45px;
-    left: -15px;
-    color: black;
-    font-size: 14px;
+.title_giatheogio {
+    position: absolute;
+    left:0;
 }
-.giatheongay {
+.content_giatheogio {
+    
+}
+
+.gia_theo_gio_div {
+    font-size: 11px;
+    height: 20px;
+    border-bottom: 1px solid grey;
     position: relative;
-    bottom: 35px;
-    left: -15px;
-    color: black;
-    font-size: 14px;
+    top: -25px;
+   
+    width: 87%;
+    justify-content: right;
+    display:flex;
+    margin-left:13px;
+
+}
+.gia_theo_ngay_div {
+    font-size: 11px;
+    height: 20px;
+    position: relative;
+    top: -20px;
+    margin-left: 15px;
+    justify-content: right;
+    display: flex;
+}
+.title_giatheongay {
+    position: absolute;
+    left: -2px;
+}
+.content_giatheongay {
+    position:absolute;
+    right:15px;
+}
+.icon_3cham {
+    position: absolute;
+    bottom: 295px;
+    left: 170px;
+    height: 30px;
+    width: 30px;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
+    display: flex;
+    border-radius:50px;
+    color:white;
+}
+.btn_threedot {
+    border: 0;
+    background-color: none;
+    background-color: rgb(89, 82, 79,0.3);
+    height: 30px;
+    width: 30px;
+    border-radius: 50px;
+    color:white;
 }

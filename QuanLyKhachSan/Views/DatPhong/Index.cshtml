@@ -1,16 +1,22 @@
-﻿<!DOCTYPE html>
+﻿@model List<QuanLyKhachSan.Models.Phong>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+   @*  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
+          crossorigin="anonymous"> *@
     <link rel="stylesheet" href="~/CssDatPhong/cssDatPhong.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
 <div class="container">
+       
     <div>
         <button type="button" class="btn btn-light">Tất cả</button>
         <button type="button" class="btn btn-light">Trống</button>
@@ -18,73 +24,42 @@
         </div>
         <div id="totalRoom" class="container">
             <div class="row">
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
+                @foreach(var phong in Model)
+                {
+                     <div class="col-md-2 ml-5">
+                    <div class="room">
+                        <img src="https://th.bing.com/th/id/R.efd003d87199ce8c240aa1fd56acc44b?rik=pAFLUJIULbXf%2bg&pid=ImgRaw&r=0" alt="" class="image_room mt-2">
+                        <span class="trangthai ">@phong.TinhTrang</span>
+                        <span class="maphong">@phong.MaPhong</span>
                         <span class="loaiphong ">Phòng Sang Trọng </span>
-                        <p class="giatheogio">Giá theo giờ : 2000000
-                        </p>
-                        
-                        <p class="giatheongay">
-                            Giá theo ngày : 300000
-                        </p>
-                    </div>
-
-                </div>
-
-
-
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
-                        <span class="loaiphong ">Phòng Sang Trọng </span>
-                    </div>
-                </div>
-
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
-                        <span class="loaiphong ">Phòng Sang Trọng </span>
+                        <div class="gia_theo_gio_div">
+                            <span class="title_giatheogio">Giá theo giờ: </span>
+                            <span class="content_giatheogio text-right">200000</span>
+                        </div>
+                        <div class="gia_theo_ngay_div">
+                            <span class="title_giatheongay">
+                                Giá theo ngày: 
+                            </span>
+                            <span class="content_giatheongay">
+                                3000000
+                            </span>
+                        </div>
+                        <div class="dropdown icon_3cham ">
+                            <button type="button" data-toggle="dropdown" class="btn_threedot">
+                                <i class="bi bi-three-dots"></i>
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Đặt phòng</a>
+                                <a class="dropdown-item" href="#">Thanh toán</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
-                        <span class="loaiphong ">Phòng Sang Trọng </span>
-                    </div>
-                </div>
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
-                        <span class="loaiphong ">Phòng Sang Trọng </span>
-                    </div>
-                </div>
-                <div class="col-md-2 ml-4">
-                    <div class="room ">
-                        <img src="~/Images/AnhTest.jpg" alt="" class="image_room mt-2">
-                        <span class="trangthai ">TRỐNG</span>
-                        <span class="maphong">P001</span>
-                        <span class="loaiphong ">Phòng Sang Trọng </span>
-                        <span>
-                            Giá theo giờ : 2000000
-                        </span><span>
-                            Giá theo ngày : 300000
-                        </span>
-                    </div>
-                </div>
-
-
-                <!-- Thêm các cột khác tùy số lượng phòng bạn có -->
+                }
+               
+               
+               
+          
             </div>
         </div>
 
