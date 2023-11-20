@@ -16,5 +16,11 @@ namespace QuanLyKhachSan.Controllers
            
             return View(qr_Phong);
         }
+        [HttpPost]
+        public IActionResult GetLoaiPhong (string? id)
+        {
+            var qr_loaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == id);
+            return Json(new { qr_loaiPhong });
+        }
     }
 }

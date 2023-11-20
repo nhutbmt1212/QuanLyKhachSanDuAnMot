@@ -51,15 +51,16 @@
     font-size: 17px;
 }
 .loaiphong {
-    position: relative;
-    bottom: 65px;
-    left: -15px;
+    position: absolute;
+    bottom: 95px;
+    left: 40px;
     color: whitesmoke;
     font-size: 14px;
 }
 .title_giatheogio {
     position: absolute;
     left:0;
+    font-weight:700;
 }
 .content_giatheogio {
     
@@ -90,6 +91,7 @@
 .title_giatheongay {
     position: absolute;
     left: -2px;
+    font-weight: 700;
 }
 .content_giatheongay {
     position:absolute;
