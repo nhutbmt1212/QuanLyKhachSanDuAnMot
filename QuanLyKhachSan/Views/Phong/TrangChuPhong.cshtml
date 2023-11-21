@@ -1,4 +1,9 @@
-﻿@model List<QuanLyKhachSan.Models.Phong>
+﻿@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+
+}
+@model List<QuanLyKhachSan.Models.Phong>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -312,7 +317,11 @@
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                        @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+                                        {
                                     <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@phong.MaLoaiPhong">Xóa</a>
+
+                                        }
                                 </div>
                             </div>
                         </td>

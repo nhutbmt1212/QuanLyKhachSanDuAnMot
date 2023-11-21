@@ -62,7 +62,7 @@ namespace QuanLyKhachSan.Controllers
 				claims.Add(new Claim(ClaimTypes.Role, "Khách hàng"));
 				claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
-				return RedirectToAction("Index", "Home");
+				return RedirectToAction("Index", "TrangChuKhachHang");
 			}
 
 			ViewData["ValidateMessage"] = "User not found";

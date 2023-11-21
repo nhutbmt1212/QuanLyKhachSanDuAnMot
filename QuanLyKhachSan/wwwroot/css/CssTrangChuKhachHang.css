@@ -1,0 +1,163 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #E5E5E5;
+}
+#container{
+    width:100%;
+    height:auto;
+}
+.nav-main-top {
+    width: 100%;
+    height: 100px;
+    background-color: white;
+}
+
+    .nav-main-top ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-between; /* Hiển thị các mục theo chiều ngang và giữa chúng */
+        align-items: center; /* Căn mục theo chiều dọc */
+        height: 100%; /* Đặt chiều cao của ul bằng chiều cao của .nav-main-top */
+    }
+
+    .nav-main-top li {
+        flex-grow: 1; /* Mở rộng tỷ lệ bằng nhau */
+        text-align: center;
+        padding: 0 15px; /* Thêm khoảng trống giữa các mục */
+    }
+
+    .nav-main-top .group-1 li {
+        background-color: #f0f0f0; /* Màu nền của nhóm 1 */
+    }
+
+    .nav-main-top .group-2 li {
+        background-color: #e0e0e0; /* Màu nền của nhóm 2 */
+    }
+
+
+.sreach-room {
+    margin-top: 20px;
+    width: 70%;
+    height: 100px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto; /* Thêm margin-left và margin-right để căn giữa theo chiều ngang */
+    margin-right: auto;
+    border-radius:5px;
+    box-shadow:1px 1px 5px grey;
+}
+.address {
+    height: 100%;
+    flex: 10;
+    display: flex;
+    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+}
+.ngaynhan {
+    height: 100%;
+    flex: 10;
+    display: flex;
+    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+}
+.ngaytra {
+    height: 100%;
+    flex: 10;
+    display: flex;
+    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+}
+.so-phong {
+    height: 100%;
+    flex: 9;
+    display: flex;
+    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+}
+.Tim-kiem {
+    display: flex;
+    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    flex: 5;
+}
+    .address input,
+    .ngaynhan input,
+    .ngaytra input,
+    .so-phong select,
+    .Tim-kiem button {
+        width: 100%; /* Set the width to 100% for input, select, and button elements */
+        padding: 5px; /* Optional: add padding for better styling */
+        box-sizing: border-box; /* Optional: include padding and border in the element's total width and height */
+    }
+
+#infor-hotel {
+    margin-top: 20px;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: row; /* Sử dụng row thay vì column */
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+.img-hotel {
+    flex-grow: 1;
+    background-color: antiquewhite;
+    align-self: stretch;
+    height: auto;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.content-infor-hotel {
+    height: 300px;
+    flex-grow: 3;
+    background-color: aqua;
+    align-self: stretch;
+    box-shadow: 1px 1px 5px grey;
+}
+
+#room-infor {
+    margin-top: 20px;
+    width: 70%;
+    height: auto;
+    display: flex;
+    flex-direction: row; /* Sử dụng row thay vì column */
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+}
+
+.room-detail {
+    flex-grow: 5;
+    background-color: antiquewhite;
+    margin-right: 20px;
+    align-self: stretch;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
+}
+
+.infor-detail {
+    height: 300px;
+    flex-grow: 3;
+    background-color: aqua;
+    align-self: stretch;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
+}

@@ -2,10 +2,6 @@
 @{
 	var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
 }
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +97,7 @@
             }
 		</ul>
 		<ul class="side-menu">
-				@if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+				@if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên"||userRole =="Khách hàng")
 			{
 				<li>
 					<a href="#">
@@ -140,11 +136,7 @@
 			@RenderBody()
 		</main>
 	</section>
-   @*  <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div> *@
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,29 +1,40 @@
 ﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
-<html>
+<html lang="en" dir="ltr">
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
     <title>Login</title>
+    <link rel="stylesheet" href="~/css/CssLogin.css">
 </head>
 <body>
-    <form asp-controller="Access" asp-action="Login" method="post">
+    <div class="center">
         <h1>Login</h1>
-        <input type="text" placeholder="Tên đăng nhập" name="TenDangNhap" />
-        <input type="password" placeholder="Mật khẩu" name="MatKhau" />
-     
-        <button type="submit">
-            Login
-        </button>
+        <form method="post" asp-controller="Access" asp-action="Login">
+            <div class="txt_field">
+                <input type="text" name="TenDangNhap" required>
+                <span></span>
+                <label>Username</label>
+            </div>
+            <div class="txt_field">
+                <input type="password" name="MatKhau" required>
+                <span></span>
+                <label>Password</label>
+            </div>
+            <div class="pass">Forgot Password?</div>
+            <input type="submit" value="Login">
+            <div class="signup_link">
+                Not a member? <a href="#">Signup</a>
+            </div>
+        </form>
         @if (ViewData["ValidateMessage"] != null)
         {
-            <br/>
+            <br />
             <br />
             <label>@ViewData["ValidateMessage"]</label>
         }
-    </form>
+    </div>
+
 </body>
 </html>
