@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class DichVuController : Controller
+	[Authorize]
+
+	public class DichVuController : Controller
     {
         private readonly ApplicationDbContext _db;
         public DichVuController(ApplicationDbContext db)

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class KhachHangController : Controller
+	[Authorize]
+
+	public class KhachHangController : Controller
     {
         private readonly ApplicationDbContext _db;
         public KhachHangController(ApplicationDbContext db)

@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class PhongController : Controller
+	[Authorize]
+
+	public class PhongController : Controller
     {
         private readonly ApplicationDbContext _db;
         public PhongController(ApplicationDbContext db)

@@ -22,6 +22,7 @@ builder.Services.AddAuthentication(
         option.LoginPath = "/Access/Login";
         option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
     });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

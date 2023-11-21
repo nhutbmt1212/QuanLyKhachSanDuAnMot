@@ -1,4 +1,10 @@
-﻿@model IEnumerable<QuanLyKhachSan.Models.NhanVien>
+﻿@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+}
+@model IEnumerable<QuanLyKhachSan.Models.NhanVien>
+@if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+{
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -320,4 +326,9 @@
             crossorigin="anonymous"></script>
     <script src="~/JsNhanVien/index.js"></script>
 </body>
-</html>
+    </html>
+}
+else
+{
+    <h1 style="color:red">LỖI BẤT KHẢ TRUY CẬP</h1>
+}

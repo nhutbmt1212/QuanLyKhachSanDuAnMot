@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class DatPhongController : Controller
+	[Authorize]
+
+	public class DatPhongController : Controller
     {
         private readonly ApplicationDbContext _db;
         public DatPhongController(ApplicationDbContext db)

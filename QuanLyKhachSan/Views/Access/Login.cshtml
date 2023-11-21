@@ -1,5 +1,4 @@
-﻿@* @model QuanLyKhachSan.Models.TaiKhoan;
-@{
+﻿@{
     Layout = null;
 }
 
@@ -13,12 +12,9 @@
 <body>
     <form asp-controller="Access" asp-action="Login" method="post">
         <h1>Login</h1>
-        <input type="text" placeholder="Tên đăng nhập" asp-for="TenDangNhap" />
-        <input type="password" placeholder="Mật khẩu" asp-for="MatKhau" />
-        <label>
-            <input type="checkbox" asp-for="LuuMatKhau"/>
-            Lưu mật khẩu.
-        </label>
+        <input type="text" placeholder="Tên đăng nhập" name="TenDangNhap" />
+        <input type="password" placeholder="Mật khẩu" name="MatKhau" />
+     
         <button type="submit">
             Login
         </button>
@@ -31,4 +27,3 @@
     </form>
 </body>
 </html>
- *@

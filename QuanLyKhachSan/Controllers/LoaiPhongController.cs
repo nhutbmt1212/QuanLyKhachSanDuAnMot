@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
-    public class LoaiPhongController : Controller
+	[Authorize]
+
+	public class LoaiPhongController : Controller
     {
         private readonly ApplicationDbContext _db;
         public LoaiPhongController(ApplicationDbContext db)
