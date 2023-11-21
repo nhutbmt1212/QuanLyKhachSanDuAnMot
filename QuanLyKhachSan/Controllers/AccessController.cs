@@ -33,19 +33,33 @@ namespace QuanLyKhachSan.Controllers
 			{
 				AllowRefresh = true,
 			};
-
-			if (TenDangNhap == "admin" && MatKhau == "admin")
+			//query nhanvien,khachhang
+			var qr_nhanvien = _db.NhanVien.FirstOrDefault(s => s.TenDangNhap == TenDangNhap && s.MatKhau == MatKhau);
+			var qr_khachhang = _db.KhachHang.FirstOrDefault(s => s.Email == TenDangNhap && s.MatKhau == MatKhau);
+			if (qr_nhanvien!=null)
 			{
-				claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
-				claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
-				claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
-				return RedirectToAction("Index", "Home");
+				if(qr_nhanvien.ChucVu=="Quản lý")
+				{
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
+                    claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
+                    claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+                    return RedirectToAction("Index", "Home");
+                }
+				else if(qr_nhanvien.ChucVu=="Nhân viên")
+				{
+                    claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
+                    claims.Add(new Claim(ClaimTypes.Role, "Nhân viên"));
+                    claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
+                    return RedirectToAction("Index", "Home");
+                }
+			
 			}
-			else if (TenDangNhap == "user" && MatKhau == "user")
+			else if (qr_khachhang!=null)
 			{
 				claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
-				claims.Add(new Claim(ClaimTypes.Role, "Nhân viên"));
+				claims.Add(new Claim(ClaimTypes.Role, "Khách hàng"));
 				claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 				return RedirectToAction("Index", "Home");
