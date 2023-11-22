@@ -49,7 +49,7 @@ body {
 .sreach-room {
     margin-top: 20px;
     width: 90%;
-    height: 80px;
+    height: auto;
     background-color: white;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@ body {
 
 
     .Tim-kiem{
-        margin-top:25px;
+        margin-top:20px;
         margin-right:10px;
     }
 
@@ -96,7 +96,7 @@ body {
 
 .content-infor-hotel {
     background-color:white;
-    height: 300px;
+    height: auto;
     flex-grow: 3;
     align-self: stretch;
     box-shadow: 1px 1px 5px grey;
@@ -150,19 +150,19 @@ body {
 }
 
 .infor-detail {
-    height: 300px;
+    height: auto;
     width: 100%;
     background-color: white;
     align-self: stretch;
     border-radius: 5px;
     box-shadow: 1px 1px 5px grey;
-    
+   
     
     
 }
 
 .infor-booked-room {
-    padding: 0 15px;
+    padding: 5px 30px;
 }
 
 .button_bookroom {
@@ -174,4 +174,9 @@ body {
     width: 100px; /* or any size you want */
     height: 100px; /* or any size you want */
     object-fit: cover;
+}
+.TongTien {
+    color: #FFCA2C;
+    font-weight:600;
+    direction:ltr;
 }

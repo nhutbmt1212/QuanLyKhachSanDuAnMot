@@ -33,5 +33,16 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(loaiPhong); // Assuming you want to return JSON data
         }
+        [HttpGet]
+        public async Task<IActionResult> SlideAnhPhong (string maPhong)
+        {
+            var phong = await _db.Phong.Include(p => p.ImageLinks).FirstOrDefaultAsync(s => s.MaPhong == maPhong);
+            if(phong == null)
+            {
+                return Json(null);
+
+            }
+            return Json(phong.ImageLinks.Select(s => s.Url));
+        }
     }
 }
