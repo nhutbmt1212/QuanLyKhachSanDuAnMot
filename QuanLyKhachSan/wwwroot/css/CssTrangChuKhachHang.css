@@ -13,98 +13,70 @@ body {
     width: 100%;
     height: 100px;
     background-color: white;
+    display: flex;
+    justify-content: space-between;
 }
 
     .nav-main-top ul {
         list-style: none;
         display: flex;
-        justify-content: space-between; /* Hiển thị các mục theo chiều ngang và giữa chúng */
-        align-items: center; /* Căn mục theo chiều dọc */
-        height: 100%; /* Đặt chiều cao của ul bằng chiều cao của .nav-main-top */
+        align-items: center;
+        height: 100%;
     }
 
     .nav-main-top li {
-        flex-grow: 1; /* Mở rộng tỷ lệ bằng nhau */
         text-align: center;
-        padding: 0 15px; /* Thêm khoảng trống giữa các mục */
+        padding: 0 5px;
+        font-size:20px;
     }
 
-    .nav-main-top .group-1 li {
-        background-color: #f0f0f0; /* Màu nền của nhóm 1 */
-    }
-
+    .nav-main-top .group-1 li,
     .nav-main-top .group-2 li {
-        background-color: #e0e0e0; /* Màu nền của nhóm 2 */
+        flex-grow: 1;
+       
     }
 
+    .nav-main-top .logo li {
+        flex-grow: 2;
+    }
+.group-1{
+    margin-left:200px;
+}
+.group-2{
+    margin-right:230px;
+}
 
 .sreach-room {
     margin-top: 20px;
-    width: 70%;
-    height: 100px;
+    width: 90%;
+    height: 80px;
     background-color: white;
-    display: flex;
-    flex-direction: row;
     align-items: center;
     justify-content: center;
-    margin-left: auto; /* Thêm margin-left và margin-right để căn giữa theo chiều ngang */
+    margin-left: auto;
     margin-right: auto;
-    border-radius:5px;
-    box-shadow:1px 1px 5px grey;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px grey;
 }
-.address {
-    height: 100%;
-    flex: 10;
-    display: flex;
-    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
-    align-items: center;
-    justify-content: center;
-}
-.ngaynhan {
-    height: 100%;
-    flex: 10;
-    display: flex;
-    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
-    align-items: center;
-    justify-content: center;
-}
-.ngaytra {
-    height: 100%;
-    flex: 10;
-    display: flex;
-    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
-    align-items: center;
-    justify-content: center;
-}
-.so-phong {
-    height: 100%;
-    flex: 9;
-    display: flex;
-    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
-    align-items: center;
-    justify-content: center;
-}
-.Tim-kiem {
-    display: flex;
-    flex-direction: column; /* Thêm dòng này để canh giữa theo chiều dọc */
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    flex: 5;
-}
-    .address input,
-    .ngaynhan input,
-    .ngaytra input,
-    .so-phong select,
-    .Tim-kiem button {
-        width: 100%; /* Set the width to 100% for input, select, and button elements */
-        padding: 5px; /* Optional: add padding for better styling */
-        box-sizing: border-box; /* Optional: include padding and border in the element's total width and height */
+
+
+
+    .Tim-kiem{
+        margin-top:25px;
+        margin-right:10px;
     }
+
+    .input-group .form-control {
+        width: 80%; /* Adjust the value as needed */
+    }
+
+
+
+
 
 #infor-hotel {
     margin-top: 20px;
-    width: 70%;
+    width: 90%;
     height: auto;
     display: flex;
     flex-direction: row; /* Sử dụng row thay vì column */
@@ -114,25 +86,28 @@ body {
     margin-right: auto;
     border-radius: 5px;
 }
+
 .img-hotel {
-    flex-grow: 1;
-    background-color: antiquewhite;
+    flex-grow: 0;
     align-self: stretch;
     height: auto;
     box-shadow: 1px 1px 5px grey;
 }
 
 .content-infor-hotel {
+    background-color:white;
     height: 300px;
     flex-grow: 3;
-    background-color: aqua;
     align-self: stretch;
     box-shadow: 1px 1px 5px grey;
+    padding: 20px; /* Thêm padding để tạo khoảng trống xung quanh nội dung */
+    font-weight:450;
+    line-height:20px;
 }
 
 #room-infor {
     margin-top: 20px;
-    width: 70%;
+    width: 90%;
     height: auto;
     display: flex;
     flex-direction: row; /* Sử dụng row thay vì column */
@@ -140,24 +115,63 @@ body {
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .room-detail {
-    flex-grow: 5;
-    background-color: antiquewhite;
+    flex-grow: 9;
+    background-color: white;
     margin-right: 20px;
     align-self: stretch;
     height: auto;
     border-radius: 5px;
     box-shadow: 1px 1px 5px grey;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom:20px;
+}
+
+    .room-detail img {
+        width: 30%;
+        height: auto;
+    }
+
+.room-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+    
+}
+
+.room-detail .btn {
+    margin-top: 20px;
 }
 
 .infor-detail {
     height: 300px;
-    flex-grow: 3;
-    background-color: aqua;
+    width: 100%;
+    background-color: white;
     align-self: stretch;
     border-radius: 5px;
     box-shadow: 1px 1px 5px grey;
+    
+    
+    
+}
+
+.infor-booked-room {
+    padding: 0 15px;
+}
+
+.button_bookroom {
+    width: 80%;
+    margin-top: 10px;
+    margin-left: 40px;
+}
+.img_detail_room {
+    width: 100px; /* or any size you want */
+    height: 100px; /* or any size you want */
+    object-fit: cover;
 }
