@@ -142,8 +142,8 @@
             font-size: 12px;
         }
 
-        .img_detail{
-            height:50px;
+        .img_detail {
+            height: 50px;
         }
     </style>
 </head>
@@ -156,11 +156,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã phòng</label>
-                        <input class="form-control" name="maphong" />
+                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                        <span id="errorMaP" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
-                        <select class="form-control" name="maloaiphong">
+                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
                             <option value="">Chọn loại phòng</option>
                             @foreach (var phong in ViewBag.DanhSachLoaiPhong)
                             {
@@ -169,17 +170,19 @@
                                 </option>
                             }
                         </select>
+                        <span id="errorChonLP" style="color: red;"></span>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày tạo</label>
-                        <input class="form-control" name="ngaytao" type="datetime-local"/>
+                        <input class="form-control" name="ngaytao" type="datetime-local" id="inputFieldNgayTao" />
+                        <span id="errorNgayTao" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Giá theo giờ</label>
-                        <input class="form-control" name="giatheogio" type="number" min="0"/>
+                        <input class="form-control" name="giatheogio" type="number" min="0" />
                     </div>
                     <div class="form-group">
                         <label>Giá theo ngày</label>
@@ -188,7 +191,7 @@
                     <div class="form-group">
                         <label>Phụ thu trả muộn</label>
                         <input class="form-control" name="phuthutramuon" type="number" min="0" />
-                    </div>              
+                    </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
@@ -208,12 +211,12 @@
                         </div>
                         <div class="image-preview-container" id="addImagePreviewContainer"></div>
                     </div>
-                    
-            </div>
+
+                </div>
             </div>
 
             <div class="clearfix">
-                <button class="btn align-middle m-2 w-25 btn " style="min-width:200px" type="submit">Thêm phòng</button>       
+                <button class="btn align-middle m-2 w-25 btn " style="min-width:200px" type="submit">Thêm phòng</button>
                 <button type="button" class="btn align-middle m-2 w-25  cancel" onclick="closeForm()">Đóng</button>
             </div>
         </form>
@@ -252,7 +255,7 @@
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="EditImageUrl">Chọn ảnh mới:</label>
-                            <input type="file" id="EditImageUrl" name="EditImageurl" multiple  />
+                            <input type="file" id="EditImageUrl" name="EditImageurl" multiple />
                         </div>
                     </div>
 
@@ -299,7 +302,7 @@
                         <td class=" align-middle">@phong.LoaiPhong.TenLoaiPhong</td>
                         <td class=" align-middle">@phong.NgayTao</td>
                         <td class="align-middle">@phong.TinhTrang</td>
-  
+
                         <td>
                                 @if (phong.ImageLinks != null && phong.ImageLinks.Any())
                                 {
@@ -319,7 +322,7 @@
                                     <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
                                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
                                         {
-                                    <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@phong.MaLoaiPhong">Xóa</a>
+                                        <a class="dropdown-item" asp-action="XoaNhanVien" asp-controller="NhanVien" asp-route-id="@phong.MaLoaiPhong">Xóa</a>
 
                                         }
                                 </div>
@@ -342,6 +345,7 @@
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
     <script src="~/JsPhong/jsPhong.js"></script>
+    <script src="~/Folder_KiemLoiInput/ErrorPhong.js"></script>
 </body>
 
 
@@ -380,7 +384,7 @@
             }
         }
     }
-   
+
     function switchSection(section) {
         $('.add-section, .edit-section').hide();
         $('#addButton, #editButton').hide();
@@ -399,21 +403,21 @@
         switchSection('add');
     });
 
-  function editImages(phongId) {
-    currentEditingPhongId = phongId;
+    function editImages(phongId) {
+        currentEditingPhongId = phongId;
 
-    // Set the images for preview
-    $.get('/Phong/GetImages?phongId=' + phongId, function (data) {
-        var container = $('#editImagePreviewContainer').html('');
+        // Set the images for preview
+        $.get('/Phong/GetImages?phongId=' + phongId, function (data) {
+            var container = $('#editImagePreviewContainer').html('');
 
-        data.forEach(function (url) {
-            createImageContainer("/UploadImage/" + url).appendTo(container);
+            data.forEach(function (url) {
+                createImageContainer("/UploadImage/" + url).appendTo(container);
+            });
+
+            // Show the "Sửa ảnh" button
+            $('#editButton').show();
         });
-
-        // Show the "Sửa ảnh" button
-        $('#editButton').show();
-    });
-}
+    }
     $('.employee-info-column-button .dropdown .dropdown-menu a.dropdown-item').on('click', function () {
         var phongId = $(this).closest('tr').data('ma-phong');
         editImages(phongId);

@@ -102,33 +102,40 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Mã loại phòng</label>
-                        <input class="form-control" name="maloaiphong" />
+                        <input class="form-control" name="maloaiphong" id="inputFieldMaLP" maxlength="6" />
+                        <span id="errorMaLP" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
-                        <input class="form-control" name="tenloaiphong" />
+                        <input class="form-control" name="tenloaiphong" id="inputFieldTenLP" />
+                        <span id="errorTenLP" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giá theo giờ</label>
-                        <input class="form-control" name="giatheogio" />
+                        <input class="form-control" name="giatheogio" id="inputFieldGiaTheoGio" />
+                        <span id="errorGiaTheoGio" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giá theo ngày</label>
-                        <input class="form-control" name="giaphongtheongay" />
+                        <input class="form-control" name="giaphongtheongay" id="inputFieldGiaTheoNgay" />
+                        <span id="errorGiaTheoNgay" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Phụ thu trả muộn</label>
-                        <input class="form-control" name="phuthutramuon" />
+                        <input class="form-control" name="phuthutramuon" id="inputFieldPhuThu" />
+                        <span id="errorPhuThu" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Số người lớn</label>
-                        <input class="form-control" name="soluongnguoilon" />
+                        <input class="form-control" name="soluongnguoilon" id="inputFieldNguoiLon" />
+                        <span id="errorNguoiLon" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Số trẻ em</label>
-                        <input class="form-control" name="soluongtreem" />
+                        <input class="form-control" name="soluongtreem" id="inputFieldTreEm" />
+                        <span id="errorTreEm" style="color: red;"></span>
                     </div>
                 </div>
             </div>
@@ -239,6 +246,7 @@
         </table>
     </div>
     <script src="~/jsLoaiPhong/LoaiPhong.js"></script>
+    <script src="~/Folder_KiemLoiInput/ErrorLoaiPhong.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
