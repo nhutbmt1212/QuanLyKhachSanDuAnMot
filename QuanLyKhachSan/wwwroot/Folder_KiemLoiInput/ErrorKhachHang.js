@@ -1,74 +1,31 @@
 ﻿$(document).ready(function () {
     // Bắt sự kiện khi người dùng click vào ô input mã nhân viên
-    $("#inputFieldMaNV").on("focusout", function () {
+    $("#inputFieldMaKH").on("focusout", function () {
         var inputValue = $(this).val();
 
         if (inputValue.length < 5) {
-            $("#errorMaNV").text("Độ dài ít nhất 5 ký tự.");
+            $("#errorMaKH").text("Độ dài ít nhất 5 ký tự.");
         } else if (inputValue.length === 0) {
-            $("#errorMaNV").text("Mã nhân viên không được để trống.");
+            $("#errorMaKH").text("Mã khách hàng không được để trống.");
         } else if (/[^a-zA-Z0-9]/.test(inputValue)) {
-            $("#errorMaNV").text("Mã nhân viên không được chứa ký tự đặc biệt hoặc khoảng trắng.");
+            $("#errorMaKH").text("Mã khách hàng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
         } else {
-            $("#errorMaNV").text("");
+            $("#errorMaKH").text("");
         }
     });
 
-    // Bắt sự kiện khi người dùng click vào ô input tên nhân viên
-    $("#inputFieldTenNV").on("focusout", function () {
+    // Bắt sự kiện khi người dùng click vào ô input tên khách hàng
+    $("#inputFieldTenKH").on("focusout", function () {
         var inputValue = $(this).val();
 
         if (inputValue.length < 3) {
-            $("#errorTenNV").text("Độ dài ít nhất 3 ký tự.");
+            $("#errorTenKH").text("Độ dài ít nhất 3 ký tự.");
         } else if (inputValue.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
-            $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+            $("#errorTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
         } else {
-            $("#errorTenNV").text("");
-        }
-    });
-
-    // Bắt sự kiện khi người dùng rời khỏi ô input email
-    $("#inputFieldEmail").on("focusout", function () {
-        var emailValue = $(this).val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (emailValue.length === 0) {
-            $("#errorEmail").text("Email không được để trống.");
-        } else if (!isValidEmail(emailValue)) {
-            $("#errorEmail").text("Email không hợp lệ.");
-        } else {
-            $("#errorEmail").text("");
-        }
-    });
-
-    // Bắt sự kiện khi người dùng rời khỏi ô input địa chỉ
-    $("#inputFieldDiaChi").on("focusout", function () {
-        var diaChiValue = $(this).val();
-
-        if (diaChiValue.length < 3) {
-            $("#errorDiaChi").text("Độ dài ít nhất 3 ký tự.");
-        } else if (diaChiValue.length === 0) {
-            $("#errorDiaChi").text("Địa chỉ không được để trống.");
-        } else {
-            $("#errorDiaChi").text("");
-        }
-    });
-
-    // Bắt sự kiện khi người dùng rời khỏi ô input tên đăng nhập
-    $("#inputFieldTenDangNhap").on("focusout", function () {
-        var tendangnhapValue = $(this).val();
-
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-        }
-        else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-        } else {
-            $("#errorTenDangNhap").text("");
+            $("#errorTenKH").text("");
         }
     });
 
@@ -85,6 +42,19 @@
         }
     });
 
+    // Bắt sự kiện khi người dùng rời khỏi ô input địa chỉ
+    $("#inputFieldDiaChi").on("focusout", function () {
+        var diaChiValue = $(this).val();
+
+        if (diaChiValue.length < 3) {
+            $("#errorDiaChi").text("Độ dài ít nhất 3 ký tự.");
+        } else if (diaChiValue.length === 0) {
+            $("#errorDiaChi").text("Địa chỉ không được để trống.");
+        } else {
+            $("#errorDiaChi").text("");
+        }
+    });
+
     // Bắt sự kiện khi người dùng rời khỏi ô input CCCD
     $("#inputFieldCCCD").on("focusout", function () {
         var cccdValue = $(this).val();
@@ -95,21 +65,6 @@
             $("#errorCCCD").text("CCCD không hợp lệ.");
         } else {
             $("#errorCCCD").text("");
-        }
-    });
-
-    // Bắt sự kiện khi người dùng rời khỏi ô input mật khẩu
-    $("#inputFieldMK").on("focusout", function () {
-        var matKhauValue = $(this).val();
-
-        if (matKhauValue.length === 0) {
-            $("#errorMK").text("Mật khẩu không được để trống.");
-        } else if (matKhauValue.length < 6) {
-            $("#errorMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
-        } else if (!isValidMatKhau(matKhauValue)) {
-            $("#errorMK").text("Mật khẩu phải bao gồm chữ và số.");
-        } else {
-            $("#errorMK").text("");
         }
     });
 
@@ -128,31 +83,35 @@
         }
     });
 
-    // Bắt sự kiện khi người dùng rời khỏi ô input ngày vào làm
-    $("#inputFieldNgayVaoLam").on("focusout", function () {
-        var ngayVaoLamValue = $(this).val();
+    // Bắt sự kiện khi người dùng rời khỏi ô input email
+    $("#inputFieldEmail").on("focusout", function () {
+        var emailValue = $(this).val();
 
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được để trống.");
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
+        if (emailValue.length === 0) {
+            $("#errorEmail").text("Email không được để trống.");
+        } else if (!isValidEmail(emailValue)) {
+            $("#errorEmail").text("Email không hợp lệ.");
         } else {
-            $("#errorNgayVaoLam").text("");
+            $("#errorEmail").text("");
         }
     });
 
-    // Bắt sự kiện khi người dùng chọn ảnh
-    $("#formFile").on("change", function () {
-        var fileInput = $(this)[0];
+    // Bắt sự kiện khi người dùng rời khỏi ô input mật khẩu
+    $("#inputFieldMK").on("focusout", function () {
+        var matKhauValue = $(this).val();
 
-        if (!fileInput.files.length) {
-            $("#errorAnh").text("Vui lòng chọn một ảnh.");
+        if (matKhauValue.length === 0) {
+            $("#errorMK").text("Mật khẩu không được để trống.");
+        } else if (matKhauValue.length < 6) {
+            $("#errorMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
+        } else if (!isValidMatKhau(matKhauValue)) {
+            $("#errorMK").text("Mật khẩu phải bao gồm chữ và số.");
         } else {
-            $("#errorAnh").text("");
+            $("#errorMK").text("");
         }
     });
+
+
 
 
 
@@ -163,29 +122,32 @@
 
     // Bắt sự kiện khi form được submit
     $("#myForm").submit(function (event) {
-        var inputValueMaNV = $("#inputFieldMaNV").val();
-        if (inputValueMaNV.length === 0) {
-            $("#errorMaNV").text("Mã nhân viên không được để trống.");
+        var inputValueMaKH = $("#inputFieldMaKH").val();
+        if (inputValueMaKH.length === 0) {
+            $("#errorMaKH").text("Mã khách hàng không được để trống.");
             // Ngăn chặn submit nếu có lỗi
             event.preventDefault();
-        } else if (/[^a-zA-Z0-9]/.test(inputValueMaNV)) {
-            $("#errorMaNV").text("Mã nhân viên không được chứa ký tự đặc biệt hoặc khoảng trắng.");
+        } else if (inputValueMaKH.length === 0) {
+            $("#errorMaKH").text("Mã khách hàng không được để trống.");
+            event.preventDefault();
+        } else if (/[^a-zA-Z0-9]/.test(inputValueMaKH)) {
+            $("#errorMaKH").text("Mã khách hàng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
             event.preventDefault();
         }
 
 
-        var inputValueTenNV = $("#inputFieldTenNV").val();
-        if (inputValueTenNV.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+        var inputValueTenKH = $("#inputFieldTenKH").val();
+        if (inputValueTenKH.length === 0) {
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
-        } else if (inputValueTenNV.trim() === "") {
-            $("#errorTenNV").text("Tên nhân viên không được chứa toàn khoảng trắng.");
+        } else if (inputValueTenKH.trim() === "") {
+            $("#errorTenKH").text("Tên khách hàng không được chứa toàn khoảng trắng.");
             event.preventDefault();
-        } else if (inputValueTenNV.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+        } else if (inputValueTenKH.length === 0) {
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
-        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
-            $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenKH)) {
+            $("#errorTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
             event.preventDefault();
         }
 
@@ -195,12 +157,9 @@
             $("#errorEmail").text("Email không được để trống.");
             event.preventDefault();
         } else if (!isValidEmail(emailValue)) {
-            $("#errorEmail").text("Địa chỉ email không hợp lệ.");
-            event.preventDefault();
-        } else if (!isValidEmail(emailValue)) {
             $("#errorEmail").text("Email không hợp lệ.");
             event.preventDefault();
-        }
+        } 
 
         var diaChiValue = $("#inputFieldDiaChi").val();
         if (diaChiValue.length === 0) {
@@ -211,18 +170,6 @@
             event.preventDefault();
         } else if (diaChiValue.length === 0) {
             $("#errorDiaChi").text("Địa chỉ không được để trống.");
-            event.preventDefault();
-        }
-
-        var tendangnhapValue = $("#inputFieldTenDangNhap").val();
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-            event.preventDefault();
-        } else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-            event.preventDefault();
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
             event.preventDefault();
         }
 
@@ -242,7 +189,7 @@
         } else if (!isValidCCCD(cccdValue)) {
             $("#errorCCCD").text("CCCD không hợp lệ.");
             event.preventDefault();
-        }
+        } 
 
         var matKhauValue = $("#inputFieldMK").val();
         if (matKhauValue.length === 0) {
@@ -266,25 +213,8 @@
         } else if (!isOldEnough(ngaySinhValue)) {
             $("#errorNgaySinh").text("Nhân viên phải đủ 15 tuổi trở lên.");
             event.preventDefault();
-        } 
-
-        var ngayVaoLamValue = $("#inputFieldNgayVaoLam").val();
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được để trống.");
-            event.preventDefault();
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-            event.preventDefault();
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
-            event.preventDefault();
         }
 
-        var fileInput = $("#formFile")[0];
-        if (!fileInput.files.length) {
-            $("#errorAnh").text("Vui lòng chọn một ảnh.");
-            event.preventDefault();
-        }
     });
 
 
@@ -300,11 +230,6 @@
         return emailRegex.test(email);
     }
 
-    // Hàm kiểm tra tên đăng nhập hợp lệ
-    function isValidTenDangNhap(tenDangNhap) {
-        var regex = /^[a-zA-Z0-9]+$/;
-        return regex.test(tenDangNhap);
-    }
 
     // Hàm kiểm tra số điện thoại hợp lệ
     function isValidSDT(sdt) {
@@ -343,11 +268,6 @@
         }
     }
 
-    // Hàm kiểm tra ngày vào làm hợp lệ
-    function isValidNgayVaoLam(ngayVaoLam) {
-        var ngayVaoLamRegex = /^\d{4}-\d{2}-\d{2}$/;
-        return ngayVaoLamRegex.test(ngayVaoLam);
-    }
 
     // Hàm kiểm tra ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày
     function isGreaterThan7Days(ngayVaoLam) {
