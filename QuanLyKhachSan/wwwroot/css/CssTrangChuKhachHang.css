@@ -59,16 +59,8 @@ body {
     box-shadow: 1px 1px 5px grey;
 }
 
-.address {
-    
-}
 
-.ngaynhan,
-.ngaytra,
-.so-phong,
-.Tim-kiem {
-    margin-right: 5px; /* Adjust the value as needed */
-}
+
     .Tim-kiem{
         margin-top:25px;
         margin-right:10px;
@@ -159,7 +151,7 @@ body {
 
 .infor-detail {
     height: 300px;
-    width: 150%;
+    width: 100%;
     background-color: white;
     align-self: stretch;
     border-radius: 5px;
@@ -177,5 +169,9 @@ body {
     width: 80%;
     margin-top: 10px;
     margin-left: 40px;
-
+}
+.img_detail_room {
+    width: 100px; /* or any size you want */
+    height: 100px; /* or any size you want */
+    object-fit: cover;
 }
