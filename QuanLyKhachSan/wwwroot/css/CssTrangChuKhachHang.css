@@ -137,9 +137,8 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: row;
-    align-items: center;
     flex-wrap: wrap;
-    margin-top:20px;
+    margin-bottom:20px;
 }
 
     .room-detail img {
@@ -150,7 +149,6 @@ body {
 .room-info {
     display: flex;
     flex-direction: column;
-    align-items: center;
     margin-left: 20px;
     
 }
