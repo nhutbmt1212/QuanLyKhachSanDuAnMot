@@ -135,7 +135,7 @@
                                 <span id="price-@phong.MaPhong" class="room-price"></span>
                                 <span id="soLuongNguoi-@phong.MaPhong"></span>
                                 <span id="phuThuTraMuon-@phong.MaPhong"></span>
-                                <a class="btn btn-warning" onclick="DatPhong(@phong.MaPhong)">Đặt ngay</a>
+                                <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
                         </div>
                     </div>
                     }
@@ -151,10 +151,13 @@
                         <div class="infor-booked-room">
                             <h5>Thông tin đặt phòng</h5>
                             <hr />
-                            <p>Mường Thanh Grand Đà Nẵng</p>
+                            <p>ASAP Grand Đà Nẵng</p>
                          <span>Thời gian đặt phòng:</span><span id="ngaynhan_text">23/11/2023</span> - <span id="ngaytra_text">02/12/2023</span>(<span id="ngay_text">10</span> ngày <span id="gio_text">9</span> giờ)
+                         <br />
+                            <span>Số lượng người: </span><span id="SoLuongNguoiDat_text">0</span><span> người</span>
                             <hr />
                             <p>Thông tin phòng</p>
+                            <div id="Infor_Phong_Chon"></div>
                             <hr />
                             <span>Tổng cộng:</span> <span class="TongTien">0 VND</span>
                             <br />
