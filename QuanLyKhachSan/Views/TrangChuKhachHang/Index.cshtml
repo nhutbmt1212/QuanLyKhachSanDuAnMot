@@ -132,8 +132,7 @@
                             <h3>@phong.MaPhong | Khu vực: @phong.KhuVuc</h3>
                                 <span id="@phong.MaPhong" class="room-type"></span>
                                 <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
-                                <span id="price-@phong.MaPhong" class="room-price"></span>
-                                <span id="soLuongNguoi-@phong.MaPhong"></span>
+                                <span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span><span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span>
                                 <span id="phuThuTraMuon-@phong.MaPhong"></span>
                                 <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
                         </div>
@@ -152,14 +151,14 @@
                             <h5>Thông tin đặt phòng</h5>
                             <hr />
                             <p>ASAP Grand Đà Nẵng</p>
-                         <span>Thời gian đặt phòng:</span><span id="ngaynhan_text">23/11/2023</span> - <span id="ngaytra_text">02/12/2023</span>(<span id="ngay_text">10</span> ngày <span id="gio_text">9</span> giờ)
+                            <span>Thời gian đặt phòng:</span><span id="ngaynhan_text">dd/MM/yyyy</span> - <span id="ngaytra_text">dd/MM/yyyy</span>(<span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ)
                          <br />
                             <span>Số lượng người: </span><span id="SoLuongNguoiDat_text">0</span><span> người</span>
                             <hr />
                             <p>Thông tin phòng</p>
                             <div id="Infor_Phong_Chon"></div>
                             <hr />
-                            <span>Tổng cộng:</span> <span class="TongTien">0 VND</span>
+                            <span>Tổng cộng:</span> <span id="TongTien">0 VND</span>
                             <br />
                             <a class="btn btn-warning button_bookroom ">Đặt ngay</a>
                         </div>

@@ -175,7 +175,7 @@ body {
     height: 100px; /* or any size you want */
     object-fit: cover;
 }
-.TongTien {
+#TongTien {
     color: #FFCA2C;
     font-weight:600;
     direction:ltr;

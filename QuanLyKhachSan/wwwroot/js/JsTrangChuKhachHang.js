@@ -15,7 +15,9 @@
                 $(".loaiPhong").text(data.tenLoaiPhong);
                 $("#loaiPhong-" + maPhong).text("Loại phòng: " + data.tenLoaiPhong);
 
-                $("#price-" + maPhong).text("Giá theo giờ: " + data.giaTheoGio + "  |  " + "Giá theo ngày: " + data.giaPhongTheoNgay);
+                $("#pricetheogio-" + maPhong).text(data.giaTheoGio);
+                $("#pricetheongay-" + maPhong).text(data.giaPhongTheoNgay);
+
                 $("#soLuongNguoi-" + maPhong).text("Số lượng người lớn: " + data.soLuongNguoiLon + "  |  " + "Số lượng trẻ em: " + data.soLuongTreEm);
                 $("#phuThuTraMuon-" + maPhong).text("Phụ thu trả muộn: " + data.phuThuTraMuon + "/1 ngày");
 
@@ -25,14 +27,38 @@
 }
 function DatPhong(MaPhong) {
     var LoaiPhong = document.getElementById('loaiPhong-' + MaPhong).innerText;
-    var a = `<span> Mã phòng: <strong>${MaPhong}</strong> </span>
-    <br/>
-    <span>${LoaiPhong}</span>
+    var giaTheoGio = document.getElementById('pricetheogio-' + MaPhong).innerText;
+    var giaTheoNgay = document.getElementById('pricetheongay-' + MaPhong).innerText;
+
+    var node = `
+    <span id="maPhongDatPhong"> Mã phòng: <strong>${MaPhong}</strong> </span>
+    <br id="break1"/>
+    <span id="loaiPhongDatPhong">${LoaiPhong}</span>
+    <br id="break2"/>
+    <span id="giaTheoGioDatPhong">Giá theo giờ: ${giaTheoGio}</span> <span id="giaTheoNgayDatPhong">Giá theo ngày: ${giaTheoNgay}</span>
+    <br id="break3"/>
+    <button class="btn btn-outline-warning huy_datPhong_DatPhong" onclick="HuyDatPhong()" id="huy_dat_phong"><i class="bi bi-x-lg"></i>  Hủy</button>
+   
     `;
-    $("#Infor_Phong_Chon").html(a);
+    $("#Infor_Phong_Chon").html(node);
+    var ngayDat = document.getElementById('ngay_text').innerText;
+    var gioDat = document.getElementById('gio_text').innerText;
+    var tongCongTienDatPhong = (ngayDat * giaTheoNgay) + (gioDat * giaTheoGio);
+    document.getElementById('TongTien').innerText = tongCongTienDatPhong +" VND";
     
 }
+function HuyDatPhong() {
+    document.getElementById('maPhongDatPhong').remove();
+    document.getElementById('loaiPhongDatPhong').remove();
+    document.getElementById('giaTheoGioDatPhong').remove();
+    document.getElementById('giaTheoNgayDatPhong').remove();
+    document.getElementById('huy_dat_phong').remove();
+    document.getElementById('break1').remove();
+    document.getElementById('break2').remove();
+    document.getElementById('break3').remove();
+    document.getElementById('TongTien').innerText = "0 VND";
 
+}
 window.onload = function () {
     var now = new Date();
     var year = now.getFullYear();
