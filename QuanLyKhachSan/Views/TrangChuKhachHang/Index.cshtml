@@ -41,7 +41,7 @@
             </ul>
             <ul class="logo">
                 <li>
-                    <img src="https://booking.muongthanh.com/images/config/logo_1650360911.svg" />
+                    <img src="https://i.ibb.co/HXp0Y2Y/Screenshot-2-preview-rev-1.png" />
                 </li>
             </ul>
             <ul class="group-2">
@@ -69,14 +69,14 @@
                 <div class="col-md-2 mb-3 mx-auto">
                     <label for="ngaynhan">Ngày nhận </label>
                     <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaynhanPicker" />
+                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaynhanPicker" id="ipt_NgayNhan" />
                     </div>
                 </div>
 
                 <div class="col-md-2 mb-3 mx-auto">
                     <label for="ngaytra"> Ngày trả</label>
                     <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaytraPicker" />
+                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaytraPicker" id="ipt_NgayTra"/>
                     </div>
                 </div>
 
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="col-md-2 Tim-kiem text-md-end">
-                    <a class="btn btn-warning">Tìm kiếm phòng</a>
+                    <a class="btn btn-warning" id="TimKiemPhong">Tìm kiếm phòng</a>
                 </div>
             </div>
         </div>
@@ -106,13 +106,13 @@
                 
             </div>
             <div class="content-infor-hotel">
-                <h2>Muong Thanh Grand Da Nang</h2>
+                <h2>ASAP Grand Da Nang</h2>
                 <p>
                     <i class="bi bi-geo-alt-fill"></i>   Số 962, đường Ngô Quyền, phường An Hải Tây, quận Sơn Trà, thành phố Đà Nẵng, Việt Nam
 
                 </p>
                 <p><i class="bi bi-telephone"></i> +84 236 3939 928</p>
-                <p>Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao Mường Thanh Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là bãi biển đẹp nhất Miền Trung</p>
+                <p>Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao ASAP Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là bãi biển đẹp nhất Miền Trung</p>
             </div>
         </div>
 
@@ -135,7 +135,7 @@
                                 <span id="price-@phong.MaPhong" class="room-price"></span>
                                 <span id="soLuongNguoi-@phong.MaPhong"></span>
                                 <span id="phuThuTraMuon-@phong.MaPhong"></span>
-                                <a class="btn btn-warning">Đặt ngay</a>
+                                <a class="btn btn-warning" onclick="DatPhong(@phong.MaPhong)">Đặt ngay</a>
                         </div>
                     </div>
                     }
@@ -146,17 +146,17 @@
                 
                 <div class="col-md-4">
                     <!-- Information Detail -->
-                    <div class="infor-detail  position-sticky " style="top:100px">
+                    <div class="infor-detail  position-sticky " style="top:85px">
                         <!-- Your existing code for Information Detail goes here -->
                         <div class="infor-booked-room">
                             <h5>Thông tin đặt phòng</h5>
                             <hr />
                             <p>Mường Thanh Grand Đà Nẵng</p>
-                            <p>23/11/2023 - 02/12/2023 (10 ngày 9 đêm)</p>
+                         <span>Thời gian đặt phòng:</span><span id="ngaynhan_text">23/11/2023</span> - <span id="ngaytra_text">02/12/2023</span>(<span id="ngay_text">10</span> ngày <span id="gio_text">9</span> giờ)
                             <hr />
                             <p>Thông tin phòng</p>
                             <hr />
-                            <span>Tổng cộng : 0VND</span>
+                            <span>Tổng cộng:</span> <span class="TongTien">0 VND</span>
                             <br />
                             <a class="btn btn-warning button_bookroom ">Đặt ngay</a>
                         </div>
@@ -172,13 +172,7 @@
 </body>
 <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
     <!-- Section: Social media -->
-    <section class="d-flex justify-content-between p-4" style="background-color: #6351ce">
-        <!-- Left -->
-        <div class="me-5">
-            <span>Get connected with us on social networks:</span>
-        </div>
-        <!-- Left -->
-        <!-- Right -->
+      
         <div>
             <a href="" class="text-white me-4">
                 <i class="fab fa-facebook-f"></i>
@@ -200,9 +194,7 @@
             </a>
         </div>
         <!-- Right -->
-    </section>
-    <!-- Section: Social media -->
-    <!-- Section: Links  -->
+    
     <section class="">
         <div class="container text-center text-md-start mt-5">
             <!-- Grid row -->
@@ -272,12 +264,7 @@
             <!-- Grid row -->
         </div>
     </section>
-    <!-- Section: Links  -->
-    <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-    </div>
+   
    <script src="~/js/JsTrangChuKhachHang.js"></script>
     <!-- Copyright -->
 </footer>
