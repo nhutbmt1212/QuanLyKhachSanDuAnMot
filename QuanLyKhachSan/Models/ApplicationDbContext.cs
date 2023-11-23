@@ -18,12 +18,17 @@ namespace QuanLyKhachSan.Models
         public DbSet<Phong> Phong { get; set; }
         public DbSet<ImageLink> imglink { get; set; }
         public DbSet<NhanVien> NhanVien { get; set; }
+        public DbSet<VatTu> VatTu { get; set; }
+        public DbSet<ChiTietPhongVatTu> ChiTietPhongVatTu { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Cấu hình khóa chính tổng hợp cho ChiTietDichVu
             modelBuilder.Entity<ChiTietDichVu>()
                 .HasKey(c => new { c.MaDichVu, c.MaKhachHang });
+            modelBuilder.Entity<ChiTietPhongVatTu>()
+                .HasKey(c => new { c.MaVatTu, c.MaPhong });
+
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<NhanVien>().HasData(
@@ -561,6 +566,80 @@ namespace QuanLyKhachSan.Models
                }
            );
 
+            modelBuilder.Entity<VatTu>().HasData(
+              new VatTu
+              {
+                  MaVatTu = "VT001",
+                  TenVatTu = "Giường",
+                  TinhTrangVatTu = ".",
+                  NgayThem = DateTime.Now,
+              },
+              new VatTu
+              {
+                  MaVatTu = "VT002",
+                  TenVatTu = "Bàn",
+                  TinhTrangVatTu = ".",
+                  NgayThem = DateTime.Now,
+              },
+              new VatTu
+              {
+                  MaVatTu = "VT003",
+                  TenVatTu = "Ghế",
+                  TinhTrangVatTu = ".",
+                  NgayThem = DateTime.Now,
+              },
+              new VatTu
+              {
+                  MaVatTu = "VT004",
+                  TenVatTu = "Đèn ngủ",
+                  TinhTrangVatTu = ".",
+                  NgayThem = DateTime.Now,
+              },
+              new VatTu
+              {
+                  MaVatTu = "VT005",
+                  TenVatTu = "Rèm",
+                  TinhTrangVatTu = ".",
+                  NgayThem = DateTime.Now,
+              }
+          );
+            modelBuilder.Entity<ChiTietPhongVatTu>().HasData(
+               new ChiTietPhongVatTu
+               {
+                   MaVatTu = "VT001",
+                   MaPhong = "P001",
+                   SoLuong = 2,
+                   TinhTrang = "Đang sử dụng"
+               },
+             new ChiTietPhongVatTu
+             {
+                 MaVatTu = "VT002",
+                 MaPhong = "P001",
+                 SoLuong = 2,
+                 TinhTrang = "Đang sử dụng"
+             },
+              new ChiTietPhongVatTu
+              {
+                  MaVatTu = "VT003",
+                  MaPhong = "P001",
+                  SoLuong = 2,
+                  TinhTrang = "Đang sử dụng"
+              },
+             new ChiTietPhongVatTu
+             {
+                 MaVatTu = "VT004",
+                 MaPhong = "P001",
+                 SoLuong = 2,
+                 TinhTrang = "Đang sử dụng"
+             },
+             new ChiTietPhongVatTu
+             {
+                 MaVatTu = "VT005",
+                 MaPhong = "P001",
+                 SoLuong = 2,
+                 TinhTrang = "Tạm ngừng"
+             }
+            );
         }
     }
 }
