@@ -23,8 +23,14 @@
             }
         });
 }
-function DatPhong( maPhong) {
-    console.log(maPhong);
+function DatPhong(MaPhong) {
+    var LoaiPhong = document.getElementById('loaiPhong-' + MaPhong).innerText;
+    var a = `<span> Mã phòng: <strong>${MaPhong}</strong> </span>
+    <br/>
+    <span>${LoaiPhong}</span>
+    `;
+    $("#Infor_Phong_Chon").html(a);
+    
 }
 
 window.onload = function () {
@@ -46,7 +52,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var ngayTra = document.getElementById('ipt_NgayTra').value;
     document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
     document.getElementById('ngaytra_text').innerHTML = ngayTra;
-
+    var soluongNguoiO = document.getElementById('sophong').value;
     var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
     var ngayTracal = new Date(document.getElementById('ipt_NgayTra').value);
 
@@ -54,8 +60,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var soNgay = Math.round(soGio / 24);
     var soGioLe = soGio % 24;
 
-
-    
+    document.getElementById('SoLuongNguoiDat_text').innerHTML = soluongNguoiO;
     document.getElementById('ngay_text').innerHTML = soNgay;
     document.getElementById('gio_text').innerHTML = soGioLe;
     
