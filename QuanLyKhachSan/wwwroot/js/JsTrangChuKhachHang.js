@@ -46,6 +46,8 @@ function DatPhong(MaPhong) {
     var tongCongTienDatPhong = (ngayDat * giaTheoNgay) + (gioDat * giaTheoGio);
     document.getElementById('TongTien').innerText = tongCongTienDatPhong + " VND";
 
+
+
 }
 document.getElementById('btn_DatPhong').addEventListener('click', DatPhongKhachSan);
 function DatPhongKhachSan() {
@@ -103,6 +105,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
         document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
         document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
         document.getElementById('btn_DatPhong').style.display = 'block';
+        
 
     }
 
@@ -139,3 +142,4 @@ function XoaSelectDichVu(idSelect) {
     document.getElementById(idSelectThemDichvu).remove();
     document.getElementById(idbtnXoaDichvu).remove();
 }
+
