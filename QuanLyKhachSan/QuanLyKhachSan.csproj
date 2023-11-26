@@ -36,4 +36,11 @@
     <None Include="wwwroot\UploadImage\quatIgnite.png" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\Folder_KiemLoiInput\ErrorDichVu.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

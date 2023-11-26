@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 
 namespace QuanLyKhachSan.Models
 {
@@ -46,7 +47,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-2),
                    AnhNhanVienBase64 = "Base64Image1",
-                   TinhTrang = "Hoat dong",
+                   TinhTrang = "Hoạt động",
                    TenDangNhap = "user1",
                    MatKhau = "password1"
                },
@@ -59,12 +60,12 @@ namespace QuanLyKhachSan.Models
                    CCCD = "987654321098",
                    NgaySinh = new DateTime(1995, 5, 5),
                    Email = "nhanvien2@example.com",
-                   GioiTinh = "Nu",
+                   GioiTinh = "Nữ",
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-1),
                    AnhNhanVienBase64 = "Base64Image2",
-                   TinhTrang = "Hoat dong",
+                   TinhTrang = "Hoạt động",
                    TenDangNhap = "user2",
                    MatKhau = "password2"
                },
@@ -82,7 +83,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-3),
                    AnhNhanVienBase64 = "Base64Image3",
-                   TinhTrang = "Nghi viec",
+                   TinhTrang = "Nghỉ việc",
                    TenDangNhap = "user3",
                    MatKhau = "password3"
                },
@@ -95,12 +96,12 @@ namespace QuanLyKhachSan.Models
                    CCCD = "555666777044",
                    NgaySinh = new DateTime(1988, 8, 8),
                    Email = "nhanvien4@example.com",
-                   GioiTinh = "Nu",
+                   GioiTinh = "Nữ",
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-5),
                    AnhNhanVienBase64 = "Base64Image4",
-                   TinhTrang = "Hoat dong",
+                   TinhTrang = "Hoạt động",
                    TenDangNhap = "user4",
                    MatKhau = "password4"
                },
@@ -118,7 +119,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-4),
                    AnhNhanVienBase64 = "Base64Image5",
-                   TinhTrang = "Hoat dong",
+                   TinhTrang = "Hoạt động",
                    TenDangNhap = "user5",
                    MatKhau = "password5"
                }
@@ -135,7 +136,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1992, 3, 15),
                     GioiTinh = "Nam",
                     Email = "khachhang1@example.com",
-                    TinhTrang = "Active",
+                    TinhTrang = "Hoạt động",
                     MatKhau = "password1",
                     NgayDangKy = DateTime.Now
                 },
@@ -147,9 +148,9 @@ namespace QuanLyKhachSan.Models
                     DiaChi = "456 Tran Thi Y, Quan 2, TP.HCM",
                     CCCD = "987654321098",
                     NgaySinh = new DateTime(1995, 7, 20),
-                    GioiTinh = "Nu",
+                    GioiTinh = "Nữ",
                     Email = "khachhang2@example.com",
-                    TinhTrang = "Active",
+                    TinhTrang = "Hoạt động",
                     MatKhau = "password2",
                     NgayDangKy = DateTime.Now
                 },
@@ -163,7 +164,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1988, 10, 5),
                     GioiTinh = "Nam",
                     Email = "khachhang3@example.com",
-                    TinhTrang = "Inactive",
+                    TinhTrang = "Hoạt động",
                     MatKhau = "password3",
                     NgayDangKy = DateTime.Now
                 },
@@ -175,9 +176,9 @@ namespace QuanLyKhachSan.Models
                     DiaChi = "101 Pham Thi K, Quan 4, TP.HCM",
                     CCCD = "555666777044",
                     NgaySinh = new DateTime(1990, 12, 25),
-                    GioiTinh = "Nu",
+                    GioiTinh = "Nữ",
                     Email = "khachhang4@example.com",
-                    TinhTrang = "Active",
+                    TinhTrang = "Hoạt động",
                     MatKhau = "password4",
                     NgayDangKy = DateTime.Now
                 },
@@ -191,7 +192,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1985, 5, 1),
                     GioiTinh = "Nam",
                     Email = "khachhang5@example.com",
-                    TinhTrang = "Active",
+                    TinhTrang = "Ngừng hoạt động",
                     MatKhau = "password5",
                     NgayDangKy = DateTime.Now
                 }
@@ -256,7 +257,7 @@ namespace QuanLyKhachSan.Models
                     MaPhong = "P001",
                     MaLoaiPhong = "LP001",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trong",
+                    TinhTrang = "Trống",
                     KhuVuc = "Khu A",
                 },
                 new Phong
@@ -264,7 +265,7 @@ namespace QuanLyKhachSan.Models
                     MaPhong = "P002",
                     MaLoaiPhong = "LP002",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trong",
+                    TinhTrang = "Trống",
                     KhuVuc = "Khu A",
                 },
                 new Phong
@@ -272,7 +273,7 @@ namespace QuanLyKhachSan.Models
                     MaPhong = "P003",
                     MaLoaiPhong = "LP003",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Da Dat",
+                    TinhTrang = "Đã đặt",
                     KhuVuc = "Khu B",
                 },
                 new Phong
@@ -280,7 +281,7 @@ namespace QuanLyKhachSan.Models
                     MaPhong = "P004",
                     MaLoaiPhong = "LP004",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trong",
+                    TinhTrang = "Trống",
                     KhuVuc = "Khu C",
                 },
                 new Phong
@@ -288,63 +289,63 @@ namespace QuanLyKhachSan.Models
                     MaPhong = "P005",
                     MaLoaiPhong = "LP005",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Da Dat",
+                    TinhTrang = "Đã đặt",
                     KhuVuc = "Khu C",
                 }
             );
 
             modelBuilder.Entity<DichVu>().HasData(
-      new DichVu
-      {
-          MaDichVu = "DV001",
-          TenDichVu = "Dịch Vụ 1",
-          DonViTinh = "Cái",
-          GiaTien = 50000,
-          TinhTrang = "Hoạt động",
-          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
-          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
-      },
-      new DichVu
-      {
-          MaDichVu = "DV002",
-          TenDichVu = "Dịch Vụ 2",
-          DonViTinh = "Cái",
-          GiaTien = 80000,
-          TinhTrang = "Hoạt động",
-          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
-          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
-      },
-      new DichVu
-      {
-          MaDichVu = "DV003",
-          TenDichVu = "Dịch Vụ 3",
-          DonViTinh = "Bộ",
-          GiaTien = 120000,
-          TinhTrang = "Ngừng hoạt động",
-          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
-          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
-      },
-      new DichVu
-      {
-          MaDichVu = "DV004",
-          TenDichVu = "Dịch Vụ 4",
-          DonViTinh = "Lần sử dụng",
-          GiaTien = 150000,
-          TinhTrang = "Hoạt động",
-          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
-          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
-      },
-      new DichVu
-      {
-          MaDichVu = "DV005",
-          TenDichVu = "Dịch Vụ 5",
-          DonViTinh = "Bộ",
-          GiaTien = 200000,
-          TinhTrang = "Hoạt động",
-          GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
-          GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
-      }
- );
+              new DichVu
+              {
+                  MaDichVu = "DV001",
+                  TenDichVu = "Giặt ủi",
+                  DonViTinh = "Kg",
+                  GiaTien = 20000,
+                  TinhTrang = "Hoạt động",
+                  GioBatDauDichVu = new TimeSpan(8, 0, 0), // 08:00
+                  GioKetThucDichVu = new TimeSpan(20, 0, 0) // 20:00
+              },
+              new DichVu
+              {
+                  MaDichVu = "DV002",
+                  TenDichVu = "Đưa đón sân bay",
+                  DonViTinh = "Lượt",
+                  GiaTien = 200000,
+                  TinhTrang = "Hoạt động",
+                  GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+                  GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+              },
+              new DichVu
+              {
+                  MaDichVu = "DV003",
+                  TenDichVu = "Dọn phòng",
+                  DonViTinh = "Lần",
+                  GiaTien = 50000,
+                  TinhTrang = "Hoạt động",
+                  GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+                  GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+              },
+              new DichVu
+              {
+                  MaDichVu = "DV004",
+                  TenDichVu = "Ăn sáng",
+                  DonViTinh = "Người",
+                  GiaTien = 50000,
+                  TinhTrang = "Hoạt động",
+                  GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+                  GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+              },
+              new DichVu
+              {
+                  MaDichVu = "DV005",
+                  TenDichVu = "Thuê xe máy",
+                  DonViTinh = "Xe",
+                  GiaTien = 120000,
+                  TinhTrang = "Hoạt động",
+                  GioBatDauDichVu = new TimeSpan(6, 0, 0), // 06:00
+                  GioKetThucDichVu = new TimeSpan(22, 0, 0) // 22:00
+              }
+         );
 
             modelBuilder.Entity<HoaDon>().HasData(
                new HoaDon
@@ -573,6 +574,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Giường",
                   TinhTrangVatTu = ".",
                   NgayThem = DateTime.Now,
+                  NhaSanXuat="Nội Thất Minh Nhật"
               },
               new VatTu
               {
@@ -580,6 +582,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Bàn",
                   TinhTrangVatTu = ".",
                   NgayThem = DateTime.Now,
+                  NhaSanXuat="Cửa Hàng Đồ Gỗ Minh Quốc"
               },
               new VatTu
               {
@@ -587,6 +590,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Ghế",
                   TinhTrangVatTu = ".",
                   NgayThem = DateTime.Now,
+                  NhaSanXuat="Cửa Hàng Đồ Gỗ Minh Quốc"
               },
               new VatTu
               {
@@ -594,6 +598,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Đèn ngủ",
                   TinhTrangVatTu = ".",
                   NgayThem = DateTime.Now,
+                  NhaSanXuat="Đèn trang chí Lan Anh"
               },
               new VatTu
               {
@@ -601,6 +606,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Rèm",
                   TinhTrangVatTu = ".",
                   NgayThem = DateTime.Now,
+                  NhaSanXuat="Rèm xinh Bmt"
               }
           );
             modelBuilder.Entity<ChiTietPhongVatTu>().HasData(

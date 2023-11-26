@@ -16,36 +16,42 @@
     <div class="form-popup mb-2" id="myForm">
         <!-- Form Thêm Dịch Vụ -->
         <form class="form-container" method="post" enctype="multipart/form-data">
-            <h1>Thêm dịch vụ</h1>
+            <h1 style="font-family:Roboto;">Thêm dịch vụ</h1>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã dịch vụ</label>
-                        <input class="form-control" name="madichvu" />
+                        <input class="form-control" name="madichvu" id="inputFieldMaDV" maxlength="6" />
+                        <span id="errorMaDV" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Tên dịch vụ</label>
-                        <input class="form-control" name="tendichvu" />
+                        <input class="form-control" name="tendichvu" id="inputFieldTenDV" />
+                        <span id="errorTenDV" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Đơn vị tính</label>
-                        <input class="form-control" name="donvitinh" />
+                        <input class="form-control" name="donvitinh" id="inputFieldDVT" />
+                        <span id="errorDVT" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giá tiền</label>
-                        <input class="form-control" name="giatien" />
+                        <input class="form-control" name="giatien" id="inputFieldGia" />
+                        <span id="errorGia" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Giờ BD phục vụ</label>
-                        <input class="form-control" name="giodichvu" type="time" />
+                        <input class="form-control" name="giodichvu" type="time" id="inputFieldGioBD" />
+                        <span id="errorGioBD" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giờ KT phục vụ</label>
-                        <input class="form-control" name="giodichvu" type="time" />
+                        <input class="form-control" name="giodichvu" type="time" id="inputFieldGioKT" />
+                        <span id="errorGioKT" style="color: red;"></span>
                     </div>
                 </div>
             </div>
@@ -60,7 +66,7 @@
     <div class="form-popupEdit mb-2" id="myFormEdit">
         <!-- Form Sửa Dịch Vụ -->
         <form class="form-container" method="post" enctype="multipart/form-data">
-            <h1>Sửa dịch vụ</h1>
+            <h1 style="font-family:Roboto;">Sửa dịch vụ</h1>
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -196,5 +202,6 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                 crossorigin="anonymous"></script>
         <script src="~/JsDichVu/dichvu.js"></script>
+        <script src="~/Folder_KiemLoiInput/ErrorDichVu.js"></script>
     </body>
     </html>

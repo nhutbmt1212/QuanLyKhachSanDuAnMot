@@ -1,160 +1,178 @@
-﻿@model IEnumerable<QuanLyKhachSan.Models.VatTu>
+﻿    @model IEnumerable<QuanLyKhachSan.Models.VatTu>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="~/CssVatTu/CssVatTu.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-</head>
-<body>
-    <!-- Popup - Thêm Vật tư -->
-    <div class="form-popup mb-2" id="myForm">
-        <!-- Form Thêm Vật tư -->
-        <form class="form-container" method="post" enctype="multipart/form-data">
-            <h1>Thêm vật tư</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Mã vật tư</label>
-                        <input class="form-control" name="mavattu" />
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+        <link rel="stylesheet" href="~/CssVatTu/CssVatTu.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <!-- Popup - Thêm Vật tư -->
+        <div class="form-popup mb-2" id="myForm">
+            <!-- Form Thêm Vật tư -->
+            <form class="form-container" method="post" enctype="multipart/form-data">
+                <h1 style="font-family:Roboto;">Thêm vật tư</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Mã vật tư</label>
+                        <input class="form-control" name="mavattu" id="inputFieldMaVT" maxlength="6" />
+                        <span id="errorMaVT" style="color: red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Tên vật tư</label>
+                        <input class="form-control" name="tenvattu" id="inputFieldTenVT" />
+                        <span id="errorTenVT" style="color: red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà sản xuất</label>
+                        <input class="form-control" name="nhasanxuat" id="inputFieldNhaSX" />
+                        <span id="errorNhaSX" style="color: red;"></span>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>Tên vật tư</label>
-                        <input class="form-control" name="tenvattu" />
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tình trạng vật tư</label>
+                        <input class="form-control" name="tinhtrangvattu" id="inputFieldTinhTrangVT" />
+                        <span id="errorTinhTrangVT" style="color: red;"></span>
+                        </div>              
+
+
+                        <div class="form-group">
+                            <label>Ngày thêm</label>
+                            <input class="form-control" name="ngaythem" type="datetime-local" />
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Tình trạng vật tư</label>
-                        <input class="form-control" name="tinhtrangvattu" />
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày thêm</label>
-                        <input class="form-control" name="ngaythem" type="datetime-local" />
-                    </div>
+                <div class="clearfix">
+                    <button type="button" class="btn float-right m-2 w-25 cancel" onclick="closeForm()">Đóng</button>
+                    <button class="btn float-right m-2 w-25" style="min-width:200px" asp-action="ThemVatTu" asp-controller="VatTu">Thêm vật tư</button>
                 </div>
-            </div>
-            <div class="clearfix">
-                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="closeForm()">Đóng</button>
-                <button class="btn float-right m-2 w-25" style="min-width:200px" asp-action="ThemDichVu" asp-controller="DichVu">Thêm vật tư</button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Popup - Sửa vật tư -->
-    <div class="form-popupEdit mb-2" id="myFormEdit">
-        <!-- Form Sửa Vật tư -->
-        <form class="form-container" method="post" enctype="multipart/form-data">
-            <h1>Sửa vật tư</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Mã vật tư</label>
-                        <input class="form-control" name="mavattu" />
-                    </div>
-                    <div class="form-group">
-                        <label>Tên vật tư</label>
-                        <input class="form-control" name="tenvattu" />
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Tình trạng vật tư</label>
-                        <input class="form-control" name="tinhtrangvattu" />
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày thêm</label>
-                        <input class="form-control" name="ngaythem" type="datetime-local" />
-                    </div>
-                </div>           
-            </div>
-            <!-- Nút Đóng và Sửa vật tư -->
-            <div class="clearfix">
-                <button type="button" class="btn float-right m-2 w-25 cancel" onclick="CloseFormEdit()">Đóng</button>
-                <button type="submit" class="btn float-right m-2 w-25" style="min-width:200px" asp-action="SuaDichVu" asp-controller="DichVu">Sửa vật tư</button>
-            </div>
-        </form>
-    </div>
-
-
-    <!-- Nút Thêm vật tư -->
-    <a class="btn btn-primary mb-2" id="btn_themvt" onclick="openForm()">Thêm vật tư</a>
-
-    <!-- Bảng Hiển Thị Danh Sách vật tư -->
-    <div id="detailDichVu">
-        <table class="table" id="table_detail" style="border:1px solid #343A40">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col" class="align-middle ">
-                        <input type="checkbox" id="thead_checkbox" />
-                    </th>
-                    <th scope="col" class="align-middle "> #</th>
-                    <th scope="col" class="align-middle ">Vật tư</th>
-                    <th scope="col" class="align-middle ">Tình trạng vật tư</th>
-                    <th scope="col" class="align-middle ">Ngày thêm</th>
-                    <th scope="col" class="align-middle  thead_xuly">Xử lý</th>
-                </tr>
-            </thead>
-
-            <!-- Dữ liệu vật tư -->
-            <form name="main">
-            <tbody>
-                    @{
-                        int stt = 0;
-                    }
-                    @foreach (var vt in Model)
-                    {
-                        stt +=1;
-                    <tr data-ma-vt="@vt.MaVatTu" data-ten-vt="@vt.TenVatTu" data-donViTinh="@vt.TinhTrangVatTu" data-ngayThem="@vt.NgayThem.ToShortDateString()">
-                        <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
-                        <td class="employee-info-column">
-                                @stt
-                        </td>
-                        <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
-                            <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <span class="d-block d-sm-inline text-warning"> @vt.MaVatTu</span>
-                                    <br>
-                                    <p class="d-block d-sm-inline">@vt.TenVatTu</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="employee-info-column">@vt.TinhTrangVatTu</td>
-                        <td class="employee-info-column">@vt.NgayThem</td>
-
-                        <td style="font-size:20px" class="employee-info-column-button">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
-                                    <a class="dropdown-item" asp-action="XoaDichVu" asp-controller="DichVu" asp-route-id="@vt.MaVatTu">Xóa</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    }
-            </tbody>
             </form>
-        </table>
-    </div>
+        </div>
 
-    <!-- Các Thư Viện JavaScript Cần Thiết -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-    <script src="~/JsDichVu/dichvu.js"></script>
-</body>
-</html>
+        <!-- Popup - Sửa vật tư -->
+        <div class="form-popupEdit mb-2" id="myFormEdit">
+            <!-- Form Sửa Vật tư -->
+        <form class="form-container" method="post" enctype="multipart/form-data">
+            <h1 style="font-family:Roboto;">Sửa vật tư</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Mã vật tư</label>
+                        <input class="form-control mavattuEdit" id="MaVatTuEdit" name="MaVatTu" />
+                        </div>
+                        <div class="form-group">
+                            <label>Tên vật tư</label>
+                        <input class="form-control tenvattuEdit" id="TenVatTuEdit" name="TenVatTu" />
+                        </div>
+                        <div class="form-group">
+                            <label>Nhà sản xuất</label>
+                        <input class="form-control nhasanxuatEdit" id="NhaSanXuatEdit" name="NhaSanXuat" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Tình trạng vật tư</label>
+                        <input class="form-control tinhtrangvattuEdit" id="TinhTrangVatTuEdit" name="TinhTrangVatTu" />
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày thêm</label>
+                        <input class="form-control ngaythemEdit" id="NgayThemEdit" name="NgayThem" type="date" />
+                        </div>
+                    </div>           
+                </div>
+                <!-- Nút Đóng và Sửa vật tư -->
+                <div class="clearfix">
+                    <button type="button" class="btn float-right m-2 w-25 cancel" onclick="CloseFormEdit()">Đóng</button>
+                    <button type="submit" class="btn float-right m-2 w-25" style="min-width:200px" asp-action="SuaVatTu" asp-controller="VatTu">Sửa vật tư</button>
+                </div>
+            </form>
+        </div>
+
+
+        <!-- Nút Thêm vật tư -->
+        <a class="btn btn-primary mb-2" id="btn_themvt" onclick="openForm()">Thêm vật tư</a>
+
+        <!-- Bảng Hiển Thị Danh Sách vật tư -->
+        <div id="detailDichVu">
+            <table class="table" id="table_detail" style="border:1px solid #343A40">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" class="align-middle ">
+                            <input type="checkbox" id="thead_checkbox" />
+                        </th>
+                        <th scope="col" class="align-middle "> #</th>
+                        <th scope="col" class="align-middle ">Vật tư</th>
+                        <th scope="col" class="align-middle ">Tình trạng vật tư</th>
+                        <th scope="col" class="align-middle ">Nhà sản xuất</th>
+                        <th scope="col" class="align-middle ">Ngày thêm</th>
+                        <th scope="col" class="align-middle  thead_xuly">Xử lý</th>
+                    </tr>
+                </thead>
+
+                <!-- Dữ liệu vật tư -->
+                <form name="main">
+                <tbody>
+                        @{
+                            int stt = 0;
+                        }
+                        @foreach (var vt in Model)
+                        {
+                            stt +=1;
+                        <tr data-ma-vt="@vt.MaVatTu" data-ten-vt="@vt.TenVatTu" data-donViTinh="@vt.TinhTrangVatTu" data-ngayThem="@vt.NgayThem.ToShortDateString()" data-nhaSanXuat="@vt.NhaSanXuat">
+                            <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                            <td class="employee-info-column">
+                                    @stt
+                            </td>
+                            <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12">
+                                        <span class="d-block d-sm-inline text-warning"> @vt.MaVatTu</span>
+                                        <br>
+                                        <p class="d-block d-sm-inline">@vt.TenVatTu</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="employee-info-column">@vt.TinhTrangVatTu</td>
+                            <td class="employee-info-column">@vt.NhaSanXuat</td>
+                            <td class="employee-info-column">@vt.NgayThem.ToShortDateString()</td>
+
+                            <td style="font-size:20px" class="employee-info-column-button">
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit('@vt.MaVatTu', '@vt.TenVatTu', '@vt.NhaSanXuat', '@vt.TinhTrangVatTu', '@vt.NgayThem.ToShortDateString()')" id="btn_Sua">Sửa</a>
+                                        <a class="dropdown-item" asp-action="DeleteVatTu" asp-controller="VatTu" asp-route-id="@vt.MaVatTu">Xóa</a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+                </form>
+            </table>
+        </div>
+
+        <!-- Các Thư Viện JavaScript Cần Thiết -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+        
+    <script src="~/JsVatTu/VatTu.js"></script>
+    <script src="~/Folder_KiemLoiInput/ErrorVatTu.js"></script>
+    </body>
+    </html>
