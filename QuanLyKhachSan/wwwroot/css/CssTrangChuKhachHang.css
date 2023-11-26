@@ -180,3 +180,6 @@ body {
     font-weight:600;
     direction:ltr;
 }
+#btn_DatPhong{
+    display:none;
+}

@@ -46,7 +46,7 @@
             </ul>
             <ul class="group-2">
                 <li>
-                    <a >Đăng nhập |</a>
+                    <a asp-action="Login" asp-controller="Access" >Đăng nhập |</a>
                 </li>
                 <li>
                     Đăng kí
@@ -69,7 +69,7 @@
                 <div class="col-md-2 mb-3 mx-auto">
                     <label for="ngaynhan">Ngày nhận </label>
                     <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaynhanPicker" id="ipt_NgayNhan" />
+                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaynhanPicker" id="ipt_NgayNhan"  />
                     </div>
                 </div>
 
@@ -80,13 +80,21 @@
                     </div>
                 </div>
 
-                <div class="col-md-2 mb-3 so-phong mx-auto">
-                    <label for="sophong">Số lượng</label>
-                    <select class="form-select" id="sophong" required>
-                        <option value="1">1 người</option>
-                        <option value="2">2 người</option>
-                        <option value="3">3 người</option>
-                    </select>
+                <div class="col-md-1 mb-3 so-phong mx-auto">
+                    <label for="sophong">SL người lớn</label>
+                    <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
+
+                    <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
+                    </div>
+                  
+                </div>
+                <div class="col-md-1 mb-1 so-phong mx-auto">
+                    <label for="sophong">SL trẻ em</label>
+                    <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
+
+                        <input type="number" id="SlTreEm" class="form-control" value="1" min="1" required />
+                    </div>
+
                 </div>
 
                 <div class="col-md-2 Tim-kiem text-md-end">
@@ -134,7 +142,7 @@
                                 <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
                                 <span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span><span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span>
                                 <span id="phuThuTraMuon-@phong.MaPhong"></span>
-                                <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
+                                <a class="btn btn-warning"  onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
                         </div>
                     </div>
                     }
@@ -151,16 +159,33 @@
                             <h5>Thông tin đặt phòng</h5>
                             <hr />
                             <p>ASAP Grand Đà Nẵng</p>
-                            <span>Thời gian đặt phòng:</span><span id="ngaynhan_text">dd/MM/yyyy</span> - <span id="ngaytra_text">dd/MM/yyyy</span>(<span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ)
+                            <span>Thời gian đặt phòng:</span><span id="ngaynhan_text"></span> - <span id="ngaytra_text"></span>(<span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ)
                          <br />
-                            <span>Số lượng người: </span><span id="SoLuongNguoiDat_text">0</span><span> người</span>
+                            <span>Số lượng người lớn: </span><span id="SoLuongNguoiLonDat_text">0</span><span> người</span>
+                            <br/>
+                            <span>Số lượng trẻ em: </span><span id="SoLuongTreEmDat_text">0</span><span> người</span>
+
                             <hr />
                             <p>Thông tin phòng</p>
                             <div id="Infor_Phong_Chon"></div>
                             <hr />
+                            <p>Thông tin dịch vụ</p>
+                            <div id="Infor_DichVu_Chon">
+                               @* dịch vụ *@
+                                <div id="ChonDichVu">
+                                    @* <select class="form-select w-75">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                    </select> *@
+                                </div>                                  
+                                <button type="button" class="btn btn-outline-success" id="AddThemDichVu"><i class="bi bi-plus"></i></button>
+
+                            </div>
+                            <hr />
                             <span>Tổng cộng:</span> <span id="TongTien">0 VND</span>
                             <br />
-                            <a class="btn btn-warning button_bookroom ">Đặt ngay</a>
+                            <a class="btn btn-warning button_bookroom " id="btn_DatPhong">Đặt ngay</a>
                         </div>
                     </div>
                 </div>
@@ -198,19 +223,14 @@
         <!-- Right -->
     
     <section class="">
+        
         <div class="container text-center text-md-start mt-5">
             <!-- Grid row -->
             <div class="row mt-3">
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
-                    <h6 class="text-uppercase fw-bold">Company name</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
-                    <p>
-                        Here you can use rows and columns to organize your footer
-                        content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit.
-                    </p>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3891.9091181247622!2d108.0787266!3d12.7193516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171f7f4d3cab885%3A0x62453fb0d0ac7b44!2zS2jDoWNoIFPhuqFuIEFTQVA!5e0!3m2!1svi!2s!4v1700876295377!5m2!1svi!2s" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <!-- Grid column -->
                 <!-- Grid column -->
@@ -268,6 +288,8 @@
     </section>
    
    <script src="~/js/JsTrangChuKhachHang.js"></script>
+ 
+   
     <!-- Copyright -->
 </footer>
 

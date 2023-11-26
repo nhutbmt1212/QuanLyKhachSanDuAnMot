@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
 
@@ -22,22 +21,21 @@ namespace QuanLyKhachSan.Controllers
             return View(listPhong);
         }
         [HttpGet]
-   
+
         public IActionResult LayLoaiPhong(string maPhong)
         {
-            // Assuming you have a relationship between Phong and LoaiPhong using MaLoaiPhong
             var loaiPhong = _db.Phong
                 .Where(p => p.MaPhong == maPhong)
-                .Select(p => p.LoaiPhong) // Assuming you have a navigation property LoaiPhong in your Phong model
+                .Select(p => p.LoaiPhong) 
                 .FirstOrDefault();
 
-            return Json(loaiPhong); // Assuming you want to return JSON data
+            return Json(loaiPhong); 
         }
         [HttpGet]
-        public async Task<IActionResult> SlideAnhPhong (string maPhong)
+        public async Task<IActionResult> SlideAnhPhong(string maPhong)
         {
             var phong = await _db.Phong.Include(p => p.ImageLinks).FirstOrDefaultAsync(s => s.MaPhong == maPhong);
-            if(phong == null)
+            if (phong == null)
             {
                 return Json(null);
 
