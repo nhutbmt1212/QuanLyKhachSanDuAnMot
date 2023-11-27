@@ -42,6 +42,8 @@ namespace QuanLyKhachSan.Controllers
 				{
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
+                    claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
+                    claims.Add(new Claim(ClaimTypes.Name, qr_nhanvien.TenNhanVien));
                     claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
                     return RedirectToAction("Index", "Home");
@@ -50,6 +52,9 @@ namespace QuanLyKhachSan.Controllers
 				{
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Role, "Nhân viên"));
+                    claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
+                    claims.Add(new Claim(ClaimTypes.Name, qr_nhanvien.TenNhanVien));
+
                     claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
                     return RedirectToAction("Index", "Home");
@@ -60,7 +65,10 @@ namespace QuanLyKhachSan.Controllers
 			{
 				claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
 				claims.Add(new Claim(ClaimTypes.Role, "Khách hàng"));
-				claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
+                claims.Add(new Claim(ClaimTypes.Name, qr_khachhang.TenKhachHang));
+
+                claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 				return RedirectToAction("Index", "TrangChuKhachHang");
 			}

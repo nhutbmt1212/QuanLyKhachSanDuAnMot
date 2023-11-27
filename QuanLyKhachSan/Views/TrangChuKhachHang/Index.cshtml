@@ -1,6 +1,12 @@
 ﻿@{
     Layout = null;
 }
+@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+    var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+    var TenNguoiDung = User.FindFirst(ClaimTypes.Name)?.Value;
+}
 @model List<QuanLyKhachSan.Models.Phong>
 
 <!DOCTYPE html>
@@ -45,12 +51,20 @@
                 </li>
             </ul>
             <ul class="group-2">
-                <li>
-                    <a asp-action="Login" asp-controller="Access" >Đăng nhập |</a>
+                @if(userName ==null){
+                         <li>
+                    <a asp-action="Login" asp-controller="Access" >Đăng nhập </a>
                 </li>
                 <li>
-                    Đăng kí
+                        | Đăng kí
                 </li>
+                }
+                else
+                {
+                    <li>Xin chào! @TenNguoiDung</li>
+                    <li><a asp-action="LogOut" asp-controller="TrangChuKhachHang">Đăng xuất</a></li>
+                }
+              
                 
             </ul>
         </div>
@@ -123,7 +137,7 @@
                 <p>Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao ASAP Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là bãi biển đẹp nhất Miền Trung</p>
             </div>
         </div>
-
+        <h1 id="Report_Phong">Phòng tìm kiếm không hợp lệ</h1>
         <div id="room-infor" class="container">
             <div class="row">
                 <div class="col-md-8">
@@ -153,7 +167,9 @@
                 
                 <div class="col-md-4">
                     <!-- Information Detail -->
-                    <div class="infor-detail  position-sticky " style="top:85px">
+@*                     <div class="infor-detail  position-sticky " style="top:85px">
+ *@
+                    <div class="infor-detail ">
                         <!-- Your existing code for Information Detail goes here -->
                         <div class="infor-booked-room">
                             <h5>Thông tin đặt phòng</h5>
@@ -173,11 +189,7 @@
                             <div id="Infor_DichVu_Chon">
                                @* dịch vụ *@
                                 <div id="ChonDichVu">
-                                    @* <select class="form-select w-75">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                    </select> *@
+                                   
                                 </div>                                  
                                 <button type="button" class="btn btn-outline-success" id="AddThemDichVu"><i class="bi bi-plus"></i></button>
 
@@ -191,10 +203,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
 </body>
 <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">

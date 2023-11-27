@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
 
@@ -18,6 +20,7 @@ namespace QuanLyKhachSan.Controllers
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
+           
             return View(listPhong);
         }
         [HttpGet]
@@ -41,6 +44,17 @@ namespace QuanLyKhachSan.Controllers
 
             }
             return Json(phong.ImageLinks.Select(s => s.Url));
+        }
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Index","TrangChuKhachHang");
+        }
+        [HttpGet]
+        public async Task<IActionResult> LayDanhSachDichVu()
+        {
+            var qr_ListDichVu = _db.DichVu.ToList();
+            return Json(qr_ListDichVu);
         }
     }
 }

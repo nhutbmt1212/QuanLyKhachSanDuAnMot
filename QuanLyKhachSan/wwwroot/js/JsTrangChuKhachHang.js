@@ -52,12 +52,10 @@ function DatPhong(MaPhong) {
 document.getElementById('btn_DatPhong').addEventListener('click', DatPhongKhachSan);
 function DatPhongKhachSan() {
     var divPhong = document.getElementById('Infor_Phong_Chon')
-    if (divPhong.innerHTML == "") {
+    if (/^\s*$/.test(divPhong.innerHTML)) {
         alert('Bạn chưa chọn phòng để đặt');
-    }
-    else {
+    } else {
         console.log(divPhong.innerHTML);
-
     }
 }
 function HuyDatPhong() {
@@ -83,6 +81,8 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var ngayTra = document.getElementById('ipt_NgayTra').value;
     var slNgLon = document.getElementById('SlNguoiLon').value;
     var slTreEm = document.getElementById('SlTreEm').value;
+    var reportPhong = document.getElementById('Report_Phong');
+    var room_infor = document.getElementById('room-infor');
     if (ngayNhan == "" || ngayTra == "") {
         alert("Chựa chọn ngày nhận kìa");
     }
@@ -90,7 +90,6 @@ document.getElementById('TimKiemPhong').onclick = function () {
         alert("Bạn chưa chọn số lượng kìa");
     }
     else {
-
         document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
         document.getElementById('ngaytra_text').innerHTML = ngayTra;
         var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
@@ -105,36 +104,58 @@ document.getElementById('TimKiemPhong').onclick = function () {
         document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
         document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
         document.getElementById('btn_DatPhong').style.display = 'block';
-        
-
     }
-
-
 }
 var counter = 0;
 
 document.getElementById('AddThemDichVu').addEventListener('click', ThemDichVu);
 
+var selectedServices = [];
+
 function ThemDichVu() {
     counter++;
 
-    var node = `
-    <div class="row">
-    <div class="col-8">
-        <select class="form-select w-100" id="themdichvuselect${counter}">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-        </select>
-        </div>
-            <div class="col-4">
+    // Correct URL for the controller action
+    var url = '/TrangChuKhachHang/LayDanhSachDichVu';
 
-        <button id="XoaSelectDichVu${counter}" class="btn btn-outline-danger" onclick="XoaSelectDichVu(${counter})"><i class="bi bi-trash3"></i></button>
-        </div>
-</div>
-    `;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function (data) {
+            var options = '';
 
-    $('#ChonDichVu').append(node);
+            // Iterate through the data received from the server
+            $.each(data, function (index, itemDichVu) {
+                // Check if the service has already been selected
+                if (!selectedServices.includes(itemDichVu.id)) {
+                    options += `<option value="${itemDichVu.id}">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
+                }
+            });
+            var node = `
+                <div class="row">
+                    <div class="col-8">
+                        <select class="form-select w-100" id="themdichvuselect${counter}" onchange="updateSelectedServices(this.value)">
+                            ${options}
+                        </select>
+                    </div>
+                    <div class="col-4">
+                        <button id="XoaSelectDichVu${counter}" class="btn btn-outline-danger" onclick="XoaSelectDichVu(${counter})">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            $('#ChonDichVu').append(node);
+        },
+        error: function (error) {
+            console.error('Error fetching data:', error);
+        }
+    });
+}
+
+function updateSelectedServices(value) {
+    selectedServices.push(value);
 }
 function XoaSelectDichVu(idSelect) {
     var idSelectThemDichvu = "themdichvuselect" + idSelect;
