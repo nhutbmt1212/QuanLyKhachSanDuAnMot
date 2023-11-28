@@ -120,3 +120,144 @@
     border-radius: 50px;
     color:white;
 }
+
+
+
+
+
+
+
+
+/* Popup */
+.popup-kh {
+    display: flex;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    z-index: 999;
+    max-width: 80%; /* Giới hạn chiều rộng tối đa */
+    width: auto;
+    max-height: 80vh; /* Giới hạn chiều cao tối đa */
+    overflow-y: auto; /* Cuộn nếu nội dung vượt quá chiều cao tối đa */
+}
+
+    .popup input,
+    .popup select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border-radius: 8px;
+    }
+
+    .popup i {
+        cursor: pointer;
+    }
+
+        .popup i:hover {
+            color: blue;
+        }
+
+        .popup i.fa-times {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+#searchBar {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+    #searchBar i {
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    #searchBar input {
+        border: none;
+        outline: none;
+        padding: 10px;
+        margin: 0 10px 0 0;
+        flex: 1;
+        border-radius: 8px;
+    }
+
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(66, 64, 64, 0.5);
+    justify-content: center;
+    align-items: center;
+
+}
+
+.popup-content {
+    width: 100%;
+    margin-left:10%;
+    max-width: 80vw; /* Giới hạn chiều rộng tối đa */
+    background-color: white;
+    padding: 25px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.close-icon {
+    position: absolute;
+    font-size: 20px;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.popup button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+    .popup {
+        width: 80%;
+    }
+
+        .popup input,
+        .popup select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border-radius: 8px;
+        }
+
+        .popup i.fa-times {
+            top: 5px;
+            right: 5px;
+        }
+}
