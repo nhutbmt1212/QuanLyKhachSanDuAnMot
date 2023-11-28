@@ -58,23 +58,29 @@ namespace QuanLyKhachSan.Controllers
             return Json(qr_ListDichVu);
         }
         [HttpGet]
-        public IActionResult TimKiemPhong(DateTime NgayNhanPhong, DateTime NgayTraPhong, string SoLuongNguoiLon, string SoLuongTreEm)
+        public IActionResult TimKiemPhong(DateTime NgayNhanPhong, DateTime NgayTraPhong, int SoLuongNguoiLon, int SoLuongTreEm)
         {
             var maPhongDaDatList = _db.DatPhong
                 .Where(s => s.NgayTra > NgayNhanPhong)
                 .Select(s => s.MaPhong)
                 .ToList();
+            var join_Phong = from phong in _db.Phong
+                             join loaiphong in _db.LoaiPhong on phong.MaLoaiPhong equals loaiphong.MaLoaiPhong
+                             select new
+                             {
+                                 MaPhong = phong.MaPhong,
+                                 SlNguoiLon = loaiphong.SoLuongNguoiLon,
+                                 SlTreEm = loaiphong.SoLuongTreEm,
 
-            var phongKhongdieuKien = _db.Phong
-                .Where(p => !maPhongDaDatList.Contains(p.MaPhong) &&
-                            p.LoaiPhong.SoLuongNguoiLon < int.Parse(SoLuongNguoiLon) &&
-                            p.LoaiPhong.SoLuongTreEm < int.Parse(SoLuongTreEm))
-                .Select(s => s.MaPhong)
-                .ToList();
+                             };
 
-            return Json(new { maPhongDaDatList, phongKhongdieuKien });
+            var qr_PhongKhongDatTieuChuan = join_Phong.Where(s => s.SlNguoiLon < SoLuongNguoiLon || s.SlTreEm < SoLuongTreEm)
+                                                      .Select(s => s.MaPhong)
+                                                      .ToList();
+
+            return Json(new { maPhongDaDatList, qr_PhongKhongDatTieuChuan });
         }
-
+   
 
 
     }

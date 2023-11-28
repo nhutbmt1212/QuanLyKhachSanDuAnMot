@@ -91,24 +91,15 @@ document.getElementById('TimKiemPhong').onclick = function () {
         alert('Bạn chưa chọn ngày trả');
     }
     else {
-        //thực hiện ajax
-        //tạo đổi tượng json để gửi đi
-
         $.ajax({
             type: "GET",
             url: `/TrangChuKhachHang/TimKiemPhong?NgayNhanPhong=${ngayNhan}&NgayTraPhong=${ngayTra}&SoLuongNguoiLon=${slNgLon}&SoLuongTreEm=${slTreEm}`,
             success: function (result) {
-                // Extract room codes from the result
                 var maPhongDaDatList = result.maPhongDaDatList.map(r => r.trim().toUpperCase());
-                var PhongKhongdieuKien = result.phongKhongdieuKien.map(r => r.trim().toUpperCase());
-                console.log(PhongKhongdieuKien);
-                // Iterate over each room
+                var PhongKhongdieuKien = result.qr_PhongKhongDatTieuChuan.map(r => r.trim().toUpperCase());
                 $('.room-detail').each(function () {
                     var maPhong = $(this).find('h3').text().split('|')[0].trim().toUpperCase(); // Convert to uppercase and trim
-
-                    // Check if the room is in either list, hide it if found
                     if (maPhongDaDatList.includes(maPhong) || PhongKhongdieuKien.includes(maPhong)) {
-                        console.log("Room is in one of the lists. Hiding:", maPhong);
                         $(this).hide();
                     } else {
                         $(this).show();
@@ -119,18 +110,15 @@ document.getElementById('TimKiemPhong').onclick = function () {
                 console.log(error);
             }
         });
-
         reportPhong.style.display = "none";
         room_infor.style.display = "block";
         document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
         document.getElementById('ngaytra_text').innerHTML = ngayTra;
         var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
         var ngayTracal = new Date(document.getElementById('ipt_NgayTra').value);
-
         var soGio = Math.abs(ngayTracal - ngayNhancal) / 3600000;
         var soNgay = Math.round(soGio / 24);
         var soGioLe = soGio % 24;
-
         document.getElementById('ngay_text').innerHTML = soNgay;
         document.getElementById('gio_text').innerHTML = soGioLe;
         document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
