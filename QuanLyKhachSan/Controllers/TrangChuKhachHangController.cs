@@ -20,6 +20,7 @@ namespace QuanLyKhachSan.Controllers
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
+
            
             return View(listPhong);
         }
@@ -56,5 +57,25 @@ namespace QuanLyKhachSan.Controllers
             var qr_ListDichVu = _db.DichVu.ToList();
             return Json(qr_ListDichVu);
         }
+        [HttpGet]
+        public IActionResult TimKiemPhong(DateTime NgayNhanPhong, DateTime NgayTraPhong, string SoLuongNguoiLon, string SoLuongTreEm)
+        {
+            var maPhongDaDatList = _db.DatPhong
+                .Where(s => s.NgayTra > NgayNhanPhong)
+                .Select(s => s.MaPhong)
+                .ToList();
+
+            var phongKhongdieuKien = _db.Phong
+                .Where(p => !maPhongDaDatList.Contains(p.MaPhong) &&
+                            p.LoaiPhong.SoLuongNguoiLon < int.Parse(SoLuongNguoiLon) &&
+                            p.LoaiPhong.SoLuongTreEm < int.Parse(SoLuongTreEm))
+                .Select(s => s.MaPhong)
+                .ToList();
+
+            return Json(new { maPhongDaDatList, phongKhongdieuKien });
+        }
+
+
+
     }
 }

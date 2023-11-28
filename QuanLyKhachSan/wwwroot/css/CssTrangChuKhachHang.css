@@ -184,3 +184,7 @@ body {
 #btn_DatPhong{
     display:none;
 }
+#Report_Phong{
+    margin-left:73px;
+    color:red;
+}
