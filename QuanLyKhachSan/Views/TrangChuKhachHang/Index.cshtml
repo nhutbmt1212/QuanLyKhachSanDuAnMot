@@ -144,12 +144,19 @@
                     <!-- Room Detail 1 -->
                     @foreach (var phong in Model)
                     {
-                    <div class="room-detail">
-                        @if (phong.ImageLinks != null && phong.ImageLinks.Any())
-                        {
-                            <!-- Your existing code for Room Detail 1 goes here -->
-                            <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail_room" />
-                        }
+                        <div class="room-detail" data-room-id="@phong.MaPhong">
+                            @if (phong.ImageLinks != null && phong.ImageLinks.Any())
+                            {
+
+                                <div class="slider" data-current-index="0">
+                                    <button class="prev">prev</button>
+                                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail_room" />
+                                    <button class="next">Next</button>
+                                </div>
+
+                           
+                            }
+
                         <div class="room-info">
                             <h3>@phong.MaPhong | Khu vực: @phong.KhuVuc</h3>
                             <span id="@phong.MaPhong" class="room-type"></span>
@@ -158,6 +165,23 @@
                                 <span>Số lượng người lớn: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
                                 <span>Số lượng trẻ em: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span></span>
                             <span id="phuThuTraMuon-@phong.MaPhong"></span>
+                            <label>Số lượng người lớn </label>
+                                
+                                <select class="form-select w-50">
+                                    @for(int i=1; i<=phong.LoaiPhong.SoLuongNguoiLon; i++){
+                                    <option>@i</option>
+                                    }
+                                    
+                                
+                            </select>
+                                <label>Số lượng trẻ em </label>
+                                <select class="form-select w-50">
+                                      @for(int i=1; i<=phong.LoaiPhong.SoLuongTreEm; i++){
+                                       
+                                        <option>@i</option>
+
+                                    }
+                                </select>
                             <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
                         </div>
                     </div>

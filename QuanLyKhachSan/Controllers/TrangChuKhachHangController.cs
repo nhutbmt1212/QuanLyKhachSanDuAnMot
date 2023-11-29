@@ -39,13 +39,17 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> SlideAnhPhong(string maPhong)
         {
             var phong = await _db.Phong.Include(p => p.ImageLinks).FirstOrDefaultAsync(s => s.MaPhong == maPhong);
+
             if (phong == null)
             {
                 return Json(null);
-
             }
-            return Json(phong.ImageLinks.Select(s => s.Url));
+
+            var imageUrls = phong.ImageLinks.Select(s => s.Url).ToList();
+
+            return Json(imageUrls);
         }
+
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -106,8 +106,12 @@
             }
         </ul>
         <ul class="side-menu">
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên"||userRole =="Khách hàng")
-            {
+                <li>
+                    <a asp-action="Index" asp-controller="TrangChuKhachHang">
+                    <i class='bx bxs-user-account'></i>
+                    <span class="text">Trang chủ khách hàng</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#">
                         <i class='bx bxs-user-account'></i>
@@ -120,7 +124,7 @@
                         <span class="text">Đăng xuất</span>
                     </a>
                 </li>
-            }
+            
         </ul>
 
     </section>

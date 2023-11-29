@@ -83,8 +83,17 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var slTreEm = document.getElementById('SlTreEm').value;
     var reportPhong = document.getElementById('Report_Phong');
     var room_infor = document.getElementById('room-infor');
+
+    var ngayNhanValidate = new Date(document.getElementById('ipt_NgayNhan').value);
+    var ngayTraValidate = new Date(document.getElementById('ipt_NgayTra').value);
+    var chenhlechthoigian = ngayTraValidate - ngayNhanValidate;
+    var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
+    console.log(chenhlechgio);
+    if (chenhlechgio <= 3) {
+        alert("Thời gian đặt phòng phải lớn hơn 3 giờ");
+    }
     //convert datetime 
-    if (ngayNhan == "") {
+  else if (ngayNhan == "") {
         alert('Bạn chưa chọn ngày nhận');
     }
     else if (ngayTra == "") {
@@ -145,9 +154,7 @@ function ThemDichVu() {
         success: function (data) {
             var options = '';
 
-            // Iterate through the data received from the server
             $.each(data, function (index, itemDichVu) {
-                // Check if the service has already been selected
                 if (!selectedServices.includes(itemDichVu.id)) {
                     options += `<option value="${itemDichVu.id}">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
                 }
@@ -185,3 +192,58 @@ function XoaSelectDichVu(idSelect) {
     document.getElementById(idbtnXoaDichvu).remove();
 }
 
+
+$(document).ready(function () {
+    $('.room-detail').each(function () {
+        var roomElement = $(this);
+        var maPhong = roomElement.data('room-id'); 
+
+        $.ajax({
+            url: '/TrangChuKhachHang/SlideAnhPhong',
+            type: 'GET',
+            data: { maPhong: maPhong },
+            success: function (data) {
+                if (data && data.length > 0) {
+                    roomElement.find('.slider').data('images', data); 
+                    updateImage(roomElement.find('.slider')); 
+                }
+            },
+            error: function (error) {
+                console.log('Error:', error);
+            }
+        });
+
+        roomElement.find('.next').on('click', function () {
+            var slider = roomElement.find('.slider');
+            var currentIndex = slider.data('current-index');
+            var images = slider.data('images');
+            if (currentIndex < images.length - 1) {
+                slider.data('current-index', currentIndex + 1); 
+            } else {
+                slider.data('current-index', 0); 
+            }
+            updateImage(slider);
+        });
+
+        roomElement.find('.prev').on('click', function () {
+            var slider = roomElement.find('.slider');
+            var currentIndex = slider.data('current-index');
+            var images = slider.data('images');
+            if (currentIndex > 0) {
+                slider.data('current-index', currentIndex - 1); 
+            } else {
+                slider.data('current-index', images.length - 1); 
+            }
+            updateImage(slider); 
+        });
+
+    });
+});
+
+function updateImage(slider) {
+    var currentIndex = slider.data('current-index');
+    var images = slider.data('images');
+    var imageUrl = images[currentIndex];
+    slider.find('.img_detail_room').attr('src', '/UploadImage/' + imageUrl);
+    console.log(imageUrl);
+}

@@ -139,10 +139,10 @@
 
 .popup {
     display: none;
-    position: fixed;
-    top: 50%;
+   
+/*    top: 50%;
     left: 60%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);*/
     padding: 20px;
     background-color: white;
     border: 2px solid #ccc;
@@ -204,7 +204,7 @@
 
 .popup-overlay {
     display: none;
-    position: fixed;
+
     top: 0;
     left: 0;
     width: 100%;
