@@ -29,6 +29,8 @@ function DatPhong(MaPhong) {
     var LoaiPhong = document.getElementById('loaiPhong-' + MaPhong).innerText;
     var giaTheoGio = document.getElementById('pricetheogio-' + MaPhong).innerText;
     var giaTheoNgay = document.getElementById('pricetheongay-' + MaPhong).innerText;
+    var slNgLonDatPhong = document.getElementById('slNguoiLonDatPhong-' + MaPhong).value;
+    var slTreEmDatPhong = document.getElementById('slTreEmDatPhong-' + MaPhong).value;
 
     var node = `
     <span id="maPhongDatPhong"> Mã phòng: <strong>${MaPhong}</strong> </span>
@@ -37,14 +39,17 @@ function DatPhong(MaPhong) {
     <br id="break2"/>
     <span id="giaTheoGioDatPhong">Giá theo giờ: ${giaTheoGio}</span> <span id="giaTheoNgayDatPhong">Giá theo ngày: ${giaTheoNgay}</span>
     <br id="break3"/>
+    <span id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: ${slNgLonDatPhong}</span> <span id="soLuongTreEmDatPhong">Số lượng trẻ em ở: ${slTreEmDatPhong}</span>
+    <br id="break4"/>
     <button class="btn btn-outline-warning huy_datPhong_DatPhong" onclick="HuyDatPhong()" id="huy_dat_phong"><i class="bi bi-x-lg"></i>  Hủy</button>
    
+
     `;
     $("#Infor_Phong_Chon").html(node);
     var ngayDat = document.getElementById('ngay_text').innerText;
     var gioDat = document.getElementById('gio_text').innerText;
     var tongCongTienDatPhong = (ngayDat * giaTheoNgay) + (gioDat * giaTheoGio);
-    document.getElementById('TongTien').innerText = tongCongTienDatPhong + " VND";
+    document.getElementById('TongTienPhong').innerText = tongCongTienDatPhong + " VND";
 
 
 
@@ -63,10 +68,13 @@ function HuyDatPhong() {
     document.getElementById('loaiPhongDatPhong').remove();
     document.getElementById('giaTheoGioDatPhong').remove();
     document.getElementById('giaTheoNgayDatPhong').remove();
+    document.getElementById('SoLuongNguoiLonDatPhong').remove();
+    document.getElementById('soLuongTreEmDatPhong').remove();
     document.getElementById('huy_dat_phong').remove();
     document.getElementById('break1').remove();
     document.getElementById('break2').remove();
     document.getElementById('break3').remove();
+    document.getElementById('break4').remove();
     document.getElementById('TongTien').innerText = "0 VND";
 
 }
@@ -88,7 +96,6 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var ngayTraValidate = new Date(document.getElementById('ipt_NgayTra').value);
     var chenhlechthoigian = ngayTraValidate - ngayNhanValidate;
     var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
-    console.log(chenhlechgio);
     if (chenhlechgio <= 3) {
         alert("Thời gian đặt phòng phải lớn hơn 3 giờ");
     }
@@ -135,17 +142,13 @@ document.getElementById('TimKiemPhong').onclick = function () {
         document.getElementById('btn_DatPhong').style.display = 'block';
     }
 }
-
-var counter = 0;
-
+var arrDichVuDaChon = [];
+var counter = -1;
+var soLuongdichVu;
 document.getElementById('AddThemDichVu').addEventListener('click', ThemDichVu);
-
-var selectedServices = [];
-
 function ThemDichVu() {
     counter++;
 
-    // Correct URL for the controller action
     var url = '/TrangChuKhachHang/LayDanhSachDichVu';
 
     $.ajax({
@@ -155,18 +158,23 @@ function ThemDichVu() {
             var options = '';
 
             $.each(data, function (index, itemDichVu) {
-                if (!selectedServices.includes(itemDichVu.id)) {
-                    options += `<option value="${itemDichVu.id}">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
+                if (!arrDichVuDaChon.includes(itemDichVu.maDichVu)) {
+                    options += `<option value="${itemDichVu.maDichVu}" class="optionChonDichVu">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
                 }
+
             });
+
             var node = `
                 <div class="row">
-                    <div class="col-8">
-                        <select class="form-select w-100" id="themdichvuselect${counter}" onchange="updateSelectedServices(this.value)">
+                    <div class="col-lg-7">
+                        <select class="form-select w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})" >
                             ${options}
                         </select>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-3">
+                        <input type="number" class="form-control w-100" id="soLuongDichVu${counter}" min="1" value="1">
+                    </div>
+                    <div class="col-2">
                         <button id="XoaSelectDichVu${counter}" class="btn btn-outline-danger" onclick="XoaSelectDichVu(${counter})">
                             <i class="bi bi-trash3"></i>
                         </button>
@@ -175,22 +183,54 @@ function ThemDichVu() {
             `;
 
             $('#ChonDichVu').append(node);
+            var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + counter).value;
+            arrDichVuDaChon[counter] = dichVuDaChonTheoId;
+
+            $('#themdichvuselect' + counter).focus(function () {
+                // Lặp qua tất cả các option
+                $(this).find('.optionChonDichVu').each(function () {
+                    // Nếu giá trị option nằm trong mảng arrDichVuDaChon, ẩn option đó
+                    if (arrDichVuDaChon.includes($(this).val())) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    }
+                });
+            });
+            if (arrDichVuDaChon.filter(function (e) { return e }).length == data.length) {
+                document.getElementById('AddThemDichVu').style.display = 'none';
+
+            }
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
     });
 }
+function DichVuDaChon(id) {
 
-function updateSelectedServices(value) {
-    selectedServices.push(value);
+    var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
+    console.log(dichVuDaChonTheoId);
+    if (arrDichVuDaChon[id] == "") {
+        console.log("mảng rỗng")
+    }
+    else {
+        arrDichVuDaChon[id] = dichVuDaChonTheoId;
+        console.log(arrDichVuDaChon)
+    }
 }
 function XoaSelectDichVu(idSelect) {
     var idSelectThemDichvu = "themdichvuselect" + idSelect;
+    var idSoLuongDichVu = "soLuongDichVu" + idSelect;
     var idbtnXoaDichvu = "XoaSelectDichVu" + idSelect;
     document.getElementById(idSelectThemDichvu).remove();
+    document.getElementById(idSoLuongDichVu).remove();
     document.getElementById(idbtnXoaDichvu).remove();
+    arrDichVuDaChon[idSelect] = "";
+    document.getElementById('AddThemDichVu').style.display = 'block';
+
 }
+
 
 
 $(document).ready(function () {

@@ -121,6 +121,7 @@
 
 
 
+    
 
 
 
@@ -164,14 +165,14 @@
                             <span id="@phong.MaPhong" class="room-type"></span>
                             <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
                                 <span><span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span> | <span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span></span>
-                              <span>Số lượng người lớn: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
-                                <span>Số lượng trẻ em: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span></span>
+                              <span>Số lượng người lớn tối đa: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
+                                <span>Số lượng trẻ em tối đa: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span></span>
                                     <span id="phuThuTraMuon-@phong.MaPhong"></span>
                               
                                 <div class="row">
                                     <div class="col-lg">
                             <label>Số lượng người lớn </label>
-                                <select class="form-select w-100">
+                                <select class="form-select w-100" id="slNguoiLonDatPhong-@phong.MaPhong">
                                     @for(int i=1; i<=phong.LoaiPhong.SoLuongNguoiLon; i++){
                                     <option>@i</option>
                                     }
@@ -179,7 +180,7 @@
                                     </div>
                                     <div class="col-lg">
                                 <label>Số lượng trẻ em </label>
-                                <select class="form-select w-100">
+                                        <select class="form-select w-100" id="slTreEmDatPhong-@phong.MaPhong">
                                       @for(int i=1; i<=phong.LoaiPhong.SoLuongTreEm; i++){
                                        
                                         <option>@i</option>
@@ -223,6 +224,10 @@
 
                             </div>
                             <hr />
+                            <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0 VND</span>
+                            <br />
+                            <span>Tổng tiền dịch vụ:</span> <span id="TongTienDichVu">0 VND</span>
+                            <br />
                             <span>Tổng cộng:</span> <span id="TongTien">0 VND</span>
                             <br />
                             <a class="btn btn-warning button_bookroom " id="btn_DatPhong">Đặt ngay</a>
