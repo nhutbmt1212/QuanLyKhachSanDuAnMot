@@ -2,7 +2,7 @@
     background-color: #F6F6F6;
 }
 .container {
-    max-width: 100%; /* Đảm bảo .container không vượt quá chiều rộng của màn hình */
+    max-width: 100%; 
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto;
@@ -139,10 +139,10 @@
 
 .popup {
     display: none;
-   
-/*    top: 50%;
+    position: fixed;
+    top: 50%;
     left: 60%;
-    transform: translate(-50%, -50%);*/
+    transform: translate(-50%, -50%);
     padding: 20px;
     background-color: white;
     border: 2px solid #ccc;
@@ -157,7 +157,6 @@
     .popup input,
     .popup select {
         width: 100%;
-        padding: 10px;
         margin-bottom: 10px;
         box-sizing: border-box;
         border-radius: 8px;
@@ -204,7 +203,7 @@
 
 .popup-overlay {
     display: none;
-
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -217,7 +216,6 @@
 
 .popup-content {
     width: 100%;
-    margin-left:10%;
     max-width: 80vw; /* Giới hạn chiều rộng tối đa */
     background-color: white;
     padding: 25px;
