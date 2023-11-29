@@ -171,11 +171,7 @@ body {
     margin-top: 10px;
     margin-left: 40px;
 }
-.img_detail_room {
-    width: 100px; /* or any size you want */
-    height: 100px; /* or any size you want */
-    object-fit: cover;
-}
+
 #TongTien {
     color: #FFCA2C;
     font-weight:600;

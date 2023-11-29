@@ -62,13 +62,15 @@
                 else
                 {
                     <li>Xin chào! @TenNguoiDung</li>
-                    <li><a asp-action="LogOut" asp-controller="TrangChuKhachHang">Đăng xuất</a></li>
+                    <li><a class="btn btn-primary" asp-action="Index" asp-controller="Home">Trở về trang quản lý</a></li>
+                    <li><a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a></li>
                 }
               
                 
             </ul>
         </div>
-        <div class="sreach-room  position-sticky top-0">
+        @* <div class="sreach-room  position-sticky top-0"> *@
+        <div class="sreach-room">
             <div class="address row ">
                 <div class="col-md-2 mb-3 mx-auto ">
                     <label for="validationDefaultUsername">Địa chỉ khách sạn</label>
@@ -141,57 +143,56 @@
         <div id="room-infor" class="container">
             <div class="row">
                 <div class="col-md-8">
-                    <!-- Room Detail 1 -->
+              
                     @foreach (var phong in Model)
-                    {
+                    {  
                         <div class="room-detail" data-room-id="@phong.MaPhong">
                             @if (phong.ImageLinks != null && phong.ImageLinks.Any())
                             {
 
                                 <div class="slider" data-current-index="0">
-                                    <button class="prev">prev</button>
-                                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail_room" />
-                                    <button class="next">Next</button>
+                                    <button class="prev btn btn-outline-success"><i class="bi bi-arrow-left"></i></button>
+                                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail_room" style="height:250px;width:300px" />
+                                    <button class="next btn btn-outline-success"><i class="bi bi-arrow-right"></i></button>
                                 </div>
 
                            
                             }
-
+                           
                         <div class="room-info">
                             <h3>@phong.MaPhong | Khu vực: @phong.KhuVuc</h3>
                             <span id="@phong.MaPhong" class="room-type"></span>
                             <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
-                            <span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span><span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span>
-                                <span>Số lượng người lớn: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
+                                <span><span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span> | <span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span></span>
+                              <span>Số lượng người lớn: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
                                 <span>Số lượng trẻ em: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span></span>
-                            <span id="phuThuTraMuon-@phong.MaPhong"></span>
+                                    <span id="phuThuTraMuon-@phong.MaPhong"></span>
+                              
+                                <div class="row">
+                                    <div class="col-lg">
                             <label>Số lượng người lớn </label>
-                                
-                                <select class="form-select w-50">
+                                <select class="form-select w-100">
                                     @for(int i=1; i<=phong.LoaiPhong.SoLuongNguoiLon; i++){
                                     <option>@i</option>
                                     }
-                                    
-                                
                             </select>
+                                    </div>
+                                    <div class="col-lg">
                                 <label>Số lượng trẻ em </label>
-                                <select class="form-select w-50">
+                                <select class="form-select w-100">
                                       @for(int i=1; i<=phong.LoaiPhong.SoLuongTreEm; i++){
                                        
                                         <option>@i</option>
 
                                     }
                                 </select>
+                                    </div>
+                                </div>
                             <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
                         </div>
                     </div>
                     }
-                    
-                   
                 </div>
-               
-                   
-                
                 <div class="col-md-4">
                     <!-- Information Detail -->
 @*                     <div class="infor-detail  position-sticky " style="top:85px">
