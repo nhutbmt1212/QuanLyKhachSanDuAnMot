@@ -147,6 +147,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
 var arrDichVuDaChon = [];
 var counter = -1;
 var soLuongdichVu;
+
 document.getElementById('AddThemDichVu').addEventListener('click', ThemDichVu);
 function ThemDichVu() {
     counter++;
@@ -207,20 +208,50 @@ function ThemDichVu() {
             var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
             var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
             $('#TongDichVuDaDat').append(nodeServices);
+            //mảng để tính tiền
+            TinhTienDichVu();
+           
+
+
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
     });
+    
+   
+}
+function TinhTienDichVu() {
+    var ThanhTienMaDichVu = [];
+    var arrSoLuongDichVu = [];
+    $('span[id^="tongTenDichVuDaDat"]').each(function () {
+        ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+    });
+    $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
+        arrSoLuongDichVu.push($(this).text().split(": ")[1]);
+    });
+    $.ajax({
+        url: '/TrangChuKhachHang/TinhTienDichVu',
+        type: 'POST',
+        data: { 'arrMaDichVu': ThanhTienMaDichVu, 'arrSoLuongDichVu': arrSoLuongDichVu },
+        traditional: true,
+        success: function (result) {
+            document.getElementById('TongTienDichVuDaDat').innerText = result;
+        },
+        error: function (xhr, status, error) {
+        }
+    });
 }
 
-function DichVuDaChon(id) {
 
+function DichVuDaChon(id) {
+    
     var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
     if (arrDichVuDaChon[id] == "") {
         console.log("mảng rỗng")
     }
     else {
+       
         var dichVuDaChon = document.getElementById('themdichvuselect' + id).value;
         var soLuongDichVu = document.getElementById('soLuongDichVu' + id).value;
 
@@ -229,13 +260,16 @@ function DichVuDaChon(id) {
         document.getElementById(tongTextTenDichVuDaDat).innerText = `Tên dịch vụ: ${dichVuDaChon} | `;
         tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${soLuongDichVu}`;
         arrDichVuDaChon[id] = dichVuDaChonTheoId;
+        TinhTienDichVu();
+        }
 }
-    }
   
 function ThayDoiSoLuongDichVu(id) {
+   
     var SoLuongDichVuDaThayDoi = document.getElementById('soLuongDichVu' + id).value;
     var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
     tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${SoLuongDichVuDaThayDoi}`;
+    TinhTienDichVu();
 }
 function XoaSelectDichVu(idSelect) {
     var idSelectThemDichvu = "themdichvuselect" + idSelect;
@@ -253,6 +287,7 @@ function XoaSelectDichVu(idSelect) {
     document.getElementById(tongTextSoLuongDaDat).remove();
     document.getElementById(tongTextTenDichVuDaDat).remove();
     document.getElementById(breakTongDichVu).remove();
+    TinhTienDichVu();
 }
 
 

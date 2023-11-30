@@ -30,6 +30,10 @@ namespace QuanLyKhachSan.Models
 
         [DataType(DataType.DateTime)]
         public DateTime ThoiGianDichVu { get; set; }
+        //public string MaDatPhong { get; set; }
+
+        //[ForeignKey("MaDatPhong")]
+        //public DatPhong DatPhong { get; set; }
 
         [StringLength(30)]
         public string TrangThai { get; set; }

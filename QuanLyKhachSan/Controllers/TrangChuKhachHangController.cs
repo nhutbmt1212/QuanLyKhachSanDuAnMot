@@ -84,7 +84,26 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(new { maPhongDaDatList, qr_PhongKhongDatTieuChuan });
         }
-   
+        [HttpPost]
+        public IActionResult TinhTienDichVu(List<string> arrMaDichVu, List<string> arrSoLuongDichVu)
+        {
+            decimal tongTien = 0;
+            for (int i = 0; i < arrMaDichVu.Count; i++)
+            {
+                var maDichVu = arrMaDichVu[i];
+                var soLuong = int.Parse(arrSoLuongDichVu[i]);
+
+                // Giả sử bạn có một bảng DịchVụ trong cơ sở dữ liệu với các cột MaDichVu, GiaTien
+                var dichVu = _db.DichVu.SingleOrDefault(dv => dv.MaDichVu == maDichVu);
+                if (dichVu != null)
+                {
+                    tongTien += dichVu.GiaTien * soLuong;
+                }
+            }
+            return Json(tongTien);
+        }
+
+
 
 
     }
