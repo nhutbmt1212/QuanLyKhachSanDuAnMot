@@ -250,8 +250,21 @@
         </div>
         @* -- *@
         <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
-        <a class="btn btn-success" id="btn_import">Import from Excel</a>
-        <a class="btn btn-success" id="btn_export">Export to Excel</a>
+        <form method="post" enctype="multipart/form-data" asp-controller="NhanVien" asp-action="Import">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload one or more files using this form:</p>
+                    <input type="file" name="formFile" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+
+        <a class="btn btn-success" id="btn_export" asp-controller="NhanVien" asp-action="ExportExcel">Export to Excel</a>
 
         <div id="detailNhanVien">
             <table class="table" id="table_detail" style="border:1px solid #343A40">
