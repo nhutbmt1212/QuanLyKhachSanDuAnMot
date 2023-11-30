@@ -20,7 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-   
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="~/css/CssTrangChuKhachHang.css" rel="stylesheet" />
 </head>
@@ -51,22 +51,27 @@
                 </li>
             </ul>
             <ul class="group-2">
-                @if(userName ==null){
-                         <li>
-                    <a asp-action="Login" asp-controller="Access" >Đăng nhập </a>
-                </li>
-                <li>
+                @if (userName == null)
+                {
+                    <li>
+                        <a asp-action="Login" asp-controller="Access">Đăng nhập </a>
+                    </li>
+                    <li>
                         | Đăng kí
-                </li>
+                    </li>
                 }
                 else
                 {
                     <li>Xin chào! @TenNguoiDung</li>
-                    <li><a class="btn btn-primary" asp-action="Index" asp-controller="Home">Trở về trang quản lý</a></li>
-                    <li><a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a></li>
+                    <li>
+                        <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Trở về trang quản lý</a>
+                    </li>
+                    <li>
+                        <a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a>
+                    </li>
                 }
-              
-                
+
+
             </ul>
         </div>
         @* <div class="sreach-room  position-sticky top-0"> *@
@@ -76,23 +81,28 @@
                     <label for="validationDefaultUsername">Địa chỉ khách sạn</label>
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend2"><i class="bi bi-geo-alt-fill"></i></span>
+                            <span class="input-group-text" id="inputGroupPrepend2">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </span>
                         </div>
-                        <input type="text" class="form-control" id="validationDefaultUsername" aria-describedby="inputGroupPrepend2" value="Nguyễn Tất Thành, Tp BMT" required>
+                        <input type="text" class="form-control" id="validationDefaultUsername"
+                               aria-describedby="inputGroupPrepend2" value="Nguyễn Tất Thành, Tp BMT" required>
                     </div>
                 </div>
 
                 <div class="col-md-2 mb-3 mx-auto">
                     <label for="ngaynhan">Ngày nhận </label>
                     <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaynhanPicker" id="ipt_NgayNhan"  />
+                        <input type="datetime-local" class="form-control datetimepicker-input"
+                               data-target="#ngaynhanPicker" id="ipt_NgayNhan" />
                     </div>
                 </div>
 
                 <div class="col-md-2 mb-3 mx-auto">
                     <label for="ngaytra"> Ngày trả</label>
                     <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input" data-target="#ngaytraPicker" id="ipt_NgayTra"/>
+                        <input type="datetime-local" class="form-control datetimepicker-input"
+                               data-target="#ngaytraPicker" id="ipt_NgayTra" />
                     </div>
                 </div>
 
@@ -100,9 +110,9 @@
                     <label for="sophong">SL người lớn</label>
                     <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
 
-                    <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
+                        <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
                     </div>
-                  
+
                 </div>
                 <div class="col-md-1 mb-1 so-phong mx-auto">
                     <label for="sophong">SL trẻ em</label>
@@ -121,83 +131,113 @@
 
 
 
-    
+
 
 
 
         <div id="infor-hotel">
             <div class="img-hotel">
-                <img src="https://images.bubbleup.com/width1920/quality35/mville2017/1-brand/1-margaritaville.com/gallery-media/220803-compasshotel-medford-pool-73868-1677873697.jpg" width="300" height="300" />
-                
+                <img src="https://images.bubbleup.com/width1920/quality35/mville2017/1-brand/1-margaritaville.com/gallery-media/220803-compasshotel-medford-pool-73868-1677873697.jpg"
+                     width="300" height="300" />
+
             </div>
             <div class="content-infor-hotel">
                 <h2>ASAP Grand Da Nang</h2>
                 <p>
-                    <i class="bi bi-geo-alt-fill"></i>   Số 962, đường Ngô Quyền, phường An Hải Tây, quận Sơn Trà, thành phố Đà Nẵng, Việt Nam
+                    <i class="bi bi-geo-alt-fill"></i> Số 962, đường Ngô Quyền, phường An Hải Tây, quận Sơn Trà,
+                    thành phố Đà Nẵng, Việt Nam
 
                 </p>
                 <p><i class="bi bi-telephone"></i> +84 236 3939 928</p>
-                <p>Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao ASAP Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là bãi biển đẹp nhất Miền Trung</p>
+                <p>
+                    Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao ASAP
+                    Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là
+                    bãi biển đẹp nhất Miền Trung
+                </p>
             </div>
         </div>
         <h1 id="Report_Phong">Phòng tìm kiếm không hợp lệ</h1>
         <div id="room-infor" class="container">
             <div class="row">
                 <div class="col-md-8">
-              
+
                     @foreach (var phong in Model)
-                    {  
+                    {
                         <div class="room-detail" data-room-id="@phong.MaPhong">
                             @if (phong.ImageLinks != null && phong.ImageLinks.Any())
                             {
 
                                 <div class="slider" data-current-index="0">
-                                    <button class="prev btn btn-outline-success"><i class="bi bi-arrow-left"></i></button>
-                                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail_room" style="height:250px;width:300px" />
-                                    <button class="next btn btn-outline-success"><i class="bi bi-arrow-right"></i></button>
+                                    <button class="prev btn btn-outline-success">
+                                        <i class="bi bi-arrow-left"></i>
+                                    </button>
+                                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image"
+                                         class="img_detail_room" style="height:250px;width:300px" />
+                                    <button class="next btn btn-outline-success">
+                                        <i class="bi bi-arrow-right"></i>
+                                    </button>
                                 </div>
 
-                           
+
                             }
-                           
-                        <div class="room-info">
-                            <h3>@phong.MaPhong | Khu vực: @phong.KhuVuc</h3>
-                            <span id="@phong.MaPhong" class="room-type"></span>
-                            <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
-                                <span><span>Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price" style="color:green;font-weight:700;"></span></span> | <span>Giá theo ngày: <span id="pricetheongay-@phong.MaPhong" style="color:green;font-weight:700;"></span></span></span>
-                              <span>Số lượng người lớn tối đa: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span></span>
-                                <span>Số lượng trẻ em tối đa: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span></span>
-                                    <span id="phuThuTraMuon-@phong.MaPhong"></span>
-                              
-                                <div class="row">
-                                    <div class="col-lg">
-                            <label>Số lượng người lớn </label>
-                                <select class="form-select w-100" id="slNguoiLonDatPhong-@phong.MaPhong">
-                                    @for(int i=1; i<=phong.LoaiPhong.SoLuongNguoiLon; i++){
-                                    <option>@i</option>
-                                    }
-                            </select>
-                                    </div>
-                                    <div class="col-lg">
-                                <label>Số lượng trẻ em </label>
-                                        <select class="form-select w-100" id="slTreEmDatPhong-@phong.MaPhong">
-                                      @for(int i=1; i<=phong.LoaiPhong.SoLuongTreEm; i++){
-                                       
-                                        <option>@i</option>
 
-                                    }
-                                </select>
+                            <div class="room-info">
+                                <h3>@phong.MaPhong | Khu vực: @phong.KhuVuc</h3>
+                                <span id="@phong.MaPhong" class="room-type"></span>
+                                <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
+                                <span>
+                                    <span>
+                                        Giá theo giờ: <span id="pricetheogio-@phong.MaPhong" class="room-price"
+                                                            style="color:green;font-weight:700;"></span>
+                                    </span> | <span>
+                                        Giá theo
+                                        ngày: <span id="pricetheongay-@phong.MaPhong"
+                                                    style="color:green;font-weight:700;"></span>
+                                    </span>
+                                </span>
+                                <span>
+                                    Số lượng người lớn tối đa: <span id="slNguoiLon-@phong.LoaiPhong.SoLuongNguoiLon">@phong.LoaiPhong.SoLuongNguoiLon</span>
+                                </span>
+                                <span>
+                                    Số lượng trẻ em tối đa: <span id="slTreEm-@phong.LoaiPhong.SoLuongTreEm">@phong.LoaiPhong.SoLuongTreEm</span>
+                                </span>
+                                <span id="phuThuTraMuon-@phong.MaPhong"></span>
+
+                                <div class="row">
+                                    <div class="col-sm">
+                                        <label>Số lượng người lớn </label>
+                                        <select class="form-select w-100" id="slNguoiLonDatPhong-@phong.MaPhong">
+                                            @for (int i = 1; i <= phong.LoaiPhong.SoLuongNguoiLon; i++)
+                                            {
+                                                <option>
+                                                    @i
+                                                </option>
+                                            }
+                                        </select>
                                     </div>
+                                    <div class="col-sm">
+                                        <label>Số lượng trẻ em </label>
+                                        <select class="form-select w-100" id="slTreEmDatPhong-@phong.MaPhong">
+                                            @for (int i = 1; i <= phong.LoaiPhong.SoLuongTreEm; i++)
+                                            {
+                                                <option>@i</option>
+
+                                            }
+                                        </select>
+
+                                    </div>
+
+
                                 </div>
-                            <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Đặt ngay</a>
+                                <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')">Chọn phòng</a>
+
+                            </div>
                         </div>
-                    </div>
                     }
                 </div>
                 <div class="col-md-4">
-                    <!-- Information Detail -->
-@*                     <div class="infor-detail  position-sticky " style="top:85px">
- *@
+                    @* <div class="infor-detail  position-sticky " style="top:85px">
+                    *@
                     <div class="infor-detail ">
                         <!-- Your existing code for Information Detail goes here -->
                         <div class="infor-booked-room">
@@ -205,10 +245,12 @@
                             <hr />
                             <p>ASAP Grand Đà Nẵng</p>
                             <span>Thời gian đặt phòng:</span><span id="ngaynhan_text"></span> - <span id="ngaytra_text"></span>(<span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ)
-                         <br />
+                            <br />
                             <span>Số lượng người lớn: </span><span id="SoLuongNguoiLonDat_text">0</span><span> người</span>
-                            <br/>
-                            <span>Số lượng trẻ em: </span><span id="SoLuongTreEmDat_text">0</span><span> người</span>
+                            <br />
+                            <span>Số lượng trẻ em: </span><span id="SoLuongTreEmDat_text">0</span><span>
+                                người
+                            </span>
 
                             <hr />
                             <p>Thông tin phòng</p>
@@ -216,17 +258,20 @@
                             <hr />
                             <p>Thông tin dịch vụ</p>
                             <div id="Infor_DichVu_Chon">
-                               @* dịch vụ *@
+                                @* dịch vụ *@
                                 <div id="ChonDichVu">
-                                   
-                                </div>                                  
-                                <button type="button" class="btn btn-outline-success" id="AddThemDichVu"><i class="bi bi-plus"></i></button>
+                                </div>
+                                <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
+                                    <i class="bi bi-plus"></i>
+                                </button>
 
                             </div>
                             <hr />
                             <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0 VND</span>
                             <br />
-                            <span>Tổng tiền dịch vụ:</span> <span id="TongTienDichVu">0 VND</span>
+                            <span>Tổng dịch vụ đã đặt</span> <span id="TongDichVuDaDat"></span>
+                            <br />
+                            <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat"></span>
                             <br />
                             <span>Tổng cộng:</span> <span id="TongTien">0 VND</span>
                             <br />
@@ -240,45 +285,48 @@
 </body>
 <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">
     <!-- Section: Social media -->
-      
-        <div>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-google"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="" class="text-white me-4">
-                <i class="fab fa-github"></i>
-            </a>
-        </div>
-        <!-- Right -->
-    
+
+    <div>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="text-white me-4">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+    <!-- Right -->
+
     <section class="">
-        
+
         <div class="container text-center text-md-start mt-5">
             <!-- Grid row -->
             <div class="row mt-3">
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
                     <!-- Content -->
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3891.9091181247622!2d108.0787266!3d12.7193516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171f7f4d3cab885%3A0x62453fb0d0ac7b44!2zS2jDoWNoIFPhuqFuIEFTQVA!5e0!3m2!1svi!2s!4v1700876295377!5m2!1svi!2s" width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3891.9091181247622!2d108.0787266!3d12.7193516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3171f7f4d3cab885%3A0x62453fb0d0ac7b44!2zS2jDoWNoIFPhuqFuIEFTQVA!5e0!3m2!1svi!2s!4v1700876295377!5m2!1svi!2s"
+                            width="300" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <!-- Grid column -->
                 <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold">Products</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 60px; background-color: #7c4dff; height: 2px" />
                     <p>
                         <a href="#!" class="text-white">MDBootstrap</a>
                     </p>
@@ -297,7 +345,8 @@
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold">Useful links</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 60px; background-color: #7c4dff; height: 2px" />
                     <p>
                         <a href="#!" class="text-white">Your Account</a>
                     </p>
@@ -316,7 +365,8 @@
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
                     <h6 class="text-uppercase fw-bold">Contact</h6>
-                    <hr class="mb-4 mt-0 d-inline-block mx-auto" style="width: 60px; background-color: #7c4dff; height: 2px" />
+                    <hr class="mb-4 mt-0 d-inline-block mx-auto"
+                        style="width: 60px; background-color: #7c4dff; height: 2px" />
                     <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
                     <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
                     <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
@@ -327,10 +377,10 @@
             <!-- Grid row -->
         </div>
     </section>
-   
-   <script src="~/js/JsTrangChuKhachHang.js"></script>
- 
-   
+
+    <script src="~/js/JsTrangChuKhachHang.js"></script>
+
+
     <!-- Copyright -->
 </footer>
 

@@ -82,6 +82,8 @@ window.onload = function () {
 
     document.getElementById('ipt_NgayNhan').min = new Date().toISOString().slice(0, 16);
     document.getElementById('ipt_NgayTra').min = new Date().toISOString().slice(0, 16);
+    document.getElementById('ipt_NgayNhan').value = new Date().toISOString().slice(0, 16);
+    document.getElementById('ipt_NgayTra').value = new Date().toISOString().slice(0, 16);
 }
 
 document.getElementById('TimKiemPhong').onclick = function () {
@@ -172,7 +174,7 @@ function ThemDichVu() {
                         </select>
                     </div>
                     <div class="col-lg-3">
-                        <input type="number" class="form-control w-100" id="soLuongDichVu${counter}" min="1" value="1">
+                        <input type="number" class="form-control w-100" id="soLuongDichVu${counter}" onchange="ThayDoiSoLuongDichVu(${counter})" min="1" value="1">
                     </div>
                     <div class="col-2">
                         <button id="XoaSelectDichVu${counter}" class="btn btn-outline-danger" onclick="XoaSelectDichVu(${counter})">
@@ -201,23 +203,39 @@ function ThemDichVu() {
                 document.getElementById('AddThemDichVu').style.display = 'none';
 
             }
+            var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
+            var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
+            var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
+            $('#TongDichVuDaDat').append(nodeServices);
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
     });
 }
+
 function DichVuDaChon(id) {
 
     var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
-    console.log(dichVuDaChonTheoId);
     if (arrDichVuDaChon[id] == "") {
         console.log("mảng rỗng")
     }
     else {
+        var dichVuDaChon = document.getElementById('themdichvuselect' + id).value;
+        var soLuongDichVu = document.getElementById('soLuongDichVu' + id).value;
+
+        var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + id;
+        var tongTextSoLuongDichVuDaDat=document.getElementById("tongSoLuongDichVuDaDat" +id);
+        document.getElementById(tongTextTenDichVuDaDat).innerText = `Tên dịch vụ: ${dichVuDaChon} | `;
+        tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${soLuongDichVu}`;
         arrDichVuDaChon[id] = dichVuDaChonTheoId;
-        console.log(arrDichVuDaChon)
+}
     }
+  
+function ThayDoiSoLuongDichVu(id) {
+    var SoLuongDichVuDaThayDoi = document.getElementById('soLuongDichVu' + id).value;
+    var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
+    tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${SoLuongDichVuDaThayDoi}`;
 }
 function XoaSelectDichVu(idSelect) {
     var idSelectThemDichvu = "themdichvuselect" + idSelect;
@@ -228,7 +246,13 @@ function XoaSelectDichVu(idSelect) {
     document.getElementById(idbtnXoaDichvu).remove();
     arrDichVuDaChon[idSelect] = "";
     document.getElementById('AddThemDichVu').style.display = 'block';
-
+    //xóa text dịch vụ đã chọn
+    var tongTextTenDichVuDaDat ="tongTenDichVuDaDat" + idSelect;
+    var tongTextSoLuongDaDat = "tongSoLuongDichVuDaDat" + idSelect;
+    var breakTongDichVu = "breakDichVu" + idSelect;
+    document.getElementById(tongTextSoLuongDaDat).remove();
+    document.getElementById(tongTextTenDichVuDaDat).remove();
+    document.getElementById(breakTongDichVu).remove();
 }
 
 
@@ -285,5 +309,4 @@ function updateImage(slider) {
     var images = slider.data('images');
     var imageUrl = images[currentIndex];
     slider.find('.img_detail_room').attr('src', '/UploadImage/' + imageUrl);
-    console.log(imageUrl);
 }
