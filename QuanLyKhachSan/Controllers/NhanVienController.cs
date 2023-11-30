@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Azure;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
+using System.Data;
+using OfficeOpenXml;
+using System.ComponentModel;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -111,5 +116,139 @@ namespace QuanLyKhachSan.Controllers
             return RedirectToAction("TrangChuNhanVien", "NhanVien");
         }
 
+        public ActionResult ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            // Đặt bản quyền cho EPPlus
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                // Tạo một worksheet mới
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("NhanVien");
+
+                // Lấy danh sách 
+                var nhanvien = _db.NhanVien.ToList();
+
+                // Tạo một bảng để lưu trữ dữ liệu 
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                dataTable.Columns.Add("Mã Nhân Viên");
+                dataTable.Columns.Add("Tên Nhân Viên");
+                dataTable.Columns.Add("CCCD");
+                dataTable.Columns.Add("Giới tính");
+                dataTable.Columns.Add("Ngày sinh");
+                dataTable.Columns.Add("Điện thoại");
+                dataTable.Columns.Add("Địa chỉ");
+                dataTable.Columns.Add("Chức Vụ");
+                dataTable.Columns.Add("Ngày Vào Làm");
+                dataTable.Columns.Add("Tình trạng");
+                dataTable.Columns.Add("Tên đăng nhập");
+                dataTable.Columns.Add("Mật khẩu");
+                dataTable.Columns.Add("Ảnh nhân viên");
+                dataTable.Columns.Add("Email");
+                dataTable.Columns.Add("Ngày đăng ký");
+                // Thêm dữ liệu  vào bảng
+                foreach (var nv in nhanvien)
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    dataRow[0] = nv.MaNhanVien;
+                    dataRow[1] = nv.TenNhanVien;
+                    dataRow[2] = nv.CCCD;
+                    dataRow[3] = nv.GioiTinh;
+                    dataRow[4] = nv.NgaySinh;
+                    dataRow[5] = nv.SoDienThoai;
+                    dataRow[6] = nv.DiaChi;
+                    dataRow[7] = nv.ChucVu;
+                    dataRow[8] = nv.NgayVaoLam;
+                    dataRow[9] = nv.TinhTrang;
+                    dataRow[10] = nv.TenDangNhap;
+                    dataRow[11] = nv.MatKhau;
+                    dataRow[12] = nv.AnhNhanVienBase64;
+                    dataRow[13] = nv.Email;
+                    dataRow[14] = nv.NgayDangKy.ToShortDateString();
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                // Thêm dữ liệu từ bảng vào worksheet
+                ws.Cells["A1"].LoadFromDataTable(dataTable, true);
+
+                // Gửi file Excel về client
+                var stream = new MemoryStream(pck.GetAsByteArray());
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "NhanVien.xlsx");
+            }
+        }
+        public async Task<IActionResult> Import(IFormFile formFile)
+        {
+            if (formFile == null || formFile.Length <= 0)
+            {
+                return BadRequest("Chọn một file để nhập dữ liệu.");
+            }
+
+            if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest("Chỉ hỗ trợ file .xlsx");
+            }
+
+           
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var stream = new MemoryStream())
+            {
+                await formFile.CopyToAsync(stream);
+
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Sử dụng sheet đầu tiên
+                    var rowCount = worksheet.Dimension.Rows;
+
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        var list = new NhanVien();
+                        list.MaNhanVien = worksheet.Cells[row, 1].Value.ToString().Trim();
+                        list.TenNhanVien = worksheet.Cells[row, 2].Value.ToString().Trim();
+                            list.CCCD = worksheet.Cells[row, 3].Value.ToString().Trim();
+                            list.GioiTinh = worksheet.Cells[row, 4].Value.ToString().Trim();
+                        if (DateTime.TryParse(worksheet.Cells[row, 5].Value.ToString().Trim(), out DateTime ngaySinh))
+                        {
+                            list.NgaySinh = ngaySinh;
+                        }
+                        //list.NgaySinh = new DateTime(01 / 01 / 2000);
+                        list.SoDienThoai = worksheet.Cells[row, 6].Value.ToString().Trim();
+                            list.DiaChi = worksheet.Cells[row, 7].Value.ToString().Trim();
+                            list.ChucVu = worksheet.Cells[row, 8].Value.ToString().Trim();
+                        if (DateTime.TryParse(worksheet.Cells[row, 9].Value.ToString().Trim(), out DateTime ngayVaoLam))
+                        {
+                            list.NgayVaoLam = ngayVaoLam;
+                        }
+                        //list.NgayVaoLam = new DateTime(01 / 01 / 2000);
+                        list.TinhTrang = worksheet.Cells[row, 10].Value.ToString().Trim();
+                            list.TenDangNhap = worksheet.Cells[row, 11].Value.ToString();
+                            list.MatKhau = worksheet.Cells[row, 12].Value.ToString();
+                            list.AnhNhanVienBase64 = worksheet.Cells[row, 13].Value.ToString().Trim();
+                            list.Email = worksheet.Cells[row, 14].Value.ToString().Trim();
+                        if (DateTime.TryParse(worksheet.Cells[row, 15].Value.ToString().Trim(), out DateTime ngayDangKy))
+                        {
+                            list.NgayDangKy = ngayDangKy;
+                        }
+                        //list.NgayDangKy = new DateTime(01 / 01 / 2000);
+                        _db.NhanVien.Add(list);
+                        _db.SaveChanges();
+
+
+                    }
+                    
+                }
+            return RedirectToAction("TrangChuNhanVien", "NhanVien");
+        }
+
+         
+
+           
     }
+
+
+
+    }
+
+
 }
+
