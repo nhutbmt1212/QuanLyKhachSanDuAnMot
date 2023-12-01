@@ -29,6 +29,13 @@ namespace QuanLyKhachSan.Models
                 .HasKey(c => new { c.MaDichVu, c.MaKhachHang });
             modelBuilder.Entity<ChiTietPhongVatTu>()
                 .HasKey(c => new { c.MaVatTu, c.MaPhong });
+            modelBuilder.Entity<ChiTietDichVu>()
+               .HasOne(cd => cd.DatPhong)
+               .WithMany(dp => dp.ChiTietDichVu)
+               .HasForeignKey(cd => cd.MaDatPhong)
+               .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(modelBuilder);
 
 
             base.OnModelCreating(modelBuilder);
@@ -527,7 +534,8 @@ namespace QuanLyKhachSan.Models
                    SoLuong = 2,
                    MaNhanVien = "NV001",
                    ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành"
+                   TrangThai = "Hoàn thành",
+                   MaDatPhong = "DP001"
                },
                new ChiTietDichVu
                {
@@ -536,7 +544,8 @@ namespace QuanLyKhachSan.Models
                    SoLuong = 1,
                    MaNhanVien = "NV002",
                    ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Chưa hoàn thành"
+                   TrangThai = "Chưa hoàn thành",
+                   MaDatPhong = "DP003"
                },
                new ChiTietDichVu
                {
@@ -545,7 +554,8 @@ namespace QuanLyKhachSan.Models
                    SoLuong = 3,
                    MaNhanVien = "NV003",
                    ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành"
+                   TrangThai = "Hoàn thành",
+                   MaDatPhong = "DP001"
                },
                new ChiTietDichVu
                {
@@ -554,7 +564,8 @@ namespace QuanLyKhachSan.Models
                    SoLuong = 2,
                    MaNhanVien = "NV004",
                    ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Chưa hoàn thành"
+                   TrangThai = "Chưa hoàn thành",
+                   MaDatPhong = "DP004"
                },
                new ChiTietDichVu
                {
@@ -563,7 +574,8 @@ namespace QuanLyKhachSan.Models
                    SoLuong = 1,
                    MaNhanVien = "NV005",
                    ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành"
+                   TrangThai = "Hoàn thành",
+                   MaDatPhong = "DP001"
                }
            );
 
