@@ -49,10 +49,10 @@ function DatPhong(MaPhong) {
     var ngayDat = document.getElementById('ngay_text').innerText;
     var gioDat = document.getElementById('gio_text').innerText;
     var tongCongTienDatPhong = (ngayDat * giaTheoNgay) + (gioDat * giaTheoGio);
-    document.getElementById('TongTienPhong').innerText = tongCongTienDatPhong + " VND";
+    document.getElementById('TongTienPhong').innerText = tongCongTienDatPhong;
 
 
-
+    TinhTongTienDatPhong();
 }
 document.getElementById('btn_DatPhong').addEventListener('click', DatPhongKhachSan);
 function DatPhongKhachSan() {
@@ -62,6 +62,7 @@ function DatPhongKhachSan() {
     } else {
         console.log(divPhong.innerHTML);
     }
+    TinhTongTienDatPhong();
 }
 function HuyDatPhong() {
     document.getElementById('maPhongDatPhong').remove();
@@ -75,7 +76,8 @@ function HuyDatPhong() {
     document.getElementById('break2').remove();
     document.getElementById('break3').remove();
     document.getElementById('break4').remove();
-    document.getElementById('TongTien').innerText = "0 VND";
+    document.getElementById('TongTienPhong').innerText = "0";
+    TinhTongTienDatPhong();
 
 }
 window.onload = function () {
@@ -119,29 +121,57 @@ document.getElementById('TimKiemPhong').onclick = function () {
                     var maPhong = $(this).find('h3').text().split('|')[0].trim().toUpperCase(); // Convert to uppercase and trim
                     if (maPhongDaDatList.includes(maPhong) || PhongKhongdieuKien.includes(maPhong)) {
                         $(this).hide();
-                    } else {
+                        reportPhong.style.display = "none";
+                        room_infor.style.display = "block";
+                        document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
+                        document.getElementById('ngaytra_text').innerHTML = ngayTra;
+                        var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
+                        var ngayTracal = new Date(document.getElementById('ipt_NgayTra').value);
+                        var soGio = Math.abs(ngayTracal - ngayNhancal) / 3600000;
+                        var soNgay = Math.round(soGio / 24);
+                        var soGioLe = soGio % 24;
+                        document.getElementById('ngay_text').innerHTML = soNgay;
+                        document.getElementById('gio_text').innerHTML = soGioLe;
+                        document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
+                        document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
+                        document.getElementById('btn_DatPhong').style.display = 'block';
+                    }
+                    
+                    else {
                         $(this).show();
+                        reportPhong.style.display = "none";
+                        room_infor.style.display = "block";
+                        document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
+                        document.getElementById('ngaytra_text').innerHTML = ngayTra;
+                        var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
+                        var ngayTracal = new Date(document.getElementById('ipt_NgayTra').value);
+                        var soGio = Math.abs(ngayTracal - ngayNhancal) / 3600000;
+                        var soNgay = Math.round(soGio / 24);
+                        var soGioLe = soGio % 24;
+                        document.getElementById('ngay_text').innerHTML = soNgay;
+                        document.getElementById('gio_text').innerHTML = soGioLe;
+                        document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
+                        document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
+                        document.getElementById('btn_DatPhong').style.display = 'block';
                     }
                 });
+               
+                if ($('.room-detail:visible').length == 0) {
+                    room_infor.style.display = "none";
+                    reportPhong.style.display = "block";
+
+                }
+                
             },
+           
             error: function (error) {
                 console.log(error);
             }
         });
-        reportPhong.style.display = "none";
-        room_infor.style.display = "block";
-        document.getElementById('ngaynhan_text').innerHTML = ngayNhan;
-        document.getElementById('ngaytra_text').innerHTML = ngayTra;
-        var ngayNhancal = new Date(document.getElementById('ipt_NgayNhan').value);
-        var ngayTracal = new Date(document.getElementById('ipt_NgayTra').value);
-        var soGio = Math.abs(ngayTracal - ngayNhancal) / 3600000;
-        var soNgay = Math.round(soGio / 24);
-        var soGioLe = soGio % 24;
-        document.getElementById('ngay_text').innerHTML = soNgay;
-        document.getElementById('gio_text').innerHTML = soGioLe;
-        document.getElementById('SoLuongNguoiLonDat_text').innerHTML = slNgLon;
-        document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
-        document.getElementById('btn_DatPhong').style.display = 'block';
+  
+           
+        
+      
     }
 }
 var arrDichVuDaChon = [];
@@ -168,8 +198,8 @@ function ThemDichVu() {
             });
 
             var node = `
-                <div class="row">
-                    <div class="col-lg-7">
+                <div class="row" id="id_DichVu${counter}">
+                    <div class="col-lg-7" style="margin-bottom:5px;">
                         <select class="form-select w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})" >
                             ${options}
                         </select>
@@ -210,15 +240,13 @@ function ThemDichVu() {
             $('#TongDichVuDaDat').append(nodeServices);
             //mảng để tính tiền
             TinhTienDichVu();
-           
-
-
         },
         error: function (error) {
             console.error('Error fetching data:', error);
         }
     });
     
+
    
 }
 function TinhTienDichVu() {
@@ -237,6 +265,7 @@ function TinhTienDichVu() {
         traditional: true,
         success: function (result) {
             document.getElementById('TongTienDichVuDaDat').innerText = result;
+            TinhTongTienDatPhong();
         },
         error: function (xhr, status, error) {
         }
@@ -272,12 +301,14 @@ function ThayDoiSoLuongDichVu(id) {
     TinhTienDichVu();
 }
 function XoaSelectDichVu(idSelect) {
-    var idSelectThemDichvu = "themdichvuselect" + idSelect;
-    var idSoLuongDichVu = "soLuongDichVu" + idSelect;
-    var idbtnXoaDichvu = "XoaSelectDichVu" + idSelect;
-    document.getElementById(idSelectThemDichvu).remove();
-    document.getElementById(idSoLuongDichVu).remove();
-    document.getElementById(idbtnXoaDichvu).remove();
+    //var idSelectThemDichvu = "themdichvuselect" + idSelect;
+    //var idSoLuongDichVu = "soLuongDichVu" + idSelect;
+    //var idbtnXoaDichvu = "XoaSelectDichVu" + idSelect;
+    var idTongTheDichVu = 'id_DichVu' + idSelect;
+    //document.getElementById(idSelectThemDichvu).remove();
+    //document.getElementById(idSoLuongDichVu).remove();
+    //document.getElementById(idbtnXoaDichvu).remove();
+    document.getElementById(idTongTheDichVu).remove();
     arrDichVuDaChon[idSelect] = "";
     document.getElementById('AddThemDichVu').style.display = 'block';
     //xóa text dịch vụ đã chọn
@@ -289,9 +320,6 @@ function XoaSelectDichVu(idSelect) {
     document.getElementById(breakTongDichVu).remove();
     TinhTienDichVu();
 }
-
-
-
 $(document).ready(function () {
     $('.room-detail').each(function () {
         var roomElement = $(this);
@@ -345,3 +373,9 @@ function updateImage(slider) {
     var imageUrl = images[currentIndex];
     slider.find('.img_detail_room').attr('src', '/UploadImage/' + imageUrl);
 }
+function TinhTongTienDatPhong() {
+    var TongTienPhong = parseFloat(document.getElementById('TongTienPhong').innerText);
+    var TongTienDichVu = parseInt(document.getElementById('TongTienDichVuDaDat').innerText);
+    console.log(TongTienPhong, TongTienDichVu);
+   document.getElementById('TongTien').innerText= TongTienPhong + TongTienDichVu;
+};

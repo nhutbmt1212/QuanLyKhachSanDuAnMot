@@ -156,11 +156,12 @@
                 </p>
             </div>
         </div>
-        <h1 id="Report_Phong">Phòng tìm kiếm không hợp lệ</h1>
+        <div id="Report_Phong">
+            <p class="report_Phong_Text">Rất tiếc, không có phòng nào theo lựa chọn của quý khách!</p>
+        </div>
         <div id="room-infor" class="container">
             <div class="row">
                 <div class="col-md-8">
-
                     @foreach (var phong in Model)
                     {
                         <div class="room-detail" data-room-id="@phong.MaPhong">
@@ -261,19 +262,19 @@
                                 @* dịch vụ *@
                                 <div id="ChonDichVu">
                                 </div>
-                                <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
-                                    <i class="bi bi-plus"></i>
+                                <button type="button" class="btn btn-outline-success" id="AddThemDichVu" >
+                                    <i class="bi bi-plus"></i> Thêm dịch vụ
                                 </button>
 
                             </div>
                             <hr />
-                            <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0 VND</span>
+                            <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0 </span><span style="color:#FFCA2C"> VNĐ</span>
                             <br />
                             <span>Tổng dịch vụ đã đặt</span> <span id="TongDichVuDaDat"></span>
                             <br />
-                            <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0 VND</span>
+                            <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0 </span><span style="color:#FFCA2C"> VNĐ</span>
                             <br />
-                            <span>Tổng cộng:</span> <span id="TongTien">0 VND</span>
+                            <span>Tổng cộng:</span> <span id="TongTien">0 </span><span style="color:#FFCA2C"> VNĐ</span>
                             <br />
                             <a class="btn btn-warning button_bookroom " id="btn_DatPhong">Đặt ngay</a>
                         </div>
@@ -324,53 +325,53 @@
                 <!-- Grid column -->
                 <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold">Products</h6>
+                    <h6 class="text-uppercase fw-bold">TIÊU CHÍ KHÁCH SẠN</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                        style="width: 60px; background-color: #7c4dff; height: 2px" />
+                        style="width:160px; background-color: #7c4dff; height: 2px" />
                     <p>
-                        <a href="#!" class="text-white">MDBootstrap</a>
+                         Phục vụ tận tình
                     </p>
                     <p>
-                        <a href="#!" class="text-white">MDWordPress</a>
+                   Chu đáo
                     </p>
                     <p>
-                        <a href="#!" class="text-white">BrandFlow</a>
+                       Thân thiện
                     </p>
                     <p>
-                        <a href="#!" class="text-white">Bootstrap Angular</a>
+                        Phù hợp với yêu cầu khách hàng
                     </p>
                 </div>
                 <!-- Grid column -->
                 <!-- Grid column -->
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold">Useful links</h6>
+                    <h6 class="text-uppercase fw-bold">NHÓM SÁNG LẬP</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
-                        style="width: 60px; background-color: #7c4dff; height: 2px" />
+                        style="width: 130px; background-color: #7c4dff; height: 2px" />
                     <p>
-                        <a href="#!" class="text-white">Your Account</a>
+                         Trương Minh Nhựt
                     </p>
                     <p>
-                        <a href="#!" class="text-white">Become an Affiliate</a>
+                          Vũ Trần Phúc Thành
                     </p>
                     <p>
-                        <a href="#!" class="text-white">Shipping Rates</a>
+                          Trần Anh Thiện
                     </p>
                     <p>
-                        <a href="#!" class="text-white">Help</a>
+                         Ngần Phi Hoàng
                     </p>
                 </div>
                 <!-- Grid column -->
                 <!-- Grid column -->
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
                     <!-- Links -->
-                    <h6 class="text-uppercase fw-bold">Contact</h6>
+                    <h6 class="text-uppercase fw-bold">LIÊN HỆ</h6>
                     <hr class="mb-4 mt-0 d-inline-block mx-auto"
                         style="width: 60px; background-color: #7c4dff; height: 2px" />
-                    <p><i class="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-                    <p><i class="fas fa-envelope mr-3"></i> info@example.com</p>
-                    <p><i class="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-                    <p><i class="fas fa-print mr-3"></i> + 01 234 567 89</p>
+                    <p><i class="fas fa-home mr-3"></i> 300 Hà Huy Tập, Thành phố Buôn Ma Thuột, Việt Nam</p>
+                    <p><i class="fas fa-envelope mr-3"></i> KhachSanAsap@gmail.com</p>
+                    <p><i class="fas fa-phone mr-3"></i> 0869536182</p>
+                    <p><i class="fas fa-print mr-3"></i> 0869536182</p>
                 </div>
                 <!-- Grid column -->
             </div>

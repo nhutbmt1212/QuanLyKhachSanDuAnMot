@@ -158,7 +158,7 @@ body {
     align-self: stretch;
     border-radius: 5px;
     box-shadow: 1px 1px 5px grey;
-   
+   margin-bottom:20px;
     
     
 }
@@ -181,7 +181,15 @@ body {
 #btn_DatPhong{
     display:none;
 }
-#Report_Phong{
-    margin-left:73px;
-    color:red;
+#Report_Phong {
+    margin: 20px auto;
+    color: black;
+    width: 90%;
+    min-height: 50px;
+    border-radius: 5px;
+    background-color: white;
+ 
+}
+.report_Phong_Text {
+    padding:12px;
 }
