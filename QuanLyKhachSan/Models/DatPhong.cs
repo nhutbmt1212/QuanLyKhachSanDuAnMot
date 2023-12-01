@@ -22,7 +22,7 @@ namespace QuanLyKhachSan.Models
         public DateTime NgayTra { get; set; }
         public int SoLuongNguoiLon { get; set; }
         public int SoLuongTreEm { get; set; }
-        [StringLength (20)]
+        [StringLength(20)]
         public string HinhThucDatPhong { get; set; }
         public int TongTienPhong { get; set; }
         [StringLength(6)]
@@ -32,5 +32,6 @@ namespace QuanLyKhachSan.Models
         [StringLength(20)]
         public string TinhTrang { get; set; }
         public int SoTienTraTruoc { get; set; }
+        public List<ChiTietDichVu> ChiTietDichVu { get; set; }
     }
 }
