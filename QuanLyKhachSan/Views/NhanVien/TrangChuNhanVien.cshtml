@@ -155,7 +155,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Mã Nhân Viên</label>
-                            <input class="form-control manvEdit" name="MaNhanVien" disabled />
+                            <input class="form-control manvEdit" name="MaNhanVien" readonly />
                         </div>
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
@@ -265,7 +265,7 @@
         </form>
 
         <a class="btn btn-success" id="btn_export" asp-controller="NhanVien" asp-action="ExportExcel">Export to Excel</a>
-
+        <a class="btn btn-success" id="btn_exportPDF" asp-controller="NhanVien" asp-action="ExportPDF">Export to PDF</a>
         <div id="detailNhanVien">
             <table class="table" id="table_detail" style="border:1px solid #343A40">
 
