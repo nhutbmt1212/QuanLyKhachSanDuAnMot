@@ -122,5 +122,54 @@ namespace QuanLyKhachSan.Controllers
             var qr_dichvu = _db.DichVu.FirstOrDefault(s => s.MaDichVu == MaDichVu);
             return Json(qr_dichvu);
         }
+        //đặt phòng
+        [HttpPost]
+        public IActionResult DatPhong(string TenKhachHang, string GioiTinh, string sdt, string email, DateTime ngaysinh, string diachi, string cccd, DateTime NgayNhan, DateTime NgayTra, string MaPhong, int SoLuongNguoiLon, int SoLuongTreEm, int TongTien)
+        {
+            Random random = new Random();
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string maKhachHang = new string(Enumerable.Repeat(chars, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            
+            var khachHang = new KhachHang
+            {
+                MaKhachHang = maKhachHang,
+                TenKhachHang= TenKhachHang,
+                SoDienThoai =sdt,
+                DiaChi=diachi,
+                CCCD=cccd,
+                NgaySinh =ngaysinh,
+                GioiTinh =GioiTinh,
+                Email =email,
+                TinhTrang= "Đang hoạt động",
+                MatKhau = maKhachHang,
+                NgayDangKy = DateTime.Now
+            };
+            _db.KhachHang.Add(khachHang);
+            const string chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string MaDatPhong = new string(Enumerable.Repeat(chars1, 6)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            var DatPhong = new DatPhong
+            {
+                MaDatPhong = MaDatPhong,
+                MaKhachHang = maKhachHang,
+                MaPhong = MaPhong,
+                NgayNhan = NgayNhan,
+                NgayTra = NgayTra,
+                SoLuongNguoiLon = SoLuongNguoiLon,
+                SoLuongTreEm = SoLuongTreEm,
+                HinhThucDatPhong = "Trả sau",
+                TongTienPhong = TongTien,
+                MaNhanVien = null,
+                TinhTrang = "Chờ xử lý",
+                SoTienTraTruoc = 0
+            };
+            _db.DatPhong.Add(DatPhong);
+            _db.SaveChanges();
+
+            return Json("Data received and saved successfully.");
+        }
+
+
     }
 }

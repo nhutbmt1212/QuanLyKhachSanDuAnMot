@@ -376,44 +376,52 @@ function DatPhongKhachSan() {
         alert('Bạn chưa chọn phòng để đặt');
     } else {
         var ngayNhanPhong = document.getElementById('ngaynhan_text').innerText;
-        localStorage.setItem('ngayNhanPhong', ngayNhanPhong);
+        sessionStorage.setItem('ngayNhanPhong', ngayNhanPhong);
+
         var ngayTraPhong = document.getElementById('ngaytra_text').innerText;
-        localStorage.setItem('ngayTraPhong', ngayTraPhong);
+        sessionStorage.setItem('ngayTraPhong', ngayTraPhong);
 
         var TinhNgay = document.getElementById('ngay_text').innerText;
-        localStorage.setItem('ngayNhanPhongDaTinh', TinhNgay);
+        sessionStorage.setItem('ngayNhanPhongDaTinh', TinhNgay);
+
         var TinhGio = document.getElementById('gio_text').innerText;
-        localStorage.setItem('gioTraPhongDaTinh', TinhGio);
-
-
+        sessionStorage.setItem('gioTraPhongDaTinh', TinhGio);
 
         var soLuongNguoiLonTimKiem = document.getElementById('SoLuongNguoiLonDat_text').innerText;
         var soLuongTreEmTimKiem = document.getElementById('SoLuongTreEmDat_text').innerText;
-        localStorage.setItem('slNguoiLonTimKiem', soLuongNguoiLonTimKiem);
-        localStorage.setItem('slTreEmTimKiem', soLuongTreEmTimKiem);
+        sessionStorage.setItem('slNguoiLonTimKiem', soLuongNguoiLonTimKiem);
+        sessionStorage.setItem('slTreEmTimKiem', soLuongTreEmTimKiem);
 
         var maPhong = document.getElementById('maPhong_DatPhong').innerText;
-        localStorage.setItem('maPhong', maPhong);
+        sessionStorage.setItem('maPhong', maPhong);
+
         var slNguoiLonDat = document.getElementById('giaTriSoLuongNguoiLonDat').innerText;
-        localStorage.setItem('slNguoiLon', slNguoiLonDat);
+        sessionStorage.setItem('slNguoiLon', slNguoiLonDat);
+
         var slTreEmDat = document.getElementById('giaTriSoLuongTreEmDat').innerText;
-        localStorage.setItem('slTreEm', slTreEmDat);
+        sessionStorage.setItem('slTreEm', slTreEmDat);
+
         var ThanhTienMaDichVu = [];
         var arrSoLuongDichVu = [];
+
         $('span[id^="tongTenDichVuDaDat"]').each(function () {
             ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
         });
+
         $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
             arrSoLuongDichVu.push($(this).text().split(": ")[1]);
         });
-        localStorage.setItem('arrMaDichVu', ThanhTienMaDichVu);
-        localStorage.setItem('arrSoLuongDichVu', arrSoLuongDichVu);
+
+        sessionStorage.setItem('arrMaDichVu', ThanhTienMaDichVu);
+        sessionStorage.setItem('arrSoLuongDichVu', arrSoLuongDichVu);
 
         var tongTienPhong = document.getElementById('TongTienPhong').innerText;
         var tongTienDichVu = document.getElementById('TongTienDichVuDaDat').innerText;
 
-        localStorage.setItem('tongTienPhong', tongTienPhong);
-        localStorage.setItem('tongTienDichVu', tongTienDichVu);
+        sessionStorage.setItem('tongTienPhong', tongTienPhong);
+        sessionStorage.setItem('tongTienDichVu', tongTienDichVu);
+
         window.location.href = '/TrangChuKhachHang/ThongTinDatPhong';
     }
+
 }

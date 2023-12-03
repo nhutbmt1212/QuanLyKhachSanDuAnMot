@@ -28,7 +28,7 @@ namespace QuanLyKhachSan.Models
         [StringLength(6)]
         [ForeignKey("MaNhanVien")]
         public NhanVien NhanVien { get; set; }
-        public string MaNhanVien { get; set; }
+        public string? MaNhanVien { get; set; }
         [StringLength(20)]
         public string TinhTrang { get; set; }
         public int SoTienTraTruoc { get; set; }

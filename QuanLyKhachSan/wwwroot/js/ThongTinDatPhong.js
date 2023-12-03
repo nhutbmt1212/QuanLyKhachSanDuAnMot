@@ -1,19 +1,20 @@
 ﻿window.onload = function () {
-    //lấy thông tin từ localstorage
-    document.getElementById('ngaynhan_text').innerText = localStorage.getItem('ngayNhanPhong');
-    document.getElementById('ngaytra_text').innerText = localStorage.getItem('ngayTraPhong');
-    document.getElementById('ngay_text').innerText = localStorage.getItem('ngayNhanPhongDaTinh');
-    document.getElementById('gio_text').innerText = localStorage.getItem('gioTraPhongDaTinh');
+    // Lấy thông tin từ sessionStorage
+    document.getElementById('ngaynhan_text').innerText = sessionStorage.getItem('ngayNhanPhong');
+    document.getElementById('ngaytra_text').innerText = sessionStorage.getItem('ngayTraPhong');
+    document.getElementById('ngay_text').innerText = sessionStorage.getItem('ngayNhanPhongDaTinh');
+    document.getElementById('gio_text').innerText = sessionStorage.getItem('gioTraPhongDaTinh');
 
-    document.getElementById('SoLuongNguoiLonDat_text').innerText = localStorage.getItem('slNguoiLonTimKiem');
-    document.getElementById('SoLuongTreEmDat_text').innerText = localStorage.getItem('slTreEmTimKiem');
-    document.getElementById('maPhong_DatPhong').innerText = localStorage.getItem('maPhong');
-    document.getElementById('giaTriSoLuongNguoiLonDat').innerText = localStorage.getItem('slNguoiLon');
-    document.getElementById('giaTriSoLuongTreEmDat').innerText = localStorage.getItem('slTreEm');
-    document.getElementById('TongTienPhong').innerText = localStorage.getItem('tongTienPhong');
-    document.getElementById('TongTienDichVuDaDat').innerText = localStorage.getItem('tongTienDichVu');
+    document.getElementById('SoLuongNguoiLonDat_text').innerText = sessionStorage.getItem('slNguoiLonTimKiem');
+    document.getElementById('SoLuongTreEmDat_text').innerText = sessionStorage.getItem('slTreEmTimKiem');
+    document.getElementById('maPhong_DatPhong').innerText = sessionStorage.getItem('maPhong');
+    document.getElementById('giaTriSoLuongNguoiLonDat').innerText = sessionStorage.getItem('slNguoiLon');
+    document.getElementById('giaTriSoLuongTreEmDat').innerText = sessionStorage.getItem('slTreEm');
+    document.getElementById('TongTienPhong').innerText = sessionStorage.getItem('tongTienPhong');
+    document.getElementById('TongTienDichVuDaDat').innerText = sessionStorage.getItem('tongTienDichVu');
     document.getElementById('TongTien').innerText = parseFloat(document.getElementById('TongTienPhong').innerText) + parseFloat(document.getElementById('TongTienDichVuDaDat').innerText)
-    var maPhong = localStorage.getItem('maPhong');
+
+    var maPhong = sessionStorage.getItem('maPhong');
     $.ajax({
         type: "GET",
         url: `/TrangChuKhachHang/LayThongTinPhongTheoMaPhong?maPhong=${maPhong}`,
@@ -21,23 +22,18 @@
             document.getElementById('loaiPhongDatPhong').innerText = 'Loại phòng: ' + result.qr_LoaiPhong.tenLoaiPhong;
             document.getElementById('giaTheoGioDatPhong').innerText = 'Giá theo giờ: ' + result.qr_LoaiPhong.giaTheoGio;
             document.getElementById('giaTheoNgayDatPhong').innerText = 'Giá theo ngày: ' + result.qr_LoaiPhong.giaPhongTheoNgay;
-
         },
         error: function (error) {
-            conssole.log(error)
+            console.log(error)
         }
-
-
     });
-    var maDichVu = localStorage.getItem('arrMaDichVu').split(',');
-    var soLuongDichVu = localStorage.getItem('arrSoLuongDichVu').split(',');
+
+    var maDichVu = sessionStorage.getItem('arrMaDichVu').split(',');
+    var soLuongDichVu = sessionStorage.getItem('arrSoLuongDichVu').split(',');
 
     maDichVu.forEach(ShowDichVu);
 
     function ShowDichVu(item, index) {
-
-
-      
         $.ajax({
             type: "GET",
             url: `/TrangChuKhachHang/LayThongTinDichVu?MaDichVu=${item}`,
@@ -46,20 +42,44 @@
                 var newDiv = document.createElement('div');
                 newDiv.innerHTML = 'Tên dịch vụ: ' + result.tenDichVu + ', Đơn giá: ' + result.giaTien + ', Số Lượng: ' + quantity;
                 document.getElementById('ChonDichVu').appendChild(newDiv);
-
-                console.log(result)
             },
             error: function (error) {
                 console.log(error)
             }
         });
-      
-
     }
-
-
-
-
-
 }
 
+$(document).ready(function () {
+    $('#DatPhong').on('click', function () {
+        // dữ liệu bên khách hàng
+        var tenkh = $('#tenkh').val();
+        var gioitinh = $('#gioitinh').val();
+        var sdt = $('#so-dien-thoai').val();
+        var email = $('#email').val();
+        var ngaySinh = $('#ngay-sinh').val();
+        var diaChi = $('#dia-chi').val();
+        var cccd = $('#cccd').val();
+
+        // dự liệu bên đặt phòng
+        var ngaynhan = $('#ngaynhan_text').text();
+        var ngaytra = $('#ngaytra_text').text();
+        var maphong = $('#maPhong_DatPhong').text();
+        var soLuongNguoiLon = $('#giaTriSoLuongNguoiLonDat').text();
+        var soLuongTreEm = $('#giaTriSoLuongTreEmDat').text();
+        var TongTien = $('#TongTien').text();
+        console.log(ngaynhan);
+     
+
+        $.ajax({
+            type: 'POST',
+            url: `/TrangChuKhachHang/DatPhong?TenKhachHang=${tenkh}&GioiTinh=${gioitinh}&sdt=${sdt}&email=${email}&ngaysinh=${ngaySinh}&diachi=${diaChi}&cccd=${cccd}&NgayNhan=${ngaynhan}&NgayTra=${ngaytra}&MaPhong=${maphong}&SoLuongNguoiLon=${soLuongNguoiLon}&SoLuongTreEm=${soLuongTreEm}&TongTien=${TongTien}`, contentType: 'application/json; charset=utf-8',
+            success: function (response) {
+                console.log(response);
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
