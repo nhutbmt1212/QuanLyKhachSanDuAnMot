@@ -6,12 +6,16 @@ using System.Data;
 using OfficeOpenXml;
 using System.ComponentModel;
 using LicenseContext = OfficeOpenXml.LicenseContext;
+using iTextSharp;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace QuanLyKhachSan.Controllers
 {
     [Authorize]
     public class NhanVienController : Controller
     {
+        private const string V = "Hello";
         private readonly ApplicationDbContext _db;
         public NhanVienController(ApplicationDbContext db)
         {
@@ -240,11 +244,148 @@ namespace QuanLyKhachSan.Controllers
                 }
             return RedirectToAction("TrangChuNhanVien", "NhanVien");
         }
-
-         
-
            
     }
+        //public async Task<IActionResult> ExportPDF()
+        //{
+        //    // Tạo một tài liệu PDF mới
+        //    Document pdfDoc = new Document();
+        //    MemoryStream memoryStream = new MemoryStream();
+        //    PdfWriter.GetInstance(pdfDoc, memoryStream);
+
+        //    // Lấy danh sách nhân viên
+        //    var nhanvien = _db.NhanVien.ToList();
+
+        //    pdfDoc.Open();
+
+        //    float cm = 20; // Độ rộng mong muốn bằng cm
+        //    float points = cm * 72 / 2.54f; // Chuyển đổi cm sang points
+
+
+        //    // Tạo một bảng để lưu trữ dữ liệu khách hàng
+        //    PdfPTable table = new PdfPTable(15);
+        //    table.SetTotalWidth(new float[] { points, points, points, points, points, points, points, points, points, points, points, points, points, points, points });
+
+        //    // Tạo một font cho tiêu đề
+        //    Font headerFont = FontFactory.GetFont("Arial", 12, Font.BOLD, BaseColor.WHITE);
+        //    BaseColor headerBackgroundColor = new BaseColor(0, 119, 119);
+
+        //    // Thêm tiêu đề cho các cột
+        //    string[] headers = { "Mã Nhân Viên", "Tên Nhân Viên", "CCCD", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Chức Vụ", "Ngày Vào Làm", "Tình trạng", "Tên đăng nhập", "Mật khẩu", "Ảnh nhân viên", "Email", "Ngày đăng ký" };
+
+        //    foreach (var header in headers)
+        //    {
+        //        PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
+        //        cell.BackgroundColor = headerBackgroundColor;
+        //        table.AddCell(cell);
+        //    }
+
+        //    // Tạo một font cho nội dung
+        //    Font contentFont = FontFactory.GetFont("Arial", 10, Font.NORMAL, BaseColor.BLACK);
+
+        //    foreach (var nv in nhanvien)
+        //    {
+        //        table.AddCell(nv.MaNhanVien.ToString());
+        //        table.AddCell(nv.TenDangNhap.ToString());
+        //        table.AddCell(nv.CCCD.ToString());
+        //        table.AddCell(nv.GioiTinh.ToString());
+        //        table.AddCell(nv.NgaySinh.ToShortDateString());
+        //        table.AddCell(nv.SoDienThoai.ToString());
+        //        table.AddCell(nv.DiaChi.ToString());
+        //        table.AddCell(nv.ChucVu.ToString());
+        //        table.AddCell(nv.NgayVaoLam.ToShortDateString());
+        //        table.AddCell(nv.TinhTrang.ToString());
+        //        table.AddCell(nv.TenDangNhap.ToString());
+        //        table.AddCell(nv.MatKhau.ToString());
+        //        table.AddCell(nv.AnhNhanVienBase64.ToString());
+        //        table.AddCell(nv.Email.ToString());
+        //        table.AddCell(nv.NgayDangKy.ToShortDateString());
+
+        //    }
+        //    // Thêm bảng vào tài liệu PDF
+        //    pdfDoc.Add(table);
+
+        //    pdfDoc.Close();
+
+        //    byte[] bytes = memoryStream.ToArray();
+        //    memoryStream.Close();
+
+        //    return File(bytes, "application/pdf", "NhanVien.pdf");
+        //}
+        public async Task<IActionResult> ExportPDF()
+        {
+            // Tạo một tài liệu PDF mới
+            Document pdfDoc = new Document();
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+
+            // Lấy danh sách nhân viên
+            var nhanvien = _db.NhanVien.ToList();
+
+            pdfDoc.Open();
+            float cm = 20; // Độ rộng mong muốn bằng cm
+            float points = cm * 72 / 2.54f; // Chuyển đổi cm sang points
+
+            // Giảm độ rộng của cột thứ 3 xuống 75%
+            float pointsForFourthColumn = points * 0.75f;
+            float pointsForThirdhColumn = points * 1.25f;
+            float pointsForConditionhColumn = points * 1.15f;
+            // Tạo một bảng để lưu trữ dữ liệu khách hàng
+            PdfPTable table = new PdfPTable(15);
+            table.SetTotalWidth(new float[] { points, points, pointsForThirdhColumn, pointsForFourthColumn, pointsForThirdhColumn, pointsForThirdhColumn, points, points, pointsForThirdhColumn, pointsForConditionhColumn, points, pointsForThirdhColumn, points, points, pointsForThirdhColumn });
+
+
+            // Tạo một font
+            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+
+            
+
+            // Tạo một font cho tiêu đề
+            Font headerFont = FontFactory.GetFont("Arial", 5, Font.BOLD, BaseColor.WHITE);
+            BaseColor headerBackgroundColor = new BaseColor(0, 119, 119);
+
+            // Thêm tiêu đề cho các cột
+            string[] headers = { "ID", "Name", "Idpersonal", "Sex", "Day of birth", "Phone number", "Address", "Duty", "Date of entry", "Condition", "UserName", "Password", "Image", "Email", "Date of registration" };
+           
+            foreach (var header in headers)
+            {
+                PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
+                cell.BackgroundColor = headerBackgroundColor;
+                table.AddCell(cell);
+            }
+
+            // Tạo một font cho nội dung
+            Font contentFont = FontFactory.GetFont("Arial", 5, Font.NORMAL, BaseColor.BLACK);
+
+            foreach (var nv in nhanvien)
+            {
+                table.AddCell(new Phrase(nv.MaNhanVien.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.TenDangNhap.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.CCCD.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString(), contentFont));
+                table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont ));
+                table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont  ));
+                table.AddCell(new Phrase(nv.ChucVu.ToString() , contentFont));
+                table.AddCell(new Phrase(nv.NgayVaoLam.ToShortDateString(), contentFont));
+                table.AddCell(new Phrase(nv.TinhTrang.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.TenDangNhap.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.MatKhau.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.AnhNhanVienBase64.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.Email.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.NgayDangKy.ToShortDateString(), contentFont));
+            }
+
+            // Thêm bảng vào tài liệu PDF
+            pdfDoc.Add(table);
+
+            pdfDoc.Close();
+
+            byte[] bytes = memoryStream.ToArray();
+            memoryStream.Close();
+
+            return File(bytes, "application/pdf", "NhanVien.pdf");
+        }
 
 
 
