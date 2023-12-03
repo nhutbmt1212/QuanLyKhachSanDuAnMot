@@ -77,6 +77,7 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SuaNhanVien(NhanVien nv, [FromServices] IWebHostEnvironment hostingEnvironment)
         {          
+            //lỗi không nhận mã nhân viên
             var existingEmployee = _db.NhanVien.Find(nv.MaNhanVien);
 
             if (nv.AnhNhanVien == null)

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
-
+using DocumentFormat.OpenXml.VariantTypes;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -102,9 +102,25 @@ namespace QuanLyKhachSan.Controllers
             }
             return Json(tongTien);
         }
+    
+        public IActionResult ThongTinDatPhong()
+        {
+            return View("ThongTinDatPhong");
+        }
 
+        public IActionResult LayThongTinPhongTheoMaPhong(string maPhong)
+        {
+            var qr_Phong = _db.Phong.FirstOrDefault(s => s.MaPhong == maPhong);
+            var maLoaiPhong = qr_Phong.MaLoaiPhong;
+            var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == maLoaiPhong);
+            return Json (new { qr_Phong, qr_LoaiPhong });
 
-
-
+        }
+        [HttpGet]
+        public ActionResult LayThongTinDichVu(string MaDichVu)
+        {
+            var qr_dichvu = _db.DichVu.FirstOrDefault(s => s.MaDichVu == MaDichVu);
+            return Json(qr_dichvu);
+        }
     }
 }
