@@ -28,9 +28,9 @@
         }
     });
 
-    var maDichVu = sessionStorage.getItem('arrMaDichVu').split(',');
-    var soLuongDichVu = sessionStorage.getItem('arrSoLuongDichVu').split(',');
-
+    var maDichVu = JSON.parse(sessionStorage.getItem('arrMaDichVu').split(','));
+    var soLuongDichVu = JSON.parse(sessionStorage.getItem('arrSoLuongDichVu').split(','));
+    
     maDichVu.forEach(ShowDichVu);
 
     function ShowDichVu(item, index) {
@@ -68,12 +68,31 @@ $(document).ready(function () {
         var soLuongNguoiLon = $('#giaTriSoLuongNguoiLonDat').text();
         var soLuongTreEm = $('#giaTriSoLuongTreEmDat').text();
         var TongTien = $('#TongTien').text();
-        console.log(ngaynhan);
-     
+
+        var arrSoLuongDichVu = JSON.parse(sessionStorage.getItem('arrSoLuongDichVu'));
+        var arrMaDichVu = JSON.parse(sessionStorage.getItem('arrMaDichVu'));
+        console.log(arrSoLuongDichVu, arrMaDichVu);
 
         $.ajax({
             type: 'POST',
-            url: `/TrangChuKhachHang/DatPhong?TenKhachHang=${tenkh}&GioiTinh=${gioitinh}&sdt=${sdt}&email=${email}&ngaysinh=${ngaySinh}&diachi=${diaChi}&cccd=${cccd}&NgayNhan=${ngaynhan}&NgayTra=${ngaytra}&MaPhong=${maphong}&SoLuongNguoiLon=${soLuongNguoiLon}&SoLuongTreEm=${soLuongTreEm}&TongTien=${TongTien}`, contentType: 'application/json; charset=utf-8',
+            url: `/TrangChuKhachHang/DatPhong`,
+            data: {
+                TenKhachHang: tenkh,
+                GioiTinh: gioitinh,
+                sdt: sdt,
+                email: email,
+                ngaysinh: ngaySinh,
+                diachi: diaChi,
+                cccd: cccd,
+                NgayNhan: ngaynhan,
+                NgayTra: ngaytra,
+                MaPhong: maphong,
+                SoLuongNguoiLon: soLuongNguoiLon,
+                SoLuongTreEm: soLuongTreEm,
+                TongTien: TongTien,
+                arrSoLuongDichVu: arrSoLuongDichVu,
+                arrMaDichVu: arrMaDichVu
+            },
             success: function (response) {
                 console.log(response);
             },
@@ -81,5 +100,6 @@ $(document).ready(function () {
                 console.error('Error:', error);
             }
         });
+
     });
 });

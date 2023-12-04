@@ -26,10 +26,10 @@ namespace QuanLyKhachSan.Models
         [StringLength(6)]
         [ForeignKey("MaNhanVien")]
         public NhanVien NhanVien { get; set; }
-        public string MaNhanVien { get; set; }
+        public string? MaNhanVien { get; set; }
 
         [DataType(DataType.DateTime)]
-        public DateTime ThoiGianDichVu { get; set; }
+        public DateTime? ThoiGianDichVu { get; set; }
 
         [StringLength(30)]
         public string TrangThai { get; set; }

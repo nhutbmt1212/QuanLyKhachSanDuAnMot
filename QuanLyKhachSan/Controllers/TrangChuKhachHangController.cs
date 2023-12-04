@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
-using DocumentFormat.OpenXml.VariantTypes;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -21,7 +20,7 @@ namespace QuanLyKhachSan.Controllers
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
 
-           
+
             return View(listPhong);
         }
         [HttpGet]
@@ -30,10 +29,10 @@ namespace QuanLyKhachSan.Controllers
         {
             var loaiPhong = _db.Phong
                 .Where(p => p.MaPhong == maPhong)
-                .Select(p => p.LoaiPhong) 
+                .Select(p => p.LoaiPhong)
                 .FirstOrDefault();
 
-            return Json(loaiPhong); 
+            return Json(loaiPhong);
         }
         [HttpGet]
         public async Task<IActionResult> SlideAnhPhong(string maPhong)
@@ -53,7 +52,7 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index","TrangChuKhachHang");
+            return RedirectToAction("Index", "TrangChuKhachHang");
         }
         [HttpGet]
         public async Task<IActionResult> LayDanhSachDichVu()
@@ -102,7 +101,7 @@ namespace QuanLyKhachSan.Controllers
             }
             return Json(tongTien);
         }
-    
+
         public IActionResult ThongTinDatPhong()
         {
             return View("ThongTinDatPhong");
@@ -113,35 +112,35 @@ namespace QuanLyKhachSan.Controllers
             var qr_Phong = _db.Phong.FirstOrDefault(s => s.MaPhong == maPhong);
             var maLoaiPhong = qr_Phong.MaLoaiPhong;
             var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == maLoaiPhong);
-            return Json (new { qr_Phong, qr_LoaiPhong });
+            return Json(new { qr_Phong, qr_LoaiPhong });
 
         }
         [HttpGet]
-        public ActionResult LayThongTinDichVu(string MaDichVu)
+        public IActionResult LayThongTinDichVu(string MaDichVu)
         {
             var qr_dichvu = _db.DichVu.FirstOrDefault(s => s.MaDichVu == MaDichVu);
             return Json(qr_dichvu);
         }
         //đặt phòng
         [HttpPost]
-        public IActionResult DatPhong(string TenKhachHang, string GioiTinh, string sdt, string email, DateTime ngaysinh, string diachi, string cccd, DateTime NgayNhan, DateTime NgayTra, string MaPhong, int SoLuongNguoiLon, int SoLuongTreEm, int TongTien)
+        public IActionResult DatPhong(string TenKhachHang, string GioiTinh, string sdt, string email, DateTime ngaysinh, string diachi, string cccd, DateTime NgayNhan, DateTime NgayTra, string MaPhong, int SoLuongNguoiLon, int SoLuongTreEm, int TongTien, List<int> arrSoLuongDichVu, List<string> arrMaDichVu)
         {
             Random random = new Random();
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             string maKhachHang = new string(Enumerable.Repeat(chars, 6)
                 .Select(s => s[random.Next(s.Length)]).ToArray());
-            
+
             var khachHang = new KhachHang
             {
                 MaKhachHang = maKhachHang,
-                TenKhachHang= TenKhachHang,
-                SoDienThoai =sdt,
-                DiaChi=diachi,
-                CCCD=cccd,
-                NgaySinh =ngaysinh,
-                GioiTinh =GioiTinh,
-                Email =email,
-                TinhTrang= "Đang hoạt động",
+                TenKhachHang = TenKhachHang,
+                SoDienThoai = sdt,
+                DiaChi = diachi,
+                CCCD = cccd,
+                NgaySinh = ngaysinh,
+                GioiTinh = GioiTinh,
+                Email = email,
+                TinhTrang = "Đang hoạt động",
                 MatKhau = maKhachHang,
                 NgayDangKy = DateTime.Now
             };
@@ -165,6 +164,26 @@ namespace QuanLyKhachSan.Controllers
                 SoTienTraTruoc = 0
             };
             _db.DatPhong.Add(DatPhong);
+            for (int i = 0; i < arrMaDichVu.Count; i++)
+            {
+                var maDichVu = arrMaDichVu[i];
+                var SoLuongDichVu = arrSoLuongDichVu[i];
+
+                var DichVu = new ChiTietDichVu
+                {
+                    MaDichVu = maDichVu,
+                    MaKhachHang = maKhachHang,
+                    SoLuong =SoLuongDichVu,
+                    MaNhanVien = null,
+                    ThoiGianDichVu = DateTime.Now,
+                    TrangThai= "Hoạt động",
+                    MaDatPhong = MaDatPhong
+                };
+                _db.ChiTietDichVu.Add(DichVu);
+            }
+
+
+            
             _db.SaveChanges();
 
             return Json("Data received and saved successfully.");

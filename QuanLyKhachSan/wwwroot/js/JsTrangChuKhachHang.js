@@ -412,8 +412,8 @@ function DatPhongKhachSan() {
             arrSoLuongDichVu.push($(this).text().split(": ")[1]);
         });
 
-        sessionStorage.setItem('arrMaDichVu', ThanhTienMaDichVu);
-        sessionStorage.setItem('arrSoLuongDichVu', arrSoLuongDichVu);
+        sessionStorage.setItem('arrMaDichVu', JSON.stringify(ThanhTienMaDichVu));
+        sessionStorage.setItem('arrSoLuongDichVu', JSON.stringify(arrSoLuongDichVu));
 
         var tongTienPhong = document.getElementById('TongTienPhong').innerText;
         var tongTienDichVu = document.getElementById('TongTienDichVuDaDat').innerText;
