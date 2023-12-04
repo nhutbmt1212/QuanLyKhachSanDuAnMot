@@ -77,6 +77,20 @@ namespace QuanLyKhachSan.Controllers
             }
             return Json(0);
         }
+        public IActionResult HuyDatPhong(string MaDatPhong)
+        {
+            var MaNhanVienDatPhong = User.FindFirst(ClaimTypes.Surname)?.Value;
+
+            var qr_datPhong = _db.DatPhong.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+            if (qr_datPhong != null)
+            {
+                qr_datPhong.TinhTrang = "Đã hủy";
+                qr_datPhong.MaNhanVien = MaNhanVienDatPhong;
+                _db.DatPhong.Update(qr_datPhong);
+                _db.SaveChanges();
+            }
+            return Json(0);
+        }
 
     }
 }
