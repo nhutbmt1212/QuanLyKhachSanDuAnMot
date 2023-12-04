@@ -60,7 +60,6 @@ $(document).ready(function () {
         var ngaySinh = $('#ngay-sinh').val();
         var diaChi = $('#dia-chi').val();
         var cccd = $('#cccd').val();
-
         // dự liệu bên đặt phòng
         var ngaynhan = $('#ngaynhan_text').text();
         var ngaytra = $('#ngaytra_text').text();

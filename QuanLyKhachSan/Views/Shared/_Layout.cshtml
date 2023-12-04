@@ -91,6 +91,12 @@
             @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
             {
                 <li>
+                    <a asp-action="Index" asp-controller="TiepNhanDatPhong">
+                        <i class='bx bxs-hotel'></i>
+                        <span class="text">Tiếp nhận đặt phòng</span>
+                    </a>
+                </li>
+                <li>
                     <a asp-action="Index" asp-controller="DatPhong">
                         <i class='bx bxs-hotel'></i>
                         <span class="text">Đặt phòng</span>
