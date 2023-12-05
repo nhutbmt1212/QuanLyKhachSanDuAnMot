@@ -54,7 +54,7 @@
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" onclick="showSearchBar()">Đặt phòng</a>
-                                    <a class="dropdown-item" href="#">Thanh toán</a>
+                                    <a class="dropdown-item" onclick="openPopupThanhToan()">Thanh toán</a>
                                 </div>
                             </div>
                         </div>
@@ -176,6 +176,84 @@
 
 
 
+        <div class="popupThanhToan" id="paymentPopup">
+            <div class="header">
+                <h1>Thanh toán phòng 101</h1>
+            </div>
+            <div class="content">
+                <table>
+                    <tr>
+                        <th>Mã đặt phòng</th>
+                        <td>DP001</td>
+                    </tr>
+                    <tr>
+                        <th>Loại phòng</th>
+                        <td>P0001-Phòng đơn</td>
+                    </tr>
+                    <tr>
+                        <th>Số người</th>
+                        <td>1 người lớn - 2 trẻ em</td>
+                    </tr>
+                    <tr>
+                        <th>Thời gian nhận</th>
+                        <td>25/11/2023 14:00</td>
+                    </tr>
+                    <tr>
+                        <th>Thời gian trả</th>
+                        <td>04/12/2023 17:04</td>
+                    </tr>
+                    <tr>
+                        <th>Tên khách hàng</th>
+                        <td>Nguyễn văn a</td>
+                    </tr>
+                    <tr>
+                        <th>Số điện thoại</th>
+                        <td>0123123123</td>
+                    </tr>
+                </table>
+                <h2>Thông tin dịch vụ</h2>
+                <table>
+                    <tr>
+                        <th>#</th>
+                        <th>Mã DV</th>
+                        <th>Tên DV</th>
+                        <th>Số lượng</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>DV001</td>
+                        <td>Đưa đón sân bay</td>
+                        <td>2</td>
+                        <td>60.000đ</td>
+                    </tr>
+                </table>
+                <h2>Thông tin thanh toán</h2>
+                <table>
+                    <tr>
+                        <th>Tổng tiền phòng</th>
+                        <td>2.000.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <th>Tổng tiền dịch vụ</th>
+                        <td>60.000 VNĐ</td>
+                    </tr>
+                    <tr>
+                        <th>Tổng tiền</th>
+                        <td id="total">2.060.000 VND</td>
+                    </tr>
+                    <tr>
+                        <th>Tiền thanh toán</th>
+                        <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
+                    </tr>
+                </table>
+                <div class="button-group">
+                    <button onclick="closePopupThanhToan()">Đóng</button>
+                    <button onclick="confirmPayment()">Thanh toán</button>
+                </div>
+            </div>
+        </div>
+        <div class="overlayThanhToan" id="overlayThanhToan" onclick="closePopupThanhToan()"></div>
 
 
     </div>
@@ -203,6 +281,16 @@
 
         function closePopup() {
             document.getElementById("popupOverlay").style.display = "none";
+        }
+
+        function openPopupThanhToan() {
+            document.getElementById("paymentPopup").style.display = "block";
+            document.getElementById("overlayThanhToan").style.display = "block";
+        }
+
+        function closePopupThanhToan() {
+            document.getElementById("paymentPopup").style.display = "none";
+            document.getElementById("overlayThanhToan").style.display = "none";
         }
     </script>
 </body>

@@ -44,6 +44,8 @@ namespace QuanLyKhachSan.Controllers
                     claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
                     claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Name, qr_nhanvien.TenNhanVien));
+                    claims.Add(new Claim(ClaimTypes.Surname, qr_nhanvien.MaNhanVien));
+
                     claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
                     return RedirectToAction("Index", "Home");
@@ -54,6 +56,8 @@ namespace QuanLyKhachSan.Controllers
                     claims.Add(new Claim(ClaimTypes.Role, "Nhân viên"));
                     claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Name, qr_nhanvien.TenNhanVien));
+                    claims.Add(new Claim(ClaimTypes.Surname, qr_nhanvien.MaNhanVien));
+
 
                     claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
@@ -67,6 +71,8 @@ namespace QuanLyKhachSan.Controllers
 				claims.Add(new Claim(ClaimTypes.Role, "Khách hàng"));
                 claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
                 claims.Add(new Claim(ClaimTypes.Name, qr_khachhang.TenKhachHang));
+                claims.Add(new Claim(ClaimTypes.Surname, qr_khachhang.MaKhachHang));
+
 
                 claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
