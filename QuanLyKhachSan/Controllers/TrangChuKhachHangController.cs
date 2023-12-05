@@ -164,22 +164,27 @@ namespace QuanLyKhachSan.Controllers
                 SoTienTraTruoc = 0
             };
             _db.DatPhong.Add(DatPhong);
-            for (int i = 0; i < arrMaDichVu.Count; i++)
+            if (arrMaDichVu.Count !=null || arrSoLuongDichVu.Count !=null)
             {
-                var maDichVu = arrMaDichVu[i];
-                var SoLuongDichVu = arrSoLuongDichVu[i];
 
-                var DichVu = new ChiTietDichVu
+
+                for (int i = 0; i < arrMaDichVu.Count; i++)
                 {
-                    MaDichVu = maDichVu,
-                    MaKhachHang = maKhachHang,
-                    SoLuong =SoLuongDichVu,
-                    MaNhanVien = null,
-                    ThoiGianDichVu = DateTime.Now,
-                    TrangThai= "Hoạt động",
-                    MaDatPhong = MaDatPhong
-                };
-                _db.ChiTietDichVu.Add(DichVu);
+                    var maDichVu = arrMaDichVu[i];
+                    var SoLuongDichVu = arrSoLuongDichVu[i];
+
+                    var DichVu = new ChiTietDichVu
+                    {
+                        MaDichVu = maDichVu,
+                        MaKhachHang = maKhachHang,
+                        SoLuong = SoLuongDichVu,
+                        MaNhanVien = null,
+                        ThoiGianDichVu = DateTime.Now,
+                        TrangThai = "Hoạt động",
+                        MaDatPhong = MaDatPhong
+                    };
+                    _db.ChiTietDichVu.Add(DichVu);
+                }
             }
             _db.SaveChanges();
             return Json("Data received and saved successfully.");
