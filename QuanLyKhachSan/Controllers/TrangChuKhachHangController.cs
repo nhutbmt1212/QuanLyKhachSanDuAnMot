@@ -181,11 +181,7 @@ namespace QuanLyKhachSan.Controllers
                 };
                 _db.ChiTietDichVu.Add(DichVu);
             }
-
-
-            
             _db.SaveChanges();
-
             return Json("Data received and saved successfully.");
         }
 

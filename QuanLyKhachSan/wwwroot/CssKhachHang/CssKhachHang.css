@@ -3,7 +3,7 @@
 }
 .container-with-border {
     border: 2px solid #000;
-    padding: 10px;
+    /*padding: 10px;*/
     position: relative;
 }
 
@@ -14,7 +14,7 @@
 
 .table th,
 .table td {
-    padding: 8px; /* Khoảng cách giữa nội dung và viền của mỗi ô */
+   /* padding: 8px; *//* Khoảng cách giữa nội dung và viền của mỗi ô */
 }
 
 .table th {
@@ -53,8 +53,7 @@
         }
 
 .table td.employee-info-column {
-    position: relative;
-    top: 10px;
+    padding: 20px 0px 0px 10px;
 }
 
 .table td.employee-info-column-button {

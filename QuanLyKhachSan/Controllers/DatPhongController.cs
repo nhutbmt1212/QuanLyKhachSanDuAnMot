@@ -15,10 +15,10 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var qr_Phong= _db.Phong.ToList();
-           
+            var qr_Phong = _db.Phong.ToList();
             return View(qr_Phong);
         }
+
         [HttpPost]
         public IActionResult GetLoaiPhong (string? id)
         {
