@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using iTextSharp.text.pdf;
+using iTextSharp.text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using QuanLyKhachSan.Models;
+using System.Data;
 
 namespace QuanLyKhachSan.Controllers
 {
-	[Authorize]
+    [Authorize]
 
-	public class KhachHangController : Controller
+    public class KhachHangController : Controller
     {
         private readonly ApplicationDbContext _db;
         public KhachHangController(ApplicationDbContext db)
@@ -37,15 +41,15 @@ namespace QuanLyKhachSan.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ThemKhachHang(KhachHang kh)
-        { 
-            
+        {
+
             kh.TinhTrang = "Đang hoạt động";
             kh.NgayDangKy = DateTime.Now;
-        
-              
-                _db.KhachHang.Add(kh);
-                _db.SaveChanges();
-       
+
+
+            _db.KhachHang.Add(kh);
+            _db.SaveChanges();
+
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
 
@@ -54,13 +58,199 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SuaKhachHang(KhachHang kh)
         {
-           //còn lỗi ngày đăng ký chưa lấy từ đb
-                _db.KhachHang.Update(kh);
-               _db.SaveChanges();
-            
+            //còn lỗi ngày đăng ký chưa lấy từ đb
+            _db.KhachHang.Update(kh);
+            _db.SaveChanges();
+
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
 
         }
+        public ActionResult ExportExcel()
+        {
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            // Đặt bản quyền cho EPPlus
+            using (ExcelPackage pck = new ExcelPackage())
+            {
+                // Tạo một worksheet mới
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("KhachHang");
+
+                // Lấy danh sách 
+                var nhanvien = _db.KhachHang.ToList();
+
+                // Tạo một bảng để lưu trữ dữ liệu 
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                dataTable.Columns.Add("Mã Khách Hàng");
+                dataTable.Columns.Add("Tên Khách Hàng");
+                dataTable.Columns.Add("Số điện thoại");
+                dataTable.Columns.Add("Địa chỉ");
+                dataTable.Columns.Add("CCCD");
+                dataTable.Columns.Add("Ngày sinh");
+                dataTable.Columns.Add("Giới tính");
+                dataTable.Columns.Add("Email");
+                dataTable.Columns.Add("Tình trạng");
+                dataTable.Columns.Add("Mật khẩu");
+                dataTable.Columns.Add("Ngày đăng ký");
+                // Thêm dữ liệu  vào bảng
+                foreach (var nv in nhanvien)
+                {
+                    DataRow dataRow = dataTable.NewRow();
+                    dataRow[0] = nv.MaKhachHang;
+                    dataRow[1] = nv.TenKhachHang;
+                    dataRow[2] = nv.SoDienThoai;
+                    dataRow[3] = nv.DiaChi;
+                    dataRow[4] = nv.CCCD;
+                    dataRow[5] = nv.NgaySinh.ToShortDateString();
+                    dataRow[6] = nv.GioiTinh;
+                    dataRow[7] = nv.Email;
+                    dataRow[8] = nv.TinhTrang;
+                    dataRow[9] = nv.MatKhau;
+                    dataRow[10] = nv.NgayDangKy.ToShortDateString();
+                    dataTable.Rows.Add(dataRow);
+                }
+
+                // Thêm dữ liệu từ bảng vào worksheet
+                ws.Cells["A1"].LoadFromDataTable(dataTable, true);
+
+                // Gửi file Excel về client
+                var stream = new MemoryStream(pck.GetAsByteArray());
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "KhachHang.xlsx");
+            }
+        }
+        public async Task<IActionResult> Import(IFormFile formFile)
+        {
+            if (formFile == null || formFile.Length <= 0)
+            {
+                return BadRequest("Chọn một file để nhập dữ liệu.");
+            }
+
+            if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest("Chỉ hỗ trợ file .xlsx");
+            }
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            using (var stream = new MemoryStream())
+            {
+                await formFile.CopyToAsync(stream);
+
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Sử dụng sheet đầu tiên
+                    var rowCount = worksheet.Dimension.Rows;
+                  
+                    for (int row = 2; row <= rowCount; row++)
+                    {
+                        var list = new KhachHang();
+                        var MaKhachHang = worksheet.Cells[row, 1].Value.ToString().Trim();
+                        if (_db.KhachHang.Any(kh => kh.MaKhachHang == MaKhachHang))
+                        {
+                           
+                            continue;
+                        }
+                        var TenKhachHang = worksheet.Cells[row, 2].Value.ToString().Trim();
+                        var SoDienThoai = worksheet.Cells[row, 3].Value.ToString().Trim();
+                        var DiaChi = worksheet.Cells[row, 4].Value.ToString().Trim();
+                        var CCCD = worksheet.Cells[row, 5].Value.ToString().Trim();
+                        DateTime ngaySinh;
+                        if (DateTime.TryParse(worksheet.Cells[row, 6].Value.ToString().Trim(), out ngaySinh))
+                        {
+                            list.NgaySinh= ngaySinh;
+                        }
+
+                        var GioiTinh = worksheet.Cells[row, 7].Value.ToString().Trim();
+                        var Email = worksheet.Cells[row, 8].Value.ToString().Trim();
+                        var TinhTrang = worksheet.Cells[row, 9].Value.ToString();
+                        var MatKhau = worksheet.Cells[row, 10].Value.ToString();
+                        if (DateTime.TryParse(worksheet.Cells[row, 11].Value.ToString().Trim(), out DateTime ngayDangKy))
+                        {
+                             list.NgayDangKy = ngayDangKy;
+                        }
+                        list.MaKhachHang = MaKhachHang;
+                        list.TenKhachHang = TenKhachHang;
+                        list.SoDienThoai = SoDienThoai;
+                        list.DiaChi = DiaChi;
+                        list.CCCD = CCCD;
+                        list.GioiTinh= GioiTinh;
+                        list.Email = Email;
+                        list.TinhTrang = TinhTrang;
+                        list.MatKhau = MatKhau;
+                        _db.KhachHang.Add(list);
+                        _db.SaveChanges();
+                    }
+                }
+                return RedirectToAction("DanhSachKhachHang", "KhachHang");
+            }
+        }
+        public async Task<IActionResult> ExportPDF()
+        {
+            // Tạo một tài liệu PDF mới
+            Document pdfDoc = new Document();
+            MemoryStream memoryStream = new MemoryStream();
+            PdfWriter writer = PdfWriter.GetInstance(pdfDoc, memoryStream);
+
+            // Lấy danh sách nhân viên
+            var nhanvien = _db.KhachHang.ToList();
+
+            pdfDoc.Open();
+            float cm = 20; // Độ rộng mong muốn bằng cm
+            float points = cm * 72 / 2.54f; // Chuyển đổi cm sang points
+            // Giảm độ rộng của cột thứ 3 xuống 75%
+            float pointsForThirdhColumn = points * 1.25f;
+            // Tạo một bảng để lưu trữ dữ liệu khách hàng
+            PdfPTable table = new PdfPTable(11);
+            table.SetTotalWidth(new float[] { pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn , pointsForThirdhColumn });
+
+
+            // Tạo một font
+            BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+
+
+
+            // Tạo một font cho tiêu đề
+            Font headerFont = FontFactory.GetFont("Arial", 5, Font.BOLD, BaseColor.WHITE);
+            BaseColor headerBackgroundColor = new BaseColor(0, 119, 119);
+
+            // Thêm tiêu đề cho các cột
+            string[] headers = { "ID", "Name", "Phone number", "Address", "Idpersonal", "Day of birth", "Sex", "Email", "Condition", "Password", "Date of registration" };
+
+            foreach (var header in headers)
+            {
+                PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
+                cell.BackgroundColor = headerBackgroundColor;
+                table.AddCell(cell);
+            }
+
+            // Tạo một font cho nội dung
+            Font contentFont = FontFactory.GetFont("Arial", 5, Font.NORMAL, BaseColor.BLACK);
+
+            foreach (var nv in nhanvien)
+            {
+                table.AddCell(new Phrase(nv.MaKhachHang.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.TenKhachHang.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.CCCD, contentFont));
+                table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString().ToString(), contentFont));
+                table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.Email.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.TinhTrang, contentFont));
+                table.AddCell(new Phrase(nv.MatKhau.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.NgayDangKy.ToShortDateString().ToString(), contentFont));
+            }
+
+            // Thêm bảng vào tài liệu PDF
+            pdfDoc.Add(table);
+
+            pdfDoc.Close();
+
+            byte[] bytes = memoryStream.ToArray();
+            memoryStream.Close();
+
+            return File(bytes, "application/pdf", "KhachHang.pdf");
+        }
+
     }
 }
