@@ -29,7 +29,9 @@ namespace QuanLyKhachSan.Controllers
                 vt.NgayThem = DateTime.Now;
                 _db.VatTu.Add(vt);
                 _db.SaveChanges();
-                return RedirectToAction("DanhSachVatTu", "VatTu");
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Thêm vật tư thành công";
+            return RedirectToAction("DanhSachVatTu", "VatTu");
   
         }
 
@@ -40,7 +42,9 @@ namespace QuanLyKhachSan.Controllers
 
                 _db.VatTu.Update(vt);
                 _db.SaveChanges();
-                return RedirectToAction("DanhSachVatTu", "VatTu");
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Sửa vật tư thành công";
+            return RedirectToAction("DanhSachVatTu", "VatTu");
 
         }
 
@@ -51,6 +55,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.VatTu.Remove(vt);
                 await _db.SaveChangesAsync();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Xóa vật tư thành công";
             }
             else
             {

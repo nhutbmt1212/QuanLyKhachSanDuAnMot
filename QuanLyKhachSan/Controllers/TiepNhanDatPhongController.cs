@@ -74,6 +74,8 @@ namespace QuanLyKhachSan.Controllers
                 qr_datPhong.MaNhanVien = MaNhanVienDatPhong;
                 _db.DatPhong.Update(qr_datPhong);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Đã xác nhận đặt phòng thành công";
             }
             return Json(0);
         }
@@ -88,6 +90,8 @@ namespace QuanLyKhachSan.Controllers
                 qr_datPhong.MaNhanVien = MaNhanVienDatPhong;
                 _db.DatPhong.Update(qr_datPhong);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Đã hủy xác nhận đặt phòng thành công";
             }
             return Json(0);
         }
