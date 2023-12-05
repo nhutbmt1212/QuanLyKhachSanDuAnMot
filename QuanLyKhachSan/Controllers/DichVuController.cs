@@ -26,6 +26,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.DichVu.Remove(qr_MaDichVu);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Xóa dịch vụ thành công";
 
             }
             else
@@ -42,7 +44,9 @@ namespace QuanLyKhachSan.Controllers
             dv.TinhTrang = "Còn hàng";
                 _db.DichVu.Add(dv);
                 _db.SaveChanges();
-            
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Thêm dịch vụ thành công";
+
 
             return RedirectToAction("DanhSachDichVu", "DichVu");
 
@@ -54,7 +58,8 @@ namespace QuanLyKhachSan.Controllers
             
                 _db.DichVu.Update(dv);
                 _db.SaveChanges();
-            
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Sửa dịch vụ thành công";
 
             return RedirectToAction("DanhSachDichVu", "DichVu");
 

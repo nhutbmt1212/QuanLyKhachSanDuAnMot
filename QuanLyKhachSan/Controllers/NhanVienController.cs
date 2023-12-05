@@ -55,6 +55,8 @@ namespace QuanLyKhachSan.Controllers
                 nv.TinhTrang = "Hoat Dong";
                 _db.NhanVien.Add(nv); // Thêm nhân viên mới vào cơ sở dữ liệu
                 _db.SaveChanges(); // Lưu thay đổi vào cơ sở dữ liệu
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Thêm nhân viên thành công";
             }
 
             return RedirectToAction("TrangChuNhanVien", "NhanVien"); // Chuyển hướng người dùng về trang chủ nhân viên
@@ -68,6 +70,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.NhanVien.Remove(qr_NhanVien);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Xóa nhân viên thành công";
 
             }
             else
@@ -92,6 +96,8 @@ namespace QuanLyKhachSan.Controllers
                     nv.AnhNhanVienBase64 = existingEmployee.AnhNhanVienBase64;
                     _db.Entry(existingEmployee).CurrentValues.SetValues(nv);
                     _db.SaveChanges();
+                    TempData["SwalIcon"] = "success";
+                    TempData["SwalTitle"] = "Sửa nhân viên thành công";
                 }
                
             }
@@ -117,6 +123,8 @@ namespace QuanLyKhachSan.Controllers
                 nv.AnhNhanVienBase64 = Path.Combine("UpLoadImage", nv.AnhNhanVien.FileName);
                 _db.Entry(existingEmployee).CurrentValues.SetValues(nv);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Sửa nhân viên thành công";
             }
             return RedirectToAction("TrangChuNhanVien", "NhanVien");
         }

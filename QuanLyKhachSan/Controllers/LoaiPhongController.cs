@@ -26,6 +26,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.LoaiPhong.Remove(qr_MaLoaiPhong);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Xóa loại phòng thành công";
 
             }
             else
@@ -43,6 +45,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.LoaiPhong.Add(loaiphong);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Thêm loại phòng thành công";
             }
 
             return RedirectToAction("TrangChuLoaiPhong", "LoaiPhong");
@@ -56,6 +60,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.LoaiPhong.Update(loaiphong);
                 _db.SaveChanges();
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Sửa loại phòng thành công";
             }
 
             return RedirectToAction("TrangChuLoaiPhong", "LoaiPhong");
