@@ -241,32 +241,48 @@ namespace QuanLyKhachSan.Controllers
                     for (int row = 2; row <= rowCount; row++)
                     {
                         var list = new NhanVien();
-                        list.MaNhanVien = worksheet.Cells[row, 1].Value.ToString().Trim();
-                        list.TenNhanVien = worksheet.Cells[row, 2].Value.ToString().Trim();
-                            list.CCCD = worksheet.Cells[row, 3].Value.ToString().Trim();
-                            list.GioiTinh = worksheet.Cells[row, 4].Value.ToString().Trim();
+                        var MaNhanVien = worksheet.Cells[row, 1].Value.ToString().Trim();
+                        if (_db.NhanVien.Any(kh => kh.MaNhanVien == MaNhanVien))
+                        {
+                            continue;
+                        }
+                        var TenNhanVien = worksheet.Cells[row, 2].Value.ToString().Trim();
+                        var CCCD = worksheet.Cells[row, 3].Value.ToString().Trim();
+                        var GioiTinh = worksheet.Cells[row, 4].Value.ToString().Trim();
                         if (DateTime.TryParse(worksheet.Cells[row, 5].Value.ToString().Trim(), out DateTime ngaySinh))
                         {
                             list.NgaySinh = ngaySinh;
                         }
                         //list.NgaySinh = new DateTime(01 / 01 / 2000);
-                        list.SoDienThoai = worksheet.Cells[row, 6].Value.ToString().Trim();
-                            list.DiaChi = worksheet.Cells[row, 7].Value.ToString().Trim();
-                            list.ChucVu = worksheet.Cells[row, 8].Value.ToString().Trim();
+                        var SoDienThoai = worksheet.Cells[row, 6].Value.ToString().Trim();
+                        var DiaChi = worksheet.Cells[row, 7].Value.ToString().Trim();
+                        var ChucVu = worksheet.Cells[row, 8].Value.ToString().Trim();
                         if (DateTime.TryParse(worksheet.Cells[row, 9].Value.ToString().Trim(), out DateTime ngayVaoLam))
                         {
                             list.NgayVaoLam = ngayVaoLam;
                         }
                         //list.NgayVaoLam = new DateTime(01 / 01 / 2000);
-                        list.TinhTrang = worksheet.Cells[row, 10].Value.ToString().Trim();
-                            list.TenDangNhap = worksheet.Cells[row, 11].Value.ToString();
-                            list.MatKhau = worksheet.Cells[row, 12].Value.ToString();
-                            list.AnhNhanVienBase64 = worksheet.Cells[row, 13].Value.ToString().Trim();
-                            list.Email = worksheet.Cells[row, 14].Value.ToString().Trim();
+                        var TinhTrang = worksheet.Cells[row, 10].Value.ToString().Trim();
+                        var TenDangNhap = worksheet.Cells[row, 11].Value.ToString();
+                        var MatKhau = worksheet.Cells[row, 12].Value.ToString();
+                        var AnhNhanVienBase64 = worksheet.Cells[row, 13].Value.ToString().Trim();
+                        var Email = worksheet.Cells[row, 14].Value.ToString().Trim();
                         if (DateTime.TryParse(worksheet.Cells[row, 15].Value.ToString().Trim(), out DateTime ngayDangKy))
                         {
                             list.NgayDangKy = ngayDangKy;
                         }
+                        list.MaNhanVien = MaNhanVien;
+                        list.TenNhanVien = TenNhanVien;
+                        list.CCCD = CCCD;
+                        list.GioiTinh = GioiTinh;
+                        list.SoDienThoai = SoDienThoai;
+                        list.DiaChi=DiaChi;
+                        list.ChucVu = ChucVu;
+                        list.TinhTrang=TinhTrang;
+                        list.TenDangNhap = TenDangNhap;
+                        list.MatKhau = MatKhau;
+                        list.AnhNhanVienBase64 = AnhNhanVienBase64;
+                        list.Email = Email;
                         //list.NgayDangKy = new DateTime(01 / 01 / 2000);
                         _db.NhanVien.Add(list);
                         _db.SaveChanges();

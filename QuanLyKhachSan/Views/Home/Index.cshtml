@@ -25,20 +25,100 @@
 	</ul>
 
 	<div class="table-data">
-		<div class="order">
+		<div class="order" >
 			<div class="head">
 				<h3>Tổng quan thu nhập</h3>
 			</div>
 			<hr>
-			<p>Biểu đồ</p>
+			<div class="col-xl-7 col-lg-7">
+				<div class="card shadow mb-4">
+					<!-- Card Body -->
+					<div class="card-body">
+						<div class="chart-area">
+							<canvas id="myAreaChart"></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+
 		</div>
 		<div class="todo">
 			<div class="head">
 				<h3>Tình trạng phòng</h3>
 			</div>
-			<hr>
-			<p>Biểu đồ</p>
-
+			<div class="col-xl-7 col-lg-7">
+				<div class="card shadow mb-4">
+					<!-- Card Body -->
+					<div class="card-body">
+						<div class="chart-area">
+							<canvas id="myPieChart" ></canvas>
+						</div>
+					</div>
+				</div>
+			</div>
+		
+				
 		</div>
 	</div>
+
 </main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	var ctx = document.getElementById('myAreaChart').getContext('2d');
+	var myChart = new Chart(ctx, {
+		type: 'line',
+		data: {
+			labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6'],
+			datasets: [{
+				label: 'Thu nhập',
+				data: [12000, 19000, 3000, 5000, 2000, 3000],
+				backgroundColor: 'rgba(78, 115, 223, 0.05)',
+				borderColor: 'rgba(78, 115, 223, 1)',
+				borderWidth: 2
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+	});
+</script>
+<script>
+	// Lấy phần tử canvas từ HTML
+	var ctx = document.getElementById('myPieChart').getContext('2d');
+
+	// Tạo dữ liệu mẫu
+	var data = {
+		datasets: [{
+			data: [5, 10],
+			backgroundColor: ['#4e73df', '#1cc88a'],
+		}],
+		labels: [
+			'Phòng trống',
+			'Đang thuê'
+		]
+	};
+
+	// Tạo biểu đồ pie
+	var myPieChart = new Chart(ctx, {
+		type: 'pie',
+		data: data,
+	});
+
+	// Cập nhật số lượng phòng trống và phòng đã đặt
+	document.getElementById('phongTrong').textContent = data.datasets[0].data[0];
+	document.getElementById('phongDaDat').textContent = data.datasets[0].data[1];
+
+</script>
+
+<style>
+	#myPieChart {
+		width: 100%; /* Đặt chiều rộng là 100% của khung chứa */
+		height: 10%; /* Đặt chiều cao là 50% của khung chứa */
+	}
+</style>

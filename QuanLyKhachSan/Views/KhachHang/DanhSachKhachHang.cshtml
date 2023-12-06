@@ -80,6 +80,7 @@
             <div class="clearfix">
                 <button type="button" class="btn float-right m-2 w-25 cancel" onclick="closeForm()">Đóng</button>
                 <button class="btn float-right m-2 w-25" style="min-width:200px" asp-action="ThemKhachHang" asp-controller="KhachHang">Thêm khách hàng</button>
+
             </div>
         </form>
     </div>
@@ -161,7 +162,21 @@
 
     <!-- Nút Thêm Khách Hàng -->
     <a class="btn btn-primary mb-2" id="btn_themKh" onclick="openForm()">Thêm khách hàng</a>
-
+    <form method="post" enctype="multipart/form-data" asp-controller="KhachHang" asp-action="Import">
+        <div class="form-group">
+            <div class="col-md-10">
+                <p>Upload one or more files using this form:</p>
+                <input type="file" name="formFile" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Upload" />
+            </div>
+        </div>
+    </form>
+    <a class="btn btn-success" id="btn_exportPDF" asp-controller="KhachHang" asp-action="ExportPDF">Export to PDF</a>
+    <a class="btn btn-success" id="btn_export" asp-controller="KhachHang" asp-action="ExportExcel">Export to Excel</a>
     <!-- Bảng Hiển Thị Danh Sách Khách Hàng -->
     <div id="detailKhachHang">
         <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
