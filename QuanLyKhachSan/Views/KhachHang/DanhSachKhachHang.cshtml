@@ -195,15 +195,14 @@
                     {
                         stt = stt + 1;
                     <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang" data-email="@kh.Email">
-                        <td class="align-middle"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td class="align-middle checkBox_td"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
                                 @stt
                         </td>
-                        <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
-                            <div class="row">
+                        <td class="employee-column  d-flex flex-column flex-sm-row justify-content-start">
+                            <div class="row" style="margin-left:-4px;">
                                 <div class="col-13 col-sm-13">
                                     <span class="d-block text-warning">@kh.MaKhachHang</span>
-                                    <br>
                                     <p class="d-block">@kh.TenKhachHang</p>
                                 </div>
                             </div>

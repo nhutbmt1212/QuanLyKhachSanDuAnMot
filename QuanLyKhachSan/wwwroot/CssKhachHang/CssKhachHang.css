@@ -37,6 +37,8 @@
     margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
     margin-left: 8px;
 }
+.checkBox_td{
+}
 
 .employee-info {
     display: flex;
