@@ -29,7 +29,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.KhachHang.Remove(qr_MaKh);
                 _db.SaveChanges();
-
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Xóa khách hàng thành công";
             }
             else
             {
@@ -45,11 +46,11 @@ namespace QuanLyKhachSan.Controllers
 
             kh.TinhTrang = "Đang hoạt động";
             kh.NgayDangKy = DateTime.Now;
-
-
-            _db.KhachHang.Add(kh);
-            _db.SaveChanges();
-
+        
+              
+                _db.KhachHang.Add(kh);
+                _db.SaveChanges();
+       
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
 
@@ -58,10 +59,10 @@ namespace QuanLyKhachSan.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SuaKhachHang(KhachHang kh)
         {
-            //còn lỗi ngày đăng ký chưa lấy từ đb
-            _db.KhachHang.Update(kh);
-            _db.SaveChanges();
-
+           //còn lỗi ngày đăng ký chưa lấy từ đb
+                _db.KhachHang.Update(kh);
+               _db.SaveChanges();
+            
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
 

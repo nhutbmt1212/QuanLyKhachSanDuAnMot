@@ -1,5 +1,5 @@
-﻿@model List<QuanLyKhachSan.Models.Phong>
-
+﻿    @model List<QuanLyKhachSan.Models.Phong>
+@inject ApplicationDbContext _db
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,20 +33,39 @@
                     <div class="col-md-2 ml-5">
                         <div class="room">
                             <img src="https://th.bing.com/th/id/R.efd003d87199ce8c240aa1fd56acc44b?rik=pAFLUJIULbXf%2bg&pid=ImgRaw&r=0" alt="" class="image_room mt-2">
-                            <span class="trangthai ">@phong.TinhTrang</span>
+
+                            @{
+                                var currentDate = DateTime.Now;
+                                var isReservationApproved = _db.DatPhong.Any(dp =>
+                                dp.MaPhong == phong.MaPhong &&
+                                dp.TinhTrang == "Đã được duyệt" &&
+                                dp.NgayNhan <= currentDate &&
+                                dp.NgayTra > currentDate
+                                );
+                            }
+
+                            @if (isReservationApproved)
+                            {
+                                <span class="trangthai text-white" style="background-color:red;" >Đã được thuê</span>
+                            }
+                            else
+                            {
+                                <span class="trangthai">Trống</span>
+                            }
+                            @{
+                                var qr_GiaPhong_MaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == phong.MaLoaiPhong);
+                            }
                             <span class="maphong">@phong.MaPhong</span>
-                            <span class="loaiphong">Phòng Sang Trọng </span>
+                            <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
                             <div class="gia_theo_gio_div">
                                 <span class="title_giatheogio">Giá theo giờ: </span>
-                                <span class="content_giatheogio text-right">200000</span>
+                                
+                              
+                                <span class="content_giatheogio text-right">@qr_GiaPhong_MaPhong.GiaTheoGio</span>
                             </div>
                             <div class="gia_theo_ngay_div">
-                                <span class="title_giatheongay">
-                                    Giá theo ngày:
-                                </span>
-                                <span class="content_giatheongay">
-                                    3000000
-                                </span>
+                                <span class="title_giatheongay">Giá theo ngày: </span>
+                                <span class="content_giatheongay">@qr_GiaPhong_MaPhong.GiaPhongTheoNgay</span>
                             </div>
                             <div class="dropdown icon_3cham ">
                                 <button type="button" data-toggle="dropdown" class="btn_threedot">

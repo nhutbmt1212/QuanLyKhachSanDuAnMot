@@ -21,8 +21,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã dịch vụ</label>
-                        <input class="form-control" name="madichvu" id="inputFieldMaDV" maxlength="6" />
-                        <span id="errorMaDV" style="color: red;"></span>
+                        <input class="form-control" name="madichvu" id="inputFieldMaDV" maxlength="6" placeholder="Mã dịch vụ tự động" readonly />
                     </div>
                     <div class="form-group">
                         <label>Tên dịch vụ</label>
@@ -45,12 +44,12 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Giờ BD phục vụ</label>
-                        <input class="form-control" name="giodichvu" type="time" id="inputFieldGioBD" />
+                        <input class="form-control" name="GioBatDauDichVu" type="time" id="inputFieldGioBD" />
                         <span id="errorGioBD" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giờ KT phục vụ</label>
-                        <input class="form-control" name="giodichvu" type="time" id="inputFieldGioKT" />
+                        <input class="form-control" name="GioKetThucDichVu" type="time" id="inputFieldGioKT" />
                         <span id="errorGioKT" style="color: red;"></span>
                     </div>
                 </div>
@@ -105,11 +104,11 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Giờ BD phục vụ</label>
-                        <input class="form-control giobddichvu" name="giodichvubd" type="time" />
+                        <input class="form-control giobddichvu" name="GioBatDauDichVu" type="time" />
                     </div>
                     <div class="form-group">
                         <label>Giờ KT phục vụ</label>
-                        <input class="form-control gioktdichvu" name="giodichvukt" type="time" />
+                        <input class="form-control gioktdichvu" name="GioKetThucDichVu" type="time" />
                     </div>
                 </div>
             </div>
@@ -203,5 +202,33 @@
                 crossorigin="anonymous"></script>
         <script src="~/JsDichVu/dichvu.js"></script>
         <script src="~/Folder_KiemLoiInput/ErrorDichVu.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function showSwalToast(icon, title) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+
+            Toast.fire({
+                icon: icon,
+                title: title
+            });
+        }
+        var swalIcon = '@TempData["SwalIcon"]';
+        var swalTitle = '@TempData["SwalTitle"]';
+
+        if (swalIcon && swalTitle) {
+            showSwalToast(swalIcon, swalTitle);
+        }
+    </script>
     </body>
     </html>
