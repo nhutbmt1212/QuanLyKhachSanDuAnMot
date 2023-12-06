@@ -26,8 +26,8 @@
 }
 
 .employee-column {
-    display: flex;
-    align-items: center;
+    
+    
 }
 
 .employee-image {
@@ -53,10 +53,11 @@
         }
 
 .table td.employee-info-column {
+    padding: 5px 0px 0px 30px;
 }
 
 .table td.employee-info-column-button {
-   
+ 
 }
 
 #btn_themNv {

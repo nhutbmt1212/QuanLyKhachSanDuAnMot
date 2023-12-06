@@ -25,5 +25,12 @@ namespace QuanLyKhachSan.Controllers
             var qr_loaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == id);
             return Json(new { qr_loaiPhong });
         }
+        [HttpGet]
+        public IActionResult LayThongTinPhong(string MaPhong)
+        {
+            var qr_phong = _db.Phong.FirstOrDefault(s => s.MaPhong == MaPhong);
+            var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s=>s.MaLoaiPhong == qr_phong.MaLoaiPhong);
+            return Json(qr_LoaiPhong);
+        }
     }
 }
