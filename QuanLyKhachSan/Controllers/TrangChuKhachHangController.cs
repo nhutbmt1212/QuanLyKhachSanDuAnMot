@@ -164,7 +164,7 @@ namespace QuanLyKhachSan.Controllers
                 SoTienTraTruoc = 0
             };
             _db.DatPhong.Add(DatPhong);
-            if (arrMaDichVu.Count !=null || arrSoLuongDichVu.Count !=null)
+            if (arrMaDichVu !=null || arrSoLuongDichVu !=null)
             {
 
 

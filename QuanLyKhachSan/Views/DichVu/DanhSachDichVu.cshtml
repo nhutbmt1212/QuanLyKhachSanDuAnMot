@@ -126,7 +126,7 @@
 
     <!-- Bảng Hiển Thị Danh Sách Dịch Vụ -->
     <div id="detailDichVu">
-        <table class="table" id="table_detail" style="border:1px solid #343A40">
+        <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col" class="align-middle ">
@@ -153,16 +153,16 @@
                     {
                         stt +=1 ;
                         <tr data-ma-dv="@dv.MaDichVu" data-ten-dv="@dv.TenDichVu" data-donViTinh="@dv.DonViTinh" data-giaTien="@dv.GiaTien" data-tinhTrang="@dv.TinhTrang" data-gioBatDauDichVu="@dv.GioBatDauDichVu" data-gioKetThucDichVu="@dv.GioKetThucDichVu">
-                        <td style="position:relative;top:17px"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td ><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
                         @stt
                         </td>
-                        <td class="employee-column align-middle d-flex flex-column flex-sm-row justify-content-start">
+                        <td class="employee-info-column">
                             <div class="row">
-                                <div class="col-12 col-sm-12">
-                                    <span class="d-block d-sm-inline text-warning"> @dv.MaDichVu</span>
+                                <div class="employee-info-column">
+                                    <span class="text-warning"> @dv.MaDichVu</span>
                                     <br>
-                                    <p class="d-block d-sm-inline">@dv.TenDichVu</p>
+                                    <p>@dv.TenDichVu</p>
                                 </div>
                             </div>
                         </td>
