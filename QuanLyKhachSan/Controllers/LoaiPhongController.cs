@@ -10,6 +10,7 @@ namespace QuanLyKhachSan.Controllers
 	public class LoaiPhongController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private static Random random = new Random();
         public LoaiPhongController(ApplicationDbContext db)
         {
             _db = db;
@@ -37,17 +38,38 @@ namespace QuanLyKhachSan.Controllers
 
             return RedirectToAction("TrangChuLoaiPhong", "LoaiPhong");
         }
+
+        public string GenerateRandomCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomString;
+
+            do
+            {
+                randomString = new string(Enumerable.Repeat(chars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            } while (_db.LoaiPhong.Any(d => d.MaLoaiPhong == $"LP{randomString}"));
+
+            return $"LP{randomString}";
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ThemLoaiPhong(LoaiPhong loaiphong)
-        {
-            if (ModelState.IsValid)
+        {       
+            if (_db.LoaiPhong.Any(d => d.MaLoaiPhong == loaiphong.MaLoaiPhong))
             {
-                _db.LoaiPhong.Add(loaiphong);
+                // Mã đã tồn tại, có thể xử lý theo ý muốn, ví dụ thông báo lỗi
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Thêm loại phòng thất bại Mã loại phòng bị trùng";
+                return RedirectToAction("TrangChuLoaiPhong", "LoaiPhong");
+            }
+
+            loaiphong.MaLoaiPhong = GenerateRandomCode();
+            _db.LoaiPhong.Add(loaiphong);
                 _db.SaveChanges();
                 TempData["SwalIcon"] = "success";
                 TempData["SwalTitle"] = "Thêm loại phòng thành công";
-            }
 
             return RedirectToAction("TrangChuLoaiPhong", "LoaiPhong");
 
