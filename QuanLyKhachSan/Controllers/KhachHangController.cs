@@ -9,6 +9,7 @@ namespace QuanLyKhachSan.Controllers
 	public class KhachHangController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private static Random random = new Random();
         public KhachHangController(ApplicationDbContext db)
         {
             _db = db;
@@ -35,11 +36,34 @@ namespace QuanLyKhachSan.Controllers
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
         }
+
+        public string GenerateRandomCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomString;
+
+            do
+            {
+                randomString = new string(Enumerable.Repeat(chars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            } while (_db.KhachHang.Any(d => d.MaKhachHang == $"KH{randomString}"));
+
+            return $"KH{randomString}";
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ThemKhachHang(KhachHang kh)
-        { 
-            
+        {
+            if (_db.KhachHang.Any(d => d.MaKhachHang == kh.MaKhachHang))
+            {
+                // Mã đã tồn tại, có thể xử lý theo ý muốn, ví dụ thông báo lỗi
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Thêm khách hàng thất bại Mã khách hàng bị trùng";
+                return RedirectToAction("DanhSachKhachHang", "KhachHang");
+            }
+            kh.MaKhachHang = GenerateRandomCode();
             kh.TinhTrang = "Đang hoạt động";
             kh.NgayDangKy = DateTime.Now;
         

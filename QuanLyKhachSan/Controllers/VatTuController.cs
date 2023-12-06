@@ -9,6 +9,7 @@ namespace QuanLyKhachSan.Controllers
     public class VatTuController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private static Random random = new Random();
 
         public VatTuController(ApplicationDbContext db)
         {
@@ -20,12 +21,32 @@ namespace QuanLyKhachSan.Controllers
             var listVatTu = _db.VatTu.ToList();
             return View(listVatTu);
         }
+        public string GenerateRandomCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomString;
+
+            do
+            {
+                randomString = new string(Enumerable.Repeat(chars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            } while (_db.VatTu.Any(d => d.MaVatTu == $"VT{randomString}"));
+
+            return $"VT{randomString}";
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult ThemVatTu(VatTu vt)
         {
-            
+            if (_db.VatTu.Any(d => d.MaVatTu == vt.MaVatTu))
+            {
+                // Mã đã tồn tại, có thể xử lý theo ý muốn, ví dụ thông báo lỗi
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Thêm vật tư thất bại Mã vật tư bị trùng";
+                return RedirectToAction("DanhSachVatTu", "VatTu");
+            }
+            vt.MaVatTu = GenerateRandomCode();
                 vt.NgayThem = DateTime.Now;
                 _db.VatTu.Add(vt);
                 _db.SaveChanges();

@@ -17,6 +17,7 @@ namespace QuanLyKhachSan.Controllers
     {
         private const string V = "Hello";
         private readonly ApplicationDbContext _db;
+        private static Random random = new Random();
         public NhanVienController(ApplicationDbContext db)
         {
             _db = db;
@@ -26,11 +27,34 @@ namespace QuanLyKhachSan.Controllers
             var listNhanVien = _db.NhanVien.ToList();
             return View(listNhanVien);
         }
+
+        public string GenerateRandomCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomString;
+
+            do
+            {
+                randomString = new string(Enumerable.Repeat(chars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            } while (_db.NhanVien.Any(d => d.MaNhanVien == $"NV{randomString}"));
+
+            return $"NV{randomString}";
+        }
+
         [HttpPost] // Đánh dấu phương thức này như một phương thức POST
         [ValidateAntiForgeryToken] // Ngăn chặn tấn công giả mạo yêu cầu đến trang web
 
         public IActionResult ThemNhanVien(NhanVien nv, [FromServices] IWebHostEnvironment hostingEnvironment)
         {
+            if (_db.NhanVien.Any(d => d.MaNhanVien == nv.MaNhanVien))
+            {
+                // Mã đã tồn tại, có thể xử lý theo ý muốn, ví dụ thông báo lỗi
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Thêm nhân viên thất bại Mã nhân viên bị trùng";
+                return RedirectToAction("TrangChuNhanVien", "NhanVien");
+            }
+
             if (nv.AnhNhanVien != null && nv.AnhNhanVien.Length > 0) // Kiểm tra xem người dùng có tải lên ảnh không
             {
                 var uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "UploadImage"); // Xác định thư mục tải lên
@@ -51,6 +75,7 @@ namespace QuanLyKhachSan.Controllers
                 }
 
                 // Lưu đường dẫn tương đối của file vào cơ sở dữ liệu
+                nv.MaNhanVien = GenerateRandomCode();
                 nv.AnhNhanVienBase64 = Path.Combine("UploadImage", nv.AnhNhanVien.FileName);
                 nv.TinhTrang = "Hoat Dong";
                 _db.NhanVien.Add(nv); // Thêm nhân viên mới vào cơ sở dữ liệu

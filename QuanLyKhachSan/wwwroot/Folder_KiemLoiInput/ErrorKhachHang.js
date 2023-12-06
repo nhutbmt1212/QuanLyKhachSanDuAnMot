@@ -1,18 +1,4 @@
 ﻿$(document).ready(function () {
-    // Bắt sự kiện khi người dùng click vào ô input mã nhân viên
-    $("#inputFieldMaKH").on("focusout", function () {
-        var inputValue = $(this).val();
-
-        if (inputValue.length < 5) {
-            $("#errorMaKH").text("Độ dài ít nhất 5 ký tự.");
-        } else if (inputValue.length === 0) {
-            $("#errorMaKH").text("Mã khách hàng không được để trống.");
-        } else if (/[^a-zA-Z0-9]/.test(inputValue)) {
-            $("#errorMaKH").text("Mã khách hàng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
-        } else {
-            $("#errorMaKH").text("");
-        }
-    });
 
     // Bắt sự kiện khi người dùng click vào ô input tên khách hàng
     $("#inputFieldTenKH").on("focusout", function () {
@@ -122,18 +108,6 @@
 
     // Bắt sự kiện khi form được submit
     $("#myForm").submit(function (event) {
-        var inputValueMaKH = $("#inputFieldMaKH").val();
-        if (inputValueMaKH.length === 0) {
-            $("#errorMaKH").text("Mã khách hàng không được để trống.");
-            // Ngăn chặn submit nếu có lỗi
-            event.preventDefault();
-        } else if (inputValueMaKH.length === 0) {
-            $("#errorMaKH").text("Mã khách hàng không được để trống.");
-            event.preventDefault();
-        } else if (/[^a-zA-Z0-9]/.test(inputValueMaKH)) {
-            $("#errorMaKH").text("Mã khách hàng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
-            event.preventDefault();
-        }
 
 
         var inputValueTenKH = $("#inputFieldTenKH").val();
