@@ -14,6 +14,7 @@ namespace QuanLyKhachSan.Controllers
         {
             _db = db;
         }
+        //comment
         public IActionResult TrangChuPhong()
         {
             var listPhong = _db.Phong.Include(p => p.ImageLinks).ToList();

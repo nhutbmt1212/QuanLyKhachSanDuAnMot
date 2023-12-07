@@ -28,6 +28,11 @@
             console.error(error);
         }
     });
+    document.getElementById('ngayNhanPhong_PopUpDatPhong').min = new Date().toISOString().slice(0, 16);
+    document.getElementById('ngayTraPhong_PopUpDatPhong').min = new Date().toISOString().slice(0, 16);
+
+    document.getElementById('ngayNhanPhong_PopUpDatPhong').value = new Date().toISOString().slice(0, 16);
+    document.getElementById('ngayTraPhong_PopUpDatPhong').value = new Date().toISOString().slice(0, 16);
 }
 
 function showForm() {
@@ -87,7 +92,7 @@ function ThemDichVu() {
             var node = `
                 <div class="row" id="id_DichVu${counter}">
                     <div class="col-lg-7" style="margin-bottom:5px;">
-                        <select class="form-select w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})" >
+                        <select class="form-control w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})" >
                             ${options}
                         </select>
                     </div>
@@ -131,16 +136,36 @@ function ThemDichVu() {
 
 
 }
+function DichVuDaChon(id) {
+
+    var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
+    if (arrDichVuDaChon[id] == "") {
+        console.log("mảng rỗng")
+    }
+    else {
+
+        var dichVuDaChon = document.getElementById('themdichvuselect' + id).value;
+        var soLuongDichVu = document.getElementById('soLuongDichVu' + id).value;
+
+        var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + id;
+        var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
+        //document.getElementById(tongTextTenDichVuDaDat).innerText = `Tên dịch vụ: ${dichVuDaChon} | `;
+        //tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${soLuongDichVu}`;
+        arrDichVuDaChon[id] = dichVuDaChonTheoId;
+    }
+}
+
 function XoaSelectDichVu(idSelect) {
     var idTongTheDichVu = 'id_DichVu' + idSelect;
     document.getElementById(idTongTheDichVu).remove();
     arrDichVuDaChon[idSelect] = "";
     document.getElementById('AddThemDichVu').style.display = 'block';
     //xóa text dịch vụ đã chọn
-    var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + idSelect;
-    var tongTextSoLuongDaDat = "tongSoLuongDichVuDaDat" + idSelect;
-    var breakTongDichVu = "breakDichVu" + idSelect;
-    document.getElementById(tongTextSoLuongDaDat).remove();
-    document.getElementById(tongTextTenDichVuDaDat).remove();
-    document.getElementById(breakTongDichVu).remove();
+    //var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + idSelect;
+    //var tongTextSoLuongDaDat = "tongSoLuongDichVuDaDat" + idSelect;
+    //var breakTongDichVu = "breakDichVu" + idSelect;
+    //document.getElementById(tongTextSoLuongDaDat).remove();
+    //document.getElementById(tongTextTenDichVuDaDat).remove();
+    //document.getElementById(breakTongDichVu).remove();
 }
+

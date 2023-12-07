@@ -77,9 +77,13 @@
                                 <button type="button" data-toggle="dropdown" class="btn_threedot">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
+                               
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</a>
-                                    <a class="dropdown-item" onclick="openPopupThanhToan()">Thanh toán</a>
+                                    @if(isReservationApproved){
+                                       <a class="dropdown-item" onclick="openPopupThanhToan()">Thanh toán</a>
+
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -137,11 +141,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ngayNhanPhong">Ngày nhận phòng</label>
-                            <input type="date" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong" required>
+                            <input type="date" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
                         </div>
                         <div class="form-group">
                             <label for="ngayTraPhong">Ngày trả phòng</label>
-                            <input type="date" class="form-control" name="ngayTraPhong" id="ngayTraPhong" required>
+                            <input type="date" class="form-control" name="ngayTraPhong" id="ngayTraPhong_PopUpDatPhong" required>
                         </div>
                         <div class="form-group">
                             <label for="tongNguoiLon">Tổng số người lớn</label>
