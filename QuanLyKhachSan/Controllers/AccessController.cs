@@ -82,6 +82,10 @@ namespace QuanLyKhachSan.Controllers
 			ViewData["ValidateMessage"] = "User not found";
 			return View();
 		}
+        public IActionResult GiaoDienDangKy()
+        {
+            return View("GiaoDienDangKy");
+        }
 
 
 	}

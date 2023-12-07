@@ -124,14 +124,14 @@
                         </div>
                         <div class="form-group">
                             <label for="hinhThuc">Hình thức</label>
-                            <select class="form-control" name="hinhThuc" id="hinhThuc">
+                            <select class="form-control" name="hinhThuc" id="hinhThuc_PopUpDatPhong">
                                 <option value="Ngay">Ngày</option>
-                                <option value="Gio">Giờ</option>
+                                <option value="Gio" selected>Giờ</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="giaPhong">Giá phòng</label>
-                            <input type="text" class="form-control" name="giaPhong" id="giaPhong" required>
+                            <input type="text" class="form-control" name="giaPhong" id="giaPhong_PopUpDatPhong" required>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -161,7 +161,13 @@
                             <label for="khachTraTruoc">Khách trả trước</label>
                             <input type="text" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
                         </div>
+                        <div id="ChonDichVu">
+                        </div>
+                        <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
+                            <i class="bi bi-plus"></i> Thêm dịch vụ
+                        </button>
                     </div>
+                   
                     <button class="btn btn-success">Nhận phòng</button>
                 </div>
             </div>

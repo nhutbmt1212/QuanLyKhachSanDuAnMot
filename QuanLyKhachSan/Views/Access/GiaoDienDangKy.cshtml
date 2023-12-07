@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Đăng ký</title>
+    <link rel="stylesheet" href="~/css/CssDangKy.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+    <div class="form-box">
+        <img src="~/UploadImage/Screenshot_2_preview_rev_1.png" alt="">
+        <h2>ĐĂNG KÝ</h2>
+        <div class="input-box">
+            <i class='bx bxs-user'></i>
+            <input type="text" required>
+            <label for="">Tên khách hàng</label>
+        </div>
+        <div class="input-box">
+            <i class='bx bxs-envelope'></i>
+            <input type="text" required>
+            <label for="">Email/Số điện thoại</label>
+        </div>
+        <div class="input-box">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" name="Password" required>
+            <label for="">Mật khẩu</label>
+        </div>
+        <div class="input-box">
+            <i class='bx bxs-lock-alt'></i>
+            <input type="password" name="cPassword" required>
+            <label for="">Nhập lại mật khẩu</label>
+        </div>
+        <div class="button">
+            <input class="btn" type="submit" value="Đăng ký">
+        </div>
+        <div class="register">
+            <p>Bạn đã có tài khoản? <a asp-action="Login" asp-controller="Access">Đăng nhập</a></p>
+        </div>
+    </div>
+</body>
+
+</html>
