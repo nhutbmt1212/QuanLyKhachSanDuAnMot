@@ -40,7 +40,19 @@
             $("#errorDVT").text("");
         }
     });
-
+    $("#inputEditDVT").on("focusout", function () {
+        var inputValue = $(this).val();
+        if (inputValue.length === 0) {
+            $("#errorEditDVT").text("Đơn vị tính không được để trống.");
+        }
+        else if (inputValue.length < 2) {
+            $("#errorEditDVT").text("Độ dài ít nhất 2 ký tự.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+            $("#errorEditDVT").text("Đơn vị tính chỉ được chứa chữ cái và khoảng trắng.");
+        } else {
+            $("#errorEditDVT").text("");
+        }
+    });
     $("#inputFieldGia").on("focusout", function () {
         var gia = $(this).val();
 
@@ -52,16 +64,59 @@
             $("#errorGia").text("");
         }
     });
+    $("#inputEditGia").on("focusout", function () {
+        var gia = $(this).val();
+
+        if (gia.length === 0) {
+            $("#errorEditGia").text("Giá theo giờ không được để trống.");
+        } else if (!isValidGiaTheoGio(gia)) {
+            $("#errorEditGia").text("Giá theo giờ không hợp lệ.");
+        } else {
+            $("#errorEditGia").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input Giờ BD phục vụ
     $("#inputFieldGioBD").on("focusout", function () {
         validateGioBD();
     });
-
+    $("#inputEditGioBD").on("focusout", function () {
+        var validateGioBD = $(this).val();
+        if (validateGioBD.length === 0) {
+            $("#errorEditGioBD").text("Giờ bắt đầu không được để trống.");
+            event.preventDefault();
+        } else if (!isvalidateGioBD(validateGioBD)) {
+            $("#errorEditGioBD").text("Giờ bắt đầu không hợp lệ.");
+            event.preventDefault();
+        } else {
+            $("#errorEditGioBD").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input Giờ KT phục vụ
     $("#inputFieldGioKT").on("focusout", function () {
         validateGioKT();
     });
+    $("#inputEditGioKT").on("focusout", function () {
+        if (validateGioKT.length === 0) {
+            $("#errorEditGioKT").text("Giờ kết thúc không được để trống.");
+            event.preventDefault();
+        } else if (!isvalidateGioBD(validateGioBD)) {
+            $("#errorEditGioKT").text("Giờ kết thúc không hợp lệ.");
+            event.preventDefault();
+        } else {
+            $("#errorEditGioKT").text("");
+        }
+    });
+    $("#inputEditTinhTrang").on("focusout", function () {
+        var TinhTrangValue = $(this).val();
 
+        if (TinhTrangValue.length === 0) {
+            $("#errorEditTinhTrang").text("Tình trạng không được để trống.");
+        } else if (!isValidTinhTrang(TinhTrangValue)) {
+            $("#errorEditTinhTrang").text("Tình trạng không hợp lệ.");
+        } else {
+            $("#errorEditTinhTrang").text("");
+        }
+    });
    
 
 

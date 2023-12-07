@@ -98,25 +98,30 @@
                     </div>
                     <div class="form-group">
                         <label>Tên khách hàng</label>
-                        <input class="form-control TenKhachHangEdit" name="tenkhachhang" />
+                        <input class="form-control TenKhachHangEdit" name="tenkhachhang" id="inputEditTenKH" />
+                        <span id="errorEditTenKH" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Số điện thoại</label>
-                        <input class="form-control SdtEdit" name="sodienthoai" />
+                        <input class="form-control SdtEdit" name="sodienthoai" id="inputEditSDT" maxlength="10" />
+                        <span id="errorEditSDT" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Địa chỉ</label>
-                        <input class="form-control DiaChiEdit" name="diachi" />
+                        <input class="form-control DiaChiEdit" name="diachi" id="inputEditDiaChi" maxlength="50" />
+                        <span id="errorEditDiaChi" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>CCCD</label>
-                        <input class="form-control CccdEdit" name="cccd" />
+                        <input class="form-control CccdEdit" name="cccd" id="inputEditCCCD" maxlength="12"/>
+                        <span id="errorEditCCCD" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Ngày sinh</label>
-                        <input class="form-control NgaySinhEdit" type="date" name="ngaysinh" />
+                        <input class="form-control NgaySinhEdit" type="date" name="ngaysinh" id="inputEditNgaySinh" />
+                        <span id="errorEditNgaySinh" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
@@ -133,7 +138,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Email</label>
-                        <input class="form-control EmailEdit" name="email" />
+                        <input class="form-control EmailEdit" name="email" id="inputEditEmail" />
+                        <span id="errorEditEmail" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Tình trạng</label>
@@ -148,7 +154,8 @@
                     </div>
                     <div class="form-group">
                         <label>Mật khẩu</label>
-                        <input class="form-control MatKhauEdit" name="matkhau" />
+                        <input class="form-control MatKhauEdit" name="matkhau" id="inputEditMK" maxlength="30"/>
+                        <span id="errorEditMK" style="color: red;"></span>
                     </div>
                 </div>
             </div>
