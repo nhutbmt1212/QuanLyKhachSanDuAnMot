@@ -148,12 +148,16 @@ namespace QuanLyKhachSan.Controllers
         {
             if (formFile == null || formFile.Length <= 0)
             {
-                return BadRequest("Chọn một file để nhập dữ liệu.");
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Chọn 1 file để import";
+                return RedirectToAction("DanhSachKhachHang", "KhachHang");
             }
 
             if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
             {
-                return BadRequest("Chỉ hỗ trợ file .xlsx");
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Chỉ hỗ trợ file .xlsx";
+                return RedirectToAction("DanhSachKhachHang", "KhachHang");
             }
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
@@ -231,9 +235,13 @@ namespace QuanLyKhachSan.Controllers
 
                     if (errorRows.Count > 0)
                     {
-                        return BadRequest($"Có lỗi ở các dòng: {string.Join(", ", errorRows)}. Vui lòng kiểm tra lại file Excel của bạn.");
+                        TempData["SwalIcon"] = "error";
+                        TempData["SwalTitle"] = $"Có lỗi ở các dòng: {string.Join(", ", errorRows)}. Vui lòng kiểm tra lại file Excel của bạn.";
+                        return RedirectToAction("DanhSachKhachHang", "KhachHang");
                     }
                 }
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Import file thành công";
                 return RedirectToAction("DanhSachKhachHang", "KhachHang");
             }
         }

@@ -218,12 +218,17 @@ namespace QuanLyKhachSan.Controllers
         {
             if (formFile == null || formFile.Length <= 0)
             {
-                return BadRequest("Chọn một file để nhập dữ liệu.");
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Chọn một file để nhập dữ liệu.";
+                return RedirectToAction("TrangChuNhanVien", "NhanVien");
+               
             }
 
             if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
             {
-                return BadRequest("Chỉ hỗ trợ file .xlsx");
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Chỉ hỗ trợ file .xlsx";
+                return RedirectToAction("TrangChuNhanVien", "NhanVien");
             }
 
 
@@ -232,7 +237,7 @@ namespace QuanLyKhachSan.Controllers
             using (var stream = new MemoryStream())
             {
                 await formFile.CopyToAsync(stream);
-
+                List<int> errorRows = new List<int>();
                 using (var package = new ExcelPackage(stream))
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Sử dụng sheet đầu tiên
@@ -240,128 +245,88 @@ namespace QuanLyKhachSan.Controllers
 
                     for (int row = 2; row <= rowCount; row++)
                     {
-                        var list = new NhanVien();
-                        var MaNhanVien = worksheet.Cells[row, 1].Value.ToString().Trim();
-                        if (_db.NhanVien.Any(kh => kh.MaNhanVien == MaNhanVien))
+                        // Kiểm tra dòng trống
+                        if (worksheet.Cells[row, 1].Value == null || worksheet.Cells[row, 2].Value == null || worksheet.Cells[row, 3].Value == null || worksheet.Cells[row, 4].Value == null || worksheet.Cells[row, 5].Value == null
+                            || worksheet.Cells[row, 6].Value == null || worksheet.Cells[row, 7].Value == null || worksheet.Cells[row, 8].Value == null || worksheet.Cells[row, 9].Value == null || worksheet.Cells[row, 10].Value == null || worksheet.Cells[row, 11].Value == null || worksheet.Cells[row, 12].Value == null || worksheet.Cells[row, 13].Value == null || worksheet.Cells[row, 14].Value == null )
                         {
+                            errorRows.Add(row);
                             continue;
                         }
+                       
+                        var MaNhanVien = worksheet.Cells[row, 1].Value.ToString().Trim();
+                        
                         var TenNhanVien = worksheet.Cells[row, 2].Value.ToString().Trim();
                         var CCCD = worksheet.Cells[row, 3].Value.ToString().Trim();
                         var GioiTinh = worksheet.Cells[row, 4].Value.ToString().Trim();
-                        if (DateTime.TryParse(worksheet.Cells[row, 5].Value.ToString().Trim(), out DateTime ngaySinh))
-                        {
-                            list.NgaySinh = ngaySinh;
-                        }
-                        //list.NgaySinh = new DateTime(01 / 01 / 2000);
+                        DateTime NgaySinh;
+                        DateTime.TryParse(worksheet.Cells[row, 5].Value.ToString().Trim(), out NgaySinh);                     
                         var SoDienThoai = worksheet.Cells[row, 6].Value.ToString().Trim();
                         var DiaChi = worksheet.Cells[row, 7].Value.ToString().Trim();
                         var ChucVu = worksheet.Cells[row, 8].Value.ToString().Trim();
-                        if (DateTime.TryParse(worksheet.Cells[row, 9].Value.ToString().Trim(), out DateTime ngayVaoLam))
-                        {
-                            list.NgayVaoLam = ngayVaoLam;
-                        }
-                        //list.NgayVaoLam = new DateTime(01 / 01 / 2000);
+                        DateTime NgayVaoLam;
+                        DateTime.TryParse(worksheet.Cells[row, 9].Value.ToString().Trim(), out NgayVaoLam);
                         var TinhTrang = worksheet.Cells[row, 10].Value.ToString().Trim();
                         var TenDangNhap = worksheet.Cells[row, 11].Value.ToString();
                         var MatKhau = worksheet.Cells[row, 12].Value.ToString();
                         var AnhNhanVienBase64 = worksheet.Cells[row, 13].Value.ToString().Trim();
                         var Email = worksheet.Cells[row, 14].Value.ToString().Trim();
-                        if (DateTime.TryParse(worksheet.Cells[row, 15].Value.ToString().Trim(), out DateTime ngayDangKy))
+                        var NhanVien = _db.NhanVien.FirstOrDefault(nv => nv.MaNhanVien == MaNhanVien);
+                        
+                        DateTime NgayDangKy;
+                        DateTime.TryParse(worksheet.Cells[row, 15].Value.ToString().Trim(), out NgayDangKy);
+                        if (NhanVien != null)
                         {
-                            list.NgayDangKy = ngayDangKy;
+                            NhanVien.TenNhanVien = TenNhanVien;
+                            NhanVien.CCCD = CCCD;
+                            NhanVien.GioiTinh = GioiTinh;
+                            NhanVien.NgaySinh = NgaySinh;
+                            NhanVien.SoDienThoai = SoDienThoai;
+                            NhanVien.DiaChi = DiaChi;
+                            NhanVien.ChucVu=ChucVu;
+                            NhanVien.NgayVaoLam = NgayVaoLam;
+                            NhanVien.TinhTrang = TinhTrang;
+                            NhanVien.TenDangNhap = TenDangNhap;
+                            NhanVien.MatKhau = MatKhau;
+                            NhanVien.AnhNhanVienBase64 = AnhNhanVienBase64;
+                            NhanVien.Email = Email;
                         }
-                        list.MaNhanVien = MaNhanVien;
-                        list.TenNhanVien = TenNhanVien;
-                        list.CCCD = CCCD;
-                        list.GioiTinh = GioiTinh;
-                        list.SoDienThoai = SoDienThoai;
-                        list.DiaChi = DiaChi;
-                        list.ChucVu = ChucVu;
-                        list.TinhTrang = TinhTrang;
-                        list.TenDangNhap = TenDangNhap;
-                        list.MatKhau = MatKhau;
-                        list.AnhNhanVienBase64 = AnhNhanVienBase64;
-                        list.Email = Email;
-                        //list.NgayDangKy = new DateTime(01 / 01 / 2000);
-                        _db.NhanVien.Add(list);
+                        else
+                        {
+                            var list = new NhanVien
+                            {   MaNhanVien=MaNhanVien,
+                                TenNhanVien=TenNhanVien,
+                                CCCD=CCCD,
+                                GioiTinh=GioiTinh,
+                                NgaySinh=NgaySinh,
+                                SoDienThoai=SoDienThoai,
+                                DiaChi=DiaChi,
+                                ChucVu=ChucVu,
+                                NgayVaoLam=NgayVaoLam,
+                                TinhTrang=TinhTrang,
+                                TenDangNhap=TenDangNhap,
+                                MatKhau=MatKhau,
+                                AnhNhanVienBase64=AnhNhanVienBase64,
+                                Email=Email
+                            };
+                            _db.NhanVien.Add(list);
+                        }
+                        
                         _db.SaveChanges();
-
-
+                    }
+                    if (errorRows.Count > 0)
+                    {
+                        TempData["SwalIcon"] = "error";
+                        TempData["SwalTitle"] = $"Có lỗi ở các dòng: {string.Join(", ", errorRows)}. Vui lòng kiểm tra lại file Excel của bạn.";
+                        return RedirectToAction("TrangChuNhanVien", "NhanVien");
                     }
 
                 }
+                TempData["SwalIcon"] = "success";
+                TempData["SwalTitle"] = "Import file thành công";
                 return RedirectToAction("TrangChuNhanVien", "NhanVien");
             }
-
         }
-        //public async Task<IActionResult> ExportPDF()
-        //{
-        //    // Tạo một tài liệu PDF mới
-        //    Document pdfDoc = new Document();
-        //    MemoryStream memoryStream = new MemoryStream();
-        //    PdfWriter.GetInstance(pdfDoc, memoryStream);
-
-        //    // Lấy danh sách nhân viên
-        //    var nhanvien = _db.NhanVien.ToList();
-
-        //    pdfDoc.Open();
-
-        //    float cm = 20; // Độ rộng mong muốn bằng cm
-        //    float points = cm * 72 / 2.54f; // Chuyển đổi cm sang points
-
-
-        //    // Tạo một bảng để lưu trữ dữ liệu khách hàng
-        //    PdfPTable table = new PdfPTable(15);
-        //    table.SetTotalWidth(new float[] { points, points, points, points, points, points, points, points, points, points, points, points, points, points, points });
-
-        //    // Tạo một font cho tiêu đề
-        //    Font headerFont = FontFactory.GetFont("Arial", 12, Font.BOLD, BaseColor.WHITE);
-        //    BaseColor headerBackgroundColor = new BaseColor(0, 119, 119);
-
-        //    // Thêm tiêu đề cho các cột
-        //    string[] headers = { "Mã Nhân Viên", "Tên Nhân Viên", "CCCD", "Giới tính", "Ngày sinh", "Điện thoại", "Địa chỉ", "Chức Vụ", "Ngày Vào Làm", "Tình trạng", "Tên đăng nhập", "Mật khẩu", "Ảnh nhân viên", "Email", "Ngày đăng ký" };
-
-        //    foreach (var header in headers)
-        //    {
-        //        PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
-        //        cell.BackgroundColor = headerBackgroundColor;
-        //        table.AddCell(cell);
-        //    }
-
-        //    // Tạo một font cho nội dung
-        //    Font contentFont = FontFactory.GetFont("Arial", 10, Font.NORMAL, BaseColor.BLACK);
-
-        //    foreach (var nv in nhanvien)
-        //    {
-        //        table.AddCell(nv.MaNhanVien.ToString());
-        //        table.AddCell(nv.TenDangNhap.ToString());
-        //        table.AddCell(nv.CCCD.ToString());
-        //        table.AddCell(nv.GioiTinh.ToString());
-        //        table.AddCell(nv.NgaySinh.ToShortDateString());
-        //        table.AddCell(nv.SoDienThoai.ToString());
-        //        table.AddCell(nv.DiaChi.ToString());
-        //        table.AddCell(nv.ChucVu.ToString());
-        //        table.AddCell(nv.NgayVaoLam.ToShortDateString());
-        //        table.AddCell(nv.TinhTrang.ToString());
-        //        table.AddCell(nv.TenDangNhap.ToString());
-        //        table.AddCell(nv.MatKhau.ToString());
-        //        table.AddCell(nv.AnhNhanVienBase64.ToString());
-        //        table.AddCell(nv.Email.ToString());
-        //        table.AddCell(nv.NgayDangKy.ToShortDateString());
-
-        //    }
-        //    // Thêm bảng vào tài liệu PDF
-        //    pdfDoc.Add(table);
-
-        //    pdfDoc.Close();
-
-        //    byte[] bytes = memoryStream.ToArray();
-        //    memoryStream.Close();
-
-        //    return File(bytes, "application/pdf", "NhanVien.pdf");
-        //}
-        public async Task<IActionResult> ExportPDF()
+            public async Task<IActionResult> ExportPDF()
         {
             // Tạo một tài liệu PDF mới
             Document pdfDoc = new Document();
@@ -387,7 +352,7 @@ namespace QuanLyKhachSan.Controllers
             // Tạo một font
             BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-            
+
 
             // Tạo một font cho tiêu đề
             Font headerFont = FontFactory.GetFont("Arial", 5, Font.BOLD, BaseColor.WHITE);
@@ -395,7 +360,7 @@ namespace QuanLyKhachSan.Controllers
 
             // Thêm tiêu đề cho các cột
             string[] headers = { "ID", "Name", "Idpersonal", "Sex", "Day of birth", "Phone number", "Address", "Duty", "Date of entry", "Condition", "UserName", "Password", "Image", "Email", "Date of registration" };
-           
+
             foreach (var header in headers)
             {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
@@ -413,9 +378,9 @@ namespace QuanLyKhachSan.Controllers
                 table.AddCell(new Phrase(nv.CCCD.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString(), contentFont));
-                table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont ));
-                table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont  ));
-                table.AddCell(new Phrase(nv.ChucVu.ToString() , contentFont));
+                table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.ChucVu.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.NgayVaoLam.ToShortDateString(), contentFont));
                 table.AddCell(new Phrase(nv.TinhTrang.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.TenDangNhap.ToString(), contentFont));
@@ -436,10 +401,14 @@ namespace QuanLyKhachSan.Controllers
             return File(bytes, "application/pdf", "NhanVien.pdf");
         }
 
+    }
+        
+       
+
 
 
     }
 
 
-}
+
 
