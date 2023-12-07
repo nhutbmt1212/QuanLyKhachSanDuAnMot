@@ -226,7 +226,7 @@ namespace QuanLyKhachSan.Controllers
                 return BadRequest("Chỉ hỗ trợ file .xlsx");
             }
 
-           
+
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using (var stream = new MemoryStream())
@@ -276,9 +276,9 @@ namespace QuanLyKhachSan.Controllers
                         list.CCCD = CCCD;
                         list.GioiTinh = GioiTinh;
                         list.SoDienThoai = SoDienThoai;
-                        list.DiaChi=DiaChi;
+                        list.DiaChi = DiaChi;
                         list.ChucVu = ChucVu;
-                        list.TinhTrang=TinhTrang;
+                        list.TinhTrang = TinhTrang;
                         list.TenDangNhap = TenDangNhap;
                         list.MatKhau = MatKhau;
                         list.AnhNhanVienBase64 = AnhNhanVienBase64;
@@ -289,12 +289,12 @@ namespace QuanLyKhachSan.Controllers
 
 
                     }
-                    
+
                 }
-            return RedirectToAction("TrangChuNhanVien", "NhanVien");
+                return RedirectToAction("TrangChuNhanVien", "NhanVien");
+            }
+
         }
-           
-    }
         //public async Task<IActionResult> ExportPDF()
         //{
         //    // Tạo một tài liệu PDF mới

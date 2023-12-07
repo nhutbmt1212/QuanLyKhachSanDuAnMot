@@ -166,50 +166,78 @@ namespace QuanLyKhachSan.Controllers
                 {
                     ExcelWorksheet worksheet = package.Workbook.Worksheets[0]; // Sử dụng sheet đầu tiên
                     var rowCount = worksheet.Dimension.Rows;
-                  
+
+                    List<int> errorRows = new List<int>();
+
                     for (int row = 2; row <= rowCount; row++)
                     {
-                        var list = new KhachHang();
-                        var MaKhachHang = worksheet.Cells[row, 1].Value.ToString().Trim();
-                        if (_db.KhachHang.Any(kh => kh.MaKhachHang == MaKhachHang))
+                        // Kiểm tra dòng trống
+                        if (worksheet.Cells[row, 1].Value == null || worksheet.Cells[row, 2].Value == null || worksheet.Cells[row, 3].Value == null || worksheet.Cells[row, 4].Value == null || worksheet.Cells[row, 5].Value == null || worksheet.Cells[row, 6].Value == null || worksheet.Cells[row, 7].Value == null || worksheet.Cells[row, 8].Value == null || worksheet.Cells[row, 9].Value == null || worksheet.Cells[row, 10].Value == null || worksheet.Cells[row, 11].Value == null)
                         {
-                           
+                            errorRows.Add(row);
                             continue;
                         }
+
+                        var MaKhachHang = worksheet.Cells[row, 1].Value.ToString().Trim();
                         var TenKhachHang = worksheet.Cells[row, 2].Value.ToString().Trim();
                         var SoDienThoai = worksheet.Cells[row, 3].Value.ToString().Trim();
                         var DiaChi = worksheet.Cells[row, 4].Value.ToString().Trim();
                         var CCCD = worksheet.Cells[row, 5].Value.ToString().Trim();
                         DateTime ngaySinh;
-                        if (DateTime.TryParse(worksheet.Cells[row, 6].Value.ToString().Trim(), out ngaySinh))
-                        {
-                            list.NgaySinh= ngaySinh;
-                        }
-
+                        DateTime.TryParse(worksheet.Cells[row, 6].Value.ToString().Trim(), out ngaySinh);
                         var GioiTinh = worksheet.Cells[row, 7].Value.ToString().Trim();
                         var Email = worksheet.Cells[row, 8].Value.ToString().Trim();
-                        var TinhTrang = worksheet.Cells[row, 9].Value.ToString();
-                        var MatKhau = worksheet.Cells[row, 10].Value.ToString();
-                        if (DateTime.TryParse(worksheet.Cells[row, 11].Value.ToString().Trim(), out DateTime ngayDangKy))
+                        var TinhTrang = worksheet.Cells[row, 9].Value.ToString().Trim();
+                        var MatKhau = worksheet.Cells[row, 10].Value.ToString().Trim();
+                        DateTime ngayDangKy;
+                        DateTime.TryParse(worksheet.Cells[row, 11].Value.ToString().Trim(), out ngayDangKy);
+
+                        var khachHang = _db.KhachHang.FirstOrDefault(kh => kh.MaKhachHang == MaKhachHang);
+                        if (khachHang != null)
                         {
-                             list.NgayDangKy = ngayDangKy;
+                            // Cập nhật khách hàng
+                            khachHang.TenKhachHang = TenKhachHang;
+                            khachHang.SoDienThoai = SoDienThoai;
+                            khachHang.DiaChi = DiaChi;
+                            khachHang.CCCD = CCCD;
+                            khachHang.NgaySinh = ngaySinh;
+                            khachHang.GioiTinh = GioiTinh;
+                            khachHang.Email = Email;
+                            khachHang.TinhTrang = TinhTrang;
+                            khachHang.MatKhau = MatKhau;
+                            khachHang.NgayDangKy = ngayDangKy;
                         }
-                        list.MaKhachHang = MaKhachHang;
-                        list.TenKhachHang = TenKhachHang;
-                        list.SoDienThoai = SoDienThoai;
-                        list.DiaChi = DiaChi;
-                        list.CCCD = CCCD;
-                        list.GioiTinh= GioiTinh;
-                        list.Email = Email;
-                        list.TinhTrang = TinhTrang;
-                        list.MatKhau = MatKhau;
-                        _db.KhachHang.Add(list);
+                        else
+                        {
+                            // Thêm khách hàng mới
+                            var list = new KhachHang
+                            {
+                                MaKhachHang = MaKhachHang,
+                                TenKhachHang = TenKhachHang,
+                                SoDienThoai = SoDienThoai,
+                                DiaChi = DiaChi,
+                                CCCD = CCCD,
+                                NgaySinh = ngaySinh,
+                                GioiTinh = GioiTinh,
+                                Email = Email,
+                                TinhTrang = TinhTrang,
+                                MatKhau = MatKhau,
+                                NgayDangKy = ngayDangKy
+                            };
+                            _db.KhachHang.Add(list);
+                        }
                         _db.SaveChanges();
+                    }
+
+                    if (errorRows.Count > 0)
+                    {
+                        return BadRequest($"Có lỗi ở các dòng: {string.Join(", ", errorRows)}. Vui lòng kiểm tra lại file Excel của bạn.");
                     }
                 }
                 return RedirectToAction("DanhSachKhachHang", "KhachHang");
             }
         }
+
         public async Task<IActionResult> ExportPDF()
         {
             // Tạo một tài liệu PDF mới
