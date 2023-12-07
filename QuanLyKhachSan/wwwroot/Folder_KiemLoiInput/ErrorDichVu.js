@@ -14,7 +14,19 @@
             $("#errorTenDV").text("");
         }
     });
-
+    $("#inputEditTenDV").on("focusout", function () {
+        var inputValue = $(this).val();
+        if (inputValue.length === 0) {
+            $("#errorEditTenDV").text("Tên dịch vụ không được để trống.");
+        }
+        else if (inputValue.length < 3) {
+            $("#errorEditTenDV").text("Độ dài ít nhất 3 ký tự.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+            $("#errorEditTenDV").text("Tên dịch vụ chỉ được chứa chữ cái và khoảng trắng.");
+        } else {
+            $("#errorEditTenDV").text("");
+        }
+    });
     $("#inputFieldDVT").on("focusout", function () {
         var inputValue = $(this).val();
         if (inputValue.length === 0) {
