@@ -5,8 +5,8 @@
     document.getElementById('ngay_text').innerText = sessionStorage.getItem('ngayNhanPhongDaTinh');
     document.getElementById('gio_text').innerText = sessionStorage.getItem('gioTraPhongDaTinh');
 
-    document.getElementById('SoLuongNguoiLonDat_text').innerText = sessionStorage.getItem('slNguoiLonTimKiem');
-    document.getElementById('SoLuongTreEmDat_text').innerText = sessionStorage.getItem('slTreEmTimKiem');
+    //document.getElementById('SoLuongNguoiLonDat_text').innerText = sessionStorage.getItem('slNguoiLonTimKiem');
+    //document.getElementById('SoLuongTreEmDat_text').innerText = sessionStorage.getItem('slTreEmTimKiem');
     document.getElementById('maPhong_DatPhong').innerText = sessionStorage.getItem('maPhong');
     document.getElementById('giaTriSoLuongNguoiLonDat').innerText = sessionStorage.getItem('slNguoiLon');
     document.getElementById('giaTriSoLuongTreEmDat').innerText = sessionStorage.getItem('slTreEm');
@@ -19,9 +19,9 @@
         type: "GET",
         url: `/TrangChuKhachHang/LayThongTinPhongTheoMaPhong?maPhong=${maPhong}`,
         success: function (result) {
-            document.getElementById('loaiPhongDatPhong').innerText = 'Loại phòng: ' + result.qr_LoaiPhong.tenLoaiPhong;
-            document.getElementById('giaTheoGioDatPhong').innerText = 'Giá theo giờ: ' + result.qr_LoaiPhong.giaTheoGio;
-            document.getElementById('giaTheoNgayDatPhong').innerText = 'Giá theo ngày: ' + result.qr_LoaiPhong.giaPhongTheoNgay;
+            document.getElementById('loaiPhongDatPhong').innerText = result.qr_LoaiPhong.tenLoaiPhong;
+            document.getElementById('giaTheoGioDatPhong').innerText = result.qr_LoaiPhong.giaTheoGio;
+            document.getElementById('giaTheoNgayDatPhong').innerText = result.qr_LoaiPhong.giaPhongTheoNgay;
         },
         error: function (error) {
             console.log(error)
@@ -39,8 +39,8 @@
             url: `/TrangChuKhachHang/LayThongTinDichVu?MaDichVu=${item}`,
             success: function (result) {
                 var quantity = soLuongDichVu[index];
-                var newDiv = document.createElement('div');
-                newDiv.innerHTML = 'Tên dịch vụ: ' + result.tenDichVu + ', Đơn giá: ' + result.giaTien + ', Số Lượng: ' + quantity;
+                var newDiv = document.createElement('span');
+                newDiv.innerHTML = `<strong>Tên:</strong> ` + result.tenDichVu + ` - <strong>Giá:</strong> ` + result.giaTien + ` - <strong>SL:</strong> ` + quantity + `<br/>`;
                 document.getElementById('ChonDichVu').appendChild(newDiv);
             },
             error: function (error) {

@@ -13,13 +13,13 @@ function fetchRoomType(maPhong, element) {
         data: { maPhong: maPhong },
         success: function (data) {
             $(".loaiPhong").text(data.tenLoaiPhong);
-            $("#loaiPhong-" + maPhong).text(data.tenLoaiPhong);
+            $("#loaiPhong-" + maPhong).text("Loại phòng: " + data.tenLoaiPhong);
 
             $("#pricetheogio-" + maPhong).text(data.giaTheoGio);
             $("#pricetheongay-" + maPhong).text(data.giaPhongTheoNgay);
 
             $("#soLuongNguoi-" + maPhong).text("Số lượng người lớn: " + data.soLuongNguoiLon + "  |  " + "Số lượng trẻ em: " + data.soLuongTreEm);
-            /*$("#phuThuTraMuon-" + maPhong).text("Phụ thu trả muộn: " + data.phuThuTraMuon + "/1 ngày");*/
+            $("#phuThuTraMuon-" + maPhong).text("Phụ thu trả muộn: " + data.phuThuTraMuon + "/1 ngày");
         }
     });
 }
@@ -31,13 +31,13 @@ function DatPhong(MaPhong) {
     var slTreEmDatPhong = document.getElementById('slTreEmDatPhong-' + MaPhong).value;
 
     var node = `
-    <strong id="maPhongDatPhong"> Mã phòng:  </strong><span id="maPhong_DatPhong">${MaPhong}</span>
-    -
+    <span id="maPhongDatPhong"> Mã phòng: <strong id="maPhong_DatPhong">${MaPhong}</strong> </span>
+    <br id="break1"/>
     <span id="loaiPhongDatPhong">${LoaiPhong}</span>
     <br id="break2"/>
-    <strong id="giaTheoGioDatPhong">Giá theo giờ:</strong> ${giaTheoGio} <br/> <strong id="giaTheoNgayDatPhong">Giá theo ngày: </strong>${giaTheoNgay}
+    <span id="giaTheoGioDatPhong">Giá theo giờ: ${giaTheoGio}</span> <span id="giaTheoNgayDatPhong">Giá theo ngày: ${giaTheoNgay}</span>
     <br id="break3"/>
-    <strong id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: </strong> <span id="giaTriSoLuongNguoiLonDat">${slNgLonDatPhong}</span> <br/> <strong id="soLuongTreEmDatPhong">Số lượng trẻ em ở: </strong><span id="giaTriSoLuongTreEmDat">${slTreEmDatPhong}</span>
+    <span id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: <span id="giaTriSoLuongNguoiLonDat">${slNgLonDatPhong}</span></span> <span id="soLuongTreEmDatPhong">Số lượng trẻ em ở: <span id="giaTriSoLuongTreEmDat">${slTreEmDatPhong}</span></span>
     <br id="break4"/>
     <button class="btn btn-outline-warning huy_datPhong_DatPhong" onclick="HuyDatPhong()" id="huy_dat_phong"><i class="bi bi-x-lg"></i>  Hủy</button>
     `;
@@ -61,7 +61,7 @@ function DatPhongKhachSan() {
 }
 function HuyDatPhong() {
     var MaPhong = document.getElementById('maPhong_DatPhong').innerText;
-  
+
     document.getElementById('maPhongDatPhong').remove();
     document.getElementById('loaiPhongDatPhong').remove();
     document.getElementById('giaTheoGioDatPhong').remove();
@@ -101,7 +101,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
         alert("Thời gian đặt phòng phải lớn hơn 3 giờ");
     }
     //convert datetime 
-  else if (ngayNhan == "") {
+    else if (ngayNhan == "") {
         alert('Bạn chưa chọn ngày nhận');
     }
     else if (ngayTra == "") {
@@ -133,7 +133,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
                         document.getElementById('SoLuongTreEmDat_text').innerHTML = slTreEm;
                         document.getElementById('btn_DatPhong').style.display = 'block';
                     }
-                    
+
                     else {
                         $(this).show();
                         reportPhong.style.display = "none";
@@ -152,23 +152,23 @@ document.getElementById('TimKiemPhong').onclick = function () {
                         document.getElementById('btn_DatPhong').style.display = 'block';
                     }
                 });
-               
+
                 if ($('.room-detail:visible').length == 0) {
                     room_infor.style.display = "none";
                     reportPhong.style.display = "block";
 
                 }
-                
+
             },
-           
+
             error: function (error) {
                 console.log(error);
             }
         });
-  
-           
-        
-      
+
+
+
+
     }
 }
 var arrDichVuDaChon = [];
@@ -233,7 +233,8 @@ function ThemDichVu() {
             }
             var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
             var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
-            var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;            $('#TongDichVuDaDat').append(nodeServices);
+            var nodeServices = `<br id="breakDichVu${counter}"/><strong id="tongTenDichVuDaDat${counter}">Tên dịch vụ: </strong>${dichVuDaChon} | <strong id="tongSoLuongDichVuDaDat${counter}">Số lượng: </strong>${soLuongDichVu}`;
+            $('#TongDichVuDaDat').append(nodeServices);
             //mảng để tính tiền
             TinhTienDichVu();
         },
@@ -241,9 +242,9 @@ function ThemDichVu() {
             console.error('Error fetching data:', error);
         }
     });
-    
 
-   
+
+
 }
 function TinhTienDichVu() {
     var ThanhTienMaDichVu = [];
@@ -270,25 +271,25 @@ function TinhTienDichVu() {
 
 
 function DichVuDaChon(id) {
-    
+
     var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
     if (arrDichVuDaChon[id] == "") {
         console.log("mảng rỗng")
     }
     else {
-       
+
         var dichVuDaChon = document.getElementById('themdichvuselect' + id).value;
         var soLuongDichVu = document.getElementById('soLuongDichVu' + id).value;
 
         var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + id;
-        var tongTextSoLuongDichVuDaDat=document.getElementById("tongSoLuongDichVuDaDat" +id);
+        var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
         document.getElementById(tongTextTenDichVuDaDat).innerText = `Tên dịch vụ: ${dichVuDaChon} | `;
         tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${soLuongDichVu}`;
         arrDichVuDaChon[id] = dichVuDaChonTheoId;
         TinhTienDichVu();
-        }
+    }
 }
-  
+
 function ThayDoiSoLuongDichVu(id) {
     var SoLuongDichVuDaThayDoi = document.getElementById('soLuongDichVu' + id).value;
     var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
@@ -301,7 +302,7 @@ function XoaSelectDichVu(idSelect) {
     arrDichVuDaChon[idSelect] = "";
     document.getElementById('AddThemDichVu').style.display = 'block';
     //xóa text dịch vụ đã chọn
-    var tongTextTenDichVuDaDat ="tongTenDichVuDaDat" + idSelect;
+    var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + idSelect;
     var tongTextSoLuongDaDat = "tongSoLuongDichVuDaDat" + idSelect;
     var breakTongDichVu = "breakDichVu" + idSelect;
     document.getElementById(tongTextSoLuongDaDat).remove();
@@ -381,7 +382,7 @@ function TinhTongTienDatPhong() {
     var TongTienPhong = parseFloat(document.getElementById('TongTienPhong').innerText);
     var TongTienDichVu = parseInt(document.getElementById('TongTienDichVuDaDat').innerText);
     console.log(TongTienPhong, TongTienDichVu);
-   document.getElementById('TongTien').innerText= TongTienPhong + TongTienDichVu;
+    document.getElementById('TongTien').innerText = TongTienPhong + TongTienDichVu;
 };
 
 document.getElementById('btn_DatPhong').addEventListener('click', DatPhongKhachSan);

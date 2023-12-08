@@ -187,7 +187,7 @@ namespace QuanLyKhachSan.Controllers
                 }
             }
             _db.SaveChanges();
-            return Json("ok");
+            return Json("Data received and saved successfully.");
         }
 
 
