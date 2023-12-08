@@ -261,6 +261,18 @@
                         <th>Thời gian trả</th>
                     <td id="thoiGianTraThanhToan_PopUp">04/12/2023 17:04</td>
                     </tr>
+                <tr>
+                    <th>Hình thức đặt phòng</th>
+                    <td id="hinhThucDatPhongThanhToan_PopUp"></td>
+                </tr>
+                <tr>
+                    <th>Giá phòng</th>
+                    <td id="giaPhongThanhToan_PopUp">
+                        <span>Giá theo giờ: </span><span id="giaTheoGioThanhToan_PopUp">100000000</span>
+                        <br/>
+                        <span>Giá theo ngày: </span><span id="giaTheoNgayThanhToan_PopUp">200000000</span>
+                    </td>
+                </tr>
                     <tr>
                         <th>Tên khách hàng</th>
                         <td id="tenKhachHangThanhToan_PopUp">Nguyễn văn a</td>
@@ -294,15 +306,19 @@
                 <table>
                     <tr>
                         <th>Tổng tiền phòng</th>
-                        <td>2.000.000 VNĐ</td>
+                        <td id="tongTienPhongThanhToan_PopUp">2.000.000 VNĐ</td>
                     </tr>
                     <tr>
                         <th>Tổng tiền dịch vụ</th>
-                        <td>60.000 VNĐ</td>
+                    <td id="tongTienDichVu_PopUp">60.000 VNĐ</td>
                     </tr>
+                <tr>
+                    <th>Số tiền khách đã trả</th>
+                    <td id="soTienKhachDaTra_PopUp">2.060.000 VND</td>
+                </tr>
                     <tr>
                         <th>Tổng tiền</th>
-                        <td id="total">2.060.000 VND</td>
+                        <td id="tongTienThanhToan_PopUp">2.060.000 VND</td>
                     </tr>
 
                     <tr>
@@ -311,8 +327,8 @@
                     </tr>
                 </table>
                 <div class="button-group">
-                    <button onclick="closePopupThanhToan()">Đóng</button>
-                    <button onclick="confirmPayment()">Thanh toán</button>
+                    <button class="btn btn-danger" onclick="closePopupThanhToan()">Đóng</button>
+                    <button class="btn btn-success" onclick="ThanhToan()">Thanh toán</button>
                 </div>
             </div>
         </div>

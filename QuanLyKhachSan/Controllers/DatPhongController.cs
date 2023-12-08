@@ -117,15 +117,49 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult LayThanhToanMaDatPhong(string maPhong)
         {
             var qr_MaDatPhongTheoNgayGioHienTai = _db.DatPhong.FirstOrDefault(s => s.MaPhong == maPhong && s.NgayNhan <= DateTime.Now && s.NgayTra >= DateTime.Now);
-            var qr_MaKhachHangTheoMaDatPhong = _db.KhachHang.FirstOrDefault(s=>s.MaKhachHang == qr_MaDatPhongTheoNgayGioHienTai.MaKhachHang);
+            var qr_MaKhachHangTheoMaDatPhong = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == qr_MaDatPhongTheoNgayGioHienTai.MaKhachHang);
+            var qr_PhongTheoMaPhong = _db.Phong.FirstOrDefault(s => s.MaPhong == maPhong);
+            var qr_LoaiPhongTheoMaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == qr_PhongTheoMaPhong.MaLoaiPhong);
 
             var qr_DichVuTheoMaDatPhong = _db.ChiTietDichVu
-          .Where(s => s.MaDatPhong == qr_MaDatPhongTheoNgayGioHienTai.MaDatPhong)
-          .Join(_db.DichVu, ctdv => ctdv.MaDichVu, dv => dv.MaDichVu, (ctdv, dv) => new { ctdv.MaDichVu, ctdv.SoLuong, dv.TenDichVu,dv.GiaTien })
-          .ToList(); // Include MaDichVu, SoLuong, and TenDichVu in the result
+                .Where(s => s.MaDatPhong == qr_MaDatPhongTheoNgayGioHienTai.MaDatPhong)
+                .Join(_db.DichVu, ctdv => ctdv.MaDichVu, dv => dv.MaDichVu, (ctdv, dv) => new { ctdv.MaDichVu, ctdv.SoLuong, dv.TenDichVu, dv.GiaTien })
+                .Select(s => new { s.MaDichVu, s.TenDichVu, s.SoLuong, s.GiaTien, ThanhTien = s.SoLuong * s.GiaTien }) // Calculate ThanhTien
+                .ToList();
 
-            return Json(new { qr_MaDatPhongTheoNgayGioHienTai ,qr_MaKhachHangTheoMaDatPhong,qr_DichVuTheoMaDatPhong});
+            return Json(new { qr_MaDatPhongTheoNgayGioHienTai, qr_MaKhachHangTheoMaDatPhong, qr_DichVuTheoMaDatPhong,qr_LoaiPhongTheoMaPhong });
+        }
+        [HttpGet]
+        public IActionResult ThanhToanPhong(string MaDatPhong, int TongTienDichVu , int TongTienPhong,int SoTienThanhToan)
+        {
+            var MaNhanVienDatPhong = User.FindFirst(ClaimTypes.Surname)?.Value;
 
+            Random random = new Random();
+
+            // mã random mã đặt phòng
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomCharacterLastMaDatPhong = new string(Enumerable.Repeat(chars, 4)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+            string MaHoaDon = "HD" + randomCharacterLastMaDatPhong;
+
+            var qr_maDatPhong = _db.DatPhong.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+            qr_maDatPhong.TinhTrang = "Đã thanh toán";
+            _db.DatPhong.Update(qr_maDatPhong);
+            var hoaDon = new HoaDon
+            {
+                MaHoaDon = MaHoaDon,
+                MaDatPhong = MaDatPhong,
+                ThoiGianThanhToan = DateTime.Now,
+                MaNhanVien = MaNhanVienDatPhong,
+                TongTienDichVu = TongTienDichVu,
+                TongTienPhong = TongTienPhong,
+                SoTienThanhToan = SoTienThanhToan
+            };
+           
+            _db.HoaDon.Add(hoaDon);
+            _db.SaveChanges();
+
+            return RedirectToAction("Index","DatPhong");
         }
     }
 }
