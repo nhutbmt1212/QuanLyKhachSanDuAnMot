@@ -378,8 +378,6 @@ function TimKiemTatCa() {
     document.getElementById('TimKiemTatCa').classList = "btn btn-light active";
     document.getElementById('TimKiemTrong').classList = "btn btn-light ";
     document.getElementById('TimKiemDaDat').classList = "btn btn-light ";
-
-
 }
 function TimKiemTrong() {
     document.getElementById('TimKiemTatCa').classList = "btn btn-light ";

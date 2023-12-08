@@ -1,19 +1,4 @@
 ﻿    $(document).ready(function () {
-
-    // Bắt sự kiện khi người dùng click vào ô input tên nhân viên
-    $("#inputFieldTenNV").on("focusout", function () {
-        var inputValue = $(this).val();
-
-        if (inputValue.length < 3) {
-            $("#errorTenNV").text("Độ dài ít nhất 3 ký tự.");
-        } else if (inputValue.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
-        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
-            $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
-        } else {
-            $("#errorTenNV").text("");
-        }
-    });
     $("#inputEditTenNV").on("focusout", function () {
         var inputValue = $(this).val();
 
