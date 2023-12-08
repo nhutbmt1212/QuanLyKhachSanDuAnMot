@@ -106,17 +106,7 @@
             $("#errorEditGioKT").text("");
         }
     });
-    $("#inputEditTinhTrang").on("focusout", function () {
-        var TinhTrangValue = $(this).val();
-
-        if (TinhTrangValue.length === 0) {
-            $("#errorEditTinhTrang").text("Tình trạng không được để trống.");
-        } else if (!isValidTinhTrang(TinhTrangValue)) {
-            $("#errorEditTinhTrang").text("Tình trạng không hợp lệ.");
-        } else {
-            $("#errorEditTinhTrang").text("");
-        }
-    });
+    
    
 
 
