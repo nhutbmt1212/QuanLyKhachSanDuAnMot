@@ -13,13 +13,13 @@ function fetchRoomType(maPhong, element) {
         data: { maPhong: maPhong },
         success: function (data) {
             $(".loaiPhong").text(data.tenLoaiPhong);
-            $("#loaiPhong-" + maPhong).text("Loại phòng: " + data.tenLoaiPhong);
+            $("#loaiPhong-" + maPhong).text(data.tenLoaiPhong);
 
             $("#pricetheogio-" + maPhong).text(data.giaTheoGio);
             $("#pricetheongay-" + maPhong).text(data.giaPhongTheoNgay);
 
             $("#soLuongNguoi-" + maPhong).text("Số lượng người lớn: " + data.soLuongNguoiLon + "  |  " + "Số lượng trẻ em: " + data.soLuongTreEm);
-            $("#phuThuTraMuon-" + maPhong).text("Phụ thu trả muộn: " + data.phuThuTraMuon + "/1 ngày");
+            /*$("#phuThuTraMuon-" + maPhong).text("Phụ thu trả muộn: " + data.phuThuTraMuon + "/1 ngày");*/
         }
     });
 }
@@ -31,13 +31,13 @@ function DatPhong(MaPhong) {
     var slTreEmDatPhong = document.getElementById('slTreEmDatPhong-' + MaPhong).value;
 
     var node = `
-    <span id="maPhongDatPhong"> Mã phòng: <strong id="maPhong_DatPhong">${MaPhong}</strong> </span>
-    <br id="break1"/>
+    <strong id="maPhongDatPhong"> Mã phòng:  </strong><span id="maPhong_DatPhong">${MaPhong}</span>
+    -
     <span id="loaiPhongDatPhong">${LoaiPhong}</span>
     <br id="break2"/>
-    <span id="giaTheoGioDatPhong">Giá theo giờ: ${giaTheoGio}</span> <span id="giaTheoNgayDatPhong">Giá theo ngày: ${giaTheoNgay}</span>
+    <strong id="giaTheoGioDatPhong">Giá theo giờ:</strong> ${giaTheoGio} <br/> <strong id="giaTheoNgayDatPhong">Giá theo ngày: </strong>${giaTheoNgay}
     <br id="break3"/>
-    <span id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: <span id="giaTriSoLuongNguoiLonDat">${slNgLonDatPhong}</span></span> <span id="soLuongTreEmDatPhong">Số lượng trẻ em ở: <span id="giaTriSoLuongTreEmDat">${slTreEmDatPhong}</span></span>
+    <strong id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: </strong> <span id="giaTriSoLuongNguoiLonDat">${slNgLonDatPhong}</span> <br/> <strong id="soLuongTreEmDatPhong">Số lượng trẻ em ở: </strong><span id="giaTriSoLuongTreEmDat">${slTreEmDatPhong}</span>
     <br id="break4"/>
     <button class="btn btn-outline-warning huy_datPhong_DatPhong" onclick="HuyDatPhong()" id="huy_dat_phong"><i class="bi bi-x-lg"></i>  Hủy</button>
     `;
@@ -233,7 +233,7 @@ function ThemDichVu() {
             }
             var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
             var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
-            var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
+            var nodeServices = `<br id="breakDichVu${counter}"/><strong id="tongTenDichVuDaDat${counter}">Tên dịch vụ: </strong>${dichVuDaChon} | <strong id="tongSoLuongDichVuDaDat${counter}">Số lượng: </strong>${soLuongDichVu}`;
             $('#TongDichVuDaDat').append(nodeServices);
             //mảng để tính tiền
             TinhTienDichVu();
