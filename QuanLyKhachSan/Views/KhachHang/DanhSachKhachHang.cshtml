@@ -167,8 +167,8 @@
         </form>
     </div>
 
-    <!-- Nút Thêm Khách Hàng -->
-    <a class="btn btn-primary mb-2" id="btn_themKh" onclick="openForm()">Thêm khách hàng</a>
+
+
     <form method="post" enctype="multipart/form-data" asp-controller="KhachHang" asp-action="Import">
         <div class="form-group">
             <div class="col-md-10">
@@ -178,12 +178,22 @@
         </div>
         <div class="form-group">
             <div class="col-md-10">
-                <input type="submit" value="Upload" />
+                <input type="submit" class="btn btn-primary" value="Upload" />
             </div>
         </div>
     </form>
-    <a class="btn btn-success" id="btn_exportPDF" asp-controller="KhachHang" asp-action="ExportPDF">Export to PDF</a>
-    <a class="btn btn-success" id="btn_export" asp-controller="KhachHang" asp-action="ExportExcel">Export to Excel</a>
+    <a class="btn btn-success mb-3" id="btn_exportPDF" asp-controller="KhachHang" asp-action="ExportPDF">Export to PDF</a>
+    <a class="btn btn-success mb-3" id="btn_export" asp-controller="KhachHang" asp-action="ExportExcel">Export to Excel</a>
+
+    <!-- Nút Thêm Khách Hàng -->
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-primary mb-2" id="btn_themKh" onclick="openForm()">Thêm khách hàng</a>
+        </div>
+        <div class="col-sm-6">
+            <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
+        </div>
+    </div>
     <!-- Bảng Hiển Thị Danh Sách Khách Hàng -->
     <div id="detailKhachHang">
         <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
@@ -298,6 +308,22 @@
         if (swalIcon && swalTitle) {
             showSwalToast(swalIcon, swalTitle);
         }
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#searchInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("table tbody tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+
+            // Bắt sự kiện thay đổi giá trị trong dropdown "Show"
+            $('select[name="example_length"]').on('change', function () {
+                var selectedValue = $(this).val();
+                $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
+            });
+        });
     </script>
 </body>
 </html>
