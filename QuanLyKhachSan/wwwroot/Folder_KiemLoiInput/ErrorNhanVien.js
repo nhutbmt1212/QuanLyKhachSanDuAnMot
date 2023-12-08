@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+﻿    $(document).ready(function () {
 
     // Bắt sự kiện khi người dùng click vào ô input tên nhân viên
     $("#inputFieldTenNV").on("focusout", function () {

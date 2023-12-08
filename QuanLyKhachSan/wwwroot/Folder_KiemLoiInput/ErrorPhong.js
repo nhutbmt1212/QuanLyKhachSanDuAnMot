@@ -25,6 +25,17 @@
             $("#errorChonLP").text("");
         }
     });
+    $("#inputEditChonLP").on("change", function () {
+        // Lấy giá trị từ select
+        var selectedValue = $(this).val();
+
+        // Kiểm tra điều kiện và hiển thị thông báo lỗi
+        if (selectedValue === "") {
+            $("#errorEditChonLP").text("Vui lòng chọn tên một loại phòng.");
+        } else {
+            $("#errorEditChonLP").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input ngày vào làm
     $("#inputFieldNgayTao").on("focusout", function () {
         var ngayTaoValue = $(this).val();
@@ -39,8 +50,31 @@
             $("#errorNgayTao").text("");
         }
     });
+    $("#inputEditNgayTao").on("focusout", function () {
+        var ngayTaoValue = $(this).val();
 
+        if (ngayTaoValue.length === 0) {
+            $("#errorEditNgayTao").text("Ngày tạo không được để trống.");
+        } else if (!isValidNgayTao(ngayTaoValue)) {
+            $("#errorEditNgayTao").text("Ngày tạo không hợp lệ.");
+        } else if (isGreaterThan7Days(ngayTaoValue)) {
+            $("#errorEditNgayTao").text("Ngày tạo không được lớn hơn ngày hiện tại quá 7 ngày.");
+        } else {
+            $("#errorEditNgayTao").text("");
+        }
+    });
+    $("#inputEditTinhTrang").on("focusout", function () {
+        var TinhTrangValue = $(this).val();
 
+        if (TinhTrangValue.length === 0) {
+            $("#errorEditTinhTrang").text("Ngày tạo không được để trống.");
+        } else if (!isValidTinhTrang(TinhTrangValue)) {
+            $("#errorEditTinhTrang").text("Ngày tạo không hợp lệ.");
+        } else {
+            $("#errorEditTinhTrang").text("");
+        }
+        
+    });
     // Bắt sự kiện khi form được submit
     $("#myForm").submit(function (event) {
         var inputValueMaLP = $("#inputFieldMaP").val();

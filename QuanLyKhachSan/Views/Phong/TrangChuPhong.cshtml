@@ -233,22 +233,25 @@
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
-                        <select class="form-control maloaiphongedit" name="maLoaiPhong">
+                        <select class="form-control maloaiphongedit" name="maLoaiPhong" id="inputEditChonLP">
                             <option value="">Chọn loại phòng</option>
                             @foreach (var phong in ViewBag.DanhSachPhong)
                             {
                                 <option value="@phong.LoaiPhong.MaLoaiPhong">@phong.LoaiPhong.TenLoaiPhong</option>
                             }
                         </select>
+                        <span id="errorEditChonLP" style="color: red;"></span>
                     </div>
 
                     <div class="form-group">
                         <label>Ngày tạo</label>
-                        <input class="form-control ngaytaoedit" name="ngaytao" />
+                        <input class="form-control ngaytaoedit" name="ngaytao" id="inputEditNgayTao" />
+                        <span id="errorEditNgayTao" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Tình trạng</label>
-                        <input class="form-control tinhtrangedit" name="tinhtrang" />
+                        <input class="form-control tinhtrangedit" name="tinhtrang" id="inputEditTinhTrang" />
+                        <span id="errorEditTinhTrang" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
