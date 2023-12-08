@@ -94,6 +94,7 @@ $(document).ready(function () {
             },
             success: function (response) {
                 console.log(response);
+                window.location.href = '/TrangChuKhachHang/Index';
             },
             error: function (error) {
                 console.error('Error:', error);

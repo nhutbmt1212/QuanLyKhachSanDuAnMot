@@ -233,8 +233,7 @@ function ThemDichVu() {
             }
             var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
             var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
-            var nodeServices = `<br id="breakDichVu${counter}"/><strong id="tongTenDichVuDaDat${counter}">Tên dịch vụ: </strong>${dichVuDaChon} | <strong id="tongSoLuongDichVuDaDat${counter}">Số lượng: </strong>${soLuongDichVu}`;
-            $('#TongDichVuDaDat').append(nodeServices);
+            var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;            $('#TongDichVuDaDat').append(nodeServices);
             //mảng để tính tiền
             TinhTienDichVu();
         },
@@ -313,7 +312,7 @@ function XoaSelectDichVu(idSelect) {
 $(document).ready(function () {
     $('.room-detail').each(function () {
         var roomElement = $(this);
-        var maPhong = roomElement.data('room-id'); 
+        var maPhong = roomElement.data('room-id');
 
         $.ajax({
             url: '/TrangChuKhachHang/SlideAnhPhong',
@@ -321,8 +320,8 @@ $(document).ready(function () {
             data: { maPhong: maPhong },
             success: function (data) {
                 if (data && data.length > 0) {
-                    roomElement.find('.slider').data('images', data); 
-                    updateImage(roomElement.find('.slider')); 
+                    roomElement.find('.slider').data('images', data);
+                    updateImage(roomElement.find('.slider'));
                 }
             },
             error: function (error) {
@@ -335,9 +334,9 @@ $(document).ready(function () {
             var currentIndex = slider.data('current-index');
             var images = slider.data('images');
             if (currentIndex < images.length - 1) {
-                slider.data('current-index', currentIndex + 1); 
+                slider.data('current-index', currentIndex + 1);
             } else {
-                slider.data('current-index', 0); 
+                slider.data('current-index', 0);
             }
             updateImage(slider);
         });
@@ -347,15 +346,31 @@ $(document).ready(function () {
             var currentIndex = slider.data('current-index');
             var images = slider.data('images');
             if (currentIndex > 0) {
-                slider.data('current-index', currentIndex - 1); 
+                slider.data('current-index', currentIndex - 1);
             } else {
-                slider.data('current-index', images.length - 1); 
+                slider.data('current-index', images.length - 1);
             }
-            updateImage(slider); 
+            updateImage(slider);
         });
 
+        // Tự động chuyển slide sau mỗi 2 giây
+        setInterval(function () {
+            roomElement.find('.next').click();
+        }, 8000);
     });
 });
+
+function updateImage(slider) {
+    var images = slider.data('images');
+    var currentIndex = slider.data('current-index');
+    var img = images[currentIndex];
+    slider.fadeOut(500, function () {
+        slider.css('background-image', 'url(' + img + ')');
+        slider.fadeIn(500);
+    });
+}
+
+
 function updateImage(slider) {
     var currentIndex = slider.data('current-index');
     var images = slider.data('images');
