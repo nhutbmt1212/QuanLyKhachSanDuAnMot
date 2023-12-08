@@ -47,8 +47,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Mã Nhân Viên</label>
-                            <input class="form-control" name="manhanvien" id="inputFieldMaNV" maxlength="6" />
-                            <span id="errorMaNV" style="color: red;"></span>
+                            <input class="form-control" name="manhanvien" id="inputFieldMaNV" maxlength="6" readonly placeholder="Mã nhân viên tự động"/>
                         </div>
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
@@ -257,12 +256,12 @@
                 </div>
             </form>
         </div>
-        @* -- *@
-        <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
+      
+
         <form method="post" enctype="multipart/form-data" asp-controller="NhanVien" asp-action="Import">
             <div class="form-group">
                 <div class="col-md-10">
-                    <p>Upload one or more files using this form:</p>
+                    <p>Chọn file Excel để upload:</p>
                     <input type="file" name="formFile"  />
                 </div>
             </div>
@@ -272,8 +271,21 @@
                 </div>
             </div>
         </form>
-        <a class="btn btn-success" id="btn_exportPDF" asp-controller="NhanVien" asp-action="ExportPDF">Export to PDF</a>
-        <a class="btn btn-success" id="btn_export" asp-controller="NhanVien" asp-action="ExportExcel">Export to Excel</a>
+        <div class="row">
+            <a class="btn btn-success mb-3 ml-3" id="btn_exportPDF" asp-controller="NhanVien" asp-action="ExportPDF">Export to PDF</a>
+            <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="NhanVien" asp-action="ExportExcel">Export to Excel</a>
+        </div>
+
+        @* --Thêm nhân viên -- *@
+        <div class="row">
+            <div class="col-sm-4">
+                <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
+            </div>
+            <div class="col-sm-6">
+                <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
+            </div>
+        </div>
+      
         <div id="detailNhanVien">
             <table class="table table-striped" id="table_detail" style="border:1px solid #343A40">
 
@@ -413,6 +425,22 @@
             if (swalIcon && swalTitle) {
                 showSwalToast(swalIcon, swalTitle);
             }
+        </script>
+        <script>
+            $(document).ready(function () {
+                $("#searchInput").on("keyup", function () {
+                    var value = $(this).val().toLowerCase();
+                    $("table tbody tr").filter(function () {
+                        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                    });
+                });
+
+                // Bắt sự kiện thay đổi giá trị trong dropdown "Show"
+                $('select[name="example_length"]').on('change', function () {
+                    var selectedValue = $(this).val();
+                    $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
+                });
+            });
         </script>
     </body>
     </html>

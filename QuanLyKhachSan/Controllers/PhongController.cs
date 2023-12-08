@@ -71,7 +71,6 @@ namespace QuanLyKhachSan.Controllers
             
         }
 
-
         [HttpPost]
         public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
         {
@@ -97,4 +96,6 @@ namespace QuanLyKhachSan.Controllers
             return View("Index");
         }
     }
+
 }
+

@@ -345,7 +345,7 @@ function DatPhong() {
         },
         traditional: true,
         success: function (result) {
-            console.log(result)
+            window.location.href = '/DatPhong/Index';
         },
         error: function (xhr, status, error) {
         }
@@ -367,8 +367,24 @@ function ThanhToan() {
         },
         traditional: true,
         success: function (result) {
-            console.log(result)
+            window.location.href = '/DatPhong/Index';
         },
         error: function (xhr, status, error) {
         }
-    }); }
+    });
+}
+
+function TimKiemTatCa() {
+    document.getElementById('TimKiemTatCa').classList = "btn btn-light active";
+    document.getElementById('TimKiemTrong').classList = "btn btn-light ";
+    document.getElementById('TimKiemDaDat').classList = "btn btn-light ";
+}
+function TimKiemTrong() {
+    document.getElementById('TimKiemTatCa').classList = "btn btn-light ";
+    document.getElementById('TimKiemTrong').classList = "btn btn-light active";
+    document.getElementById('TimKiemDaDat').classList = "btn btn-light ";
+} function TimKiemDaDat() {
+    document.getElementById('TimKiemTatCa').classList = "btn btn-light ";
+    document.getElementById('TimKiemTrong').classList = "btn btn-light ";
+    document.getElementById('TimKiemDaDat').classList = "btn btn-light active";
+}

@@ -116,7 +116,7 @@ namespace QuanLyKhachSan.Controllers
         [HttpGet]
         public IActionResult LayThanhToanMaDatPhong(string maPhong)
         {
-            var qr_MaDatPhongTheoNgayGioHienTai = _db.DatPhong.FirstOrDefault(s => s.MaPhong == maPhong && s.NgayNhan <= DateTime.Now && s.NgayTra >= DateTime.Now);
+            var qr_MaDatPhongTheoNgayGioHienTai = _db.DatPhong.FirstOrDefault(s => s.MaPhong == maPhong && s.NgayNhan <= DateTime.Now && s.NgayTra >= DateTime.Now && s.TinhTrang!= "Đã thanh toán");
             var qr_MaKhachHangTheoMaDatPhong = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == qr_MaDatPhongTheoNgayGioHienTai.MaKhachHang);
             var qr_PhongTheoMaPhong = _db.Phong.FirstOrDefault(s => s.MaPhong == maPhong);
             var qr_LoaiPhongTheoMaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == qr_PhongTheoMaPhong.MaLoaiPhong);

@@ -1,18 +1,4 @@
 ﻿$(document).ready(function () {
-    // Bắt sự kiện khi người dùng click vào ô input mã nhân viên
-    $("#inputFieldMaP").on("focusout", function () {
-        var inputValue = $(this).val();
-
-        if (inputValue.length < 5) {
-            $("#errorMaP").text("Độ dài ít nhất 5 ký tự.");
-        } else if (inputValue.length === 0) {
-            $("#errorMaP").text("Mã phòng không được để trống.");
-        } else if (/[^a-zA-Z0-9]/.test(inputValue)) {
-            $("#errorMaP").text("Mã phòng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
-        } else {
-            $("#errorMaP").text("");
-        }
-    });
     // Bắt sự kiện khi người dùng thay đổi giá trị của select
     $("#inputFieldChonLP").on("change", function () {
         // Lấy giá trị từ select
@@ -77,15 +63,6 @@
     });
     // Bắt sự kiện khi form được submit
     $("#myForm").submit(function (event) {
-        var inputValueMaLP = $("#inputFieldMaP").val();
-        if (inputValueMaLP.length === 0) {
-            $("#errorMaP").text("Mã phòng không được để trống.");
-            // Ngăn chặn submit nếu có lỗi
-            event.preventDefault();
-        } else if (/[^a-zA-Z0-9]/.test(inputValueMaLP)) {
-            $("#errorMaP").text("Mã phòng không được chứa ký tự đặc biệt hoặc khoảng trắng.");
-            event.preventDefault();
-        }
 
         var selectedValue = $("#inputFieldChonLP").val();
         if (selectedValue === "") {

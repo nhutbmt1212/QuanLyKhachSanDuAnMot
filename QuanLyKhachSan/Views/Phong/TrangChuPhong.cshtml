@@ -156,7 +156,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Mã phòng</label>
-                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" readonly placeholder="Mã phòng tự động"/>
                         <span id="errorMaP" style="color: red;"></span>
                     </div>
                     <div class="form-group">
@@ -229,7 +229,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Mã phòng</label>
-                        <input class="form-control maphongedit" name="maphong" />
+                        <input class="form-control maphongedit" name="maphong" readonly/>
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
@@ -272,7 +272,15 @@
         </form>
     </div>
     <!-- Nút Thêm Phòng -->
-    <a class="btn btn-primary" id="btn_themPhong" onclick="openForm()">Thêm phòng</a>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <a class="btn btn-primary" id="btn_themPhong" onclick="openForm()">Thêm phòng</a>
+        </div>
+        <div class="col-sm-6">
+            <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
+        </div>
+    </div>
     <!-- Bảng Hiển Thị Danh Sách Phòng -->
     <div>
         <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
@@ -353,125 +361,6 @@
 
 
 </html>
-
-
-<script>
-    var currentEditingPhongId = null;
-    function createImageContainer(url) {
-        var imageContainer = $('<div class="image-container">');
-        var img = $('<img>').attr('src', url);
-        var deleteIcon = $('<span class="delete-icon">').text('X').click(function () {
-            imageContainer.remove();
-        });
-
-        return imageContainer.append(img, deleteIcon);
-    }
-
-    function previewImages() {
-        var input = $('#ImageUrl')[0];
-        var addContainer = $('#addImagePreviewContainer');
-        var editContainer = $('#editImagePreviewContainer');
-
-        addContainer.html(''); // Clear the add container
-        editContainer.html(''); // Clear the edit container
-
-        if (input.files && input.files.length > 0) {
-            for (var i = 0; i < input.files.length; i++) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    createImageContainer(e.target.result).appendTo(addContainer);
-                };
-
-                reader.readAsDataURL(input.files[i]);
-            }
-        }
-    }
-
-    function switchSection(section) {
-        $('.add-section, .edit-section').hide();
-        $('#addButton, #editButton').hide();
-
-        if (section === 'add') {
-            $('.add-section').show();
-            $('#addButton').show();
-        } else if (section === 'edit') {
-            $('.edit-section').show();
-            $('#editButton').show();
-        }
-    }
-
-    $('#addButton').on('click', function (e) {
-        e.preventDefault();
-        switchSection('add');
-    });
-
-    function editImages(phongId) {
-        currentEditingPhongId = phongId;
-
-        // Set the images for preview
-        $.get('/Phong/GetImages?phongId=' + phongId, function (data) {
-            var container = $('#editImagePreviewContainer').html('');
-
-            data.forEach(function (url) {
-                createImageContainer("/UploadImage/" + url).appendTo(container);
-            });
-
-            // Show the "Sửa ảnh" button
-            $('#editButton').show();
-        });
-    }
-    $('.employee-info-column-button .dropdown .dropdown-menu a.dropdown-item').on('click', function () {
-        var phongId = $(this).closest('tr').data('ma-phong');
-        editImages(phongId);
-    });
-
-    $('#btn_Sua').on('click', function () {
-        var phongId = $(this).closest('tr').data('ma-phong');
-        editImages(phongId);
-    });
-
-    // Event handler for the "Sửa ảnh" button
-
-    $('#editButton').on('click', function () {
-        saveEditedImages(currentEditingPhongId);
-    });
-
-    $('#ImageUrl').off('change').on('change', function (e) {
-        e.preventDefault();
-        previewImages();
-    });
-    function saveEditedImages(phongId) {
-        var editedImageUrls = [];
-
-        $('.image-container img').each(function () {
-            editedImageUrls.push($(this).attr('src').replace('/UploadImage/', ''));
-        });
-
-        $.ajax({
-            url: '/Phong/SuaAnh',
-            type: 'POST',
-            traditional: true,
-            data: { phongId: phongId, editedImageUrls: editedImageUrls },
-            success: function (response) {
-                if (response.success) {
-                    alert('Images updated successfully.');
-                } else {
-                    alert('Failed to update images. Please try again.');
-                }
-
-                $('.add-section, .edit-section').hide();
-                $('#addButton, #editButton').hide().show();
-            },
-            error: function () {
-                alert('An error occurred while updating images. Please try again.');
-            }
-        });
-    }
-
-</script>
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     function showSwalToast(icon, title) {
@@ -498,4 +387,20 @@
     if (swalIcon && swalTitle) {
         showSwalToast(swalIcon, swalTitle);
     }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#searchInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("table tbody tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+
+        // Bắt sự kiện thay đổi giá trị trong dropdown "Show"
+        $('select[name="example_length"]').on('change', function () {
+            var selectedValue = $(this).val();
+            $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
+        });
+    });
 </script>

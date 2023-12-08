@@ -28,9 +28,9 @@
     <div class="container">
 
         <div>
-            <button type="button" class="btn btn-light">Tất cả</button>
-            <button type="button" class="btn btn-light">Trống</button>
-            <button type="button" class="btn btn-light">Đã đặt</button>
+            <button type="button" id="TimKiemTatCa" class="btn btn-light active" onclick="TimKiemTatCa()">Tất cả</button>
+            <button type="button" id="TimKiemTrong" class="btn btn-light" onclick="TimKiemTrong()">Trống</button>
+            <button type="button" id="TimKiemDaDat" class="btn btn-light" onclick="TimKiemDaDat()">Đã đặt</button>
         </div>
         <div id="totalRoom" class="container">
             <div class="row">
@@ -52,7 +52,7 @@
 
                             @if (isReservationApproved)
                             {
-                                <span class="trangthai text-white" style="background-color:red;" >Đã được thuê</span>
+                                <span class="trangthai text-white" style="background-color:red;">Đã được thuê</span>
                             }
                             else
                             {
@@ -65,8 +65,8 @@
                             <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
                             <div class="gia_theo_gio_div">
                                 <span class="title_giatheogio">Giá theo giờ: </span>
-                                
-                              
+
+
                                 <span class="content_giatheogio text-right">@qr_GiaPhong_MaPhong.GiaTheoGio</span>
                             </div>
                             <div class="gia_theo_ngay_div">
@@ -77,11 +77,12 @@
                                 <button type="button" data-toggle="dropdown" class="btn_threedot">
                                     <i class="bi bi-three-dots"></i>
                                 </button>
-                               
+
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</a>
-                                    @if(isReservationApproved){
-                                       <a class="dropdown-item" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</a>
+                                    @if (isReservationApproved)
+                                    {
+                                        <a class="dropdown-item" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</a>
 
                                     }
                                 </div>
@@ -124,7 +125,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="gioiTinh">Loại phòng</label>
-                           <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control"/>
+                            <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" />
                         </div>
                         <div class="form-group">
                             <label for="hinhThuc">Hình thức</label>
@@ -141,7 +142,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ngayNhanPhong">Ngày nhận phòng</label>
-                            <input type="datetime-local" class="form-control"   name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
+                            <input type="datetime-local" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
                         </div>
                         <div class="form-group">
                             <label for="ngayTraPhong">Ngày trả phòng</label>
@@ -157,7 +158,7 @@
                             <label for="tongTreEm">Tổng số trẻ em</label>
                             <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" required>
                         </div>
-                     
+
                         <div class="form-group">
                             <label for="khachTraTruoc">Khách trả trước</label>
                             <input type="text" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
@@ -182,85 +183,85 @@
                         <br />
                         <span>Tổng cộng:</span> <span id="TongTien">0 </span><span> VNĐ</span>
                     </strong>
-                    </div>
+                </div>
                 <div id="TongDichVuDaDat"></div>
-                    <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
-                </div>
+                <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
             </div>
         </div>
+    </div>
 
-        <div class="popup" id="formPopup">
-            <h2>Thêm mới khách hàng</h2>
-            <i class="fa fa-times close-icon" onclick="closeForm()"></i>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="name">Họ tên</label>
-                        <input type="text" class="form-control" name="name" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="gioiTinh">Giới tính</label>
-                        <select class="form-control" name="gioiTinh" id="gioiTinh">
-                            <option value="Nam">Nam</option>
-                            <option value="Nu">Nữ</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="cccd">CMND/CCCD</label>
-                        <input type="text" class="form-control" name="cccd" id="cccd" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Số điện thoại</label>
-                        <input type="text" class="form-control" name="phone" id="phone" required>
-                    </div>
+    <div class="popup" id="formPopup">
+        <h2>Thêm mới khách hàng</h2>
+        <i class="fa fa-times close-icon" onclick="closeForm()"></i>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="name">Họ tên</label>
+                    <input type="text" class="form-control" name="name" id="name" required>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ngaySinh">Ngày sinh</label>
-                        <input type="date" class="form-control" name="ngaySinh" id="ngaySinh" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="diaChi">Địa chỉ</label>
-                        <input type="text" class="form-control" name="diaChi" id="diaChi" required>
-                    </div>
+                <div class="form-group">
+                    <label for="gioiTinh">Giới tính</label>
+                    <select class="form-control" name="gioiTinh" id="gioiTinh">
+                        <option value="Nam">Nam</option>
+                        <option value="Nu">Nữ</option>
+                    </select>
                 </div>
-                <button class="btn btn-secondary cancel" onclick="closeForm()">Bỏ qua</button>
-                <button class="btn btn-success save">Lưu</button>
+                <div class="form-group">
+                    <label for="cccd">CMND/CCCD</label>
+                    <input type="text" class="form-control" name="cccd" id="cccd" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input type="text" class="form-control" name="phone" id="phone" required>
+                </div>
             </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" name="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="ngaySinh">Ngày sinh</label>
+                    <input type="date" class="form-control" name="ngaySinh" id="ngaySinh" required>
+                </div>
+                <div class="form-group">
+                    <label for="diaChi">Địa chỉ</label>
+                    <input type="text" class="form-control" name="diaChi" id="diaChi" required>
+                </div>
+            </div>
+            <button class="btn btn-secondary cancel" onclick="closeForm()">Bỏ qua</button>
+            <button class="btn btn-success save">Lưu</button>
         </div>
+    </div>
 
 
 
-        <div class="popupThanhToan" id="paymentPopup">
-            <div class="header">
-                <h1>Thanh toán phòng <span id="MaPhong_ThanhToan"></span></h1>
-            </div>
-            <div class="content">
-                <table>
-                    <tr>
-                        <th>Mã đặt phòng</th>
-                        <td id="maDatPhongThanhToan_PopUp">DP001</td>
-                    </tr>
-                    <tr>
-                        <th>Loại phòng</th>
-                        <td id="loaiPhongThanhToan_PopUp">Phòng đơn</td>
-                    </tr>
-                    <tr>
-                        <th>Số người</th>
+    <div class="popupThanhToan" id="paymentPopup">
+        <div class="header">
+            <h1>Thanh toán phòng <span id="MaPhong_ThanhToan"></span></h1>
+        </div>
+        <div class="content">
+            <table>
+                <tr>
+                    <th>Mã đặt phòng</th>
+                    <td id="maDatPhongThanhToan_PopUp">DP001</td>
+                </tr>
+                <tr>
+                    <th>Loại phòng</th>
+                    <td id="loaiPhongThanhToan_PopUp">Phòng đơn</td>
+                </tr>
+                <tr>
+                    <th>Số người</th>
                     <td><span id="soLuongNguoiLonThanhToan_PopUp">1</span> người lớn - <span id="soLuongTreEmThanhToan_PopUp">2</span> trẻ em</td>
-                    </tr>
-                    <tr>
-                        <th>Thời gian nhận</th>
-                        <td id="thoiGianNhanThanhToan_PopUp">25/11/2023 14:00</td>
-                    </tr>
-                    <tr>
-                        <th>Thời gian trả</th>
+                </tr>
+                <tr>
+                    <th>Thời gian nhận</th>
+                    <td id="thoiGianNhanThanhToan_PopUp">25/11/2023 14:00</td>
+                </tr>
+                <tr>
+                    <th>Thời gian trả</th>
                     <td id="thoiGianTraThanhToan_PopUp">04/12/2023 17:04</td>
-                    </tr>
+                </tr>
                 <tr>
                     <th>Hình thức đặt phòng</th>
                     <td id="hinhThucDatPhongThanhToan_PopUp"></td>
@@ -269,73 +270,103 @@
                     <th>Giá phòng</th>
                     <td id="giaPhongThanhToan_PopUp">
                         <span>Giá theo giờ: </span><span id="giaTheoGioThanhToan_PopUp">100000000</span>
-                        <br/>
+                        <br />
                         <span>Giá theo ngày: </span><span id="giaTheoNgayThanhToan_PopUp">200000000</span>
                     </td>
                 </tr>
-                    <tr>
-                        <th>Tên khách hàng</th>
-                        <td id="tenKhachHangThanhToan_PopUp">Nguyễn văn a</td>
-                    </tr>
-                    <tr>
-                        <th>Số điện thoại</th>
-                        <td id="soDienThoaiThanhToan_PopUp">0123123123</td>
-                    </tr>
-                </table>
-                <h2>Thông tin dịch vụ</h2>
-                <table class="table table-bordered table-striped">
-                    <tr>
-                        <th>#</th>
-                        <th>Mã DV</th>
-                        <th>Tên DV</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>DV001</td>
-                        <td>Đưa đón sân bay</td>
-                        <td>2</td>
-                        <td>60.000đ</td>
-                
-                    </tr>
+                <tr>
+                    <th>Tên khách hàng</th>
+                    <td id="tenKhachHangThanhToan_PopUp">Nguyễn văn a</td>
+                </tr>
+                <tr>
+                    <th>Số điện thoại</th>
+                    <td id="soDienThoaiThanhToan_PopUp">0123123123</td>
+                </tr>
+            </table>
+            <h2>Thông tin dịch vụ</h2>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Mã DV</th>
+                    <th>Tên DV</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thành tiền</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>DV001</td>
+                    <td>Đưa đón sân bay</td>
+                    <td>2</td>
+                    <td>60.000đ</td>
 
-                </table>
-                <h2>Thông tin thanh toán</h2>
-                <table>
-                    <tr>
-                        <th>Tổng tiền phòng</th>
-                        <td id="tongTienPhongThanhToan_PopUp">2.000.000 VNĐ</td>
-                    </tr>
-                    <tr>
-                        <th>Tổng tiền dịch vụ</th>
+                </tr>
+
+            </table>
+            <h2>Thông tin thanh toán</h2>
+            <table>
+                <tr>
+                    <th>Tổng tiền phòng</th>
+                    <td id="tongTienPhongThanhToan_PopUp">2.000.000 VNĐ</td>
+                </tr>
+                <tr>
+                    <th>Tổng tiền dịch vụ</th>
                     <td id="tongTienDichVu_PopUp">60.000 VNĐ</td>
-                    </tr>
+                </tr>
                 <tr>
                     <th>Số tiền khách đã trả</th>
                     <td id="soTienKhachDaTra_PopUp">2.060.000 VND</td>
                 </tr>
-                    <tr>
-                        <th>Tổng tiền</th>
-                        <td id="tongTienThanhToan_PopUp">2.060.000 VND</td>
-                    </tr>
+                <tr>
+                    <th>Tổng tiền</th>
+                    <td id="tongTienThanhToan_PopUp">2.060.000 VND</td>
+                </tr>
 
-                    <tr>
-                        <th>Tiền thanh toán</th>
-                        <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
-                    </tr>
-                </table>
-                <div class="button-group">
-                    <button class="btn btn-danger" onclick="closePopupThanhToan()">Đóng</button>
-                    <button class="btn btn-success" onclick="ThanhToan()">Thanh toán</button>
-                </div>
+                <tr>
+                    <th>Tiền thanh toán</th>
+                    <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
+                </tr>
+            </table>
+            <div class="button-group">
+                <button class="btn btn-danger" onclick="closePopupThanhToan()">Đóng</button>
+                <button class="btn btn-success" onclick="ThanhToan()">Thanh toán</button>
             </div>
         </div>
-        <div class="overlayThanhToan" id="overlayThanhToan" onclick="closePopupThanhToan()"></div>
+    </div>
+    <div class="overlayThanhToan" id="overlayThanhToan" onclick="closePopupThanhToan()"></div>
 
 
     </div>
-<script src="~/JsDatPhong/JsDatPhong.js"></script>
+    <script src="~/JsDatPhong/JsDatPhong.js"></script>
+    <script>
+        function filterRooms(status) {
+            $(".room").hide();
+
+            //Hiện thị phòng theo trạng thái đã chọn
+            if (status === "all") {
+                $(".room").show();
+            } else {
+                $(".room").each(function () {
+                    var roomStatus = $(this).find(".trangthai").text().toLowerCase();
+                    if (roomStatus === status) {
+                        $(this).show();
+                    }
+                });
+            }
+        }
+
+        // Xử lý các nút đã click vào
+        $("#TimKiemTatCa").click(function () {
+            filterRooms("all");
+        });
+
+        $("#TimKiemTrong").click(function () {
+            filterRooms("trống");
+        });
+
+        $("#TimKiemDaDat").click(function () {
+            filterRooms("đã được thuê");
+        });
+    </script>
 </body>
 </html>

@@ -98,4 +98,116 @@ function KiemTraCheckBox() {
 
 
 }
+//sửa phòng
+var currentEditingPhongId = null;
+function createImageContainer(url) {
+    var imageContainer = $('<div class="image-container">');
+    var img = $('<img>').attr('src', url);
+    var deleteIcon = $('<span class="delete-icon">').text('X').click(function () {
+        imageContainer.remove();
+    });
 
+    return imageContainer.append(img, deleteIcon);
+}
+
+function previewImages() {
+    var input = $('#ImageUrl')[0];
+    var addContainer = $('#addImagePreviewContainer');
+    var editContainer = $('#editImagePreviewContainer');
+
+    addContainer.html(''); // Clear the add container
+    editContainer.html(''); // Clear the edit container
+
+    if (input.files && input.files.length > 0) {
+        for (var i = 0; i < input.files.length; i++) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                createImageContainer(e.target.result).appendTo(addContainer);
+            };
+
+            reader.readAsDataURL(input.files[i]);
+        }
+    }
+}
+
+function switchSection(section) {
+    $('.add-section, .edit-section').hide();
+    $('#addButton, #editButton').hide();
+
+    if (section === 'add') {
+        $('.add-section').show();
+        $('#addButton').show();
+    } else if (section === 'edit') {
+        $('.edit-section').show();
+        $('#editButton').show();
+    }
+}
+
+$('#addButton').on('click', function (e) {
+    e.preventDefault();
+    switchSection('add');
+});
+
+function editImages(phongId) {
+    currentEditingPhongId = phongId;
+
+    // Set the images for preview
+    $.get('/Phong/GetImages?phongId=' + phongId, function (data) {
+        var container = $('#editImagePreviewContainer').html('');
+
+        data.forEach(function (url) {
+            createImageContainer("/UploadImage/" + url).appendTo(container);
+        });
+
+        // Show the "Sửa ảnh" button
+        $('#editButton').show();
+    });
+}
+$('.employee-info-column-button .dropdown .dropdown-menu a.dropdown-item').on('click', function () {
+    var phongId = $(this).closest('tr').data('ma-phong');
+    editImages(phongId);
+});
+
+$('#btn_Sua').on('click', function () {
+    var phongId = $(this).closest('tr').data('ma-phong');
+    editImages(phongId);
+});
+
+// Event handler for the "Sửa ảnh" button
+
+$('#editButton').on('click', function () {
+    saveEditedImages(currentEditingPhongId);
+});
+
+$('#ImageUrl').off('change').on('change', function (e) {
+    e.preventDefault();
+    previewImages();
+});
+function saveEditedImages(phongId) {
+    var editedImageUrls = [];
+
+    $('.image-container img').each(function () {
+        editedImageUrls.push($(this).attr('src').replace('/UploadImage/', ''));
+    });
+
+    $.ajax({
+        url: '/Phong/SuaAnh',
+        type: 'POST',
+        traditional: true,
+        data: { phongId: phongId, editedImageUrls: editedImageUrls },
+        success: function (response) {
+            if (response.success) {
+                alert('Images updated successfully.');
+            } else {
+                alert('Failed to update images. Please try again.');
+            }
+
+            $('.add-section, .edit-section').hide();
+            $('#addButton, #editButton').hide().show();
+        },
+        error: function () {
+            alert('An error occurred while updating images. Please try again.');
+        }
+    });
+}
