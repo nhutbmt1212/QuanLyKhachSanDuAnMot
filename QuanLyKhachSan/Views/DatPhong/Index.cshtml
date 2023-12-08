@@ -117,12 +117,12 @@
                             }
                         </datalist>
 
-                        <i class="fa fa-circle-plus" onclick="showForm()"></i>
+                        <i class="fa fa-circle-plus" onclick="showForm()" hidden></i>
                     </div>
 
 
 
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <div class="form-group">
                             <label for="gioiTinh">Loại phòng</label>
                             <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" />
@@ -138,6 +138,7 @@
                             <label for="giaPhong">Giá phòng</label>
                             <input type="text" class="form-control" name="giaPhong" id="giaPhong_PopUpDatPhong" required>
                         </div>
+                      
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -152,40 +153,40 @@
                             <label for="tongNguoiLon">Tổng số người lớn</label>
                             <input type="text" class="form-control" name="tongNguoiLon" id="tongNguoiLon" required>
                         </div>
+                        
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="tongTreEm">Tổng số trẻ em</label>
                             <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" required>
                         </div>
-
                         <div class="form-group">
                             <label for="khachTraTruoc">Khách trả trước</label>
                             <input type="text" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
                         </div>
-                        <div id="ChonDichVu">
-                        </div>
+                      
+                        <div id="ChonDichVu" class="mt-4">
+                      
+                         </div>
                         <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
                             <i class="bi bi-plus"></i> Thêm dịch vụ
                         </button>
                     </div>
-                    <hr />
-                    <strong>
-                        <p>
-                            Thành tiền
-                        </p>
-                    </strong>
 
-                    <strong>
-                        <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0</span><span> VNĐ</span>
-                        <br />
-                        <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0</span><span> VNĐ</span>
-                        <br />
-                        <span>Tổng cộng:</span> <span id="TongTien">0 </span><span> VNĐ</span>
-                    </strong>
+                    <div class="col-md-12 text-right">
+                        <strong>
+                            <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0</span><span> VNĐ</span>
+                            <br />
+                            <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0</span><span> VNĐ</span>
+                            <br />
+                            <span>Tổng cộng:</span> <span id="TongTien">0 </span><span> VNĐ</span>
+                        </strong>
+                        <div id="TongDichVuDaDat" style="display:none;"></div>
+                        <br/>
+                        <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
+                    </div>
                 </div>
-                <div id="TongDichVuDaDat"></div>
-                <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
+               
             </div>
         </div>
     </div>
@@ -322,13 +323,13 @@
                     <td id="tongTienThanhToan_PopUp">2.060.000 VND</td>
                 </tr>
 
-                <tr>
+               @*  <tr>
                     <th>Tiền thanh toán</th>
                     <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
-                </tr>
+                </tr> *@
             </table>
-            <div class="button-group">
-                <button class="btn btn-danger" onclick="closePopupThanhToan()">Đóng</button>
+            <div class="button-group d-flex justify-content-end mt-3">
+                <button class="btn btn-danger mr-2" onclick="closePopupThanhToan()">Đóng</button>
                 <button class="btn btn-success" onclick="ThanhToan()">Thanh toán</button>
             </div>
         </div>

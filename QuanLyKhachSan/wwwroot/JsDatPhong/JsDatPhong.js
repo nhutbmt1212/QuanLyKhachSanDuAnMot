@@ -162,7 +162,7 @@ function ThemDichVu() {
             var node = `
                 <div class="row" id="id_DichVu${counter}">
                     <div class="col-lg-7" style="margin-bottom:5px;">
-                        <select class="form-control w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})" >
+                        <select class="form-control w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})">
                             ${options}
                         </select>
                     </div>

@@ -8,6 +8,7 @@
     padding-left: 15px;
     margin-right: auto;
     margin-left: auto;
+    min-height:1000px;
 }
 
 .room {
@@ -336,4 +337,9 @@ input {
             top: 5px;
             right: 5px;
         }
+}
+#ChonDichVu {
+    max-height: 120px;
+    max-width:10000px;
+    overflow-y: auto;
 }
