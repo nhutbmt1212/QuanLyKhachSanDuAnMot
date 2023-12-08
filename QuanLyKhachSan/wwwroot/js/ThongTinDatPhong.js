@@ -50,56 +50,170 @@
     }
 }
 
+function validateName() {
+    var tenkh = $('#inputFieldTenKH').val();
+    // Regex for alphabets (including Vietnamese), spaces only
+    var regexName = /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểẾỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễếệỉịọỏốồổỗộớờởỡợụủứừễỄễỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪỬỮỰỲỴÝỶỸýỳỷỹỵ\s]*$/;
+
+    if (tenkh == "") {
+        $('#errorTenKH').text('');
+        $('#errorTenKH').text('Tên khách hàng không được bỏ trống');
+        return false;
+    }
+
+    // Convert the name to uppercase before testing it against the regex
+    if (!regexName.test(tenkh.toUpperCase())) {
+        $('#errorTenKH').text('');
+        $('#errorTenKH').text('Tên khách hàng không được chứa số hoặc kí tự đặc biệt');
+        return false;
+    } else {
+        $('#errorTenKH').text('');
+        return true;
+    }
+}
+
+
+function validatePhoneNumber() {
+    var sdt = $('#inputFieldSDT').val();
+    var regexPhone = /^[0-9]{10}$/; // Regex for 10 digits
+    if (sdt == "") {
+        $('#errorSDT').text('');
+        $('#errorSDT').text('Số điện thoại không được bỏ trống');
+        return false;
+    }
+    if (!regexPhone.test(sdt)) {
+        $('#errorSDT').text('');
+        $('#errorSDT').text('Số điện thoại phải có đúng 10 chữ số');
+        return false;
+    } else {
+        $('#errorSDT').text('');
+        return true;
+    }
+}
+
+function validateEmail() {
+    var email = $('#inputFieldEmail').val();
+    var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex for a basic email format
+    if (email == "") {
+        $('#errorEmail').text('');
+        $('#errorEmail').text('Email không được bỏ trống');
+        return false;
+    }
+    if (!regexEmail.test(email)) {
+        $('#errorEmail').text('');
+        $('#errorEmail').text('Email không đúng định dạng');
+        return false;
+    } else {
+        $('#errorEmail').text('');
+        return true;
+    }
+}
+
+function validateCCCD() {
+    var cccd = $('#inputFieldCCCD').val();
+    var regexCCCD = /^[0-9]{12}$/; // Regex for 12 digits
+    if (cccd == "") {
+        $('#errorCCCD').text('');
+        $('#errorCCCD').text('CCCD không được bỏ trống');
+        return false;
+    }
+    if (!regexCCCD.test(cccd)) {
+        $('#errorCCCD').text('');
+        $('#errorCCCD').text('CCCD phải có đúng 12 chữ số');
+        return false;
+    } else {
+        $('#errorCCCD').text('');
+        return true;
+    }
+}
+
+function validateNgaySinh() {
+    var ngaySinh = $('#inputFieldNgaySinh').val();
+    // Add your logic for checking if ngaySinh is valid according to your requirements
+    // Example: Check if the user is at least 16 years old
+    var birthDate = new Date(ngaySinh);
+    var currentDate = new Date();
+    var age = currentDate.getFullYear() - birthDate.getFullYear();
+    if (age == "") {
+        $('#errorNgaySinh').text('');
+        $('#errorNgaySinh').text('Bạn chưa chọn ngày sinh');
+    }
+    if (age < 16) {
+        $('#errorNgaySinh').text('');
+        $('#errorNgaySinh').text('Bạn phải có ít nhất 16 tuổi để đặt phòng');
+        return false;
+    } else {
+        $('#errorNgaySinh').text('');
+        return true;
+    }
+}
+
+function validateDiaChi() {
+    var diaChi = $('#inputFieldDiaChi').val();
+    if (diaChi == "") {
+        $('#errorDiaChi').text('');
+        $('#errorDiaChi').text('Địa chỉ không được bỏ trống');
+        return false;
+    } else {
+        $('#errorDiaChi').text('');
+        return true;
+    }
+}
+
 $(document).ready(function () {
-    $('#DatPhong').on('click', function () {
-        // dữ liệu bên khách hàng
-        var tenkh = $('#inputFieldTenKH').val();
-        var gioitinh = $('#gioitinh').val();
-        var sdt = $('#inputFieldSDT').val();
-        var email = $('#inputFieldEmail').val();
-        var ngaySinh = $('#inputFieldNgaySinh').val();
-        var diaChi = $('#inputFieldDiaChi').val();
-        var cccd = $('#inputFieldCCCD').val();
-        // dự liệu bên đặt phòng
-        var ngaynhan = $('#ngaynhan_text').text();
-        var ngaytra = $('#ngaytra_text').text();
-        var maphong = $('#maPhong_DatPhong').text();
-        var soLuongNguoiLon = $('#giaTriSoLuongNguoiLonDat').text();
-        var soLuongTreEm = $('#giaTriSoLuongTreEmDat').text();
-        var TongTien = $('#TongTien').text();
+    $('#DatPhong').on('click', function (event) {
+        if (!validateName() || !validatePhoneNumber() || !validateEmail() || !validateCCCD() || !validateNgaySinh() || !validateDiaChi()) {
+            event.preventDefault();
+            return;
+        }
+        else {
+            var tenkh = $('#inputFieldTenKH').val();
+            var gioitinh = $('#gioitinh').val();
+            var sdt = $('#inputFieldSDT').val();
+            var email = $('#inputFieldEmail').val();
+            var ngaySinh = $('#inputFieldNgaySinh').val();
+            var diaChi = $('#inputFieldDiaChi').val();
+            var cccd = $('#inputFieldCCCD').val();
+            // dự liệu bên đặt phòng
+            var ngaynhan = $('#ngaynhan_text').text();
+            var ngaytra = $('#ngaytra_text').text();
+            var maphong = $('#maPhong_DatPhong').text();
+            var soLuongNguoiLon = $('#giaTriSoLuongNguoiLonDat').text();
+            var soLuongTreEm = $('#giaTriSoLuongTreEmDat').text();
+            var TongTien = $('#TongTien').text();
 
-        var arrSoLuongDichVu = JSON.parse(sessionStorage.getItem('arrSoLuongDichVu'));
-        var arrMaDichVu = JSON.parse(sessionStorage.getItem('arrMaDichVu'));
-        console.log(arrSoLuongDichVu, arrMaDichVu);
+            var arrSoLuongDichVu = JSON.parse(sessionStorage.getItem('arrSoLuongDichVu'));
+            var arrMaDichVu = JSON.parse(sessionStorage.getItem('arrMaDichVu'));
+            console.log(arrSoLuongDichVu, arrMaDichVu);
 
-        $.ajax({
-            type: 'POST',
-            url: `/TrangChuKhachHang/DatPhong`,
-            data: {
-                TenKhachHang: tenkh,
-                GioiTinh: gioitinh,
-                sdt: sdt,
-                email: email,
-                ngaysinh: ngaySinh,
-                diachi: diaChi,
-                cccd: cccd,
-                NgayNhan: ngaynhan,
-                NgayTra: ngaytra,
-                MaPhong: maphong,
-                SoLuongNguoiLon: soLuongNguoiLon,
-                SoLuongTreEm: soLuongTreEm,
-                TongTien: TongTien,
-                arrSoLuongDichVu: arrSoLuongDichVu,
-                arrMaDichVu: arrMaDichVu
-            },
-            success: function (response) {
-                console.log(response);
-                window.location.href = '/TrangChuKhachHang/Index';
-            },
-            error: function (error) {
-                console.error('Error:', error);
-            }
-        });
-
+            $.ajax({
+                type: 'POST',
+                url: `/TrangChuKhachHang/DatPhong`,
+                data: {
+                    TenKhachHang: tenkh,
+                    GioiTinh: gioitinh,
+                    sdt: sdt,
+                    email: email,
+                    ngaysinh: ngaySinh,
+                    diachi: diaChi,
+                    cccd: cccd,
+                    NgayNhan: ngaynhan,
+                    NgayTra: ngaytra,
+                    MaPhong: maphong,
+                    SoLuongNguoiLon: soLuongNguoiLon,
+                    SoLuongTreEm: soLuongTreEm,
+                    TongTien: TongTien,
+                    arrSoLuongDichVu: arrSoLuongDichVu,
+                    arrMaDichVu: arrMaDichVu
+                },
+                success: function (response) {
+                    console.log(response);
+                    window.location.href = '/TrangChuKhachHang/Index';
+                },
+                error: function (error) {
+                    console.error('Error:', error);
+                }
+            });
+        }
     });
 });
