@@ -21,7 +21,6 @@ namespace QuanLyKhachSan.Controllers
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
-            var a = 0;
             return View(listPhong);
         }
 
