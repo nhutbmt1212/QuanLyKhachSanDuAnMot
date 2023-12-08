@@ -23,6 +23,29 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="~/css/CssTrangChuKhachHang.css" rel="stylesheet" />
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <style>
+        .swiper-image {
+            width: 100%; /* 100% chiều rộng của container */
+            max-height: 500px; /* Đặt chiều cao tối đa là 500px */
+            object-fit: cover; /* Hiển thị toàn bộ ảnh và cắt đi phần thừa */
+        }
+
+        .swiper-container {
+            position: relative;
+            z-index: 1;
+        }
+
+       /*  .sreach-room {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2; 
+        } */
+    </style>
 </head>
 
 
@@ -75,84 +98,91 @@
 
             </ul>
         </div>
-        @* <div class="sreach-room  position-sticky top-0"> *@
-        <div class="sreach-room">
-            <div class="address row ">
-                <div class="col-md-2 mb-3 mx-auto ">
-                    <label for="validationDefaultUsername">Địa chỉ khách sạn</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupPrepend2">
-                                <i class="bi bi-geo-alt-fill"></i>
-                            </span>
+
+        @* style="overflow:hidden" *@
+
+
+
+        <div class="swiper-container" style="overflow:hidden">
+            <div class="swiper-wrapper">
+                <!-- Slide 1 -->
+                <div class="swiper-slide">
+                    <div class="img-hotel">
+                        <img src="https://www.sripanwa.com/images/hero-banner/luxury-pool-villa-phuket-hotel-private-residences-villa-sri-panwa.jpg" alt="Hotel Image 1" class="swiper-image" />
+                    </div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="swiper-slide">
+                    <div class="img-hotel">
+                        <img src="https://www.sripanwa.com/images/hero-banner/luxury-pool-villa-hotel-best-exclusive-rooftop-bar.jpg" alt="Hotel Image 2" class="swiper-image" />
+                    </div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="swiper-slide">
+                    <div class="img-hotel">
+                        <img src="https://www.sripanwa.com/images/villas/luxury-pool-villa-hotel-yaya-pool-suite-ocean-private-pool-1.jpg" alt="Hotel Image 3" class="swiper-image" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phần tìm kiếm phòng -->
+            <div class="sreach-room position-sticky top-0">
+                <h2 class="p-2">Đặt phòng</h2>
+                <div class="address row">
+               @*      <div class="col-md-2 mb-3 mx-auto ">
+                        <label for="validationDefaultUsername">Địa chỉ khách sạn</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend2">
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" id="validationDefaultUsername"
+                                   aria-describedby="inputGroupPrepend2" value="Nguyễn Tất Thành, Tp BMT" required>
                         </div>
-                        <input type="text" class="form-control" id="validationDefaultUsername"
-                               aria-describedby="inputGroupPrepend2" value="Nguyễn Tất Thành, Tp BMT" required>
-                    </div>
-                </div>
+                    </div> *@
 
-                <div class="col-md-2 mb-3 mx-auto">
-                    <label for="ngaynhan">Ngày nhận </label>
-                    <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input"
-                               data-target="#ngaynhanPicker" id="ipt_NgayNhan" />
-                    </div>
-                </div>
-
-                <div class="col-md-2 mb-3 mx-auto">
-                    <label for="ngaytra"> Ngày trả</label>
-                    <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-                        <input type="datetime-local" class="form-control datetimepicker-input"
-                               data-target="#ngaytraPicker" id="ipt_NgayTra" />
-                    </div>
-                </div>
-
-                <div class="col-md-1 mb-3 so-phong mx-auto">
-                    <label for="sophong">SL người lớn</label>
-                    <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-
-                        <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
+                    <div class="col-md-2 mb-3 mx-auto">
+                        <label for="ngaynhan">Ngày nhận </label>
+                        <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
+                            <input type="datetime-local" class="form-control datetimepicker-input"
+                                   data-target="#ngaynhanPicker" id="ipt_NgayNhan" />
+                        </div>
                     </div>
 
-                </div>
-                <div class="col-md-1 mb-1 so-phong mx-auto">
-                    <label for="sophong">SL trẻ em</label>
-                    <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-
-                        <input type="number" id="SlTreEm" class="form-control" value="1" min="1" required />
+                    <div class="col-md-2 mb-3 mx-auto">
+                        <label for="ngaytra"> Ngày trả</label>
+                        <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
+                            <input type="datetime-local" class="form-control datetimepicker-input"
+                                   data-target="#ngaytraPicker" id="ipt_NgayTra" />
+                        </div>
                     </div>
 
-                </div>
+                    <div class="col-md-1 mb-3 so-phong mx-auto">
+                        <label for="sophong">SL người lớn</label>
+                        <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
+                            <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
+                        </div>
+                    </div>
 
-                <div class="col-md-2 Tim-kiem text-md-end">
-                    <a class="btn btn-warning" id="TimKiemPhong">Tìm kiếm phòng</a>
+                    <div class="col-md-1 mb-1 so-phong mx-auto">
+                        <label for="sophong">SL trẻ em</label>
+                        <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
+                            <input type="number" id="SlTreEm" class="form-control" value="1" min="1" required />
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 Tim-kiem mx-auto">
+                        <a class="btn btn-warning" id="TimKiemPhong">Tìm kiếm phòng</a>
+                    </div>
                 </div>
             </div>
         </div>
 
 
 
-        <div id="infor-hotel">
-            <div class="img-hotel">
-                <img src="https://images.bubbleup.com/width1920/quality35/mville2017/1-brand/1-margaritaville.com/gallery-media/220803-compasshotel-medford-pool-73868-1677873697.jpg"
-                     width="300" height="350" />
-
-            </div>
-            <div class="content-infor-hotel">
-                <h2>ASAP Grand Da Nang</h2>
-                <p>
-                    <i class="bi bi-geo-alt-fill"></i> Số 962, đường Ngô Quyền, phường An Hải Tây, quận Sơn Trà,
-                    thành phố Đà Nẵng, Việt Nam
-
-                </p>
-                <p><i class="bi bi-telephone"></i> +84 236 3939 928</p>
-                <p>
-                    Là thành viên thứ 18 của chuỗi khách sạn tư nhân lớn nhất Việt Nam, khách sạn 4 sao ASAP
-                    Grand Đà Nẵng tọa lạc tại vị trí đắc địa, nằm giữa một bên là sông Hàn thơ mộng, một bên là
-                    bãi biển đẹp nhất Miền Trung
-                </p>
-            </div>
-        </div>
         <div id="Report_Phong">
             <p class="report_Phong_Text">Rất tiếc, không có phòng nào theo lựa chọn của quý khách!</p>
         </div>
@@ -377,8 +407,23 @@
     </section>
 
     <script src="~/js/JsTrangChuKhachHang.js"></script>
-
-
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            loop: true, // Cho phép lặp lại slide
+            autoplay: {
+                delay: 3000, // Thời gian chờ giữa các slide (3 giây)
+                disableOnInteraction: false, // Tự động chuyển đến slide tiếp theo khi người dùng tương tác
+            },
+        });
+    </script>
     <!-- Copyright -->
 </footer>
 
