@@ -28,6 +28,12 @@ namespace QuanLyKhachSan.Controllers
             return View(listNhanVien);
         }
 
+        public IActionResult HoSoNhanVien()
+        {
+
+            return View();
+        }
+
         public string GenerateRandomCode()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

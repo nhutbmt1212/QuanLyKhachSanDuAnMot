@@ -45,6 +45,52 @@ body {
     overflow-x: hidden;
 }
 
+#content .profile {
+    position: relative;
+}
+
+    #content .profile img {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        cursor: pointer;
+    }
+
+    #content .profile .profile-link {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        background: var(--light);
+        padding: 10px 0;
+        box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+        border-radius: 10px;
+        width: 160px;
+        opacity: 0;
+        pointer-events: none;
+        transition: all .3s ease;
+    }
+
+        #content .profile .profile-link.show {
+            opacity: 1;
+            pointer-events: visible;
+            top: 100%;
+        }
+
+        #content .profile .profile-link a {
+            padding: 10px 16px;
+            display: flex;
+            grid-gap: 10px;
+            font-size: 14px;
+            color: var(--dark);
+            align-items: center;
+            transition: all .3s ease;
+        }
+
+            #content .profile .profile-link a:hover {
+                background: var(--grey);
+                text-decoration: none;
+            }
 
 
 
