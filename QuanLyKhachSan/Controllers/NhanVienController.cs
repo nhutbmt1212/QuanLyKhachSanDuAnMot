@@ -11,7 +11,7 @@ using iTextSharp.text.pdf;
 using iTextSharp.text;
 
 namespace QuanLyKhachSan.Controllers
-{
+{ 
     [Authorize]
     public class NhanVienController : Controller
     {
@@ -406,14 +406,75 @@ namespace QuanLyKhachSan.Controllers
 
             return File(bytes, "application/pdf", "NhanVien.pdf");
         }
+        [HttpGet]
+        public JsonResult CheckEmail(string email)
+        {
+            
+            bool exists = EmailExists(email);
+
+          
+            return Json(new { exists = exists });
+        }
+
+        private bool EmailExists(string email)
+        {
+            
+            return _db.NhanVien.Any(nv => nv.Email == email);
+        }
+        [HttpGet]
+        public JsonResult CheckSoDienThoai(string sodienthoai)
+        {
+            
+            bool exists = SoDienThoaiExists(sodienthoai);
+
+           
+            return Json(new { exists = exists });
+        }
+
+        private bool SoDienThoaiExists(string sodienthoai)
+        {
+            
+            return _db.NhanVien.Any(nv => nv.SoDienThoai == sodienthoai);
+        }
+        [HttpGet]
+        public JsonResult CheckTenDangNhap(string tendangnhap)
+        {
+            bool exists = TenDangNhapExists(tendangnhap);
+
+            return Json(new { exists = exists });
+        }
+
+        private bool TenDangNhapExists(string tendangnhap)
+        {
+           
+            return _db.NhanVien.Any(nv => nv.TenDangNhap == tendangnhap);
+        }
+        [HttpGet]
+        public JsonResult CheckCCCD(string cccd)
+        {
+            
+            bool exists = CCCDExists(cccd);
+
+          
+            return Json(new { exists = exists });
+        }
+
+        private bool CCCDExists(string cccd)
+        {
+            
+            return _db.NhanVien.Any(nv => nv.CCCD == cccd);
+        }
+
+
 
     }
-        
-       
 
 
 
-    }
+
+
+
+}
 
 
 

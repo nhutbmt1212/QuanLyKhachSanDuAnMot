@@ -39,13 +39,7 @@ body {
     .nav-main-top .logo li {
         flex-grow: 2;
     }
-.group-1{
-   margin-left:100px;
-   margin-right:300px
-}
-.group-2{
-    margin-right:50px;
-}
+
 
 .sreach-room {
     margin-top: 20px;
@@ -193,3 +187,4 @@ body {
 .report_Phong_Text {
     padding:12px;
 }
+

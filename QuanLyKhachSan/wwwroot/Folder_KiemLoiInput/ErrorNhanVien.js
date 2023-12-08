@@ -28,18 +28,33 @@
         }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input email
-    $("#inputFieldEmail").on("focusout", function () {
-        var emailValue = $(this).val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Bắt sự kiện khi người dùng rời khỏi ô input email
+        $("#inputFieldEmail").on("focusout", function () {
+            var emailValue = $(this).val();
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailValue.length === 0) {
-            $("#errorEmail").text("Email không được để trống.");
-        } else if (!isValidEmail(emailValue)) {
-            $("#errorEmail").text("Email không hợp lệ.");
-        } else {
-            $("#errorEmail").text("");
-        }
-    });
+            if (emailValue.length === 0) {
+                $("#errorEmail").text("Email không được để trống.");
+            } else if (!emailRegex.test(emailValue)) {
+                $("#errorEmail").text("Email không hợp lệ.");
+            } else {
+                
+                $.ajax({
+                    url: '/NhanVien/CheckEmail',  // Đường dẫn đến API của bạn
+                    type: 'GET',
+                    data: { email: emailValue },
+                    success: function (data) {
+                        if (data.exists) {
+                            $("#errorEmail").text("Email đã tồn tại trong hệ thống.");
+                        } else {
+                            $("#errorEmail").text("");
+                        }
+                    }
+                });
+            }
+        });
+
+
     $("#inputEditEmail").on("focusout", function () {
         var emailValue = $(this).val();
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -76,20 +91,32 @@
         }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input tên đăng nhập
-    $("#inputFieldTenDangNhap").on("focusout", function () {
-        var tendangnhapValue = $(this).val();
+        $("#inputFieldTenDangNhap").on("focusout", function () {
+            var tendangnhapValue = $(this).val();
 
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-        }
-        else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-        } else {
-            $("#errorTenDangNhap").text("");
-        }
-    });
+            if (tendangnhapValue.length === 0) {
+                $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
+            } else if (tendangnhapValue.length < 5) {
+                $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
+            } else if (!isValidTenDangNhap(tendangnhapValue)) {
+                $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
+            } else {
+                // Gửi yêu cầu đến API để kiểm tra tên đăng nhập
+                $.ajax({
+                    url: '/NhanVien/CheckTenDangNhap',  // Đường dẫn đến API của bạn
+                    type: 'GET',
+                    data: { tendangnhap: tendangnhapValue },
+                    success: function (data) {
+                        if (data.exists) {
+                            $("#errorTenDangNhap").text("Tên đăng nhập đã tồn tại trong hệ thống.");
+                        } else {
+                            $("#errorTenDangNhap").text("");
+                        }
+                    }
+                });
+            }
+        });
+
     $("#inputEditTenDangNhap").on("focusout", function () {
         var tendangnhapValue = $(this).val();
 
@@ -105,17 +132,33 @@
         }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại
-    $("#inputFieldSDT").on("focusout", function () {
-        var sdtValue = $(this).val();
+        $("#inputFieldSDT").on("focusout", function () {
+            var sdtValue = $(this).val();
 
-        if (sdtValue.length === 0) {
-            $("#errorSDT").text("Số điện thoại không được để trống.");
-        } else if (!isValidSDT(sdtValue)) {
-            $("#errorSDT").text("Số điện thoại không hợp lệ.");
-        } else {
-            $("#errorSDT").text("");
-        }
-    });
+            if (sdtValue.length === 0) {
+                $("#errorSDT").text("Số điện thoại không được để trống.");
+            } else if (!isValidSDT(sdtValue)) {
+                $("#errorSDT").text("Số điện thoại không hợp lệ.");
+            } else {
+                $.ajax({
+                    url: '/NhanVien/CheckSoDienThoai',  // Đường dẫn đến API của bạn
+                    type: 'GET',
+                    data: { sodienthoai: sdtValue },
+                    success: function (data) {
+                        if (data.exists) {
+                            $("#errorSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
+                        } else {
+                            $("#errorSDT").text("");
+                        }
+                    },
+                    error: function (error) {
+                        console.error(error);
+                    }
+                });
+            }
+        });
+
+    
     $("#inputEditSDT").on("focusout", function () {
         var sdtValue = $(this).val();
 
@@ -128,17 +171,30 @@
         }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input CCCD
-    $("#inputFieldCCCD").on("focusout", function () {
-        var cccdValue = $(this).val();
+        $("#inputFieldCCCD").on("focusout", function () {
+            var cccdValue = $(this).val();
 
-        if (cccdValue.length === 0) {
-            $("#errorCCCD").text("CCCD không được để trống.");
-        } else if (!isValidCCCD(cccdValue)) {
-            $("#errorCCCD").text("CCCD không hợp lệ.");
-        } else {
-            $("#errorCCCD").text("");
-        }
-    });
+            if (cccdValue.length === 0) {
+                $("#errorCCCD").text("CCCD không được để trống.");
+            } else if (!isValidCCCD(cccdValue)) {
+                $("#errorCCCD").text("CCCD không hợp lệ.");
+            } else {
+                // Gửi yêu cầu đến API để kiểm tra CCCD
+                $.ajax({
+                    url: '/NhanVien/CheckCCCD',  // Đường dẫn đến API của bạn
+                    type: 'GET',
+                    data: { cccd: cccdValue },
+                    success: function (data) {
+                        if (data.exists) {
+                            $("#errorCCCD").text("CCCD đã tồn tại trong hệ thống.");
+                        } else {
+                            $("#errorCCCD").text("");
+                        }
+                    }
+                });
+            }
+        });
+
 
     $("#inputEditCCCD").on("focusout", function () {
         var cccdValue = $(this).val();
