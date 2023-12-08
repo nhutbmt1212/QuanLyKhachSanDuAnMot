@@ -20,7 +20,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult DanhSachKhachHang()
         {
-            var listKhachHang = _db.KhachHang.ToList();
+            var listKhachHang = _db.KhachHang.Where(s=>s.TinhTrang!="Đã xóa").ToList();
             return View(listKhachHang);
         }
         public IActionResult XoaKhachHang(string id)
@@ -28,7 +28,8 @@ namespace QuanLyKhachSan.Controllers
             var qr_MaKh = _db.KhachHang.Find(id);
             if (qr_MaKh != null)
             {
-                _db.KhachHang.Remove(qr_MaKh);
+                qr_MaKh.TinhTrang = "Đã xóa";
+                _db.KhachHang.Update(qr_MaKh);
                 _db.SaveChanges();
                 TempData["SwalIcon"] = "success";
                 TempData["SwalTitle"] = "Xóa khách hàng thành công";

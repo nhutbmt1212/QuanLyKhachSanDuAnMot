@@ -208,7 +208,7 @@
         <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
             <thead class="thead-dark ">
                 <tr>
-                    <th scope="col"><input type="checkbox" id="thead_checkbox" /></th>
+                    <th scope="col"><input type="checkbox" id="thead_checkbox"  hidden/></th>
                     <th scope="col" class="text-center">#</th>
                     <th scope="col">Mã Loại Phòng</th>
                     <th scope="col">Tên Loại Phòng</th>
@@ -229,7 +229,7 @@
                     {
                         stt = stt + 1;
                     <tr data-ma-loai-phong="@loaiPhong.MaLoaiPhong" data-ten-loai-phong="@loaiPhong.TenLoaiPhong" data-gia-theo-gio="@loaiPhong.GiaTheoGio" data-gia-theo-ngay="@loaiPhong.GiaPhongTheoNgay" data-phu-thu-tra-muon="@loaiPhong.PhuThuTraMuon" data-so-luong-nguoi-lon="@loaiPhong.SoLuongNguoiLon" data-so-luong-tre-em="@loaiPhong.SoLuongTreEm">
-                        <td style="padding:22px 10px 20px 10px;" class="loaiPhong_detail"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                        <td style="padding:22px 10px 20px 10px;" class="loaiPhong_detail" hidden><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="align-middle loaiPhong_detail">
                                 @stt
                         </td>
@@ -242,7 +242,7 @@
                         <td class="align-middle loaiPhong_detail">@loaiPhong.SoLuongTreEm</td>
                         <td style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
-                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: rgba(0, 0, 0, 0);" >
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
                                 <div class="dropdown-menu xuly_dropdown" aria-labelledby="dropdownMenuButton">

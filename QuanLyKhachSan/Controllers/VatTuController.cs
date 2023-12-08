@@ -22,7 +22,7 @@ namespace QuanLyKhachSan.Controllers
 
         public IActionResult DanhSachVatTu()
         {
-            var listVatTu = _db.VatTu.ToList();
+            var listVatTu = _db.VatTu.Where(s=>s.TinhTrangVatTu!="Đã xóa").ToList();
             return View(listVatTu);
         }
         public string GenerateRandomCode()
@@ -78,7 +78,8 @@ namespace QuanLyKhachSan.Controllers
             var vt = await _db.VatTu.FindAsync(id);
             if (vt != null)
             {
-                _db.VatTu.Remove(vt);
+                vt.TinhTrangVatTu = "Đã xóa";
+                _db.VatTu.Update(vt);
                 await _db.SaveChangesAsync();
                 TempData["SwalIcon"] = "success";
                 TempData["SwalTitle"] = "Xóa vật tư thành công";

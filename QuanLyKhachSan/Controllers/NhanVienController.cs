@@ -24,7 +24,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult TrangChuNhanVien()
         {
-            var listNhanVien = _db.NhanVien.ToList();
+            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!="Đã xóa").ToList();
             return View(listNhanVien);
         }
 
@@ -99,7 +99,8 @@ namespace QuanLyKhachSan.Controllers
             var qr_NhanVien = _db.NhanVien.Find(id);
             if (qr_NhanVien != null)
             {
-                _db.NhanVien.Remove(qr_NhanVien);
+                qr_NhanVien.TinhTrang = "Đã xóa";
+                _db.NhanVien.Update(qr_NhanVien);
                 _db.SaveChanges();
                 TempData["SwalIcon"] = "success";
                 TempData["SwalTitle"] = "Xóa nhân viên thành công";

@@ -21,7 +21,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult DanhSachDichVu()
         {
-            var listDichVu = _db.DichVu.ToList();
+            var listDichVu = _db.DichVu.Where(s=>s.TinhTrang!="Đã xóa").ToList();
             return View(listDichVu);
         }
 
@@ -30,7 +30,8 @@ namespace QuanLyKhachSan.Controllers
             var qr_MaDichVu = _db.DichVu.Find(id);
             if (qr_MaDichVu != null)
             {
-                _db.DichVu.Remove(qr_MaDichVu);
+                qr_MaDichVu.TinhTrang = "Đã xóa";
+                _db.DichVu.Update(qr_MaDichVu);
                 _db.SaveChanges();
                 TempData["SwalIcon"] = "success";
                 TempData["SwalTitle"] = "Xóa dịch vụ thành công";

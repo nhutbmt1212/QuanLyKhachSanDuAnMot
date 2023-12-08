@@ -24,6 +24,7 @@
                 justify-content: center;
                 justify-items: center;
             }
+           
         </style>
     </head>
     <body>
@@ -291,7 +292,7 @@
 
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col" class="align-middle text-center">
+                        <th scope="col" class="align-middle text-center" hidden>
                             <input type="checkbox" id="thead_checkbox" />
                         </th>
                         <th scope="col" class="align-middle text-center"> #</th>
@@ -320,7 +321,7 @@
                         {
                             stt = stt + 1;
                         <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()" data-tendangnhap="@nv.TenDangNhap" data-matkhau="@nv.MatKhau" data-tinhtrang="@nv.TinhTrang">
-                            <td style="padding:23px 0px 15px 8px;"><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
+                            <td style="padding:23px 0px 15px 8px;" hidden><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                             <td class="employee-info-column">
                                     @stt
                             </td>
@@ -346,11 +347,11 @@
                             <td class="employee-info-column tbody_ngayvaolam">@nv.NgayVaoLam.ToShortDateString()</td>
                             <td class="employee-info-column tbody_tendangnhap">@nv.TenDangNhap</td>
                             <td class="employee-info-column tbody_matkhau">@nv.MatKhau</td>
-                            <td class="employee-info-column " id="tbody_tinhtrang">@nv.TinhTrang</td>
+                            <td class="employee-info-column text-success" id="tbody_tinhtrang">@nv.TinhTrang</td>
 
                             <td style="font-size:20px" class="employee-info-column-button">
                                 <div class="dropdown">
-                                    <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: rgba(0, 0, 0, 0); ">
                                         <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -359,6 +360,8 @@
                                     </div>
                                 </div>
                             </td>
+
+
                         </tr>
 
                         }
@@ -442,6 +445,8 @@
                 });
             });
         </script>
+      
+
     </body>
     </html>
 }

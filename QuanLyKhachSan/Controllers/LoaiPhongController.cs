@@ -25,6 +25,7 @@ namespace QuanLyKhachSan.Controllers
             var qr_MaLoaiPhong = _db.LoaiPhong.Find(id);
             if (qr_MaLoaiPhong != null)
             {
+                
                 _db.LoaiPhong.Remove(qr_MaLoaiPhong);
                 _db.SaveChanges();
                 TempData["SwalIcon"] = "success";

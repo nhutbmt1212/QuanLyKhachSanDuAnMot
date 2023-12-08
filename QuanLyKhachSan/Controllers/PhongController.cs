@@ -17,7 +17,7 @@ namespace QuanLyKhachSan.Controllers
         //comment
         public IActionResult TrangChuPhong()
         {
-            var listPhong = _db.Phong.Include(p => p.ImageLinks).ToList();
+            var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s=>s.TinhTrang!="Đã xóa").ToList();
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
@@ -94,6 +94,17 @@ namespace QuanLyKhachSan.Controllers
             await _db.SaveChangesAsync();
 
             return View("Index");
+        }
+        public IActionResult XoaPhong(string MaPhong)
+        {
+            var qr_maPhong = _db.Phong.FirstOrDefault(s => s.MaPhong == MaPhong);
+            if (qr_maPhong != null)
+            {
+                qr_maPhong.TinhTrang = "Đã xóa";
+                _db.Phong.Update(qr_maPhong);
+                _db.SaveChanges();
+            }
+            return RedirectToAction("TrangChuPhong");
         }
     }
 
