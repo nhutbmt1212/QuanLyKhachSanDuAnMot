@@ -3,16 +3,18 @@
 }
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="utf-8">
     <title>Login</title>
     <link rel="stylesheet" href="~/css/CssLogin.css">
 </head>
+
 <body>
     <section>
         <div class="form-box">
             <div class="form-value">
-                <form method="post" asp-controller="Access" asp-action="Login">
+                <form id="loginForm" method="post" asp-controller="Access" asp-action="Login" onsubmit="return handleLogin()">
                     <img src="~/UploadImage/Screenshot_2_preview_rev_1.png" alt="">
                     <h2>ĐĂNG NHẬP</h2>
                     <div class="inputbox">
@@ -27,8 +29,7 @@
                     </div>
                     <div class="forget">
                         <label style="display: contents;">
-                            <input type="checkbox">Nhớ mật khẩu <a style="margin-left: 75px;"
-                                                                   href="javascript:void(0);" onclick="showPopupQuenMK()">Quên mật khẩu?</a>
+                            <input type="checkbox">Nhớ mật khẩu <a style="margin-left: 75px;" href="javascript:void(0);" onclick="showPopupQuenMK()">Quên mật khẩu?</a>
                         </label>
                     </div>
                     <button type="submit" value="Login">Đăng nhập</button>
@@ -39,6 +40,9 @@
             </div>
         </div>
     </section>
+
+    <!-- Thêm thông báo SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
     <div class="overlayQuenMK" id="overlayQuenMK">
         <div class="popupQuenMK">
@@ -64,7 +68,24 @@
         function hidePopup() {
             document.getElementById("overlayQuenMK").style.display = "none";
         }
+
+        function handleLogin() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Đăng nhập thành công!',
+                showConfirmButton: false,
+                timer: 1500
+            });
+
+            setTimeout(function () {
+                document.getElementById("loginForm").submit();
+            }, 1500);
+
+            // Chặn sự kiện submit form để tránh chuyển trang ngay lập tức
+            return false;
+        }
     </script>
+
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
