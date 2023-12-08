@@ -81,7 +81,7 @@
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</a>
                                     @if(isReservationApproved){
-                                       <a class="dropdown-item" onclick="openPopupThanhToan()">Thanh toán</a>
+                                       <a class="dropdown-item" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</a>
 
                                     }
                                 </div>
@@ -141,11 +141,11 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="ngayNhanPhong">Ngày nhận phòng</label>
-                            <input type="date" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
+                            <input type="datetime-local" class="form-control"   name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
                         </div>
                         <div class="form-group">
                             <label for="ngayTraPhong">Ngày trả phòng</label>
-                            <input type="date" class="form-control" name="ngayTraPhong" id="ngayTraPhong_PopUpDatPhong" required>
+                            <input type="datetime-local" class="form-control" name="ngayTraPhong" id="ngayTraPhong_PopUpDatPhong" required>
                         </div>
                         <div class="form-group">
                             <label for="tongNguoiLon">Tổng số người lớn</label>
@@ -157,10 +157,7 @@
                             <label for="tongTreEm">Tổng số trẻ em</label>
                             <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" required>
                         </div>
-                        <div class="form-group">
-                            <label for="tongGia">Tổng giá</label>
-                            <input type="text" class="form-control" name="tongGia" id="tongGia" required>
-                        </div>
+                     
                         <div class="form-group">
                             <label for="khachTraTruoc">Khách trả trước</label>
                             <input type="text" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
@@ -171,8 +168,23 @@
                             <i class="bi bi-plus"></i> Thêm dịch vụ
                         </button>
                     </div>
-                   
-                    <button class="btn btn-success">Nhận phòng</button>
+                    <hr />
+                    <strong>
+                        <p>
+                            Thành tiền
+                        </p>
+                    </strong>
+
+                    <strong>
+                        <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0</span><span> VNĐ</span>
+                        <br />
+                        <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0</span><span> VNĐ</span>
+                        <br />
+                        <span>Tổng cộng:</span> <span id="TongTien">0 </span><span> VNĐ</span>
+                    </strong>
+                    </div>
+                <div id="TongDichVuDaDat"></div>
+                    <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
                 </div>
             </div>
         </div>
@@ -225,46 +237,47 @@
 
         <div class="popupThanhToan" id="paymentPopup">
             <div class="header">
-                <h1>Thanh toán phòng 101</h1>
+                <h1>Thanh toán phòng <span id="MaPhong_ThanhToan"></span></h1>
             </div>
             <div class="content">
                 <table>
                     <tr>
                         <th>Mã đặt phòng</th>
-                        <td>DP001</td>
+                        <td id="maDatPhongThanhToan_PopUp">DP001</td>
                     </tr>
                     <tr>
                         <th>Loại phòng</th>
-                        <td>P0001-Phòng đơn</td>
+                        <td id="loaiPhongThanhToan_PopUp">Phòng đơn</td>
                     </tr>
                     <tr>
                         <th>Số người</th>
-                        <td>1 người lớn - 2 trẻ em</td>
+                    <td><span id="soLuongNguoiLonThanhToan_PopUp">1</span> người lớn - <span id="soLuongTreEmThanhToan_PopUp">2</span> trẻ em</td>
                     </tr>
                     <tr>
                         <th>Thời gian nhận</th>
-                        <td>25/11/2023 14:00</td>
+                        <td id="thoiGianNhanThanhToan_PopUp">25/11/2023 14:00</td>
                     </tr>
                     <tr>
                         <th>Thời gian trả</th>
-                        <td>04/12/2023 17:04</td>
+                    <td id="thoiGianTraThanhToan_PopUp">04/12/2023 17:04</td>
                     </tr>
                     <tr>
                         <th>Tên khách hàng</th>
-                        <td>Nguyễn văn a</td>
+                        <td id="tenKhachHangThanhToan_PopUp">Nguyễn văn a</td>
                     </tr>
                     <tr>
                         <th>Số điện thoại</th>
-                        <td>0123123123</td>
+                        <td id="soDienThoaiThanhToan_PopUp">0123123123</td>
                     </tr>
                 </table>
                 <h2>Thông tin dịch vụ</h2>
-                <table>
+                <table class="table table-bordered table-striped">
                     <tr>
                         <th>#</th>
                         <th>Mã DV</th>
                         <th>Tên DV</th>
                         <th>Số lượng</th>
+                        <th>Đơn giá</th>
                         <th>Thành tiền</th>
                     </tr>
                     <tr>
@@ -273,7 +286,9 @@
                         <td>Đưa đón sân bay</td>
                         <td>2</td>
                         <td>60.000đ</td>
+                
                     </tr>
+
                 </table>
                 <h2>Thông tin thanh toán</h2>
                 <table>
