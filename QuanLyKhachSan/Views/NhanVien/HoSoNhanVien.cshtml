@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+    <title>Nhân Viên Profile</title>
+    <style>
+
+        img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .edit-mode .display-mode {
+            display: none;
+        }
+
+        .edit-mode .edit-mode-input {
+            display: inline-block;
+        }
+
+        .edit-mode .display-mode a,
+        .display-mode .edit-mode-input {
+            display: none;
+        }
+
+        .non-editable {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .list-group a {
+            font-size: .8em;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ nhân viên</h2>
+        <div class="row">
+            <div class="col-md-2">
+                <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">
+                <label for="imageInput">
+                    <img id="previewImage"
+                         src="https://photographer.vn/wp-content/uploads/2017/07/chup-anh-the-6.jpg"
+                         alt="avata">
+                </label>
+
+            </div>
+
+            <div class="col-md-8">
+                <ul class="list-group">
+                    <li class="list-group-item display-mode" id="employeeNameItem">
+                        <strong>Tên Nhân Viên:</strong>
+                        <span class="display-mode" id="employeeName">Nguyễn Văn A</span>
+                        <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
+                        <input type="text" id="editedValue_employeeName" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('employeeName')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('employeeName')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode" id="phoneNumberItem">
+                        <strong>Số Điện Thoại:</strong>
+                        <span class="display-mode" id="phoneNumber">0123456789</span>
+                        <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
+                        <input type="text" id="editedValue_phoneNumber" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('phoneNumber')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('phoneNumber')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode" id="cccdItem">
+                        <strong>CCCD:</strong>
+                        <span class="display-mode" id="cccd">123456789</span>
+                        <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
+                        <input type="text" id="editedValue_cccd" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('cccd')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('cccd')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode" id="emailItem">
+                        <strong>Email:</strong>
+                        <span class="display-mode" id="email">NV001@gmail.com</span>
+                        <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
+                        <input type="email" id="editedValue_email" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('email')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('email')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode" id="genderItem">
+                        <strong>Giới Tính:</strong>
+                        <span class="display-mode" id="gender">Nam</span>
+                        <select id="editedValue_gender" class="form-control edit-mode-input mb-1"
+                                style="display: none;">
+                            <option value="Nam">Nam</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                        <a href="#" onclick="editMode('gender')">Chỉnh Sửa</a>
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('gender')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('gender')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode non-editable" id="dobItem">
+                        <strong>Ngày Sinh:</strong>
+                        <span class="display-mode" id="dob">01/01/1990</span>
+                        <!-- This field is non-editable -->
+                    </li>
+                    <li class="list-group-item display-mode" id="addressItem">
+                        <strong>Địa Chỉ:</strong>
+                        <span class="display-mode" id="address">BMT VietNam</span>
+                        <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
+                        <input type="text" id="editedValue_address" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('address')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('address')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode non-editable" id="positionItem">
+                        <strong>Chức Vụ:</strong>
+                        <span class="display-mode" id="position">Nhân Viên</span>
+                        <!-- This field is non-editable -->
+                    </li>
+                    <li class="list-group-item display-mode" id="passwordItem">
+                        <strong>Mật Khẩu:</strong>
+                        <span class="display-mode" id="password">Tesst123</span>
+                        <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
+                        <input type="password" id="editedValue_password" class="form-control edit-mode-input mb-1"
+                               style="display: none;">
+                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                           onclick="saveEdit('password')">Lưu</a>
+                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                           onclick="cancelEdit('password')">Hủy</a>
+                    </li>
+                    <li class="list-group-item display-mode non-editable" id="startDateItem">
+                        <strong>Ngày Vào Làm:</strong>
+                        <span class="display-mode" id="startDate">01/01/2020</span>
+                        <!-- This field is non-editable -->
+                    </li>
+                    <li class="list-group-item display-mode non-editable" id="registrationDateItem">
+                        <strong>Ngày Đăng Ký:</strong>
+                        <span class="display-mode" id="registrationDate">01/01/2020</span>
+                        <!-- This field is non-editable -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var editingField = null;
+
+        function editMode(fieldId) {
+            if (editingField) {
+                return;
+            }
+
+            editingField = fieldId;
+
+            document.getElementById(fieldId + 'Item').classList.add('edit-mode');
+
+            var currentValue = document.getElementById(fieldId).innerText;
+            document.getElementById('editedValue_' + fieldId).value = currentValue;
+
+            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'inline-block';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'inline-block';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'inline-block';
+
+            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'none';
+        }
+
+        function saveEdit(fieldId) {
+            var editedValue = document.getElementById('editedValue_' + fieldId).value;
+            document.getElementById(fieldId).innerText = editedValue;
+            cancelEdit(fieldId);
+        }
+
+        function cancelEdit(fieldId) {
+            document.getElementById(fieldId + 'Item').classList.remove('edit-mode');
+
+            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'none';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'none';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'none';
+            document.getElementById('editedValue_' + fieldId).value = '';
+
+            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'inline-block';
+
+            editingField = null;
+        }
+    </script>
+
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function (event) {
+            const input = event.target;
+            const previewImage = document.getElementById('previewImage');
+
+            const file = input.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                    previewImage.src = e.target.result;
+                };
+
+                reader.readAsDataURL(file);
+            }
+            console.log(file);
+        });
+    </script>
+
+</body>
+
+</html>
