@@ -53,13 +53,13 @@
 $(document).ready(function () {
     $('#DatPhong').on('click', function () {
         // dữ liệu bên khách hàng
-        var tenkh = $('#tenkh').val();
+        var tenkh = $('#inputFieldTenKH').val();
         var gioitinh = $('#gioitinh').val();
-        var sdt = $('#so-dien-thoai').val();
-        var email = $('#email').val();
-        var ngaySinh = $('#ngay-sinh').val();
-        var diaChi = $('#dia-chi').val();
-        var cccd = $('#cccd').val();
+        var sdt = $('#inputFieldSDT').val();
+        var email = $('#inputFieldEmail').val();
+        var ngaySinh = $('#inputFieldNgaySinh').val();
+        var diaChi = $('#inputFieldDiaChi').val();
+        var cccd = $('#inputFieldCCCD').val();
         // dự liệu bên đặt phòng
         var ngaynhan = $('#ngaynhan_text').text();
         var ngaytra = $('#ngaytra_text').text();

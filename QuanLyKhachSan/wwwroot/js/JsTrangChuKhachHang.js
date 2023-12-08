@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $('.room-type').each(function () {
         var maPhong = $(this).attr('id');
         fetchRoomType(maPhong, this);
@@ -233,7 +232,7 @@ function ThemDichVu() {
             }
             var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
             var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
-            var nodeServices = `<br id="breakDichVu${counter}"/><strong id="tongTenDichVuDaDat${counter}">Tên dịch vụ: </strong>${dichVuDaChon} | <strong id="tongSoLuongDichVuDaDat${counter}">Số lượng: </strong>${soLuongDichVu}`;
+            var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
             $('#TongDichVuDaDat').append(nodeServices);
             //mảng để tính tiền
             TinhTienDichVu();
@@ -354,24 +353,8 @@ $(document).ready(function () {
             updateImage(slider);
         });
 
-        // Tự động chuyển slide sau mỗi 2 giây
-        setInterval(function () {
-            roomElement.find('.next').click();
-        }, 8000);
     });
 });
-
-function updateImage(slider) {
-    var images = slider.data('images');
-    var currentIndex = slider.data('current-index');
-    var img = images[currentIndex];
-    slider.fadeOut(500, function () {
-        slider.css('background-image', 'url(' + img + ')');
-        slider.fadeIn(500);
-    });
-}
-
-
 function updateImage(slider) {
     var currentIndex = slider.data('current-index');
     var images = slider.data('images');
