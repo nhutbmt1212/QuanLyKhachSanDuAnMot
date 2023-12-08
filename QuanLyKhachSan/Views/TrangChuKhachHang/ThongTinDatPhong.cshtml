@@ -128,8 +128,9 @@
                 <section id="thong-tin-nguoi-dat-phong">
                     <h2>Thông tin người đặt phòng</h2>
                     <div class="form-group">
-                        <label for="ten">Họ và tên</label>
-                        <input type="text" class="form-control" id="tenkh" placeholder="Nhập họ và tên" style='text-transform:uppercase'>
+                        < <label>Tên khách hàng</label>
+                        <input class="form-control" name="tenkhachhang" id="inputFieldTenKH" placeholder="Nhập họ và tên" style='text-transform:uppercase' />
+                        <span id="errorTenKH" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Giới tính</label>
@@ -143,24 +144,29 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="so-dien-thoai">Số điện thoại</label>
-                        <input type="tel" class="form-control" id="so-dien-thoai" placeholder="Nhập số điện thoại">
+                        <label>Số điện thoại</label>
+                        <input class="form-control" name="sodienthoai" id="inputFieldSDT" maxlength="10" placeholder="Nhập số điện thoại" />
+                        <span id="errorSDT" style="color: red;"></span>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" placeholder="Nhập email">
+                        <label>Email</label>
+                        <input class="form-control" name="email" id="inputFieldEmail" placeholder="Nhập email" />
+                        <span id="errorEmail" style="color: red;"></span>
                     </div>
                     <div class="form-group">
-                        <label for="cccd">CCCD</label>
-                        <input type="number" class="form-control" id="cccd" placeholder="Nhập CCCD">
+                        <label>CCCD</label>
+                        <input class="form-control" name="cccd" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
+                        <span id="errorCCCD" style="color: red;"></span>
                     </div>
                     <div class="form-group">
-                        <label for="ngay-sinh">Ngày sinh</label>
-                        <input type="date" class="form-control" id="ngay-sinh">
+                        <label>Ngày sinh</label>
+                        <input class="form-control" type="date" name="ngaysinh" id="inputFieldNgaySinh" />
+                        <span id="errorNgaySinh" style="color: red;"></span>
                     </div>
                     <div class="form-group">
-                        <label for="dia-chi">Địa chỉ</label>
-                        <input type="text" class="form-control" id="dia-chi" placeholder="Nhập địa chỉ">
+                        <label>Địa chỉ</label>
+                        <input class="form-control" name="diachi" id="inputFieldDiaChi" maxlength="50" />
+                        <span id="errorDiaChi" style="color: red;"></span>
                     </div>
                 </section>
             </div>
@@ -248,6 +254,6 @@
 
     </form>
     <script src="~/js/ThongTinDatPhong.js"></script>
-
+    <script src="~/Folder_KiemLoiInput/ErrorThongTinDatPhong.js"></script>
 </body>
 </html>
