@@ -26,7 +26,17 @@
             $("#errorTenVT").text("");
         }
     });
+    $("#inputEditTenVT").on("focusout", function () {
+        var inputValue = $(this).val();
 
+        if (inputValue.length < 3) {
+            $("#errorEditTenVT").text("Độ dài ít nhất 3 ký tự.");
+        } else if (inputValue.length === 0) {
+            $("#errorEditTenVT").text("Tên vật tư không được để trống.");
+        } else {
+            $("#errorEditTenVT").text("");
+        }
+    });
     $("#inputFieldNhaSX").on("focusout", function () {
         var inputValue = $(this).val();
 
@@ -36,6 +46,17 @@
             $("#errorNhaSX").text("Tên nhà sản xuất không được để trống.");
         }  else {
             $("#errorNhaSX").text("");
+        }
+    });
+    $("#inputEditNhaSX").on("focusout", function () {
+        var inputValue = $(this).val();
+
+        if (inputValue.length < 3) {
+            $("#errorEditNhaSX").text("Độ dài ít nhất 3 ký tự.");
+        } else if (inputValue.length === 0) {
+            $("#errorEditNhaSX").text("Tên nhà sản xuất không được để trống.");
+        } else {
+            $("#errorEditNhaSX").text("");
         }
     });
     $("#inputFieldTinhTrangVT").on("focusout", function () {
@@ -51,7 +72,19 @@
             $("#errorTinhTrangVT").text("");
         }
     });
+    $("#inputEditTinhTrangVT").on("focusout", function () {
+        var inputValue = $(this).val();
 
+        if (inputValue.length < 3) {
+            $("#errorEditTinhTrangVT").text("Độ dài ít nhất 3 ký tự.");
+        } else if (inputValue.length === 0) {
+            $("#errorEditTinhTrangVT").text("Tình trạng vật tư không được để trống.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+            $("#errorEditTinhTrangVT").text("Tình trạng vật tư chỉ được chứa chữ cái và khoảng trắng.");
+        } else {
+            $("#errorEditTinhTrangVT").text("");
+        }
+    });
 
 
     // Bắt sự kiện khi form được submit

@@ -15,7 +15,19 @@
             $("#errorTenLP").text("");
         }
     });
+    $("#inputEditTenLP").on("focusout", function () {
+        var inputValue = $(this).val();
 
+        if (inputValue.length < 3) {
+            $("#errorEditTenLP").text("Độ dài ít nhất 3 ký tự.");
+        } else if (inputValue.length === 0) {
+            $("#errorEditTenLP").text("Tên loại phòng không được để trống.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+            $("#errorEditTenLP").text("Tên loại phòng chỉ được chứa chữ cái và khoảng trắng.");
+        } else {
+            $("#errorEditTenLP").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input giá theo giờ
     $("#inputFieldGiaTheoGio").on("focusout", function () {
         var giaTheoGioValue = $(this).val();
@@ -28,7 +40,17 @@
             $("#errorGiaTheoGio").text("");
         }
     });
+    $("#inputEditGiaTheoGio").on("focusout", function () {
+        var giaTheoGioValue = $(this).val();
 
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditGiaTheoGio").text("Giá theo giờ không được để trống.");
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditGiaTheoGio").text("Giá theo giờ không hợp lệ.");
+        } else {
+            $("#errorEditGiaTheoGio").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input giá theo giờ
     $("#inputFieldGiaTheoNgay").on("focusout", function () {
         var giaTheoGioValue = $(this).val();
@@ -41,7 +63,17 @@
             $("#errorGiaTheoNgay").text("");
         }
     });
+    $("#inputEditGiaTheoNgay").on("focusout", function () {
+        var giaTheoGioValue = $(this).val();
 
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditGiaTheoNgay").text("Giá theo ngày không được để trống.");
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditGiaTheoNgay").text("Giá theo ngày không hợp lệ.");
+        } else {
+            $("#errorEditGiaTheoNgay").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input giá theo giờ
     $("#inputFieldPhuThu").on("focusout", function () {
         var giaTheoGioValue = $(this).val();
@@ -54,7 +86,17 @@
             $("#errorPhuThu").text("");
         }
     });
+    $("#inputEditPhuThu").on("focusout", function () {
+        var giaTheoGioValue = $(this).val();
 
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditPhuThu").text("Giá phụ thu không được để trống.");
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditPhuThu").text("Giá phụ thu không hợp lệ.");
+        } else {
+            $("#errorEditPhuThu").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input giá theo giờ
     $("#inputFieldNguoiLon").on("focusout", function () {
         var giaTheoGioValue = $(this).val();
@@ -67,7 +109,17 @@
             $("#errorNguoiLon").text("");
         }
     });
+    $("#inputEditNguoiLon").on("focusout", function () {
+        var giaTheoGioValue = $(this).val();
 
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditNguoiLon").text("Số lượng người lớn không được để trống.");
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditNguoiLon").text("Số lượng người lớn không hợp lệ.");
+        } else {
+            $("#errorEditNguoiLon").text("");
+        }
+    });
     // Bắt sự kiện khi người dùng rời khỏi ô input giá theo giờ
     $("#inputFieldTreEm").on("focusout", function () {
         var giaTheoGioValue = $(this).val();
@@ -80,7 +132,17 @@
             $("#errorTreEm").text("");
         }
     });
+    $("#inputEditTreEm").on("focusout", function () {
+        var giaTheoGioValue = $(this).val();
 
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditTreEm").text("Số lượng trẻ em không được để trống.");
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditTreEm").text("Số lượng trẻ em không hợp lệ.");
+        } else {
+            $("#errorEditTreEm").text("");
+        }
+    });
 
 
 
