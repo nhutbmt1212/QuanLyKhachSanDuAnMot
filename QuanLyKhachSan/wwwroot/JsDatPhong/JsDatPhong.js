@@ -345,7 +345,7 @@ function DatPhong() {
         },
         traditional: true,
         success: function (result) {
-            console.log(result)
+            window.location.href = '/DatPhong/Index';
         },
         error: function (xhr, status, error) {
         }
@@ -367,7 +367,7 @@ function ThanhToan() {
         },
         traditional: true,
         success: function (result) {
-            console.log(result)
+            window.location.href = '/DatPhong/Index';
         },
         error: function (xhr, status, error) {
         }
