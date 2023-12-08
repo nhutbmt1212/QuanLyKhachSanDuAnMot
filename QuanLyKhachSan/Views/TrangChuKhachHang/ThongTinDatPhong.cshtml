@@ -100,11 +100,12 @@
             bottom: 0;
             width: 100%;
         }
-        .Khach_Tra_Truoc{
-           background-color: whitesmoke;
-            padding:5px 10px 15px 20px;
-            width:40%;
-            min-width:300px;
+
+        .Khach_Tra_Truoc {
+            background-color: whitesmoke;
+            padding: 5px 10px 15px 20px;
+            width: 40%;
+            min-width: 300px;
         }
     </style>
 </head>
@@ -165,53 +166,54 @@
             </div>
             <div class="col-md-6">
                 <section id="thong-tin-phong">
-                    <h3>Thông tin đặt phòng</h3>
+                    <h2>Thông tin đặt phòng</h2>
                     <hr />
-                    <strong><p>ASAP Buôn Ma Thuột</p></strong>
-                    <span>Thời gian đặt phòng:</span><span id="ngaynhan_text"></span> - <span id="ngaytra_text"></span>(<span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ)
+                    <h3>ASAP Buôn Ma Thuột</h3>
+                    <strong>Thời gian đặt phòng: </strong><span id="ngaynhan_text"></span> - <span id="ngaytra_text"></span>
                     <br />
-                    <span>Số lượng người lớn tìm kiếm phòng: </span><span id="SoLuongNguoiLonDat_text">0</span><span> người</span>
+                    <strong>Tổng: </strong><span id="ngay_text">0</span> ngày <span id="gio_text">0</span> giờ
                     <br />
-                    <span>Số lượng trẻ em tìm kiếm phòng: </span><span id="SoLuongTreEmDat_text">0</span><span>
-                        người
-                    </span>
+                    @* <strong>Số lượng người lớn trong phòng: </strong><span id="SoLuongNguoiLonDat_text">0</span><span> người</span>
+                    <br />
+                    <strong>Số lượng trẻ em trong phòng: </strong><span id="SoLuongTreEmDat_text">0</span><span>
+                    người
+                    </span> *@
 
                     <hr />
-                    <strong><p>Thông tin phòng</p></strong>
+                    <h3>Thông tin phòng</h3>
                     <div id="Infor_Phong_Chon">
-                        <span id="maPhongDatPhong"> Mã phòng: <strong id="maPhong_DatPhong"></strong> </span>
-                        <br id="break1" />
-                        <span id="loaiPhongDatPhong"></span>
+                        <strong id="maPhongDatPhong"> Mã phòng: </strong><span id="maPhong_DatPhong"></span> - <span id="loaiPhongDatPhong"></span>
+
                         <br id="break2" />
-                        <span id="giaTheoGioDatPhong">Giá theo giờ: </span> <span id="giaTheoNgayDatPhong">Giá theo ngày: </span>
+                        <strong>Giá theo giờ:</strong> <span id="giaTheoGioDatPhong">Giá theo giờ: </span> <br />
+                        <strong>Giá theo ngày:</strong> <span id="giaTheoNgayDatPhong">Giá theo ngày: </span>
                         <br id="break3" />
-                        <span id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: <span id="giaTriSoLuongNguoiLonDat"></span></span> <span id="soLuongTreEmDatPhong">Số lượng trẻ em ở: <span id="giaTriSoLuongTreEmDat"></span></span>
+                        <strong id="SoLuongNguoiLonDatPhong">Số lượng người lớn ở: </strong><span id="giaTriSoLuongNguoiLonDat"></span>
+                        <br />
+                        <strong id="soLuongTreEmDatPhong">Số lượng trẻ em ở: </strong><span id="giaTriSoLuongTreEmDat"></span>
                         <br id="break4" />
                     </div>
                     <hr />
-                    <strong><p>Thông tin dịch vụ</p></strong>
+                    <h3>Thông tin dịch vụ</h3>
                     <div id="Infor_DichVu_Chon">
                         @* dịch vụ *@
+
                         <div id="ChonDichVu">
                         </div>
-                       
+
 
                     </div>
                     <hr />
-                    <strong>
-                        <p>
-                            Thành tiền
-                        </p>
-                    </strong>
+                    <h3>Thành tiền</h3>
 
-                    <strong>
-                        <span>Tổng tiền phòng:</span> <span id="TongTienPhong">0</span><span> VNĐ</span>
-                        <br />
-                        <span>Tổng tiền dịch vụ đã đặt:</span> <span id="TongTienDichVuDaDat">0 VND</span><span> VNĐ</span>
-                        <br />
-                        <span>Tổng cộng:</span> <span id="TongTien">0 VND</span><span> VNĐ</span>
-                    </strong>
-                   
+
+                    <strong>Tổng tiền phòng:</strong> <span style="color:#FFCA2C" id="TongTienPhong">0</span><span style="color:#FFCA2C"> VNĐ</span>
+                    <br />
+                    <strong>Tổng tiền dịch vụ:</strong> <span style="color:#FFCA2C" id="TongTienDichVuDaDat">0 VND</span><span style="color:#FFCA2C"> VNĐ</span>
+                    <br />
+                    <strong>Tổng cộng:</strong> <span style="color:#FFCA2C" id="TongTien">0 VND</span><span style="color:#FFCA2C"> VNĐ</span>
+
+
                 </section>
                 <section id="phuong-thuc-thanh-toan">
                     <h4>Phương thức thanh toán</h4>
@@ -233,7 +235,7 @@
                     </div>
 
                 </section>
-                <button id="DatPhong">Xác nhận đặt phòng</button>
+                <button class="btn btn-warning button_bookroom" id="DatPhong">Xác nhận đặt phòng</button>
 
             </div>
 
@@ -241,11 +243,26 @@
         </div>
 
 
-       
+
 
 
     </form>
     <script src="~/js/ThongTinDatPhong.js"></script>
+    <script>
+        document.getElementById("DatPhong").addEventListener("click", function () {
+            $.ajax({
+                url: '/TrangChuKhachHang/Index',
+                type: 'POST',
+                success: function (data) {
+                    window.location.href = data.redirectTo;
+                },
+                error: function () {
+                }
+            });
+        });
+    </script>
+
+
 
 </body>
 </html>
