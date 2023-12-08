@@ -196,9 +196,8 @@
         });
 
 
-    $("#inputEditCCCD").on("focusout", function () {
+        $("#inputEditCCCD").on("focusout", function () {
         var cccdValue = $(this).val();
-
         if (cccdValue.length === 0) {
             $("#errorEditCCCD").text("CCCD không được để trống.");
         } else if (!isValidCCCD(cccdValue)) {

@@ -36,7 +36,23 @@
         } else if (!isValidSDT(sdtValue)) {
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
         } else {
-            $("#errorSDT").text("");
+            // Gọi AJAX để kiểm tra 
+            $.ajax({
+                url: '/KhachHang/CheckSoDienThoai',
+                data: { sodienthoai: sdtValue },
+                type: 'GET',
+                success: function (response) {
+                    if (response.exists) {
+                        $("#errorSDT").text("Số điện thoại đã tồn tại.");
+                    } else {
+                        $("#errorSDT").text("");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            }
+            );
         }
     });
     $("#inputEditSDT").on("focusout", function () {
@@ -82,7 +98,23 @@
         } else if (!isValidCCCD(cccdValue)) {
             $("#errorCCCD").text("CCCD không hợp lệ.");
         } else {
-            $("#errorCCCD").text("");
+            // Gọi AJAX để kiểm tra email
+            $.ajax({
+                url: '/KhachHang/CheckCCCD',
+                data: { cccd: cccdValue },
+                type: 'GET',
+                success: function (response) {
+                    if (response.exists) {
+                        $("#errorCCCD").text("CCCD đã tồn tại.");
+                    } else {
+                        $("#errorCCCD").text("");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            }
+            );
         }
     });
     $("#inputEditCCCD").on("focusout", function () {
@@ -129,12 +161,33 @@
 
         if (emailValue.length === 0) {
             $("#errorEmail").text("Email không được để trống.");
+            
         } else if (!isValidEmail(emailValue)) {
             $("#errorEmail").text("Email không hợp lệ.");
+            
         } else {
-            $("#errorEmail").text("");
+            
+            // Gọi AJAX để kiểm tra email
+            $.ajax({
+                url: '/KhachHang/CheckEmail',
+                data: { email: emailValue },
+                type: 'GET',
+                success: function (response) {
+                    if (response.exists) {
+                        $("#errorEmail").text("Email đã tồn tại.");
+                    } else {
+                        $("#errorEmail").text("");
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            }
+            );
         }
-    });
+    })
+;
+
     $("#inputEditEmail").on("focusout", function () {
         var emailValue = $(this).val();
 
