@@ -78,41 +78,60 @@ function openPopupThanhToan(maPhong) {
             document.getElementById('thoiGianTraThanhToan_PopUp').innerHTML = result.qr_MaDatPhongTheoNgayGioHienTai.ngayTra;
             document.getElementById('tenKhachHangThanhToan_PopUp').innerHTML = result.qr_MaKhachHangTheoMaDatPhong.tenKhachHang;
             document.getElementById('soDienThoaiThanhToan_PopUp').innerHTML = result.qr_MaKhachHangTheoMaDatPhong.soDienThoai;
+            document.getElementById('tongTienThanhToan_PopUp').innerHTML = result.qr_MaDatPhongTheoNgayGioHienTai.tongTienPhong;
+            document.getElementById('giaTheoGioThanhToan_PopUp').innerHTML = result.qr_LoaiPhongTheoMaPhong.giaTheoGio;
+            document.getElementById('giaTheoNgayThanhToan_PopUp').innerHTML = result.qr_LoaiPhongTheoMaPhong.giaPhongTheoNgay;
+            document.getElementById('loaiPhongThanhToan_PopUp').innerHTML = result.qr_LoaiPhongTheoMaPhong.tenLoaiPhong;
+            document.getElementById('hinhThucDatPhongThanhToan_PopUp').innerHTML = result.qr_MaDatPhongTheoNgayGioHienTai.hinhThucDatPhong;
             var table = document.querySelector('.table');
+            var hinhThuc = result.qr_MaDatPhongTheoNgayGioHienTai.hinhThucDatPhong;
+            var ngayNhanPhong = new Date(result.qr_MaDatPhongTheoNgayGioHienTai.ngayNhan);
+            var ngayTraPhong = new Date(result.qr_MaDatPhongTheoNgayGioHienTai.ngayTra);
+            var duration = 0;
+            var giaPhong = 0;
+            if (hinhThuc === 'Ngay') {
+                duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60 * 24);
+                giaPhong = result.qr_LoaiPhongTheoMaPhong.giaPhongTheoNgay;
+            } else {
+                duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60);
+                giaPhong = result.qr_LoaiPhongTheoMaPhong.giaTheoGio;
+            }
+            var tongTienPhong = giaPhong * duration;
+            document.getElementById('tongTienPhongThanhToan_PopUp').innerText = tongTienPhong;
+          
             while (table.rows.length > 1) {
                 table.deleteRow(1);
             }
+            var tongTienDichVu = 0;
             for (var i = 0; i < result.qr_DichVuTheoMaDatPhong.length; i++) {
                 var service = result.qr_DichVuTheoMaDatPhong[i];
-
-                // Add a new row
                 var row = table.insertRow(-1);
-
-                // Add cells with relevant data
                 var cell1 = row.insertCell(0);
                 var cell2 = row.insertCell(1);
                 var cell3 = row.insertCell(2);
                 var cell4 = row.insertCell(3);
                 var cell5 = row.insertCell(4);
                 var cell6 = row.insertCell(5);
-
-                // Populate cells with data
-                cell1.innerHTML = i + 1; // Row number
-                cell2.innerHTML = service.maDichVu; // Service code
-                cell3.innerHTML = service.tenDichVu; // Replace with actual service name
-                cell4.innerHTML = service.soLuong; // Replace with actual quantity
-                cell5.innerHTML = service.giaTien;
-                cell6.innerHTML = "Total Amount"; 
-                console.log(service)
+                cell1.innerHTML = i + 1; 
+                cell2.innerHTML = service.maDichVu; 
+                cell3.innerHTML = service.tenDichVu; 
+                cell4.innerHTML = service.soLuong;
+                cell5.innerHTML = service.giaTien; 
+                cell6.innerHTML = service.thanhTien; 
+                tongTienDichVu += service.thanhTien;
             }
+          
+            document.getElementById('tongTienDichVu_PopUp').innerText = tongTienDichVu;
+            var soTienKhachDaTra = result.qr_MaDatPhongTheoNgayGioHienTai.soTienTraTruoc;
+            document.getElementById('soTienKhachDaTra_PopUp').innerText = soTienKhachDaTra;
+            var TongTienDatPhong = (parseFloat(tongTienDichVu) + parseFloat(tongTienPhong)) - parseFloat(soTienKhachDaTra);
+            document.getElementById('tongTienThanhToan_PopUp').innerText = TongTienDatPhong;
         },
         error: function (xhr, status, error) {
-            // Xử lý lỗi nếu có
             console.log(error);
         }
     });
 }
-
 function closePopupThanhToan() {
     document.getElementById("paymentPopup").style.display = "none";
     document.getElementById("overlayThanhToan").style.display = "none";
@@ -129,7 +148,7 @@ function ThemDichVu() {
 
     $.ajax({
         url: url,
-        type: 'GET',
+        type: 'GET', 
         success: function (data) {
             var options = '';
 
@@ -332,3 +351,24 @@ function DatPhong() {
         }
     });
 }
+function ThanhToan() {
+    var maDatPhong = document.getElementById('maDatPhongThanhToan_PopUp').innerText;
+    var tongTienDichVu = document.getElementById('tongTienPhongThanhToan_PopUp').innerText;
+    var tongTienPhong = document.getElementById('tongTienDichVu_PopUp').innerText;
+    var soTienThanhToan = document.getElementById('tongTienThanhToan_PopUp').innerText;
+    $.ajax({
+        url: '/DatPhong/ThanhToanPhong',
+        type: 'GET',
+        data: {
+            'MaDatPhong': maDatPhong,
+            'TongTienDichVu': tongTienDichVu,
+            'TongTienPhong': tongTienPhong,
+            'SoTienThanhToan': soTienThanhToan
+        },
+        traditional: true,
+        success: function (result) {
+            console.log(result)
+        },
+        error: function (xhr, status, error) {
+        }
+    }); }
