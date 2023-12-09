@@ -211,6 +211,67 @@
         } 
     });
 
+    $("#myFormEdit").submit(function (event) {
+
+        var inputValueTenLP = $("#inputEditTenLP").val();
+        if (inputValueTenLP.length === 0) {
+            $("#errorEditTenLP").text("Tên loại phòng không được để trống.");
+            event.preventDefault();
+        } else if (inputValueTenLP.trim() === "") {
+            $("#errorEditTenLP").text("Tên loại phòng không được chứa toàn khoảng trắng.");
+            event.preventDefault();
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenLP)) {
+            $("#errorEditTenLP").text("Tên loại phòng chỉ được chứa chữ cái và khoảng trắng.");
+            event.preventDefault();
+        }
+
+        // Lấy giá trị từ ô input
+        var giaTheoGioValue = $("#inputEditGiaTheoGio").val();
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditGiaTheoGio").text("Giá theo giờ không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditGiaTheoGio").text("Giá theo giờ không hợp lệ.");
+            event.preventDefault();
+        }
+        // Lấy giá trị từ ô input
+        var giaTheoNgayValue = $("#inputEditGiaTheoNgay").val();
+        if (giaTheoNgayValue.length === 0) {
+            $("#errorEditGiaTheoNgay").text("Giá theo ngày không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditGiaTheoNgay").text("Giá theo giờ không hợp lệ.");
+            event.preventDefault();
+        }
+        // Lấy giá trị từ ô input
+        var phuThuValue = $("#inputEditPhuThu").val();
+        if (phuThuValue.length === 0) {
+            $("#errorEditPhuThu").text("Phụ thu không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditPhuThu").text("Phụ thu không hợp lệ.");
+            event.preventDefault();
+        }
+        // Lấy giá trị từ ô input
+        var giaTheoGioValue = $("#inputEditNguoiLon").val();
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditNguoiLon").text("Số lượng người lớn không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditNguoiLon").text("Số lượng người lớn không hợp lệ.");
+            event.preventDefault();
+        }
+        // Lấy giá trị từ ô input
+        var giaTheoGioValue = $("#inputEditTreEm").val();
+        if (giaTheoGioValue.length === 0) {
+            $("#errorEditTreEm").text("Số lượng trẻ em không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
+            $("#errorEditTreEm").text("Số lượng trẻ em không hợp lệ.");
+            event.preventDefault();
+        }
+    });
+
     // Hàm kiểm tra giá theo giờ hợp lệ
     function isValidGiaTheoGio(giaTheoGio) {
         // Sử dụng biểu thức chính quy để kiểm tra chỉ có số và không âm

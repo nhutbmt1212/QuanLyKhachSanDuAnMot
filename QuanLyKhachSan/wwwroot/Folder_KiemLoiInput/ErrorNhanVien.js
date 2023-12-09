@@ -409,6 +409,117 @@
     });
 
 
+        $("#myFormEdit").submit(function (event) {
+
+
+            var inputValueTenNV = $("#inputEditTenNV").val();
+            if (inputValueTenNV.length === 0) {
+                $("#errorEditTenNV").text("Tên nhân viên không được để trống.");
+                event.preventDefault();
+            } else if (inputValueTenNV.trim() === "") {
+                $("#errorEditTenNV").text("Tên nhân viên không được chứa toàn khoảng trắng.");
+                event.preventDefault();
+            } else if (inputValueTenNV.length === 0) {
+                $("#errorEditTenNV").text("Tên nhân viên không được để trống.");
+                event.preventDefault();
+            } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
+                $("#errorEditTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+                event.preventDefault();
+            }
+
+
+            var emailValue = $("#inputEditEmail").val();
+            if (emailValue.length === 0) {
+                $("#errorEditEmail").text("Email không được để trống.");
+                event.preventDefault();
+            } else if (!isValidEmail(emailValue)) {
+                $("#errorEditEmail").text("Địa chỉ email không hợp lệ.");
+                event.preventDefault();
+            } else if (!isValidEmail(emailValue)) {
+                $("#errorEditEmail").text("Email không hợp lệ.");
+                event.preventDefault();
+            }
+
+            var diaChiValue = $("#inputEditDiaChi").val();
+            if (diaChiValue.length === 0) {
+                $("#errorEditDiaChi").text("Địa chỉ không được để trống.");
+                event.preventDefault();
+            } else if (diaChiValue.trim() === "") {
+                $("#errorEditDiaChi").text("Địa chỉ không được chứa toàn khoảng trắng.");
+                event.preventDefault();
+            } else if (diaChiValue.length === 0) {
+                $("#errorEditDiaChi").text("Địa chỉ không được để trống.");
+                event.preventDefault();
+            }
+
+            var tendangnhapValue = $("#inputEditTenDangNhap").val();
+            if (tendangnhapValue.length === 0) {
+                $("#errorEditTenDangNhap").text("Tên đăng nhập không được để trống.");
+                event.preventDefault();
+            } else if (tendangnhapValue.length < 5) {
+                $("#errorEditTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
+                event.preventDefault();
+            } else if (!isValidTenDangNhap(tendangnhapValue)) {
+                $("#errorEditTenDangNhap").text("Tên đăng nhập không hợp lệ.");
+                event.preventDefault();
+            }
+
+            var sdtValue = $("#inputEditSDT").val();
+            if (sdtValue.length === 0) {
+                $("#errorEditSDT").text("Số điện thoại không được để trống.");
+                event.preventDefault();
+            } else if (!isValidSDT(sdtValue)) {
+                $("#errorEditSDT").text("Số điện thoại không hợp lệ.");
+                event.preventDefault();
+            }
+
+            var cccdValue = $("#inputEditCCCD").val();
+            if (cccdValue.length === 0) {
+                $("#errorEditCCCD").text("CCCD không được để trống.");
+                event.preventDefault();
+            } else if (!isValidCCCD(cccdValue)) {
+                $("#errorEditCCCD").text("CCCD không hợp lệ.");
+                event.preventDefault();
+            }
+
+            var matKhauValue = $("#inputEditMK").val();
+            if (matKhauValue.length === 0) {
+                $("#errorEditMK").text("Mật khẩu không được để trống.");
+                event.preventDefault();
+            } else if (matKhauValue.length < 6) {
+                $("#errorEditMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
+                event.preventDefault();
+            } else if (!isValidMatKhau(matKhauValue)) {
+                $("#errorEditMK").text("Mật khẩu phải bao gồm chữ và số.");
+                event.preventDefault();
+            }
+
+            var ngaySinhValue = $("#inputEditNgaySinh").val();
+            if (ngaySinhValue.length === 0) {
+                $("#errorEditNgaySinh").text("Ngày sinh không được để trống.");
+                event.preventDefault();
+            } else if (!isValidNgaySinh(ngaySinhValue)) {
+                $("#errorEditNgaySinh").text("Ngày sinh không hợp lệ.");
+                event.preventDefault();
+            } else if (!isOldEnough(ngaySinhValue)) {
+                $("#errorEditNgaySinh").text("Nhân viên phải đủ 15 tuổi trở lên.");
+                event.preventDefault();
+            }
+
+            var ngayVaoLamValue = $("#inputEditNgayVaoLam").val();
+            if (ngayVaoLamValue.length === 0) {
+                $("#errorEditNgayVaoLam").text("Ngày vào làm không được để trống.");
+                event.preventDefault();
+            } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
+                $("#errorEditNgayVaoLam").text("Ngày vào làm không hợp lệ.");
+                event.preventDefault();
+            } else if (isGreaterThan7Days(ngayVaoLamValue)) {
+                $("#errorEditNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
+                event.preventDefault();
+            }          
+        });
+
+
 
 
 
