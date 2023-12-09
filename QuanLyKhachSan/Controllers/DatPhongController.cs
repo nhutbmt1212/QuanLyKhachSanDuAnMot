@@ -17,7 +17,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var qr_Phong = _db.Phong.ToList();
+            var qr_Phong = _db.Phong.Where(s=>s.TinhTrang!="Đã xóa").ToList();
             return View(qr_Phong);
         }
 
@@ -32,7 +32,7 @@ namespace QuanLyKhachSan.Controllers
         {
             var qr_phong = _db.Phong.FirstOrDefault(s => s.MaPhong == MaPhong);
             var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s=>s.MaLoaiPhong == qr_phong.MaLoaiPhong);
-            return Json(qr_LoaiPhong);
+            return Json(new { qr_LoaiPhong, qr_phong });
         }
         [HttpGet]
         public async Task<IActionResult> LayDanhSachDichVu()
@@ -160,6 +160,15 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
 
             return RedirectToAction("Index","DatPhong");
+        }
+        public IActionResult GetBookingDates(string maPhong)
+        {
+            var bookingDates =  _db.DatPhong
+                .Where(dp => dp.MaPhong == maPhong)
+                .Select(dp => new { dp.NgayNhan, dp.NgayTra })
+                .ToList();
+
+            return Json(new { bookingDates });
         }
     }
 }

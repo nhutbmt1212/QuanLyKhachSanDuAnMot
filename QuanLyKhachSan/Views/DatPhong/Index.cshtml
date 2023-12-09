@@ -118,6 +118,8 @@
                         </datalist>
 
                         <i class="fa fa-circle-plus" onclick="showForm()" hidden></i>
+                        <span id="errorKhachHang" style="color: red;"></span>
+
                     </div>
 
 
@@ -126,6 +128,8 @@
                         <div class="form-group">
                             <label for="gioiTinh">Loại phòng</label>
                             <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" />
+                            
+
                         </div>
                         <div class="form-group">
                             <label for="hinhThuc">Hình thức</label>
@@ -144,25 +148,35 @@
                         <div class="form-group">
                             <label for="ngayNhanPhong">Ngày nhận phòng</label>
                             <input type="datetime-local" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
+                            <span id="errorNgayNhan" style="color: red;"></span>
+
                         </div>
                         <div class="form-group">
                             <label for="ngayTraPhong">Ngày trả phòng</label>
                             <input type="datetime-local" class="form-control" name="ngayTraPhong" id="ngayTraPhong_PopUpDatPhong" required>
+                            <span id="errorNgayTra" style="color: red;"></span>
+
                         </div>
                         <div class="form-group">
-                            <label for="tongNguoiLon">Tổng số người lớn</label>
-                            <input type="text" class="form-control" name="tongNguoiLon" id="tongNguoiLon" required>
+                            <label for="tongNguoiLon">Tổng số người lớn (Số người lớn được ở tối đa: <span id="SoNgLonToiDaPopUp_DatPhong"></span>)</label>
+                            <input type="text" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
+                            <span id="errorTongSoNguoiLon" style="color: red;"></span>
+
                         </div>
                         
                     </div>
                     <div class="col-md-5">
                         <div class="form-group">
-                            <label for="tongTreEm">Tổng số trẻ em</label>
-                            <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" required>
+                            <label for="tongTreEm">Tổng số trẻ em (Số trẻ em được ở tối đa: <span id="SoTreEmToiDaPopUp_DatPhong"></span>)</label>
+                            <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required> 
+                            <span id="errorTongSoTreEm" style="color: red;"></span>
+
                         </div>
                         <div class="form-group">
                             <label for="khachTraTruoc">Khách trả trước</label>
-                            <input type="text" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
+                            <input type="number" min="0" value="0" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
+                            <span id="errorKhachTraTruoc" style="color: red;"></span>
+
                         </div>
                       
                         <div id="ChonDichVu" class="mt-4">

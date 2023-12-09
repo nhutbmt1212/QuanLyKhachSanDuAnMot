@@ -55,6 +55,7 @@ getValue.addEventListener('click', function (e) {
     var matKhau = row.dataset.matkhau;
     var tinhTrang = row.dataset.tinhtrang;
     var email = row.dataset.email;
+    console.log(gioiTinh);
     document.querySelector('.MaKhachHangEdit').value = MaKh;
     document.querySelector('.TenKhachHangEdit').value = TenKh;
     document.querySelector('.SdtEdit').value = sdt;

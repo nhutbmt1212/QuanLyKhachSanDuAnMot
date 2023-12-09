@@ -15,7 +15,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var listPhong = _db.Phong.Include(p => p.ImageLinks).ToList();
+            var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s=>s.TinhTrang!="Đã xóa").ToList();
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
@@ -157,7 +157,7 @@ namespace QuanLyKhachSan.Controllers
                 NgayTra = NgayTra,
                 SoLuongNguoiLon = SoLuongNguoiLon,
                 SoLuongTreEm = SoLuongTreEm,
-                HinhThucDatPhong = "Trả sau",
+                HinhThucDatPhong = "Ngay",
                 TongTienPhong = TongTien,
                 MaNhanVien = null,
                 TinhTrang = "Chờ xử lý",

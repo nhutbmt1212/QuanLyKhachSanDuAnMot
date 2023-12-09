@@ -1,6 +1,5 @@
 ﻿function showSearchBar(MaPhong) {
     document.getElementById("popupOverlay").style.display = "flex";
-    console.log(MaPhong);
     var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText = MaPhong;
     $.ajax({
         url: '/DatPhong/LayThongTinPhong', 
@@ -8,16 +7,18 @@
         data: { maPhong: maPhong },
         success: function (data) {
             console.log(data);
-            document.getElementById('MaLoaiPhong_PopUpDatPhong').value = data.tenLoaiPhong;
-            document.getElementById('giaPhong_PopUpDatPhong').value = data.giaTheoGio;
+            document.getElementById('MaLoaiPhong_PopUpDatPhong').value = data.qr_LoaiPhong.tenLoaiPhong;
+            document.getElementById('giaPhong_PopUpDatPhong').value = data.qr_LoaiPhong.giaTheoGio;
+            document.getElementById('SoNgLonToiDaPopUp_DatPhong').innerText = data.qr_LoaiPhong.soLuongNguoiLon;
+            document.getElementById('SoTreEmToiDaPopUp_DatPhong').innerText = data.qr_LoaiPhong.soLuongTreEm;
+
             document.getElementById('hinhThuc_PopUpDatPhong').onchange = function () {
                 var hinhthuc = document.getElementById('hinhThuc_PopUpDatPhong').value;
                 if (hinhthuc == 'Ngay') {
-                    document.getElementById('giaPhong_PopUpDatPhong').value = data.giaPhongTheoNgay;
-
+                    document.getElementById('giaPhong_PopUpDatPhong').value = data.qr_LoaiPhong.giaPhongTheoNgay;
                 }
                 else {
-                    document.getElementById('giaPhong_PopUpDatPhong').value = data.giaTheoGio;
+                    document.getElementById('giaPhong_PopUpDatPhong').value = data.qr_LoaiPhong.giaTheoGio;
 
                 }
                 TinhTongTienPhong();
@@ -307,6 +308,12 @@ function TongTienDatPhong() {
 
 document.getElementById('NhanPhong_PopUp').addEventListener('click', DatPhong);
 function DatPhong() {
+    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc()) {
+        console.log("Other validations failed");
+        return;
+    } else {
+        console.log("Validation passed! Submitting data...");
+
     var ThanhTienMaDichVu = [];
     var arrSoLuongDichVu = [];
     $('span[id^="tongTenDichVuDaDat"]').each(function () {
@@ -325,8 +332,6 @@ function DatPhong() {
     var tongTienPhong = document.getElementById('TongTien').innerText;
     var khachTraTruoc = document.getElementById('khachTraTruoc').value;
     var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
-    console.log(tongTienPhong, khachTraTruoc);
-    // Gửi AJAX request
     $.ajax({
         url: '/DatPhong/DatPhongNhanh',
         type: 'POST',
@@ -350,6 +355,7 @@ function DatPhong() {
         error: function (xhr, status, error) {
         }
     });
+    }
 }
 function ThanhToan() {
     var maDatPhong = document.getElementById('maDatPhongThanhToan_PopUp').innerText;
@@ -388,3 +394,134 @@ function TimKiemTrong() {
     document.getElementById('TimKiemTrong').classList = "btn btn-light ";
     document.getElementById('TimKiemDaDat').classList = "btn btn-light active";
 }
+//kiểm lỗi 
+function validateMaKhachHang() {
+    var maKhachHangDatPhong = document.getElementById('MaKhachHangDatPhong').value;
+    var maKhachHang = maKhachHangDatPhong.split('|')[0].trim();
+    if (maKhachHang == "") {
+        document.getElementById('errorKhachHang').textContent = 'Bạn chưa chọn khách hàng';
+        return false;
+    } else {
+        document.getElementById('errorKhachHang').textContent = '';
+        return true;
+    }
+}
+
+function validateNgayNhan() {
+    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
+    var now = new Date();
+    if (ngayNhan < now) {
+        document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
+        return false;
+    } else {
+        document.getElementById('errorNgayNhan').textContent = '';
+        return true;
+    }
+}
+
+function validateNgayTra() {
+    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
+    var ngayTra = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
+    var chenhlechthoigian = ngayTra - ngayNhan;
+    var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
+    if (chenhlechgio <= 3) {
+        document.getElementById('errorNgayTra').textContent = "Thời gian đặt phòng phải lớn hơn 3 giờ";
+        return false;
+    } else {
+        document.getElementById('errorNgayTra').textContent = '';
+        return true;
+    }
+}
+function validateTongNguoiLon() {
+    var tongNguoiLon = document.getElementById('tongNguoiLon').value;
+    var soLuongNguoiLonToiDa = document.getElementById('SoNgLonToiDaPopUp_DatPhong').innerText;
+    var regex = /^[0-9]*$/; // Regex for numbers only
+    if (tongNguoiLon == "") {
+        document.getElementById('errorTongSoNguoiLon').textContent = '';
+        document.getElementById('errorTongSoNguoiLon').textContent = 'Tổng số người lớn không được bỏ trống';
+        return false;
+    } else if (!regex.test(tongNguoiLon)) {
+        document.getElementById('errorTongSoNguoiLon').textContent = '';
+        document.getElementById('errorTongSoNguoiLon').textContent = 'Tổng số người lớn phải là số';
+        return false;
+    } else if (tongNguoiLon > soLuongNguoiLonToiDa) {
+        document.getElementById('errorTongSoNguoiLon').textContent = '';
+        document.getElementById('errorTongSoNguoiLon').textContent = 'Tổng số người lớn không được vượt quá số lượng người lớn tối đa';
+        return false;
+    } else {
+        document.getElementById('errorTongSoNguoiLon').textContent = '';
+        return true;
+    }
+}
+
+function validateTongTreEm() {
+    var tongTreEm = document.getElementById('tongTreEm').value;
+    var soLuongTreEmToiDa = document.getElementById('SoTreEmToiDaPopUp_DatPhong').innerText;
+    var regex = /^[0-9]*$/; // Regex for numbers only
+    if (tongTreEm == "") {
+       document.getElementById('errorTongSoTreEm').textContent = '';
+
+        document.getElementById('errorTongSoTreEm').textContent = 'Tổng số trẻ em không được bỏ trống';
+        return false;
+    } else if (!regex.test(tongTreEm)) {
+        document.getElementById('errorTongSoTreEm').textContent = '';
+
+        document.getElementById('errorTongSoTreEm').textContent = 'Tổng số trẻ em phải là số';
+        return false;
+    } else if (tongTreEm > soLuongTreEmToiDa) {
+        document.getElementById('errorTongSoTreEm').textContent = '';
+
+        document.getElementById('errorTongSoTreEm').textContent = 'Tổng số trẻ em không được vượt quá số lượng trẻ em tối đa';
+        return false;
+    } else {
+        document.getElementById('errorTongSoTreEm').textContent = '';
+        return true;
+    }
+}
+
+
+
+function validateKhachTraTruoc() {
+    var khachTraTruoc = document.getElementById('khachTraTruoc').value;
+    var regex = /^[0-9]*$/; // Regex for numbers only
+    if (khachTraTruoc == "" || !regex.test(khachTraTruoc)) {
+        document.getElementById('errorKhachTraTruoc').textContent = 'Khách trả trước không được để trống và phải là số';
+        return false;
+    } else {
+        document.getElementById('errorKhachTraTruoc').textContent = '';
+        return true;
+    }
+}
+
+//function validateBookingDates(callback) {
+//    var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
+//    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
+//    var ngayTra = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
+
+//    $.ajax({
+//        url: '/DatPhong/GetBookingDates',
+//        type: 'GET',
+//        data: { maPhong: maPhong },
+//        success: function (data) {
+//            var bookingDates = data.bookingDates;
+//            for (var i = 0; i < bookingDates.length; i++) {
+//                var existingNgayNhan = new Date(bookingDates[i].ngayNhan);
+//                var existingNgayTra = new Date(bookingDates[i].ngayTra);
+//                if ((ngayNhan >= existingNgayNhan && ngayNhan < existingNgayTra) || (ngayTra > existingNgayNhan && ngayTra <= existingNgayTra)) {
+//                    document.getElementById('errorNgayNhan').textContent = 'Ngày nhận và ngày trả bị trùng với khung giờ đã đặt phòng của phòng này';
+//                    document.getElementById('errorNgayTra').textContent = 'Ngày nhận và ngày trả bị trùng với khung giờ đã đặt phòng của phòng này';
+//                    callback(false); 
+//                    return;
+//                }
+//            }
+//            document.getElementById('errorNgayNhan').textContent = '';
+//            document.getElementById('errorNgayTra').textContent = '';
+//            callback(true); // Pass the result to the callback
+//        },
+//        error: function (error) {
+//            console.error(error);
+//            callback(false); // Pass the result to the callback
+//        }
+//    });
+//}
+

@@ -96,11 +96,25 @@ document.getElementById('TimKiemPhong').onclick = function () {
     var ngayTraValidate = new Date(document.getElementById('ipt_NgayTra').value);
     var chenhlechthoigian = ngayTraValidate - ngayNhanValidate;
     var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
+    var ngayNhanValidate = new Date(ngayNhan);
+    
+    var now = new Date();
+
+    if (ngayNhanValidate < now) {
+        document.getElementById('Error_NgayNhan').textContent = 'Ngày nhận phải lớn hơn ngày giờ hiện tại';
+        return;
+    } else {
+        document.getElementById('Error_NgayNhan').textContent = '';
+    }
+
     if (chenhlechgio <= 3) {
-        alert("Thời gian đặt phòng phải lớn hơn 3 giờ");
+        document.getElementById('Error_NgayTra').textContent = "Thời gian đặt phòng phải lớn hơn 3 giờ";
+        return;
+    } else {
+        document.getElementById('Error_NgayTra').textContent = '';
     }
     //convert datetime 
-    else if (ngayNhan == "") {
+     if (ngayNhan == "") {
         alert('Bạn chưa chọn ngày nhận');
     }
     else if (ngayTra == "") {

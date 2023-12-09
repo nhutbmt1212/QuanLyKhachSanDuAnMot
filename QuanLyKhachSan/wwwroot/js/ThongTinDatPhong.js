@@ -129,6 +129,10 @@ function validateCCCD() {
 
 function validateNgaySinh() {
     var ngaySinh = $('#inputFieldNgaySinh').val();
+    if (ngaySinh == "") {
+        $('#errorNgaySinh').text('Bạn chưa chọn ngày sinh');
+        return false;
+    }
     // Add your logic for checking if ngaySinh is valid according to your requirements
     // Example: Check if the user is at least 16 years old
     var birthDate = new Date(ngaySinh);
