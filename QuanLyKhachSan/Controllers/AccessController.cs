@@ -79,7 +79,7 @@ namespace QuanLyKhachSan.Controllers
 				return RedirectToAction("Index", "TrangChuKhachHang");
 			}
 
-			ViewData["ValidateMessage"] = "User not found";
+			
 			return View();
 		}
         public IActionResult GiaoDienDangKy()

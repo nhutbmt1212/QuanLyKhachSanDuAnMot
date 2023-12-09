@@ -76,7 +76,9 @@ namespace QuanLyKhachSan.Controllers
               
                 _db.KhachHang.Add(kh);
                 _db.SaveChanges();
-       
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Thêm khách hàng thành công";
+
 
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
 
@@ -88,10 +90,9 @@ namespace QuanLyKhachSan.Controllers
            //còn lỗi ngày đăng ký chưa lấy từ đb
                 _db.KhachHang.Update(kh);
                _db.SaveChanges();
-            
-
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Sửa khách hàng thành công";
             return RedirectToAction("DanhSachKhachHang", "KhachHang");
-
         }
         public ActionResult ExportExcel()
         {

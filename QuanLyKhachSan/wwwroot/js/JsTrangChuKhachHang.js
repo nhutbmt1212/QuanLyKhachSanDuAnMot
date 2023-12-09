@@ -12,7 +12,7 @@ function fetchRoomType(maPhong, element) {
         data: { maPhong: maPhong },
         success: function (data) {
             $(".loaiPhong").text(data.tenLoaiPhong);
-            $("#loaiPhong-" + maPhong).text("Loại phòng: " + data.tenLoaiPhong);
+            $("#loaiPhong-" + maPhong).text(data.tenLoaiPhong);
 
             $("#pricetheogio-" + maPhong).text(data.giaTheoGio);
             $("#pricetheongay-" + maPhong).text(data.giaPhongTheoNgay);
