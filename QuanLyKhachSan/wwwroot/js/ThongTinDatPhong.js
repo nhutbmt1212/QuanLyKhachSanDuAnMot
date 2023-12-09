@@ -77,54 +77,120 @@ function validatePhoneNumber() {
     var sdt = $('#inputFieldSDT').val();
     var regexPhone = /^[0-9]{10}$/; // Regex for 10 digits
     if (sdt == "") {
-        $('#errorSDT').text('');
         $('#errorSDT').text('Số điện thoại không được bỏ trống');
         return false;
     }
     if (!regexPhone.test(sdt)) {
-        $('#errorSDT').text('');
         $('#errorSDT').text('Số điện thoại phải có đúng 10 chữ số');
         return false;
+    }
+    if (sdt.charAt(0) != '0') {
+        $('#errorSDT').text('Số điện thoại phải bắt đầu bằng số 0');
+        return false;
     } else {
-        $('#errorSDT').text('');
-        return true;
+        return checkPhoneNumber(sdt).then(function (isValid) {
+            if (isValid) {
+                $("#errorSDT").text("");
+            } else {
+                $("#errorSDT").text("Số điện thoại đã tồn tại.");
+            }
+            return isValid;
+        });
     }
 }
+
+
+function checkPhoneNumber(sdt) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/KhachHang/CheckSoDienThoai',
+            data: { sodienthoai: sdt },
+            type: 'GET',
+            success: function (response) {
+                resolve(!response.exists);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
+}
+
 
 function validateEmail() {
     var email = $('#inputFieldEmail').val();
     var regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Regex for a basic email format
     if (email == "") {
-        $('#errorEmail').text('');
         $('#errorEmail').text('Email không được bỏ trống');
         return false;
     }
     if (!regexEmail.test(email)) {
-        $('#errorEmail').text('');
         $('#errorEmail').text('Email không đúng định dạng');
         return false;
     } else {
-        $('#errorEmail').text('');
-        return true;
+        return checkEmail(email).then(function (isValid) {
+            if (isValid) {
+                $("#errorEmail").text("");
+            } else {
+                $("#errorEmail").text("Email đã tồn tại.");
+            }
+            return isValid;
+        });
     }
+}
+
+function checkEmail(email) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/KhachHang/CheckEmail',
+            data: { email: email },
+            type: 'GET',
+            success: function (response) {
+                resolve(!response.exists);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
 }
 
 function validateCCCD() {
     var cccd = $('#inputFieldCCCD').val();
     var regexCCCD = /^[0-9]{12}$/; // Regex for 12 digits
     if (cccd == "") {
-        $('#errorCCCD').text('');
         $('#errorCCCD').text('CCCD không được bỏ trống');
         return false;
     }
     if (!regexCCCD.test(cccd)) {
-        $('#errorCCCD').text('');
         $('#errorCCCD').text('CCCD phải có đúng 12 chữ số');
         return false;
     } else {
-        $('#errorCCCD').text('');
-        return true;
+        return checkCCCD(cccd).then(function (isValid) {
+            if (isValid) {
+                $("#errorCCCD").text("");
+            } else {
+                $("#errorCCCD").text("CCCD đã tồn tại.");
+            }
+            return isValid;
+        });
     }
+}
+
+function checkCCCD(cccd) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            url: '/KhachHang/CheckCCCD',
+            data: { cccd: cccd },
+            type: 'GET',
+            success: function (response) {
+                resolve(!response.exists);
+            },
+            error: function (error) {
+                reject(error);
+            }
+        });
+    });
 }
 
 function validateNgaySinh() {
@@ -142,9 +208,9 @@ function validateNgaySinh() {
         $('#errorNgaySinh').text('');
         $('#errorNgaySinh').text('Bạn chưa chọn ngày sinh');
     }
-    if (age < 16) {
+    if (age < 18) {
         $('#errorNgaySinh').text('');
-        $('#errorNgaySinh').text('Bạn phải có ít nhất 16 tuổi để đặt phòng');
+        $('#errorNgaySinh').text('Bạn phải có ít nhất 18 tuổi để đặt phòng');
         return false;
     } else {
         $('#errorNgaySinh').text('');
