@@ -78,6 +78,11 @@ namespace QuanLyKhachSan.Controllers
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 				return RedirectToAction("Index", "TrangChuKhachHang");
 			}
+            else
+            {
+                TempData["SwalIcon"] = "error";
+                TempData["SwalTitle"] = "Đăng nhập không thành công";
+            }
 
 			
 			return View();
