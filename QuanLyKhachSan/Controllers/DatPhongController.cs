@@ -109,7 +109,8 @@ namespace QuanLyKhachSan.Controllers
                 }
             }
             _db.SaveChanges();
-
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Đặt phòng thành công";
 
             return Json(new { arrMaDichVu, arrSoLuongDichVu });
         }
@@ -158,7 +159,8 @@ namespace QuanLyKhachSan.Controllers
            
             _db.HoaDon.Add(hoaDon);
             _db.SaveChanges();
-
+            TempData["SwalIcon"] = "success";
+            TempData["SwalTitle"] = "Thanh toán thành công";
             return RedirectToAction("Index","DatPhong");
         }
         public IActionResult GetBookingDates(string maPhong)

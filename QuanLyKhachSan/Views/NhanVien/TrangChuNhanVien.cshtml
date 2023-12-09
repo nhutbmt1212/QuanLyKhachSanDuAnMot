@@ -193,7 +193,7 @@
                         <div class="form-group">
                             <label>Giới tính</label>
                             <select class="form-control gioiTinhEdit" name="GioiTinh">
-                                <option value="nam">
+                                <option value="Nam">
                                     Nam
                                 </option>
                                 <option value="Nữ">
@@ -226,10 +226,10 @@
                             <input class="form-control ngaySinhEdit" type="date" name="NgaySinh" id="inputEditNgaySinh" />
                             <span id="errorEditNgaySinh" style="color: red;"></span>
                         </div>
-                        <div class="form-group">
+                        @* <div class="form-group">
                             <label>Ngày đăng ký</label>
-                            <input class="form-control ngayDangKyEdit" type="date" name="NgayDangKy" />
-                        </div>
+                            <input class="form-control ngayDangKyEdit" type="date" name="NgayDangKy" read />
+                        </div> *@
                         <div class="form-group">
                             <label>Ngày vào làm</label>
                             <input class="form-control ngayVaoLamEdit" type="date" name="NgayVaoLam" id="inputEditNgayVaoLam" />
@@ -280,7 +280,7 @@
         @* --Thêm nhân viên -- *@
         <div class="row">
             <div class="col-sm-4">
-                <a class="btn btn-primary" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
+                <a class="btn btn-primary text-white" id="btn_themNv" onclick="openForm()">Thêm nhân viên</a>
             </div>
             <div class="col-sm-6">
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
