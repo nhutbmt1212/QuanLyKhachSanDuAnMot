@@ -179,20 +179,7 @@
                         <span id="errorNgayTao" style="color: red;"></span>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Giá theo giờ</label>
-                        <input class="form-control" name="giatheogio" type="number" min="0" />
-                    </div>
-                    <div class="form-group">
-                        <label>Giá theo ngày</label>
-                        <input class="form-control" name="giatheongay" type="number" min="0" />
-                    </div>
-                    <div class="form-group">
-                        <label>Phụ thu trả muộn</label>
-                        <input class="form-control" name="phuthutramuon" type="number" min="0" />
-                    </div>
-                </div>
+             
                 <div class="col-md-2">
                     <div class="form-group">
                         <label>Số lượng người lớn</label>
@@ -207,9 +194,7 @@
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="ImageUrl">Chọn ảnh:</label>
-                            <input type="file" id="addInputImage" multiple>
-                            <ul id="imageList"></ul>
-
+                            <input type="file" id="addInputImage" multiple onchange="XuLyAnhDaChon(this)">
                         </div>
                         <div class="image-preview-container" id="addImagePreviewContainer"></div>
                     </div>
@@ -332,10 +317,10 @@
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                    <a class="dropdown-item check_checkbox"  id="btn_Sua" onclick="HienThiAnhSuaPhong('@phong.MaPhong')">Sửa</a>
                                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
                                         {
-                                        <a class="dropdown-item" id="xoa-phong">Xóa</a>
+                                        <a class="dropdown-item" id="xoa-phong" >Xóa</a>
                                         }
                                 </div>
                             </div>
@@ -388,10 +373,7 @@
     if (swalIcon && swalTitle) {
         showSwalToast(swalIcon, swalTitle);
     }
-    $('#xoa-phong').click(function () {
-        var maPhong = $(this).closest('tr').data('ma-phong');
-        window.location.href = '/Phong/XoaPhong?MaPhong=' + maPhong;
-    });
+ 
 </script>
 <script>
     $(document).ready(function () {

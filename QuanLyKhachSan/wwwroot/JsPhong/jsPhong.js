@@ -12,16 +12,16 @@ function closeForm() {
 }
 
 //editPopup
-function OpenFormEdit() {
+
+document.getElementById('btn_Sua').addEventListener('click', function () {
     document.getElementById('myFormEdit').style.display = "block";
 
-}
+})
 function CloseFormEdit() {
     document.getElementById('myFormEdit').style.display = "none";
 
 }
 
-//turn off popup if both open
 document.getElementById('btn_themPhong').addEventListener('click', hidePopUpEditNhanVien);
 
 function hidePopUpEditNhanVien() {
@@ -36,7 +36,6 @@ function hidePopUpAddNhanVien() {
 
 }
 
-//take data from table and fill to form popup edit employee
 var getValue = document.querySelector('#table_detail');
 
 getValue.addEventListener('click', function (e) {
@@ -48,13 +47,12 @@ getValue.addEventListener('click', function (e) {
     var maLoaiPhong = row.dataset.maLoaiPhong;
     var ngayTao = row.dataset.ngayTao;
     var tinhTrang = row.dataset.tinhTrang;
-    console.log(maphong);
+
     document.querySelector('.maphongedit').value = maphong;
     document.querySelector('.maloaiphongedit').value = maLoaiPhong;
     document.querySelector('.tinhtrangedit').value = tinhTrang;
 
   
-    //convert time
     var ngayTaoParts = ngayTao.split('/');
     var ngaySinhFormatted = ngayTaoParts[2] + '-' + ngayTaoParts[1] + '-' + ngayTaoParts[0];
     document.querySelector('.ngaytaoedit').value = ngaySinhFormatted;
@@ -75,7 +73,6 @@ function TickedAllCheckBox() {
 }
 
 
-//sự kiện onload để chỉnh ui hoatdong
 window.addEventListener('load', (event) => {
 
 });
@@ -98,169 +95,138 @@ function KiemTraCheckBox() {
 
 
 }
-//sửa phòng
-// Lưu các URL ảnh đã chọn vào một mảng
-var selectedImages = [];
+//thêm
+var arrLinkAnh = [];
+var arrImagePreviewing = [];
 
-// Hàm hiển thị các ảnh đã chọn trong phần editpreview
-function displaySelectedImages() {
-    var previewElement = document.getElementById('editImagePreviewContainer');
-    previewElement.innerHTML = '';
+function XuLyAnhDaChon(input) {
+    const fileAnhChon = input.files;
+    for (let i = 0; i < fileAnhChon.length; i++) {
+        const file = fileAnhChon[i];
+        const LinkAnh = URL.createObjectURL(file);
+        arrLinkAnh.push(LinkAnh);
+        arrImagePreviewing.push(file);
+    }
+    capNhatAnhPreviewThemPhong();
+}
 
-    selectedImages.forEach(function (imageUrl, index) {
-        var imageContainer = document.createElement('div');
-        imageContainer.classList.add('image-container');
+function capNhatAnhPreviewThemPhong() {
+    const previewContainer = document.getElementById('addImagePreviewContainer');
+    previewContainer.innerHTML = "";
+    for (let i = 0; i < arrLinkAnh.length; i++) {
+        const UrlAnh = arrLinkAnh[i];
+        const ImagePreviewing = arrImagePreviewing[i];
+        const imageContainer = document.createElement('div');
+        imageContainer.className = "image-containerAddPhong";
 
-        var imageElement = document.createElement('img');
-        imageElement.src = imageUrl;
+        const imgElement = document.createElement('img');
+        imgElement.src = UrlAnh;
+        imgElement.alt = "Image Preview";
 
-        var removeButton = document.createElement('button');
-        removeButton.classList.add('remove-button');
-        removeButton.innerText = 'X';
-        removeButton.addEventListener('click', function () {
-            removeImage(index);
+        // Xóa ảnh
+        const nutXoa = document.createElement('button');
+        nutXoa.textContent = "Xóa";
+        nutXoa.className = "XoaAnh_ThemPhong";
+        nutXoa.type = "button";
+
+        nutXoa.addEventListener('click', function () {
+            XoaAnhThemPhong(i);
         });
 
-        imageContainer.appendChild(imageElement);
-        imageContainer.appendChild(removeButton);
-        previewElement.appendChild(imageContainer);
-    });
-}
-
-// Hàm xóa ảnh khỏi phần editpreview
-function removeImage(index) {
-    selectedImages.splice(index, 1);
-    displaySelectedImages();
-
-    // Xóa ảnh khỏi danh sách "choose files"
-    var fileInput = document.getElementById('editInputImage');
-    var fileList = fileInput.files;
-    var newFileList = new FileList();
-
-    for (var i = 0; i < fileList.length; i++) {
-        if (i !== index) {
-            newFileList.append(fileList[i]);
-        }
+        imageContainer.appendChild(imgElement);
+        imageContainer.appendChild(nutXoa);
+        previewContainer.appendChild(imageContainer);
     }
-
-    fileInput.files = newFileList;
-}
-// Hàm chuyển đổi từ base64 sang file
-function dataURLtoFile(dataurl, filename) {
-    var arr = dataurl.split(',');
-    var mime = arr[0].match(/:(.*?);/)[1];
-    var bstr = atob(arr[1]);
-    var n = bstr.length;
-    var u8arr = new Uint8Array(n);
-    while (n--) {
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, { type: mime });
 }
 
-// Sự kiện khi chọn ảnh mới trong phần sửa phòng
-document.getElementById('editInputImage').addEventListener('change', function (e) {
-    var files = e.target.files;
-    for (var i = 0; i < files.length; i++) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            selectedImages.push(event.target.result);
-            displaySelectedImages();
-        };
-        reader.readAsDataURL(files[i]);
-    }
-});
-
-// Hàm hiển thị các ảnh đã chọn trong phần addImagePreview
-function displayAddedImages() {
-    var previewElement = document.getElementById('addImagePreviewContainer');
-    previewElement.innerHTML = '';
-
-    selectedImages.forEach(function (imageUrl, index) {
-        var imageContainer = document.createElement('div');
-        imageContainer.classList.add('image-container');
-
-        var imageElement = document.createElement('img');
-        imageElement.src = imageUrl;
-
-        var removeButton = document.createElement('button');
-        removeButton.classList.add('remove-button');
-        removeButton.innerText = 'X';
-        removeButton.addEventListener('click', function () {
-            removeAddedImage(index);
-        });
-
-        imageContainer.appendChild(imageElement);
-        imageContainer.appendChild(removeButton);
-        previewElement.appendChild(imageContainer);
-    });
+function XoaAnhThemPhong(index) {
+    arrLinkAnh.splice(index, 1);
+    arrImagePreviewing.splice(index, 1);
+    capNhatAnhPreviewThemPhong();
 }
-
-// Hàm xóa ảnh khỏi phần addImagePreview
-function removeAddedImage(index) {
-    selectedImages.splice(index, 1);
-    displayAddedImages();
-}
-
-// Sự kiện khi chọn ảnh mới trong phần thêm phòng
-document.getElementById('addInputImage').addEventListener('change', function (e) {
-    var files = e.target.files;
-    for (var i = 0; i < files.length; i++) {
-        var reader = new FileReader();
-        reader.onload = function (event) {
-            selectedImages.push(event.target.result);
-            displayAddedImages();
-        };
-        reader.readAsDataURL(files[i]);
-    }
-});
 function ThemPhong() {
-    // Lấy các giá trị từ các trường input
-    var maPhong = document.getElementById('inputFieldMaP').value;
-    var maLoaiPhong = document.getElementById('inputFieldChonLP').value;
-    var ngayTao = document.getElementById('inputFieldNgayTao').value;
-    var giaTheoGio = document.getElementsByName('giatheogio')[0].value;
-    var giaTheoNgay = document.getElementsByName('giatheongay')[0].value;
-    var phuThuTraMuon = document.getElementsByName('phuthutramuon')[0].value;
-    var soLuongNguoiLon = document.getElementsByName('soluonnguoilon')[0].value;
-    var soLuongTreEm = document.getElementsByName('soluongtreem')[0].value;
 
-    // Tạo FormData object để chứa dữ liệu form
-    var formData = new FormData();
+        var maphong = $("#inputFieldMaP").val();
+        var maloaiphong = $("#inputFieldChonLP").val();
+        var ngaytao = $("#inputFieldNgayTao").val();
+        var soluonnguoilon = $("#inputFieldSoLuongNguoiLon").val();
+        var soluongtreem = $("#inputFieldSoLuongTreEm").val();
 
-    // Thêm các giá trị vào FormData
-    formData.append('maphong', maPhong);
-    formData.append('maloaiphong', maLoaiPhong);
-    formData.append('ngaytao', ngayTao);
-   
-    formData.append('soluongnguoilon', soLuongNguoiLon);
-    formData.append('soluongtreem', soLuongTreEm);
+       
 
-    // Lấy danh sách các tệp tin ảnh đã chọn từ input[type="file"]
-    var fileInput = document.getElementById('addInputImage');
-    var files = fileInput.files;
+        var formData = new FormData();
 
-    // Thêm danh sách các tệp tin ảnh vào FormData
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        formData.append('Imageurl', file);
-    }
+        formData.append("maphong", maphong);
+        formData.append("maloaiphong", maloaiphong);
+        formData.append("ngaytao", ngaytao);
+        formData.append("soluonnguoilon", soluonnguoilon);
+        formData.append("soluongtreem", soluongtreem);
 
-    // Gọi action "LuuAnh" và truyền FormData
-    fetch('/Phong/LuuAnh', {
-        method: 'POST',
-        body: formData
-    })
-        .then(function (response) {
-            if (response.ok) {
-                // Xử lý khi gọi action thành công
-                console.log('Action called successfully');
-            } else {
-                // Xử lý khi gọi action không thành công
-                console.log('Failed to call action');
+        for (var i = 0; i < arrImagePreviewing.length; i++) {
+            formData.append("Imageurl", arrImagePreviewing[i]);
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Phong/LuuAnh",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                console.log(result);
+            },
+            error: function (error) {
+                console.error(error);
             }
-        })
-        .catch(function (error) {
-            console.log('Error:', error);
         });
+    
 }
+
+//sửa
+var arrImageEditPreview = [];
+function HienThiAnhSuaPhong(MaPhong) {
+    $.ajax({
+        type: 'GET',
+        url: '/Phong/GetImages',
+        data: { MaPhong, MaPhong },
+        success: function (LinkAnhs) {
+           
+            const previewContainer = document.getElementById('editImagePreviewContainer');
+            previewContainer.innerHTML = "";
+            for (let i = 0; i < LinkAnhs.length; i++) {
+
+                var LinkAnh = LinkAnhs[i];
+                arrImageEditPreview.push(LinkAnh);
+                const imageContainer = document.createElement('div');
+                imageContainer.className = "image-containerEditPhong";
+
+                const imgElement = document.createElement('img');
+                imgElement.src = '/UploadImage/'+LinkAnh;
+                imgElement.alt = "Image Edit Preview";
+
+                // Xóa ảnh
+                const nutXoa = document.createElement('button');
+                nutXoa.textContent = "Xóa";
+                nutXoa.className = "XoaAnh_SuaPhong";
+                nutXoa.type = "button";
+
+                nutXoa.addEventListener('click', function () {
+                    XoaAnhSuaPhong(i);
+                });
+
+                imageContainer.appendChild(imgElement);
+                imageContainer.appendChild(nutXoa);
+                previewContainer.appendChild(imageContainer);
+            }
+        },
+        error: function (error) {
+
+        }
+    });
+}
+function XoaAnhSuaPhong(index) {
+   
+    arrImageEditPreview.splice(index, 1);
+    
+}
+

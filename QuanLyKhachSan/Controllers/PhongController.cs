@@ -23,19 +23,18 @@ namespace QuanLyKhachSan.Controllers
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
             return View(listPhong);
         }
-
-        public async Task<IActionResult> GetImages(string phongId)
+        [HttpGet]
+        public async Task<IActionResult> GetImages(string MaPhong)
         {
             var phong = await _db.Phong
                 .Include(p => p.ImageLinks)
-                .FirstOrDefaultAsync(p => p.MaPhong == phongId);
+                .FirstOrDefaultAsync(p => p.MaPhong == MaPhong);
 
             if (phong == null)
             {
                 return NotFound();
             }
 
-            // Return the URLs of the images as a JSON array
             return Json(phong.ImageLinks.Select(il => il.Url));
         }
 
