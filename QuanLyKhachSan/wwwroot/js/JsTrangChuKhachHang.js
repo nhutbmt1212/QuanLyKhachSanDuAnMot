@@ -77,11 +77,35 @@ function HuyDatPhong() {
 
 }
 window.onload = function () {
+    // Lấy ngày và giờ hiện tại
+    var currentDate = new Date();
+    currentDate.setHours(currentDate.getHours() + 2);
+    // Đặt giá trị min cho ô input Ngày Nhận và Ngày Trả
+    document.getElementById('ipt_NgayNhan').min = formatDate(currentDate);
+    document.getElementById('ipt_NgayTra').min = formatDate(currentDate);
 
-    document.getElementById('ipt_NgayNhan').min = new Date().toISOString().slice(0, 16);
-    document.getElementById('ipt_NgayTra').min = new Date().toISOString().slice(0, 16);
-    document.getElementById('ipt_NgayNhan').value = new Date().toISOString().slice(0, 16);
-    document.getElementById('ipt_NgayTra').value = new Date().toISOString().slice(0, 16);
+    // Đặt giá trị mặc định cho ô input Ngày Nhận và Ngày Trả
+    document.getElementById('ipt_NgayNhan').value = formatDate(currentDate);
+    document.getElementById('ipt_NgayTra').value = formatDate(currentDate);
+
+    console.log(currentDate);
+}
+
+// Hàm chuyển đổi đối tượng Date thành chuỗi ngày/tháng/năm giờ:phút
+function formatDate(date) {
+    var day = date.getDate();
+    var month = date.getMonth() + 1; // Lưu ý: getMonth trả về số tháng từ 0 đến 11
+    var year = date.getFullYear();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+
+    // Định dạng số đẹp hơn (thêm 0 nếu cần)
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+    hours = hours < 10 ? '0' + hours : hours;
+    minutes = minutes < 10 ? '0' + minutes : minutes;
+
+    return year + '-' + month + '-' + day + 'T' + hours + ':' + minutes;
 }
 
 document.getElementById('TimKiemPhong').onclick = function () {
@@ -113,7 +137,7 @@ document.getElementById('TimKiemPhong').onclick = function () {
     } else {
         document.getElementById('Error_NgayTra').textContent = '';
     }
-    //convert datetime 
+ 
      if (ngayNhan == "") {
         alert('Bạn chưa chọn ngày nhận');
     }
@@ -366,6 +390,17 @@ $(document).ready(function () {
             }
             updateImage(slider);
         });
+        setInterval(function AutoNextSlider() {
+            var slider = roomElement.find('.slider');
+            var currentIndex = slider.data('current-index');
+            var images = slider.data('images');
+            if (currentIndex < images.length - 1) {
+                slider.data('current-index', currentIndex + 1);
+            } else {
+                slider.data('current-index', 0);
+            }
+            updateImage(slider);
+        }, 10000);
 
     });
 });
