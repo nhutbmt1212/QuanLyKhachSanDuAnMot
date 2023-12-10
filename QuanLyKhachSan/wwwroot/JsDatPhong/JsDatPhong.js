@@ -446,7 +446,7 @@ function validateTongNguoiLon() {
         return false;
     } else if (tongNguoiLon > soLuongNguoiLonToiDa) {
         document.getElementById('errorTongSoNguoiLon').textContent = '';
-        document.getElementById('errorTongSoNguoiLon').textContent = 'Tổng số người lớn không được vượt quá số lượng người lớn tối đa';
+        document.getElementById('errorTongSoNguoiLon').textContent = 'Số lượng người lớn trong phòng đã vượt mức tối đa';
         return false;
     } else {
         document.getElementById('errorTongSoNguoiLon').textContent = '';
@@ -471,7 +471,7 @@ function validateTongTreEm() {
     } else if (tongTreEm > soLuongTreEmToiDa) {
         document.getElementById('errorTongSoTreEm').textContent = '';
 
-        document.getElementById('errorTongSoTreEm').textContent = 'Tổng số trẻ em không được vượt quá số lượng trẻ em tối đa';
+        document.getElementById('errorTongSoTreEm').textContent = 'Số lượng trẻ em trong phòng đã vượt mức tối đa';
         return false;
     } else {
         document.getElementById('errorTongSoTreEm').textContent = '';

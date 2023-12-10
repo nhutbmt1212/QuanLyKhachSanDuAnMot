@@ -139,7 +139,7 @@
 
 
 
-/* Popup */
+/* Popup Đặt phòng*/
 .popup-kh {
     display: flex;
     background-color: white;
@@ -226,11 +226,15 @@
 
 .popup-content {
     width: 100%;
-    max-width: 80vw; /* Giới hạn chiều rộng tối đa */
+    height:80%;
+    max-width: 60vw; /* Giới hạn chiều rộng tối đa */
     background-color: white;
     padding: 25px;
     border: 2px solid #ccc;
     border-radius: 8px;
+    overflow-y: auto;
+    max-height: 130vw; /* hoặc giá trị phù hợp khác */
+    overflow-y: auto;
 }
 
 .close-icon {

@@ -104,7 +104,7 @@
                     <div class="popup-kh col-md-12" id="searchBar">
                         <i class="fa fa-search"></i>
 
-                        <input list="SearchMaKhachHang" id="MaKhachHangDatPhong" name="MaKhachHang" />
+                        <input list="SearchMaKhachHang" id="MaKhachHangDatPhong" name="MaKhachHang" placeholder="Tìm kiếm khách hàng"/>
                         @{
                             var qr_khachHang = _db.KhachHang.ToList();
                         }
@@ -124,10 +124,10 @@
 
 
 
-                    <div class="col-md-3">
+                    <div class="col-md-3 mx-auto">
                         <div class="form-group">
                             <label for="gioiTinh">Loại phòng</label>
-                            <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" />
+                            <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" readonly/>
                             
 
                         </div>
@@ -140,17 +140,26 @@
                         </div>
                         <div class="form-group">
                             <label for="giaPhong">Giá phòng</label>
-                            <input type="text" class="form-control" name="giaPhong" id="giaPhong_PopUpDatPhong" required>
+                            <input type="text" class="form-control" name="giaPhong" id="giaPhong_PopUpDatPhong" readonly required>
                         </div>
                       
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 mx-auto">
                         <div class="form-group">
                             <label for="ngayNhanPhong">Ngày nhận phòng</label>
                             <input type="datetime-local" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
                             <span id="errorNgayNhan" style="color: red;"></span>
+                        </div>
+                      
+                        <div class="form-group">
+                            <label for="tongNguoiLon">Tổng số người lớn (Tối đa: <span id="SoNgLonToiDaPopUp_DatPhong"></span>)</label>
+                            <input type="text" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
+                            <span id="errorTongSoNguoiLon" style="color: red;"></span>
 
                         </div>
+                        
+                    </div>
+                    <div class="col-md-4 m">
                         <div class="form-group">
                             <label for="ngayTraPhong">Ngày trả phòng</label>
                             <input type="datetime-local" class="form-control" name="ngayTraPhong" id="ngayTraPhong_PopUpDatPhong" required>
@@ -158,30 +167,30 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="tongNguoiLon">Tổng số người lớn (Số người lớn được ở tối đa: <span id="SoNgLonToiDaPopUp_DatPhong"></span>)</label>
-                            <input type="text" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
-                            <span id="errorTongSoNguoiLon" style="color: red;"></span>
-
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="tongTreEm">Tổng số trẻ em (Số trẻ em được ở tối đa: <span id="SoTreEmToiDaPopUp_DatPhong"></span>)</label>
+                            <label for="tongTreEm">Tổng số trẻ em (Tối đa: <span id="SoTreEmToiDaPopUp_DatPhong"></span>)</label>
                             <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required> 
                             <span id="errorTongSoTreEm" style="color: red;"></span>
 
                         </div>
-                        <div class="form-group">
+
+                        @* KHÁCH TRẢ TRƯỚC *@
+                      @*   <div class="form-group">
                             <label for="khachTraTruoc">Khách trả trước</label>
                             <input type="number" min="0" value="0" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
                             <span id="errorKhachTraTruoc" style="color: red;"></span>
-
-                        </div>
+                        </div> *@
                       
-                        <div id="ChonDichVu" class="mt-4">
+                      @*   <div id="ChonDichVu" class="mt-4">
                       
                          </div>
+                        <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
+                            <i class="bi bi-plus"></i> Thêm dịch vụ
+                        </button> *@
+                    </div>
+
+                    <div class="col-md-12">
+                        <div id="ChonDichVu" class="mt-4">
+                        </div>
                         <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
                             <i class="bi bi-plus"></i> Thêm dịch vụ
                         </button>
@@ -197,7 +206,16 @@
                         </strong>
                         <div id="TongDichVuDaDat" style="display:none;"></div>
                         <br/>
-                        <button class="btn btn-success" id="NhanPhong_PopUp">Nhận phòng</button>
+                        <br/>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group float-right">
+                            <strong for="khachTraTruoc" class="mt-3">Khách trả trước</strong>
+                            <input type="number" min="0" value="0" class="form-control col-md-12 mb-3" name="khachTraTruoc" id="khachTraTruoc" required>
+                            <span id="errorKhachTraTruoc" style="color: red;"></span>
+                            <button class="btn btn-success float-right" id="NhanPhong_PopUp">Nhận phòng</button>
+                        </div>
+
                     </div>
                 </div>
                
