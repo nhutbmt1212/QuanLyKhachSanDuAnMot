@@ -99,115 +99,168 @@ function KiemTraCheckBox() {
 
 }
 //sửa phòng
-var currentEditingPhongId = null;
-function createImageContainer(url) {
-    var imageContainer = $('<div class="image-container">');
-    var img = $('<img>').attr('src', url);
-    var deleteIcon = $('<span class="delete-icon">').text('X').click(function () {
-        imageContainer.remove();
-    });
+// Lưu các URL ảnh đã chọn vào một mảng
+var selectedImages = [];
 
-    return imageContainer.append(img, deleteIcon);
-}
+// Hàm hiển thị các ảnh đã chọn trong phần editpreview
+function displaySelectedImages() {
+    var previewElement = document.getElementById('editImagePreviewContainer');
+    previewElement.innerHTML = '';
 
-function previewImages() {
-    var input = $('#ImageUrl')[0];
-    var addContainer = $('#addImagePreviewContainer');
-    var editContainer = $('#editImagePreviewContainer');
+    selectedImages.forEach(function (imageUrl, index) {
+        var imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
 
-    addContainer.html(''); // Clear the add container
-    editContainer.html(''); // Clear the edit container
+        var imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
 
-    if (input.files && input.files.length > 0) {
-        for (var i = 0; i < input.files.length; i++) {
-            var reader = new FileReader();
-
-            reader.onload = function (e) {
-                createImageContainer(e.target.result).appendTo(addContainer);
-            };
-
-            reader.readAsDataURL(input.files[i]);
-        }
-    }
-}
-
-function switchSection(section) {
-    $('.add-section, .edit-section').hide();
-    $('#addButton, #editButton').hide();
-
-    if (section === 'add') {
-        $('.add-section').show();
-        $('#addButton').show();
-    } else if (section === 'edit') {
-        $('.edit-section').show();
-        $('#editButton').show();
-    }
-}
-
-$('#addButton').on('click', function (e) {
-    e.preventDefault();
-    switchSection('add');
-});
-
-function editImages(phongId) {
-    currentEditingPhongId = phongId;
-
-    // Set the images for preview
-    $.get('/Phong/GetImages?phongId=' + phongId, function (data) {
-        var container = $('#editImagePreviewContainer').html('');
-
-        data.forEach(function (url) {
-            createImageContainer("/UploadImage/" + url).appendTo(container);
+        var removeButton = document.createElement('button');
+        removeButton.classList.add('remove-button');
+        removeButton.innerText = 'X';
+        removeButton.addEventListener('click', function () {
+            removeImage(index);
         });
 
-        // Show the "Sửa ảnh" button
-        $('#editButton').show();
+        imageContainer.appendChild(imageElement);
+        imageContainer.appendChild(removeButton);
+        previewElement.appendChild(imageContainer);
     });
 }
-$('.employee-info-column-button .dropdown .dropdown-menu a.dropdown-item').on('click', function () {
-    var phongId = $(this).closest('tr').data('ma-phong');
-    editImages(phongId);
-});
 
-$('#btn_Sua').on('click', function () {
-    var phongId = $(this).closest('tr').data('ma-phong');
-    editImages(phongId);
-});
+// Hàm xóa ảnh khỏi phần editpreview
+function removeImage(index) {
+    selectedImages.splice(index, 1);
+    displaySelectedImages();
 
-// Event handler for the "Sửa ảnh" button
+    // Xóa ảnh khỏi danh sách "choose files"
+    var fileInput = document.getElementById('editInputImage');
+    var fileList = fileInput.files;
+    var newFileList = new FileList();
 
-$('#editButton').on('click', function () {
-    saveEditedImages(currentEditingPhongId);
-});
-
-$('#ImageUrl').off('change').on('change', function (e) {
-    e.preventDefault();
-    previewImages();
-});
-function saveEditedImages(phongId) {
-    var editedImageUrls = [];
-
-    $('.image-container img').each(function () {
-        editedImageUrls.push($(this).attr('src').replace('/UploadImage/', ''));
-    });
-
-    $.ajax({
-        url: '/Phong/SuaAnh',
-        type: 'POST',
-        traditional: true,
-        data: { phongId: phongId, editedImageUrls: editedImageUrls },
-        success: function (response) {
-            if (response.success) {
-                alert('Images updated successfully.');
-            } else {
-                alert('Failed to update images. Please try again.');
-            }
-
-            $('.add-section, .edit-section').hide();
-            $('#addButton, #editButton').hide().show();
-        },
-        error: function () {
-            alert('An error occurred while updating images. Please try again.');
+    for (var i = 0; i < fileList.length; i++) {
+        if (i !== index) {
+            newFileList.append(fileList[i]);
         }
+    }
+
+    fileInput.files = newFileList;
+}
+// Hàm chuyển đổi từ base64 sang file
+function dataURLtoFile(dataurl, filename) {
+    var arr = dataurl.split(',');
+    var mime = arr[0].match(/:(.*?);/)[1];
+    var bstr = atob(arr[1]);
+    var n = bstr.length;
+    var u8arr = new Uint8Array(n);
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+}
+
+// Sự kiện khi chọn ảnh mới trong phần sửa phòng
+document.getElementById('editInputImage').addEventListener('change', function (e) {
+    var files = e.target.files;
+    for (var i = 0; i < files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            selectedImages.push(event.target.result);
+            displaySelectedImages();
+        };
+        reader.readAsDataURL(files[i]);
+    }
+});
+
+// Hàm hiển thị các ảnh đã chọn trong phần addImagePreview
+function displayAddedImages() {
+    var previewElement = document.getElementById('addImagePreviewContainer');
+    previewElement.innerHTML = '';
+
+    selectedImages.forEach(function (imageUrl, index) {
+        var imageContainer = document.createElement('div');
+        imageContainer.classList.add('image-container');
+
+        var imageElement = document.createElement('img');
+        imageElement.src = imageUrl;
+
+        var removeButton = document.createElement('button');
+        removeButton.classList.add('remove-button');
+        removeButton.innerText = 'X';
+        removeButton.addEventListener('click', function () {
+            removeAddedImage(index);
+        });
+
+        imageContainer.appendChild(imageElement);
+        imageContainer.appendChild(removeButton);
+        previewElement.appendChild(imageContainer);
     });
+}
+
+// Hàm xóa ảnh khỏi phần addImagePreview
+function removeAddedImage(index) {
+    selectedImages.splice(index, 1);
+    displayAddedImages();
+}
+
+// Sự kiện khi chọn ảnh mới trong phần thêm phòng
+document.getElementById('addInputImage').addEventListener('change', function (e) {
+    var files = e.target.files;
+    for (var i = 0; i < files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            selectedImages.push(event.target.result);
+            displayAddedImages();
+        };
+        reader.readAsDataURL(files[i]);
+    }
+});
+function ThemPhong() {
+    // Lấy các giá trị từ các trường input
+    var maPhong = document.getElementById('inputFieldMaP').value;
+    var maLoaiPhong = document.getElementById('inputFieldChonLP').value;
+    var ngayTao = document.getElementById('inputFieldNgayTao').value;
+    var giaTheoGio = document.getElementsByName('giatheogio')[0].value;
+    var giaTheoNgay = document.getElementsByName('giatheongay')[0].value;
+    var phuThuTraMuon = document.getElementsByName('phuthutramuon')[0].value;
+    var soLuongNguoiLon = document.getElementsByName('soluonnguoilon')[0].value;
+    var soLuongTreEm = document.getElementsByName('soluongtreem')[0].value;
+
+    // Tạo FormData object để chứa dữ liệu form
+    var formData = new FormData();
+
+    // Thêm các giá trị vào FormData
+    formData.append('maphong', maPhong);
+    formData.append('maloaiphong', maLoaiPhong);
+    formData.append('ngaytao', ngayTao);
+   
+    formData.append('soluongnguoilon', soLuongNguoiLon);
+    formData.append('soluongtreem', soLuongTreEm);
+
+    // Lấy danh sách các tệp tin ảnh đã chọn từ input[type="file"]
+    var fileInput = document.getElementById('addInputImage');
+    var files = fileInput.files;
+
+    // Thêm danh sách các tệp tin ảnh vào FormData
+    for (var i = 0; i < files.length; i++) {
+        var file = files[i];
+        formData.append('Imageurl', file);
+    }
+
+    // Gọi action "LuuAnh" và truyền FormData
+    fetch('/Phong/LuuAnh', {
+        method: 'POST',
+        body: formData
+    })
+        .then(function (response) {
+            if (response.ok) {
+                // Xử lý khi gọi action thành công
+                console.log('Action called successfully');
+            } else {
+                // Xử lý khi gọi action không thành công
+                console.log('Failed to call action');
+            }
+        })
+        .catch(function (error) {
+            console.log('Error:', error);
+        });
 }

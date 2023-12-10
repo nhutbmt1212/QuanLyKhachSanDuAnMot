@@ -150,7 +150,7 @@
 <body>
     <!-- Popup Thêm Phòng -->
     <div class="form-popup mb-2" id="myForm">
-        <form class="form-container" method="post" action="/Phong/LuuAnh" enctype="multipart/form-data">
+        <form class="form-container" method="post" enctype="multipart/form-data">
             <h1 style="font-family:Roboto;">Thêm phòng</h1>
             <div class="row">
                 <div class="col-md-4">
@@ -207,7 +207,9 @@
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="ImageUrl">Chọn ảnh:</label>
-                            <input type="file" id="ImageUrl" name="Imageurl" multiple accept="image/*" />
+                            <input type="file" id="addInputImage" multiple>
+                            <ul id="imageList"></ul>
+
                         </div>
                         <div class="image-preview-container" id="addImagePreviewContainer"></div>
                     </div>
@@ -216,7 +218,7 @@
             </div>
 
             <div class="clearfix">
-                <button class="btn align-middle m-2 w-25 btn " style="min-width:200px" type="submit">Thêm phòng</button>
+                <button class="btn align-middle m-2 w-25 btn " style="min-width:200px" type="submit" onclick="ThemPhong()">Thêm phòng</button>
                 <button type="button" class="btn align-middle m-2 w-25  cancel" onclick="closeForm()">Đóng</button>
             </div>
         </form>
@@ -258,7 +260,7 @@
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="EditImageUrl">Chọn ảnh mới:</label>
-                            <input type="file" id="EditImageUrl" name="EditImageurl" multiple accept="image/*" />
+                            <input type="file" id="editInputImage" multiple>
                         </div>
                     </div>
 
