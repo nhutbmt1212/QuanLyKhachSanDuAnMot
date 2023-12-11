@@ -37,38 +37,36 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(phong.ImageLinks.Select(il => il.Url));
         }
-
         [HttpPost]
-        public async Task<IActionResult> LuuAnh(Phong phong, List<IFormFile> Imageurl)
-        { 
-                var images = new List<ImageLink>();
+        public async Task<IActionResult> LuuPhongVaAnh([FromForm] Phong phong, [FromForm] List<IFormFile> Imageurl)
+        {
+            var images = new List<ImageLink>();
 
-                foreach (var image in Imageurl)
+            foreach (var image in Imageurl)
+            {
+                var fileName = Path.GetFileName(image.FileName);
+                var path = Path.Combine("wwwroot", "UploadImage", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
                 {
-                    var fileName = Path.GetFileName(image.FileName);
-                    var path = Path.Combine("wwwroot", "UploadImage", fileName);
-
-                    using (var stream = new FileStream(path, FileMode.Create))
-                    {
-                        await image.CopyToAsync(stream);
-                    }
-
-                    var relativePath = $"{fileName}";
-                    images.Add(new ImageLink { Url = relativePath });
+                    await image.CopyToAsync(stream);
                 }
+
+                var relativePath = $"{fileName}";
+                images.Add(new ImageLink { Url = relativePath });
+            }
             phong.TinhTrang = "Đang hoạt động";
             phong.KhuVuc = "A";
 
-                phong.ImageLinks = images;
+            phong.ImageLinks = images;
 
-                _db.Phong.Add(phong);
-                await _db.SaveChangesAsync();
+            _db.Phong.Add(phong);
+            await _db.SaveChangesAsync();
 
-                return RedirectToAction("TrangChuPhong", "Phong");
-    
-
-            
+            return RedirectToAction("TrangChuPhong", "Phong");
         }
+
+
 
         [HttpPost]
         public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
