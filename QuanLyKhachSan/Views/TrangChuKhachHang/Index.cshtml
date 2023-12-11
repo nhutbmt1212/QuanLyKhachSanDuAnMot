@@ -47,37 +47,30 @@
 <body>
 
     <div id="container">
-        <div class="nav-main-top">
-            <ul class="group-1">
-                <li>
-                    <i class="bi bi-telephone-fill"></i><span style="font-size:18px; font-weight:600">0869536182</span>
-                </li>
-                <li>
-                    <i class="bi bi-facebook"></i>
-                </li>
-                <li>
-                    <i class="bi bi-instagram"></i>
-                </li>
-                <li>
-                    <i class="bi bi-youtube">
-
-                    </i>
-                </li>
+        <nav>
+            <div class="logo">
+                <a class="active" asp-action="Index" asp-controller="TrangChuKhachHang" <img src="https://i.ibb.co/HXp0Y2Y/Screenshot-2-preview-rev-1.png" alt=""></a>
+            </div>
+            <ul>
+                <li><a class="active" asp-action="Index" asp-controller="TrangChuKhachHang">Trang chủ</a></li>
+                <li><a href="#">Đặt chỗ nghỉ</a></li>
             </ul>
-            <ul class="logo">
-                <li>
-                    <img src="https://i.ibb.co/HXp0Y2Y/Screenshot-2-preview-rev-1.png" />
-                </li>
-            </ul>
-            <ul class="group-2">
+            <input type="checkbox" id="click">
+            <label for="click" class="menu-btn">
+                <i class="fas fa-bars" style="color: black;"></i>
+            </label>
+            <ul>
+                <!-- <li><a class="active" href="#">Trang chủ</a></li>
+                <li><a href="#">Đặt chỗ nghỉ</a></li> -->
                 @if (userName == null)
                 {
                     <li>
                         <a asp-action="Login" asp-controller="Access">Đăng nhập </a>
                     </li>
                     <li>
-                        | Đăng kí
+                        <p style="  font-size: 18px; font-weight: 500;">|</p>
                     </li>
+                    <li><a href="#">Đăng ký</a></li>
                 }
                 else
                 {
@@ -89,10 +82,8 @@
                         <a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a>
                     </li>
                 }
-
-
             </ul>
-        </div>
+        </nav>
 
         @* style="overflow:hidden" *@
 
