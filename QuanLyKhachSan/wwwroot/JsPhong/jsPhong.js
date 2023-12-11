@@ -95,48 +95,53 @@ function KiemTraCheckBox() {
 
 
 }
-//thêm
+////thêm
+
+var arrLinkAnh = [];
 var arrImagePreviewing = [];
 
 function XuLyAnhDaChon(input) {
     const fileAnhChon = input.files;
-    arrImagePreviewing = Array.from(fileAnhChon); // Chuyển đổi FileList thành mảng
+    for (let i = 0; i < fileAnhChon.length; i++) {
+        const file = fileAnhChon[i];
+        const LinkAnh = URL.createObjectURL(file);
+        arrLinkAnh.push(LinkAnh);
+        arrImagePreviewing.push(file);
+    }
     capNhatAnhPreviewThemPhong();
 }
 
 function capNhatAnhPreviewThemPhong() {
     const previewContainer = document.getElementById('addImagePreviewContainer');
     previewContainer.innerHTML = "";
-    for (let i = 0; i < arrImagePreviewing.length; i++) {
-        const file = arrImagePreviewing[i];
-        const reader = new FileReader();
-        reader.onloadend = function () {
-            const imageContainer = document.createElement('div');
-            imageContainer.className = "image-containerAddPhong";
+    for (let i = 0; i < arrLinkAnh.length; i++) {
+        const UrlAnh = arrLinkAnh[i];
+        const ImagePreviewing = arrImagePreviewing[i];
+        const imageContainer = document.createElement('div');
+        imageContainer.className = "image-containerAddPhong";
 
-            const imgElement = document.createElement('img');
-            imgElement.src = reader.result; // Sử dụng URL base64 từ FileReader
-            imgElement.alt = "Image Preview";
+        const imgElement = document.createElement('img');
+        imgElement.src = UrlAnh;
+        imgElement.alt = "Image Preview";
 
-            // Xóa ảnh
-            const nutXoa = document.createElement('button');
-            nutXoa.textContent = "Xóa";
-            nutXoa.className = "XoaAnh_ThemPhong";
-            nutXoa.type = "button";
+        // Xóa ảnh
+        const nutXoa = document.createElement('button');
+        nutXoa.textContent = "Xóa";
+        nutXoa.className = "XoaAnh_ThemPhong";
+        nutXoa.type = "button";
 
-            nutXoa.addEventListener('click', function () {
-                XoaAnhThemPhong(i);
-            });
+        nutXoa.addEventListener('click', function () {
+            XoaAnhThemPhong(i);
+        });
 
-            imageContainer.appendChild(imgElement);
-            imageContainer.appendChild(nutXoa);
-            previewContainer.appendChild(imageContainer);
-        }
-        reader.readAsDataURL(file); // Đọc nội dung của tệp tin
+        imageContainer.appendChild(imgElement);
+        imageContainer.appendChild(nutXoa);
+        previewContainer.appendChild(imageContainer);
     }
 }
 
 function XoaAnhThemPhong(index) {
+    arrLinkAnh.splice(index, 1);
     arrImagePreviewing.splice(index, 1);
     capNhatAnhPreviewThemPhong();
 }
