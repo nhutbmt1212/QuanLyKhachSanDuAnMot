@@ -9,6 +9,7 @@ using LicenseContext = OfficeOpenXml.LicenseContext;
 using iTextSharp;
 using iTextSharp.text.pdf;
 using iTextSharp.text;
+using System.Security.Claims;
 
 namespace QuanLyKhachSan.Controllers
 { 
@@ -30,8 +31,10 @@ namespace QuanLyKhachSan.Controllers
 
         public IActionResult HoSoNhanVien()
         {
+            var MaNhanVien = User.FindFirst(ClaimTypes.Surname)?.Value;
+            var qr_NhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == MaNhanVien);
 
-            return View();
+            return View(qr_NhanVien);
         }
 
         public string GenerateRandomCode()

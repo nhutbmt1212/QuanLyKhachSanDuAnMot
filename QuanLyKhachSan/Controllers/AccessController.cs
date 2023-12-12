@@ -3,12 +3,15 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using QuanLyKhachSan.Models;
+using System;
 
 namespace QuanLyKhachSan.Controllers
 {
     public class AccessController : Controller
     {
         private readonly ApplicationDbContext _db;
+        private static Random random = new Random();
+
         public AccessController(ApplicationDbContext db)
         {
             _db = db;
@@ -91,6 +94,35 @@ namespace QuanLyKhachSan.Controllers
         {
             return View("GiaoDienDangKy");
         }
+        public string GenerateRandomCode()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            string randomString;
+
+            do
+            {
+                randomString = new string(Enumerable.Repeat(chars, 4)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+            } while (_db.KhachHang.Any(d => d.MaKhachHang == $"NV{randomString}"));
+
+            return $"KH{randomString}";
+        }
+        [HttpPost]
+        public IActionResult DangKyTaikhoan(string TenKhachHang, string Email, string MatKhau)
+        {
+
+            var kh = new KhachHang
+            {
+                MaKhachHang = GenerateRandomCode(),
+                TenKhachHang = TenKhachHang,
+                Email = Email,
+                MatKhau = MatKhau
+            };
+            _db.KhachHang.Add(kh);
+            _db.SaveChanges();
+            return View("Login");
+        }
+
 
 
 	}

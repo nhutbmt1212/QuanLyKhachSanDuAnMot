@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@model QuanLyKhachSan.Models.NhanVien
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -55,7 +56,7 @@
                 <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">
                 <label for="imageInput">
                     <img id="previewImage"
-                         src="https://photographer.vn/wp-content/uploads/2017/07/chup-anh-the-6.jpg"
+                         src="~/@Model.AnhNhanVienBase64"
                          alt="avata">
                 </label>
 
@@ -65,7 +66,7 @@
                 <ul class="list-group">
                     <li class="list-group-item display-mode" id="employeeNameItem">
                         <strong>Tên Nhân Viên:</strong>
-                        <span class="display-mode" id="employeeName">Nguyễn Văn A</span>
+                        <span class="display-mode" id="employeeName">@Model.TenNhanVien</span>
                         <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
                         <input type="text" id="editedValue_employeeName" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -76,7 +77,7 @@
                     </li>
                     <li class="list-group-item display-mode" id="phoneNumberItem">
                         <strong>Số Điện Thoại:</strong>
-                        <span class="display-mode" id="phoneNumber">0123456789</span>
+                        <span class="display-mode" id="phoneNumber">@Model.SoDienThoai</span>
                         <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
                         <input type="text" id="editedValue_phoneNumber" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -87,7 +88,7 @@
                     </li>
                     <li class="list-group-item display-mode" id="cccdItem">
                         <strong>CCCD:</strong>
-                        <span class="display-mode" id="cccd">123456789</span>
+                        <span class="display-mode" id="cccd">@Model.CCCD</span>
                         <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
                         <input type="text" id="editedValue_cccd" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -98,7 +99,7 @@
                     </li>
                     <li class="list-group-item display-mode" id="emailItem">
                         <strong>Email:</strong>
-                        <span class="display-mode" id="email">NV001@gmail.com</span>
+                        <span class="display-mode" id="email">@Model.Email</span>
                         <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
                         <input type="email" id="editedValue_email" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -109,7 +110,7 @@
                     </li>
                     <li class="list-group-item display-mode" id="genderItem">
                         <strong>Giới Tính:</strong>
-                        <span class="display-mode" id="gender">Nam</span>
+                        <span class="display-mode" id="gender">@Model.GioiTinh</span>
                         <select id="editedValue_gender" class="form-control edit-mode-input mb-1"
                                 style="display: none;">
                             <option value="Nam">Nam</option>
@@ -123,12 +124,12 @@
                     </li>
                     <li class="list-group-item display-mode non-editable" id="dobItem">
                         <strong>Ngày Sinh:</strong>
-                        <span class="display-mode" id="dob">01/01/1990</span>
+                        <span class="display-mode" id="dob">@Model.NgaySinh</span>
                         <!-- This field is non-editable -->
                     </li>
                     <li class="list-group-item display-mode" id="addressItem">
                         <strong>Địa Chỉ:</strong>
-                        <span class="display-mode" id="address">BMT VietNam</span>
+                        <span class="display-mode" id="address">@Model.DiaChi</span>
                         <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
                         <input type="text" id="editedValue_address" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -139,12 +140,12 @@
                     </li>
                     <li class="list-group-item display-mode non-editable" id="positionItem">
                         <strong>Chức Vụ:</strong>
-                        <span class="display-mode" id="position">Nhân Viên</span>
+                        <span class="display-mode" id="position">@Model.ChucVu</span>
                         <!-- This field is non-editable -->
                     </li>
                     <li class="list-group-item display-mode" id="passwordItem">
                         <strong>Mật Khẩu:</strong>
-                        <span class="display-mode" id="password">Tesst123</span>
+                        <span class="display-mode" id="password">@Model.MatKhau</span>
                         <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
                         <input type="password" id="editedValue_password" class="form-control edit-mode-input mb-1"
                                style="display: none;">
@@ -155,12 +156,12 @@
                     </li>
                     <li class="list-group-item display-mode non-editable" id="startDateItem">
                         <strong>Ngày Vào Làm:</strong>
-                        <span class="display-mode" id="startDate">01/01/2020</span>
+                        <span class="display-mode" id="startDate">@Model.NgayVaoLam</span>
                         <!-- This field is non-editable -->
                     </li>
                     <li class="list-group-item display-mode non-editable" id="registrationDateItem">
                         <strong>Ngày Đăng Ký:</strong>
-                        <span class="display-mode" id="registrationDate">01/01/2020</span>
+                        <span class="display-mode" id="registrationDate">@Model.NgayDangKy</span>
                         <!-- This field is non-editable -->
                     </li>
                 </ul>

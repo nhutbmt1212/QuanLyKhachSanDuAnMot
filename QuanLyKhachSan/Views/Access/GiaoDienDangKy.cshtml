@@ -17,17 +17,17 @@
         <h2>ĐĂNG KÝ</h2>
         <div class="input-box">
             <i class='bx bxs-user'></i>
-            <input type="text" required>
+            <input type="text" name="TenKhachHang" required>
             <label for="">Tên khách hàng</label>
         </div>
         <div class="input-box">
             <i class='bx bxs-envelope'></i>
-            <input type="text" required>
+            <input type="text" name="Email" required>
             <label for="">Email/Số điện thoại</label>
         </div>
         <div class="input-box">
             <i class='bx bxs-lock-alt'></i>
-            <input type="password" name="Password" required>
+            <input type="password" name="MatKhau" required>
             <label for="">Mật khẩu</label>
         </div>
         <div class="input-box">
@@ -36,7 +36,7 @@
             <label for="">Nhập lại mật khẩu</label>
         </div>
         <div class="button">
-            <input class="btn" type="submit" value="Đăng ký">
+            <input class="btn" type="submit" value="Đăng ký" asp-action="">
         </div>
         <div class="register">
             <p>Bạn đã có tài khoản? <a asp-action="Login" asp-controller="Access">Đăng nhập</a></p>
