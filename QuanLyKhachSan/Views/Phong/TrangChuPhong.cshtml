@@ -202,7 +202,7 @@
     </div>
     <!-- Popup Sửa Phòng -->
     <div class="form-popupEdit mb-2" id="myFormEdit">
-        <form class="form-container" method="post" enctype="multipart/form-data">
+        <form class="form-container" id="myFormContainerEdit">
             <h1 style="font-family:Roboto;">Sửa phòng</h1>
             <div class="row">
                 <div class="col-md-6">
@@ -237,7 +237,7 @@
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="EditImageUrl">Chọn ảnh mới:</label>
-                            <input type="file" id="editInputImage" multiple>
+                            <input type="file" id="editInputImage" onchange="XuLyAnhDaChonSuaPhong(this)" multiple>
                         </div>
                     </div>
 
@@ -246,7 +246,7 @@
             </div>
             <div class="clearfix">
                 <button type="button" class="btn float-right m-2 w-25  cancel " onclick="CloseFormEdit()">Đóng</button>
-                <button  class="btn float-right m-2 w-25 " style="min-width:200px" id="editButton">Sửa phòng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px" id="editButton" >Sửa phòng</button>
             </div>
         </form>
     </div>

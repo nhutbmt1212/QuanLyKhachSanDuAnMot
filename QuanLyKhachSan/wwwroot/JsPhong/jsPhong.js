@@ -13,10 +13,10 @@ function closeForm() {
 
 //editPopup
 
-document.getElementById('btn_Sua').addEventListener('click', function () {
-    document.getElementById('myFormEdit').style.display = "block";
+//document.getElementById('btn_Sua').addEventListener('click', function () {
+//    document.getElementById('myFormEdit').style.display = "block";
 
-})
+//});
 function CloseFormEdit() {
     document.getElementById('myFormEdit').style.display = "none";
 
@@ -185,51 +185,132 @@ function ThemPhong() {
 }
 
 
-//sửa
-//var arrImageEditPreview = [];
-//function HienThiAnhSuaPhong(MaPhong) {
-//    $.ajax({
-//        type: 'GET',
-//        url: '/Phong/GetImages',
-//        data: { MaPhong, MaPhong },
-//        success: function (LinkAnhs) {
-           
-//            const previewContainer = document.getElementById('editImagePreviewContainer');
-//            previewContainer.innerHTML = "";
-//            for (let i = 0; i < LinkAnhs.length; i++) {
+/*sửa*/
+var arrLinkAnhEdit = [];
+var arrImagePreviewingEdit = [];
 
-//                var LinkAnh = LinkAnhs[i];
-//                arrImageEditPreview.push(LinkAnh);
-//                const imageContainer = document.createElement('div');
-//                imageContainer.className = "image-containerEditPhong";
+function HienThiAnhSuaPhong(MaPhong) {
+    document.getElementById('myFormEdit').style.display = "block";
 
-//                const imgElement = document.createElement('img');
-//                imgElement.src = '/UploadImage/'+LinkAnh;
-//                imgElement.alt = "Image Edit Preview";
+    $.ajax({
+        type: 'GET',
+        url: '/Phong/GetImages',
+        data: { MaPhong: MaPhong },
+        success: function (LinkAnhs) {
+            const previewContainer = document.getElementById('editImagePreviewContainer');
+            previewContainer.innerHTML = "";
+            arrImagePreviewingEdit = [];
 
-//                // Xóa ảnh
-//                const nutXoa = document.createElement('button');
-//                nutXoa.textContent = "Xóa";
-//                nutXoa.className = "XoaAnh_SuaPhong";
-//                nutXoa.type = "button";
+            for (let i = 0; i < LinkAnhs.length; i++) {
+                var LinkAnh = LinkAnhs[i];
+                arrImagePreviewingEdit.push(LinkAnh);
+                appendImagePreview(LinkAnh, i);
+            }
+        },
+        error: function (error) {
+            // Handle error
+        }
+    });
+}
 
-//                nutXoa.addEventListener('click', function () {
-//                    XoaAnhSuaPhong(i);
-//                });
+function XuLyAnhDaChonSuaPhong(input) {
+    const fileAnhChon = input.files;
+    for (let i = 0; i < fileAnhChon.length; i++) {
+        const file = fileAnhChon[i];
+        const LinkAnh = URL.createObjectURL(file);
+        arrLinkAnhEdit.push(LinkAnh);
+        arrImagePreviewingEdit.push(file);
+        appendImagePreview(LinkAnh, arrImagePreviewingEdit.length - 1);
+    }
+}
 
-//                imageContainer.appendChild(imgElement);
-//                imageContainer.appendChild(nutXoa);
-//                previewContainer.appendChild(imageContainer);
-//            }
-//        },
-//        error: function (error) {
-
-//        }
-//    });
-//}
-//function XoaAnhSuaPhong(index) {
-   
-//    arrImageEditPreview.splice(index, 1);
+function appendImagePreview(LinkAnh, index) {
+    var imageFileExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
     
-//}
+
+
+    const previewContainer = document.getElementById('editImagePreviewContainer');
+    const imageContainer = document.createElement('div');
+    imageContainer.className = "image-containerEditPhong";
+
+    const imgElement = document.createElement('img');
+    var fileExtension = LinkAnh.split('.').pop().toLowerCase();
+    if (imageFileExtensions.includes(fileExtension)) {
+        imgElement.src = '/UploadImage/' + LinkAnh;
+    } else {
+        imgElement.src =  LinkAnh;
+    }
+    console.log(LinkAnh);
+    imgElement.alt = "Image Edit Preview";
+
+    const nutXoa = document.createElement('button');
+    nutXoa.textContent = "Xóa";
+    nutXoa.className = "XoaAnh_SuaPhong";
+    nutXoa.type = "button";
+
+    nutXoa.addEventListener('click', function () {
+        XoaAnhSuaPhong(index);
+    });
+
+    imageContainer.appendChild(imgElement);
+    imageContainer.appendChild(nutXoa);
+    previewContainer.appendChild(imageContainer);
+}
+
+function capNhatAnhPreviewSuaPhong() {
+    const previewContainer = document.getElementById('editImagePreviewContainer');
+    previewContainer.innerHTML = "";
+
+    for (let i = 0; i < arrImagePreviewingEdit.length; i++) {
+        const ImagePreviewing = arrImagePreviewingEdit[i];
+        appendImagePreview(typeof ImagePreviewing === 'string' ? ImagePreviewing : URL.createObjectURL(ImagePreviewing), i);
+    }
+}
+
+function XoaAnhSuaPhong(index) {
+
+    arrImagePreviewingEdit.splice(index, 1);
+    capNhatAnhPreviewSuaPhong();
+}
+
+
+$("#myFormContainerEdit").on("submit", function (event) {
+    event.preventDefault(); 
+    SuaPhong();
+});
+function SuaPhong() {
+    var maphong = $(".maphongedit").val();
+    var maloaiphong = $("#inputEditChonLP").val();
+    var ngaytao = $("#inputEditNgayTao").val();
+
+    var formData = new FormData();
+
+    formData.append("MaPhong", maphong);
+    formData.append("MaLoaiPhong", maloaiphong);
+    formData.append("NgayTao", ngaytao);
+
+    if (arrImagePreviewingEdit.length > 0) {
+        for (var i = 0; i < arrImagePreviewingEdit.length; i++) {
+            formData.append("Imageurl", arrImagePreviewingEdit[i]);
+        }
+    }
+
+    $.ajax({
+        type: "POST",
+        url: "/Phong/SuaPhong",
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (result) {
+            console.log(result);
+            arrLinkAnhEdit = [];
+            arrImagePreviewingEdit = [];
+            location.reload();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
+
 

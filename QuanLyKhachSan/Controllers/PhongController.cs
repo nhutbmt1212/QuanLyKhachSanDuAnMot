@@ -68,30 +68,62 @@ namespace QuanLyKhachSan.Controllers
 
 
 
+        //[HttpPost]
+        //public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
+        //{
+        //    var phong = await _db.Phong
+        //        .Include(p => p.ImageLinks)
+        //        .FirstOrDefaultAsync(p => p.MaPhong == phongId);
+
+        //    if (phong == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    // Update the existing images with the edited URLs
+        //    phong.ImageLinks.Clear();
+
+        //    foreach (var editedImageUrl in editedImageUrls)
+        //    {
+        //        phong.ImageLinks.Add(new ImageLink { Url = editedImageUrl });
+        //    }
+
+        //    await _db.SaveChangesAsync();
+
+        //    return View("Index");
+        //}
         [HttpPost]
-        public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
+        public async Task<IActionResult> SuaPhong([FromForm] Phong phong, [FromForm] List<IFormFile> Imageurl)
         {
-            var phong = await _db.Phong
-                .Include(p => p.ImageLinks)
-                .FirstOrDefaultAsync(p => p.MaPhong == phongId);
+            var qr_Phong = _db.Phong.FirstOrDefault(s => s.MaPhong == phong.MaPhong);
+            var images = new List<ImageLink>();
 
-            if (phong == null)
+            foreach (var image in Imageurl)
             {
-                return NotFound();
+                var fileName = Path.GetFileName(image.FileName);
+                var path = Path.Combine("wwwroot", "UploadImage", fileName);
+
+                using (var stream = new FileStream(path, FileMode.Create))
+                {
+                    await image.CopyToAsync(stream);
+                }
+
+                var relativePath = $"{fileName}";
+                images.Add(new ImageLink { Url = relativePath });
             }
+            qr_Phong.MaLoaiPhong = phong.MaLoaiPhong;
+            qr_Phong.NgayTao = phong.NgayTao;
+            qr_Phong.TinhTrang = "Đang hoạt động";
+            qr_Phong.KhuVuc = "A";
 
-            // Update the existing images with the edited URLs
-            phong.ImageLinks.Clear();
+            qr_Phong.ImageLinks = images;
 
-            foreach (var editedImageUrl in editedImageUrls)
-            {
-                phong.ImageLinks.Add(new ImageLink { Url = editedImageUrl });
-            }
-
+            _db.Phong.Update(qr_Phong);
             await _db.SaveChangesAsync();
 
-            return View("Index");
+            return RedirectToAction("TrangChuPhong", "Phong");
         }
+
         public IActionResult XoaPhong(string MaPhong)
         {
             var qr_maPhong = _db.Phong.FirstOrDefault(s => s.MaPhong == MaPhong);
