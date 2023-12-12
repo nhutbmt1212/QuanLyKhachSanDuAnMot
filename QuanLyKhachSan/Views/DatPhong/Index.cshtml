@@ -31,74 +31,61 @@
             <li class="breadcrumb-item active" aria-current="page">Đặt phòng</li>
         </ol>
     </section>
-    <div class="container">
 
-        <div>
-            <button type="button" id="TimKiemTatCa" class="btn btn-light active" onclick="TimKiemTatCa()">Tất cả</button>
-            <button type="button" id="TimKiemTrong" class="btn btn-light" onclick="TimKiemTrong()">Trống</button>
-            <button type="button" id="TimKiemDaDat" class="btn btn-light" onclick="TimKiemDaDat()">Đã đặt</button>
-        </div>
-        <div id="totalRoom" class="container">
-            <div class="row">
-                @foreach (var phong in Model)
-                {
-                    <div class="col-md-2 ml-5">
-                        <div class="room">
-                            <img src="https://th.bing.com/th/id/R.efd003d87199ce8c240aa1fd56acc44b?rik=pAFLUJIULbXf%2bg&pid=ImgRaw&r=0" alt="" class="image_room mt-2">
-
-                            @{
-                                var currentDate = DateTime.Now;
-                                var isReservationApproved = _db.DatPhong.Any(dp =>
-                                dp.MaPhong == phong.MaPhong &&
-                                dp.TinhTrang == "Đã được duyệt" &&
-                                dp.NgayNhan <= currentDate &&
-                                dp.NgayTra > currentDate
-                                );
-                            }
-
-                            @if (isReservationApproved)
-                            {
-                                <span class="trangthai text-white" style="background-color:red;">Đã được thuê</span>
-                            }
-                            else    
-                            {
-                                <span class="trangthai">Trống</span>
-                            }
-                            @{
-                                var qr_GiaPhong_MaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == phong.MaLoaiPhong);
-                            }
-                            <span class="maphong">@phong.MaPhong</span>
-                            <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
-                            <div class="gia_theo_gio_div">
-                                <span class="title_giatheogio">Giá theo giờ: </span>
+    <button type="button" id="TimKiemTatCa" class="btn btn-light active" onclick="TimKiemTatCa()">Tất cả</button>
+    <button type="button" id="TimKiemTrong" class="btn btn-light" onclick="TimKiemTrong()">Trống</button>
+    <button type="button" id="TimKiemDaDat" class="btn btn-light" onclick="TimKiemDaDat()">Đã đặt</button>
 
 
-                                <span class="content_giatheogio text-right">@qr_GiaPhong_MaPhong.GiaTheoGio</span>
-                            </div>
-                            <div class="gia_theo_ngay_div">
-                                <span class="title_giatheongay">Giá theo ngày: </span>
-                                <span class="content_giatheongay">@qr_GiaPhong_MaPhong.GiaPhongTheoNgay</span>
-                            </div>
-                            <div class="dropdown icon_3cham ">
-                                <button type="button" data-toggle="dropdown" class="btn_threedot">
-                                    <i class="bi bi-three-dots"></i>
-                                </button>
+    <section class="rooms-container">
 
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</a>
-                                    @if (isReservationApproved)
-                                    {
-                                        <a class="dropdown-item" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</a>
-
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        @foreach (var phong in Model)
+        {
+            
+            <div class="room">
+                @{
+                    var currentDate = DateTime.Now;
+                    var isReservationApproved = _db.DatPhong.Any(dp =>
+                    dp.MaPhong == phong.MaPhong &&
+                    dp.TinhTrang == "Đã được duyệt" &&
+                    dp.NgayNhan <= currentDate &&
+                    dp.NgayTra > currentDate
+                    );
                 }
+               @*  @if (isReservationApproved)
+                {
+                    <span class="trangthai text-white" style="background-color:red;">Đã được thuê</span>
+                }
+                else
+                {
+                    <span class="trangthai">Trống</span>
+                } *@
+                @{
+                    var qr_GiaPhong_MaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == phong.MaLoaiPhong);
+                }
+                <div class="options-container">
+                    <div class="options-btn">&#8226;&#8226;&#8226;</div>
+                    <div class="options-menu">
+                        <div class="option" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</div>
+                        <div class="option">Thêm dịch vụ</div>
+                        <div class="option" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</div>
+                    </div>
+                </div>
+                <img src="https://hoangtibaclieu.com/files/tin/36/jpg/meo-trang-tri-phong-khach-chuan.jpg"
+                     alt="Room 1 Image">
+                <div class="details">
+                    <div class="status-badge">
+                        <span class="status-text status-available">Trống</span>
+                    </div>
+                    <h4><span class="maphong">@phong.MaPhong</span> - 
+                        <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
+                    </h4>
+                    <p>@qr_GiaPhong_MaPhong.GiaTheoGio VND/Giờ - @qr_GiaPhong_MaPhong.GiaPhongTheoNgay VND/Ngày</p>
+                    <p>Tối đa: @qr_GiaPhong_MaPhong.SoLuongNguoiLon Người lớn - @qr_GiaPhong_MaPhong.SoLuongTreEm Trẻ em</p>
+                    <button class="book-button">Đặt phòng</button>
+                </div>
             </div>
-        </div>
-
+        }
         <div class="popup-overlay" id="popupOverlay">
             <div class="popup-content">
                 <div class="row">
@@ -110,7 +97,7 @@
                     <div class="popup-kh col-md-12" id="searchBar">
                         <i class="fa fa-search"></i>
 
-                        <input list="SearchMaKhachHang" id="MaKhachHangDatPhong" name="MaKhachHang" placeholder="Tìm kiếm khách hàng"/>
+                        <input list="SearchMaKhachHang" id="MaKhachHangDatPhong" name="MaKhachHang" placeholder="Tìm kiếm khách hàng" />
                         @{
                             var qr_khachHang = _db.KhachHang.ToList();
                         }
@@ -133,8 +120,8 @@
                     <div class="col-md-3 mx-auto">
                         <div class="form-group">
                             <label for="gioiTinh">Loại phòng</label>
-                            <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" readonly/>
-                            
+                            <input type="text" id="MaLoaiPhong_PopUpDatPhong" class="form-control" readonly />
+
 
                         </div>
                         <div class="form-group">
@@ -148,7 +135,7 @@
                             <label for="giaPhong">Giá phòng</label>
                             <input type="text" class="form-control" name="giaPhong" id="giaPhong_PopUpDatPhong" readonly required>
                         </div>
-                      
+
                     </div>
                     <div class="col-md-4 mx-auto">
                         <div class="form-group">
@@ -156,14 +143,14 @@
                             <input type="datetime-local" class="form-control" name="ngayNhanPhong" id="ngayNhanPhong_PopUpDatPhong" required>
                             <span id="errorNgayNhan" style="color: red;"></span>
                         </div>
-                      
+
                         <div class="form-group">
                             <label for="tongNguoiLon">Tổng số người lớn (Tối đa: <span id="SoNgLonToiDaPopUp_DatPhong"></span>)</label>
                             <input type="text" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
                             <span id="errorTongSoNguoiLon" style="color: red;"></span>
 
                         </div>
-                        
+
                     </div>
                     <div class="col-md-4 m">
                         <div class="form-group">
@@ -174,23 +161,23 @@
                         </div>
                         <div class="form-group">
                             <label for="tongTreEm">Tổng số trẻ em (Tối đa: <span id="SoTreEmToiDaPopUp_DatPhong"></span>)</label>
-                            <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required> 
+                            <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required>
                             <span id="errorTongSoTreEm" style="color: red;"></span>
 
                         </div>
 
                         @* KHÁCH TRẢ TRƯỚC *@
-                      @*   <div class="form-group">
-                            <label for="khachTraTruoc">Khách trả trước</label>
-                            <input type="number" min="0" value="0" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
-                            <span id="errorKhachTraTruoc" style="color: red;"></span>
+                        @*   <div class="form-group">
+                        <label for="khachTraTruoc">Khách trả trước</label>
+                        <input type="number" min="0" value="0" class="form-control" name="khachTraTruoc" id="khachTraTruoc" required>
+                        <span id="errorKhachTraTruoc" style="color: red;"></span>
                         </div> *@
-                      
-                      @*   <div id="ChonDichVu" class="mt-4">
-                      
-                         </div>
+
+                        @*   <div id="ChonDichVu" class="mt-4">
+
+                        </div>
                         <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
-                            <i class="bi bi-plus"></i> Thêm dịch vụ
+                        <i class="bi bi-plus"></i> Thêm dịch vụ
                         </button> *@
                     </div>
 
@@ -211,8 +198,8 @@
                             <span>Tổng cộng:</span> <span id="TongTien">0 </span><span> VNĐ</span>
                         </strong>
                         <div id="TongDichVuDaDat" style="display:none;"></div>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                     </div>
                     <div class="col-md-12">
                         <div class="form-group float-right">
@@ -224,10 +211,30 @@
 
                     </div>
                 </div>
-               
+
             </div>
         </div>
-    </div>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <div class="popup" id="formPopup">
         <h2>Thêm mới khách hàng</h2>
@@ -361,9 +368,9 @@
                     <td id="tongTienThanhToan_PopUp">2.060.000 VND</td>
                 </tr>
 
-               @*  <tr>
-                    <th>Tiền thanh toán</th>
-                    <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
+                @*  <tr>
+                <th>Tiền thanh toán</th>
+                <td><input type="number" placeholder="Nhập số tiền khách đưa" id="money"></td>
                 </tr> *@
             </table>
             <div class="button-group d-flex justify-content-end mt-3">

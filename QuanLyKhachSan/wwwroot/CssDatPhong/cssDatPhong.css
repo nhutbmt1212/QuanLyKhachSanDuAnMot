@@ -1,137 +1,135 @@
 ﻿body {
-    background-color: #F6F6F6;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
 }
 
-.container {
-    max-width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
-    min-height:1000px;
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+nav {
+    text-align: center;
+    padding: 1em;
+    background-color: #eee;
+}
+
+    nav button {
+        margin: 0.5em;
+        padding: 0.5em 1em;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+.rooms-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 2em;
 }
 
 .room {
-    margin-top: 10px;
-    height: 19rem;
-    width: 225px;
-    border-radius: 10px;
-    border: 1px solid grey;
-    background-color: #FFFFFF;
-}
-
-.image_room {
-    width: 93%;
-    height: 70%;
-    background-color: antiquewhite;
+    position: relative;
+    margin: 1em;
+    max-width: 340px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    margin-left: 8px;
+    overflow: hidden;
+    background-color: #fff;
 }
 
-.trangthai {
-    position: relative;
-    bottom: 90px;
-    left: 25px;
-    color: whitesmoke;
-    font-size: 12px;
-    background-color: #78D69D;
-    height: 30px;
-    width: 120px;
-    border-radius: 7px;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    text-align: center;
-    display: flex;
+    .room img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-radius: 8px 8px 0 0;
+    }
+
+.details {
+    padding: 1em;
 }
 
-.maphong {
-    position: relative;
-    bottom: 88px;
-    left: 25px;
-    color: whitesmoke;
-    font-size: 17px;
-}
-
-.loaiphong {
-    position: absolute;
-    bottom: 95px;
-    left: 40px;
-    color: whitesmoke;
-    font-size: 14px;
-}
-
-.title_giatheogio {
-    position: absolute;
-    left: 0;
-    font-weight: 700;
-}
-
-.content_giatheogio {
-}
-
-.gia_theo_gio_div {
-    font-size: 11px;
-    height: 20px;
-    border-bottom: 1px solid grey;
-    position: relative;
-    top: -25px;
-    width: 87%;
-    justify-content: right;
-    display: flex;
-    margin-left: 13px;
-}
-
-.gia_theo_ngay_div {
-    font-size: 11px;
-    height: 20px;
-    position: relative;
-    top: -20px;
-    margin-left: 15px;
-    justify-content: right;
-    display: flex;
-}
-
-.title_giatheongay {
-    position: absolute;
-    left: -2px;
-    font-weight: 700;
-}
-
-.content_giatheongay {
-    position: absolute;
-    right: 15px;
-}
-
-.icon_3cham {
-    position: absolute;
-    bottom: 295px;
-    left: 170px;
-    height: 30px;
-    width: 30px;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    text-align: center;
-    display: flex;
-    border-radius: 50px;
+button.book-button {
+    background-color: #333;
     color: white;
+    padding: 0.5em 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
-.btn_threedot {
-    border: 0;
-    background-color: none;
-    background-color: rgb(89, 82, 79,0.3);
-    height: 30px;
-    width: 30px;
-    border-radius: 50px;
+footer {
+    background-color: #333;
     color: white;
+    text-align: center;
+    padding: 1em;
 }
 
+.options-container {
+    position: absolute;
+    top: 3%;
+    right: 5%;
+    z-index: 1;
+}
+
+.options-btn {
+    cursor: pointer;
+    padding: 7px 10px 7px 10px;
+    font-size: 20px;
+    color: white;
+    border-radius: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1000;
+}
+
+.options-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    right: 0;
+    top: 100%;
+    min-width: 150px;
+    z-index:-1000;
+}
+
+.option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+    .option:hover {
+        background-color: #eee;
+    }
+
+.status-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+}
+
+.status-text {
+    font-weight: bold;
+}
+
+.status-available {
+    color: green;
+}
+
+.status-booked {
+    color: red;
+}
 
 
 
@@ -222,6 +220,7 @@
     background-color: rgba(66, 64, 64, 0.5);
     justify-content: center;
     align-items: center;
+    z-index:1;
 }
 
 .popup-content {
