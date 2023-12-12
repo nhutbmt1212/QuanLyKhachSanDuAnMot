@@ -12,6 +12,19 @@
             $("#errorTenNV").text("");
         }
     });
+        $("#inputFieldTenNV").on("focusout", function () {
+            var inputValue = $(this).val();
+
+            if (inputValue.length < 3) {
+                $("#errorTenNV").text("Độ dài ít nhất 3 ký tự.");
+            } else if (inputValue.length === 0) {
+                $("#errorTenNV").text("Tên nhân viên không được để trống.");
+            } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+                $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+            } else {
+                $("#errorTenNV").text("");
+            }
+        });
     // Bắt sự kiện khi người dùng rời khỏi ô input email
         // Bắt sự kiện khi người dùng rời khỏi ô input email
         $("#inputFieldEmail").on("focusout", function () {
