@@ -226,7 +226,7 @@ function XuLyAnhDaChonSuaPhong(input) {
 
 function appendImagePreview(LinkAnh, index) {
     var imageFileExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
-    
+
 
 
     const previewContainer = document.getElementById('editImagePreviewContainer');
@@ -238,7 +238,7 @@ function appendImagePreview(LinkAnh, index) {
     if (imageFileExtensions.includes(fileExtension)) {
         imgElement.src = '/UploadImage/' + LinkAnh;
     } else {
-        imgElement.src =  LinkAnh;
+        imgElement.src = LinkAnh;
     }
     console.log(LinkAnh);
     imgElement.alt = "Image Edit Preview";
@@ -268,14 +268,31 @@ function capNhatAnhPreviewSuaPhong() {
 }
 
 function XoaAnhSuaPhong(index) {
-
-    arrImagePreviewingEdit.splice(index, 1);
-    capNhatAnhPreviewSuaPhong();
+    var MaPhong = $(".maphongedit").val(); 
+    var ImageUrl = arrImagePreviewingEdit[index]; 
+    if (typeof ImageUrl === 'string') {
+        $.ajax({
+            type: "POST",
+            url: "/Phong/XoaAnhSuaPhong",
+            data: { MaPhong: MaPhong, ImageUrl: ImageUrl },
+            success: function (result) {
+                console.log(result);
+                arrImagePreviewingEdit.splice(index, 1);
+                capNhatAnhPreviewSuaPhong();
+            },
+            error: function (error) {
+                console.error(error);
+            }
+        });
+    } else {
+        arrImagePreviewingEdit.splice(index, 1);
+        capNhatAnhPreviewSuaPhong();
+    }
 }
 
 
 $("#myFormContainerEdit").on("submit", function (event) {
-    event.preventDefault(); 
+    event.preventDefault();
     SuaPhong();
 });
 function SuaPhong() {
@@ -312,5 +329,3 @@ function SuaPhong() {
         }
     });
 }
-
-

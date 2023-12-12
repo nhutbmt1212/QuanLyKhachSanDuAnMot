@@ -123,6 +123,15 @@ namespace QuanLyKhachSan.Controllers
 
             return RedirectToAction("TrangChuPhong", "Phong");
         }
+        [HttpPost]
+        public async Task<IActionResult> XoaAnhSuaPhong(string MaPhong, string ImageUrl)
+        {
+            // Tìm phòng tương ứng với MaPhong
+            var anhPhong = _db.imglink.FirstOrDefault(p => p.Url == ImageUrl && p.MaPhong == MaPhong);
+            _db.imglink.Remove(anhPhong);
+            _db.SaveChanges();
+            return Ok();
+        }
 
         public IActionResult XoaPhong(string MaPhong)
         {

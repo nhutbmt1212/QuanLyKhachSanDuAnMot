@@ -1,7 +1,9 @@
 ﻿@using System.Security.Claims;
 @{
     var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+    var MaNguoiDung = User.FindFirst(ClaimTypes.Surname)?.Value;
 }
+@inject ApplicationDbContext _db;
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +20,22 @@
 
 </head>
 <body>
+    <style>
+      
+    </style>
     <section id="sidebar">
         <a href="#" class="brand">
             <div class="sidebar-brand-icon">
+                @{
+                    var qr_AnhNhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == MaNguoiDung);
+                }
                 <img style="height: 52px;left:0;top: 10px;" src="~/css/Screenshot_7_preview_rev_1.png" alt="">
             </div>
             <span class="text">ASAP HOTEL</span>
         </a>
         <ul class="side-menu top">
 
-            <li class="active">
+            <li >
                 <a asp-action="Index" asp-controller="Home">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text" data-toggle="tooltip" data-placement="right" title="Tổng quan">Tổng quan</span>
@@ -146,7 +154,7 @@
                 <span class="num">8</span>
             </a>
             <div class="profile">
-                <img src="~/Images/AnhTest.jpg">
+                <img src="~/@qr_AnhNhanVien.AnhNhanVienBase64">
                 <ul class="profile-link">
                     <li><a asp-action="HoSoNhanVien" asp-controller="NhanVien"><i class='bx bxs-user-circle icon'></i> Hồ sơ</a></li>
                     <li><a asp-action="LichSuHoatDong" asp-controller="NhanVien"><i class='bx bx-history'></i>Lịch sử hoạt động</a></li>
@@ -160,6 +168,7 @@
     </section>
 
     <script>
+       
         function updateClock() {
             var currentDateTimeElement = document.getElementById('currentDateTime');
             var currentTime = new Date();
