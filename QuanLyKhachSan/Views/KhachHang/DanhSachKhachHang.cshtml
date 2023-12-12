@@ -226,7 +226,7 @@
                     @foreach (var kh in Model)
                     {
                         stt = stt + 1;
-                    <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang" data-email="@kh.Email">
+                    <tr data-ma-kh="@kh.MaKhachHang" data-ten-kh="@kh.TenKhachHang" data-gioiTinh="@kh.GioiTinh" data-sdt="@kh.SoDienThoai" data-diaChi="@kh.DiaChi" data-cccd="@kh.CCCD" data-email="@kh.Email" data-ngaySinh="@kh.NgaySinh?.ToShortDateString()" data-matKhau="@kh.MatKhau" data-ngayDangKy="@kh.NgayDangKy.ToShortDateString()" data-tinhTrang="@kh.TinhTrang" data-email="@kh.Email">
                         <td class="align-middle checkBox_td" hidden><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
                                 @stt
@@ -244,7 +244,7 @@
                         <td class="employee-info-column">@kh.DiaChi</td>
                         <td class="employee-info-column">@kh.CCCD</td>
                         <td class="employee-info-column">@kh.Email</td>
-                        <td class="employee-info-column">@kh.NgaySinh.ToShortDateString()</td>
+                        <td class="employee-info-column">@kh.NgaySinh?.ToShortDateString()</td>
                         <td class="employee-info-column">@kh.MatKhau</td>
                         <td class="employee-info-column">@kh.NgayDangKy.ToShortDateString()</td>
                         <td class="employee-info-column">@kh.TinhTrang</td>

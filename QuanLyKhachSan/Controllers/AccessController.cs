@@ -116,7 +116,10 @@ namespace QuanLyKhachSan.Controllers
                 MaKhachHang = GenerateRandomCode(),
                 TenKhachHang = TenKhachHang,
                 Email = Email,
-                MatKhau = MatKhau
+                MatKhau = MatKhau,
+                NgayDangKy =DateTime.Now,
+                TinhTrang="Đang hoạt động"
+                
             };
             _db.KhachHang.Add(kh);
             _db.SaveChanges();

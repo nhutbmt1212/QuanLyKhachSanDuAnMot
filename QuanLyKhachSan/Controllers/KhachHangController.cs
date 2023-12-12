@@ -128,7 +128,7 @@ namespace QuanLyKhachSan.Controllers
                     dataRow[2] = nv.SoDienThoai;
                     dataRow[3] = nv.DiaChi;
                     dataRow[4] = nv.CCCD;
-                    dataRow[5] = nv.NgaySinh.ToShortDateString();
+                    dataRow[5] = nv.NgaySinh?.ToShortDateString();
                     dataRow[6] = nv.GioiTinh;
                     dataRow[7] = nv.Email;
                     dataRow[8] = nv.TinhTrang;
@@ -297,7 +297,7 @@ namespace QuanLyKhachSan.Controllers
                 table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.CCCD, contentFont));
-                table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString().ToString(), contentFont));
+                table.AddCell(new Phrase(nv.NgaySinh?.ToShortDateString().ToString(), contentFont));
                 table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.Email.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.TinhTrang, contentFont));

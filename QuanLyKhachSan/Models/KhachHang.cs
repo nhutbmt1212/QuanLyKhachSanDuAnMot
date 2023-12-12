@@ -10,17 +10,17 @@ namespace QuanLyKhachSan.Models
         [StringLength(50)]
         public string TenKhachHang { get; set; }
         [StringLength(10)]
-        public string SoDienThoai { get; set; }
+        public string? SoDienThoai { get; set; }
         [StringLength(50)]
-        public string DiaChi { get; set; }
+        public string? DiaChi { get; set; }
         [StringLength(12)]
-        public string CCCD { get; set; }
+        public string? CCCD { get; set; }
         [DataType(DataType.DateTime)]
-        public DateTime NgaySinh { get; set; }
+        public DateTime? NgaySinh { get; set; }
         [StringLength(3)]
-        public string GioiTinh { get; set; }
+        public string? GioiTinh { get; set; }
         [StringLength(50)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [StringLength(20)]
         public string TinhTrang { get; set; }
         [StringLength(30)]
