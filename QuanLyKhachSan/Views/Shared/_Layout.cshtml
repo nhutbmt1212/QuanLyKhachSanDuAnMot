@@ -137,11 +137,9 @@
     <section id="content">
         <nav>
             <i class='bx bx-menu' id="HandleButton"></i>
-            <a href="#" class="nav-link">Tổng quan</a>
+            <a href="#" class="nav-link"></a>
             <form action="#">
-                <div class="form-input">
-                    #01/01/2000
-                </div>
+                <div class="form-input" id="currentDateTime" style="font-size:1.3rem;"></div>
             </form>
             <a href="#" class="notification">
                 <i class='bx bxs-bell'></i>
@@ -161,7 +159,24 @@
         </main>
     </section>
 
+    <script>
+        function updateClock() {
+            var currentDateTimeElement = document.getElementById('currentDateTime');
+            var currentTime = new Date();
+            var hours = currentTime.getHours();
+            var minutes = currentTime.getMinutes();
+            var seconds = currentTime.getSeconds();
+            var day = currentTime.getDate();
+            var month = currentTime.getMonth() + 1;
+            var year = currentTime.getFullYear();
 
+            var formattedDateTime = day + "/" + month + "/" + year + " - " + hours + ":" + minutes + ":" + seconds;
+
+            currentDateTimeElement.innerHTML = formattedDateTime;
+            setTimeout(updateClock, 1000);
+        }
+        updateClock();
+    </script>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
