@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+
     <link rel="stylesheet" href="~/CssLoaiPhong/CssLoaiPhong.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <style>
@@ -94,6 +95,12 @@
     </style>
 </head>
 <body>
+    <section>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Tổng quan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Loại phòng</li>
+        </ol>
+    </section>
     <!-- Popup Thêm Loại Phòng -->
     <div class="form-popup mb-2" id="myForm">
         <form class="form-container" method="post">

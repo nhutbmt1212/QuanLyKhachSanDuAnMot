@@ -48,9 +48,15 @@
 </head>
 
 <body>
+    <section>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Tổng quan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Hồ sơ</li>
+        </ol>
+    </section>
 
     <div class="container">
-        <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ nhân viên</h2>
+        <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ</h2>
         <div class="row">
             <div class="col-md-2">
                 <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">

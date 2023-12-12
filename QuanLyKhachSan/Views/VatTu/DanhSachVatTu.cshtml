@@ -12,6 +12,12 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     </head>
     <body>
+    <section>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Tổng quan</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Vật tư</li>
+        </ol>
+    </section>
         <!-- Popup - Thêm Vật tư -->
         <div class="form-popup mb-2" id="myForm">
             <!-- Form Thêm Vật tư -->
@@ -104,7 +110,7 @@
     <form method="post" enctype="multipart/form-data" asp-controller="VatTu" asp-action="Import">
         <div class="form-group">
             <div class="col-md-10">
-                <p>Upload one or more files using this form:</p>
+                <p>Chọn file Excel để upload:</p>
                 <input type="file" name="formFile" />
             </div>
         </div>
