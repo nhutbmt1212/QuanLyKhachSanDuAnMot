@@ -1,4 +1,29 @@
-﻿function showSearchBar(MaPhong) {
+﻿document.addEventListener('DOMContentLoaded', function () {
+    const optionsContainers = document.querySelectorAll('.options-container');
+
+    optionsContainers.forEach(container => {
+        const optionsBtn = container.querySelector('.options-btn');
+        const optionsMenu = container.querySelector('.options-menu');
+
+        optionsBtn.addEventListener('click', function (event) {
+            event.stopPropagation();
+
+            optionsContainers.forEach(otherContainer => {
+                if (otherContainer !== container) {
+                    otherContainer.querySelector('.options-menu').style.display = 'none';
+                }
+            });
+
+            optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.addEventListener('click', function () {
+            optionsMenu.style.display = 'none';
+        });
+    });
+});
+
+function showSearchBar(MaPhong) {
     document.getElementById("popupOverlay").style.display = "flex";
     var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText = MaPhong;
     $.ajax({

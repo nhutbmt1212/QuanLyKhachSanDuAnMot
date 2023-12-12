@@ -130,8 +130,9 @@ body {
 }
 
     .room-detail img {
-        width: 30%;
-        height: auto;
+        width: 300px;
+        height: 250px;
+        object-fit: cover;
     }
 
 .room-info {
