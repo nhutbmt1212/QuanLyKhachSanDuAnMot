@@ -68,7 +68,12 @@
                     <div class="options-menu">
                         <div class="option" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</div>
                         <div class="option">Thêm dịch vụ</div>
-                        <div class="option" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</div>
+                       
+                        @if (isReservationApproved)
+                        {
+                            <div class="option" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</div>
+
+                        }
                     </div>
                 </div>
                 <img src="https://hoangtibaclieu.com/files/tin/36/jpg/meo-trang-tri-phong-khach-chuan.jpg"
