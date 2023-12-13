@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
 using System;
 using System.Security.Claims;
@@ -17,8 +18,8 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var qr_Phong = _db.Phong.Where(s=>s.TinhTrang!="Đã xóa").ToList();
-            return View(qr_Phong);
+            var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s => s.TinhTrang != "Đã xóa").ToList();
+            return View(listPhong);
         }
 
         [HttpPost]
