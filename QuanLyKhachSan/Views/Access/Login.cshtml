@@ -8,6 +8,7 @@
     <meta charset="utf-8">
     <title>Login</title>
     <link rel="stylesheet" href="~/css/CssLogin.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 
 <body>
@@ -50,34 +51,35 @@
             <h2>QUÊN MẬT KHẨU</h2>
             <p>Nhập Email của bạn để kiểm tra và lấy lại mật khẩu.</p>
             <br>
-               <form id="emailForm" method="post">
-                    <label>Email:</label>
-                <input type="email" name="Email" class="form-control" id="emailQuenMk" required>
-                    <br>
-                    <button type="button" id="btnGuiMail">Gửi mã</button>
-                </form>
-
-                <!-- Add this section for confirmation code -->
-                <div id="confirmationSection" style="display: none;">
-                    <label>Mã xác nhận:</label>
-                    <input type="text" name="ConfirmationCode" class="form-control" id="confirmationCode" required>
-                    <br>
-                    <button type="button" id="btnXacNhan">Xác nhận</button>
+            <form id="emailForm" method="post">
+                <div class="form-group">
+                    <label for="emailQuenMk">Email:</label>
+                    <input type="email" name="Email" class="form-control" id="emailQuenMk" required>
                 </div>
+                <button type="button" class="btn btn-primary" id="btnGuiMail">Gửi mã</button>
+            </form>
+            <!-- Add this section for confirmation code -->
+            <div id="confirmationSection" style="display: none;">
+                <div class="form-group">
+                    <label for="confirmationCode">Mã xác nhận:</label>
+                    <input type="text" name="ConfirmationCode" class="form-control" id="confirmationCode" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="btnXacNhan">Xác nhận</button>
+            </div>
             <div id="PasswordSection" style="display: none;">
-
-            <label>Mật khẩu mới:</label>
-            <input type="password" name="Password" class="form-control" id="passwordMoi" required>
-            <br>
-
-            <label>Nhập lại mật khẩu:</label>
-            <input type="password" name="ConfirmPassword" class="form-control" id="confirmPasswordMoi" required>
-            <br>
-                <button type="button" id="btn_LuuMatKhau">Xác nhận</button>
-
+                <div class="form-group">
+                    <label for="passwordMoi">Mật khẩu mới:</label>
+                    <input type="password" name="Password" class="form-control" id="passwordMoi" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPasswordMoi">Nhập lại mật khẩu:</label>
+                    <input type="password" name="ConfirmPassword" class="form-control" id="confirmPasswordMoi" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="btn_LuuMatKhau">Xác nhận</button>
             </div>
         </div>
     </div>
+
 
     <script>
         function showPopupQuenMK() {
