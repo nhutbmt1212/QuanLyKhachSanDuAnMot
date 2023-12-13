@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using QuanLyKhachSan.Models;
 using System;
+using System.Net.Mail;
+using System.Net;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -125,8 +127,87 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
             return View("Login");
         }
+        [HttpPost]
+        public async Task<IActionResult> GuiMail(string Email)
+        {
+            var existEmailNhanVien = _db.NhanVien.FirstOrDefault(s => s.Email == Email);
+            var existEmailKhachHang = _db.NhanVien.FirstOrDefault(s => s.Email == Email);
+            if(existEmailKhachHang != null)
+            {
+                string MaXacNhan;
+                Random rnd = new Random();
+                MaXacNhan = rnd.Next().ToString();
 
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Credentials = new NetworkCredential("khachsanasap@gmail.com", "ulwg gvjl vqmb iwya");
 
+                MailMessage mail = new MailMessage();
+                mail.To.Add(Email);
+                mail.From = new MailAddress("khachsanasap@gmail.com");
+                mail.Subject = "Thông Báo Quan Trọng Từ Khách Sạn ASAP";
 
-	}
+                string logoUrl = "https://i.imgur.com/2VUOkoU.png";
+
+                mail.Body = "Kính gửi,<br>" +
+                            "Chúng tôi xác nhận bạn đã sử dụng quên mật khẩu của chúng tôi<br>" +
+                            "<strong><h2>Đây là mã xác nhận của bạn: " + MaXacNhan + "</h2></strong><br>" +
+                            "Xin vui lòng không cung cấp cho người khác<br>" +
+                            "Trân trọng.<br>" +
+                            "Đội ngũ hỗ trợ Khách Sạn ASAP" + "<br><br>" +
+                            "<img src='" + logoUrl + "' alt='Logo' />";
+                mail.IsBodyHtml = true;
+                await smtp.SendMailAsync(mail);
+                return Json(new { success = true, confirmationCode = MaXacNhan, responseText = "Email đã được gửi thành công!" });
+            }
+            if(existEmailNhanVien != null)
+            {
+                string MaXacNhan;
+                Random rnd = new Random();
+                MaXacNhan = rnd.Next().ToString();
+                SmtpClient smtp = new SmtpClient("smtp.gmail.com");
+                smtp.EnableSsl = true;
+                smtp.Port = 587;
+                smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                smtp.Credentials = new NetworkCredential("khachsanasap@gmail.com", "ulwg gvjl vqmb iwya");
+                MailMessage mail = new MailMessage();
+                mail.To.Add(Email);
+                mail.From = new MailAddress("khachsanasap@gmail.com");
+                mail.Subject = "Thông Báo Quan Trọng Từ Khách Sạn ASAP";
+                string logoUrl = "https://i.imgur.com/2VUOkoU.png";
+                mail.Body = "Kính gửi,<br>" +
+                            "Chúng tôi xác nhận bạn đã sử dụng quên mật khẩu của chúng tôi<br>" +
+                            "<strong><h2>Đây là mã xác nhận của bạn: " + MaXacNhan + "</h2></strong><br>" +
+                            "Xin vui lòng không cung cấp cho người khác<br>" +
+                            "Trân trọng.<br>" +
+                            "Đội ngũ hỗ trợ Khách Sạn ASAP" + "<br><br>" +
+                            "<img src='" + logoUrl + "' alt='Logo' />";
+                mail.IsBodyHtml = true;
+                await smtp.SendMailAsync(mail);
+                return Json(new { success = true, confirmationCode = MaXacNhan, responseText = "Email đã được gửi thành công!" });
+            }
+            return Ok();
+        }
+        [HttpPost]
+        public IActionResult QuenMatKhau(string Email , string NewPassword)
+        {
+            var qr_nhanvien = _db.NhanVien.FirstOrDefault(s => s.Email == Email);
+            var qr_khachhang = _db.KhachHang.FirstOrDefault(s => s.Email == Email);
+            if (qr_nhanvien!=null)
+            {
+                qr_nhanvien.MatKhau = NewPassword;
+                _db.NhanVien.Update(qr_nhanvien);
+            }
+            if (qr_khachhang != null)
+            {
+                qr_khachhang.MatKhau = NewPassword;
+                _db.KhachHang.Update(qr_khachhang);
+            }
+            _db.SaveChanges();
+            return Ok();
+        }
+
+    }
 }
