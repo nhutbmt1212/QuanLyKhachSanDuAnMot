@@ -36,6 +36,7 @@
     border-radius: 50%; /* Tạo hình tròn cho ảnh */
     margin-right: 10px; /* Khoảng cách giữa ảnh và thông tin nhân viên */
     margin-left: 8px;
+    object-fit:cover;
 }
 
 .employee-info {

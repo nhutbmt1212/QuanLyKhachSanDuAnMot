@@ -39,7 +39,7 @@ namespace QuanLyKhachSan.Controllers
 				AllowRefresh = true,
 			};
 			//query nhanvien,khachhang
-			var qr_nhanvien = _db.NhanVien.FirstOrDefault(s => s.TenDangNhap == TenDangNhap && s.MatKhau == MatKhau);
+			var qr_nhanvien = _db.NhanVien.FirstOrDefault(s => s.Email == TenDangNhap && s.MatKhau == MatKhau);
 			var qr_khachhang = _db.KhachHang.FirstOrDefault(s => s.Email == TenDangNhap && s.MatKhau == MatKhau);
 			if (qr_nhanvien!=null)
 			{

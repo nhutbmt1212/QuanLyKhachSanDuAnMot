@@ -53,9 +53,8 @@ namespace QuanLyKhachSan.Models
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-2),
-                   AnhNhanVienBase64 = "Base64Image1",
+                   AnhNhanVienBase64 = "UploadImage\\profileStaff.jpg",
                    TinhTrang = "Hoạt động",
-                   TenDangNhap = "user1",
                    MatKhau = "password1"
                },
                new NhanVien
@@ -71,9 +70,8 @@ namespace QuanLyKhachSan.Models
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-1),
-                   AnhNhanVienBase64 = "Base64Image2",
+                   AnhNhanVienBase64 = "UploadImage\\profileStaff2.jpg",
                    TinhTrang = "Hoạt động",
-                   TenDangNhap = "user2",
                    MatKhau = "password2"
                },
                new NhanVien
@@ -89,9 +87,8 @@ namespace QuanLyKhachSan.Models
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-3),
-                   AnhNhanVienBase64 = "Base64Image3",
+                   AnhNhanVienBase64 = "UploadImage\\profileStaff3.jpg",
                    TinhTrang = "Nghỉ việc",
-                   TenDangNhap = "user3",
                    MatKhau = "password3"
                },
                new NhanVien
@@ -107,9 +104,8 @@ namespace QuanLyKhachSan.Models
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-5),
-                   AnhNhanVienBase64 = "Base64Image4",
+                   AnhNhanVienBase64 = "UploadImage\\profileStaff4.jpg",
                    TinhTrang = "Hoạt động",
-                   TenDangNhap = "user4",
                    MatKhau = "password4"
                },
                new NhanVien
@@ -125,9 +121,8 @@ namespace QuanLyKhachSan.Models
                    NgayDangKy = DateTime.Now,
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-4),
-                   AnhNhanVienBase64 = "Base64Image5",
+                   AnhNhanVienBase64 = "UploadImage\\profileStaff5.webp",
                    TinhTrang = "Hoạt động",
-                   TenDangNhap = "user5",
                    MatKhau = "password5"
                }
         );
@@ -208,7 +203,7 @@ namespace QuanLyKhachSan.Models
             modelBuilder.Entity<LoaiPhong>().HasData(
                 new LoaiPhong
                 {
-                    MaLoaiPhong = "LP001",
+                    MaLoaiPhong = "LP0001",
                     TenLoaiPhong = "Phòng Đơn",
                     GiaTheoGio = 50000,
                     GiaPhongTheoNgay = 100000,
@@ -218,7 +213,7 @@ namespace QuanLyKhachSan.Models
                 },
                 new LoaiPhong
                 {
-                    MaLoaiPhong = "LP002",
+                    MaLoaiPhong = "LP0002",
                     TenLoaiPhong = "Phòng Đôi",
                     GiaTheoGio = 80000,
                     GiaPhongTheoNgay = 150000,
@@ -228,7 +223,7 @@ namespace QuanLyKhachSan.Models
                 },
                 new LoaiPhong
                 {
-                    MaLoaiPhong = "LP003",
+                    MaLoaiPhong = "LP0003",
                     TenLoaiPhong = "Phòng Gia Đình",
                     GiaTheoGio = 120000,
                     GiaPhongTheoNgay = 200000,
@@ -238,7 +233,7 @@ namespace QuanLyKhachSan.Models
                 },
                 new LoaiPhong
                 {
-                    MaLoaiPhong = "LP004",
+                    MaLoaiPhong = "LP0004",
                     TenLoaiPhong = "Phòng Suite",
                     GiaTheoGio = 150000,
                     GiaPhongTheoNgay = 250000,
@@ -248,7 +243,7 @@ namespace QuanLyKhachSan.Models
                 },
                 new LoaiPhong
                 {
-                    MaLoaiPhong = "LP005",
+                    MaLoaiPhong = "LP0005",
                     TenLoaiPhong = "Phòng VIP",
                     GiaTheoGio = 200000,
                     GiaPhongTheoNgay = 300000,
@@ -261,45 +256,133 @@ namespace QuanLyKhachSan.Models
             modelBuilder.Entity<Phong>().HasData(
                 new Phong
                 {
-                    MaPhong = "P001",
-                    MaLoaiPhong = "LP001",
+                    MaPhong = "P00001",
+                    MaLoaiPhong = "LP0001",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trống",
-                    KhuVuc = "Khu A",
+                    TinhTrang = "Đang hoạt động",
                 },
                 new Phong
                 {
-                    MaPhong = "P002",
-                    MaLoaiPhong = "LP002",
+                    MaPhong = "P00002",
+                    MaLoaiPhong = "LP0002",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trống",
-                    KhuVuc = "Khu A",
+                    TinhTrang = "Đang hoạt động",
                 },
                 new Phong
                 {
-                    MaPhong = "P003",
-                    MaLoaiPhong = "LP003",
+                    MaPhong = "P00003",
+                    MaLoaiPhong = "LP0003",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Đã đặt",
-                    KhuVuc = "Khu B",
+                    TinhTrang = "Đang hoạt động",
                 },
                 new Phong
                 {
-                    MaPhong = "P004",
-                    MaLoaiPhong = "LP004",
+                    MaPhong = "P00004",
+                    MaLoaiPhong = "LP0004",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Trống",
-                    KhuVuc = "Khu C",
+                    TinhTrang = "Đang hoạt động",
                 },
                 new Phong
                 {
-                    MaPhong = "P005",
-                    MaLoaiPhong = "LP005",
+                    MaPhong = "P00005",
+                    MaLoaiPhong = "LP0005",
                     NgayTao = DateTime.Now,
-                    TinhTrang = "Đã đặt",
-                    KhuVuc = "Khu C",
+                    TinhTrang = "Đang hoạt động",
                 }
             );
+
+            modelBuilder.Entity<ImageLink>().HasData(
+                new ImageLink
+                {
+                    ImageLinkId = 1,
+                    Url = "Deluxe_fomxmd_horizontal.webp",
+                    MaPhong = "P00001"
+                },
+                 new ImageLink
+                 {
+                     ImageLinkId= 2,
+                     Url = "Deluxe2_y1oap9_horizontal.webp",
+                     MaPhong = "P00001"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 3,
+                     Url = "Deluxe3_5wufjk_horizontal.webp",
+                     MaPhong = "P00002"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 4,
+                     Url = "DeluxePremium3_nbft54_horizontal.webp",
+                     MaPhong = "P00002"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 5,
+                     Url = "HLC-64_gr3tad_horizontal_kd7412_horizontal.webp",
+                     MaPhong = "P00003"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 6,
+                     Url = "HLC-65_162rzy_horizontal_68gd8e_horizontal.webp",
+                     MaPhong = "P00003"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 7,
+                     Url = "HLC-71_gx38pc_horizontal_atp0eq_horizontal.webp",
+                     MaPhong = "P00003"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 8,
+                     Url = "HLC-72_7i5du6_horizontal_4ka00z_horizontal.webp",
+                     MaPhong = "P00003"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 9,
+                     Url = "HLC-75_ueo7hb_horizontal_cichzd_horizontal.webp",
+                     MaPhong = "P00004"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 10,
+                     Url = "HLC-77_bun0l5_horizontal_7rl43c_horizontal.webp",
+                     MaPhong = "P00004"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 11,
+                     Url = "HLC-90_z82lws_horizontal_scaf5o_horizontal.webp",
+                     MaPhong = "P00004"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 12,
+                     Url = "HLC-92_g5s1jd_horizontal_2sxis1_horizontal.webp",
+                     MaPhong = "P00004"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 13,
+                     Url = "HLC-101_fjad9s_horizontal_v4iia9_horizontal.webp",
+                     MaPhong = "P00005"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 14,
+                     Url = "HLC-108_xzs4v9_horizontal_uhmq5c_horizontal.webp",
+                     MaPhong = "P00005"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 15,
+                     Url = "HLC-112_dv5czy_horizontal_qliyr2_horizontal.webp",
+                     MaPhong = "P00005"
+                 }
+                );
 
             modelBuilder.Entity<DichVu>().HasData(
               new DichVu
@@ -354,230 +437,11 @@ namespace QuanLyKhachSan.Models
               }
          );
 
-            modelBuilder.Entity<HoaDon>().HasData(
-               new HoaDon
-               {
-                   MaHoaDon = "HD001",
-                   MaDatPhong = "DP001",
-                   ThoiGianThanhToan = DateTime.Now,
-                   MaNhanVien = "NV001",
-                   TongTienDichVu = 50000,
-                   TongTienPhong = 100000,
-                   SoTienThanhToan = 150000
-               },
-               new HoaDon
-               {
-                   MaHoaDon = "HD002",
-                   MaDatPhong = "DP002",
-                   ThoiGianThanhToan = DateTime.Now,
-                   MaNhanVien = "NV002",
-                   TongTienDichVu = 80000,
-                   TongTienPhong = 150000,
-                   SoTienThanhToan = 230000
-               },
-               new HoaDon
-               {
-                   MaHoaDon = "HD003",
-                   MaDatPhong = "DP003",
-                   ThoiGianThanhToan = DateTime.Now,
-                   MaNhanVien = "NV003",
-                   TongTienDichVu = 120000,
-                   TongTienPhong = 200000,
-                   SoTienThanhToan = 320000
-               },
-               new HoaDon
-               {
-                   MaHoaDon = "HD004",
-                   MaDatPhong = "DP004",
-                   ThoiGianThanhToan = DateTime.Now,
-                   MaNhanVien = "NV004",
-                   TongTienDichVu = 150000,
-                   TongTienPhong = 250000,
-                   SoTienThanhToan = 400000
-               },
-               new HoaDon
-               {
-                   MaHoaDon = "HD005",
-                   MaDatPhong = "DP005",
-                   ThoiGianThanhToan = DateTime.Now,
-                   MaNhanVien = "NV005",
-                   TongTienDichVu = 200000,
-                   TongTienPhong = 300000,
-                   SoTienThanhToan = 500000
-               }
-           );
-            modelBuilder.Entity<DatPhong>().HasData(
-               new DatPhong
-               {
-                   MaDatPhong = "DP001",
-                   MaKhachHang = "KH001",
-                   MaPhong = "P001",
-                   NgayNhan = DateTime.Now,
-                   NgayTra = DateTime.Now.AddDays(1),
-                   SoLuongNguoiLon = 2,
-                   SoLuongTreEm = 1,
-                   HinhThucDatPhong = "Trực tuyến",
-                   TongTienPhong = 100000,
-                   MaNhanVien = "NV001",
-                   TinhTrang = "Đã xác nhận",
-                   SoTienTraTruoc = 50000
-               },
-               new DatPhong
-               {
-                   MaDatPhong = "DP002",
-                   MaKhachHang = "KH002",
-                   MaPhong = "P002",
-                   NgayNhan = DateTime.Now.AddDays(2),
-                   NgayTra = DateTime.Now.AddDays(4),
-                   SoLuongNguoiLon = 1,
-                   SoLuongTreEm = 0,
-                   HinhThucDatPhong = "Điện thoại",
-                   TongTienPhong = 150000,
-                   MaNhanVien = "NV002",
-                   TinhTrang = "Đã xác nhận",
-                   SoTienTraTruoc = 80000
-               },
-               new DatPhong
-               {
-                   MaDatPhong = "DP003",
-                   MaKhachHang = "KH003",
-                   MaPhong = "P003",
-                   NgayNhan = DateTime.Now.AddDays(3),
-                   NgayTra = DateTime.Now.AddDays(5),
-                   SoLuongNguoiLon = 3,
-                   SoLuongTreEm = 2,
-                   HinhThucDatPhong = "Trực tiếp",
-                   TongTienPhong = 200000,
-                   MaNhanVien = "NV003",
-                   TinhTrang = "Đã xác nhận",
-                   SoTienTraTruoc = 120000
-               },
-               new DatPhong
-               {
-                   MaDatPhong = "DP004",
-                   MaKhachHang = "KH004",
-                   MaPhong = "P004",
-                   NgayNhan = DateTime.Now.AddDays(4),
-                   NgayTra = DateTime.Now.AddDays(6),
-                   SoLuongNguoiLon = 2,
-                   SoLuongTreEm = 0,
-                   HinhThucDatPhong = "Trực tuyến",
-                   TongTienPhong = 250000,
-                   MaNhanVien = "NV004",
-                   TinhTrang = "Đã xác nhận",
-                   SoTienTraTruoc = 150000
-               },
-               new DatPhong
-               {
-                   MaDatPhong = "DP005",
-                   MaKhachHang = "KH005",
-                   MaPhong = "P005",
-                   NgayNhan = DateTime.Now.AddDays(5),
-                   NgayTra = DateTime.Now.AddDays(7),
-                   SoLuongNguoiLon = 1,
-                   SoLuongTreEm = 1,
-                   HinhThucDatPhong = "Điện thoại",
-                   TongTienPhong = 300000,
-                   MaNhanVien = "NV005",
-                   TinhTrang = "Đã xác nhận",
-                   SoTienTraTruoc = 200000
-               }
-           );
+           
+           
 
-            modelBuilder.Entity<DanhGia>().HasData(
-                new DanhGia
-                {
-                    MaDanhGia = "DG001",
-                    MaKhachHang = "KH001",
-                    BinhLuan = "Dịch vụ tốt, phòng sạch sẽ.",
-                    NgayDanhGia = DateTime.Now,
-                    DiemDanhGia = 5
-                },
-                new DanhGia
-                {
-                    MaDanhGia = "DG002",
-                    MaKhachHang = "KH002",
-                    BinhLuan = "Không hài lòng với dịch vụ nhân viên.",
-                    NgayDanhGia = DateTime.Now,
-                    DiemDanhGia = 2
-                },
-                new DanhGia
-                {
-                    MaDanhGia = "DG003",
-                    MaKhachHang = "KH003",
-                    BinhLuan = "Phòng ốc quá ồn ào, không yên tĩnh.",
-                    NgayDanhGia = DateTime.Now,
-                    DiemDanhGia = 3
-                },
-                new DanhGia
-                {
-                    MaDanhGia = "DG004",
-                    MaKhachHang = "KH004",
-                    BinhLuan = "Dịch vụ và phòng ốc đều rất tốt.",
-                    NgayDanhGia = DateTime.Now,
-                    DiemDanhGia = 5
-                },
-                new DanhGia
-                {
-                    MaDanhGia = "DG005",
-                    MaKhachHang = "KH005",
-                    BinhLuan = "Giá cả hợp lý, nhân viên nhiệt tình.",
-                    NgayDanhGia = DateTime.Now,
-                    DiemDanhGia = 4
-                }
-            );
-            modelBuilder.Entity<ChiTietDichVu>().HasData(
-               new ChiTietDichVu
-               {
-                   MaDichVu = "DV001",
-                   MaKhachHang = "KH001",
-                   SoLuong = 2,
-                   MaNhanVien = "NV001",
-                   ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành",
-                   MaDatPhong = "DP001"
-               },
-               new ChiTietDichVu
-               {
-                   MaDichVu = "DV002",
-                   MaKhachHang = "KH002",
-                   SoLuong = 1,
-                   MaNhanVien = "NV002",
-                   ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Chưa hoàn thành",
-                   MaDatPhong = "DP003"
-               },
-               new ChiTietDichVu
-               {
-                   MaDichVu = "DV003",
-                   MaKhachHang = "KH003",
-                   SoLuong = 3,
-                   MaNhanVien = "NV003",
-                   ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành",
-                   MaDatPhong = "DP001"
-               },
-               new ChiTietDichVu
-               {
-                   MaDichVu = "DV004",
-                   MaKhachHang = "KH004",
-                   SoLuong = 2,
-                   MaNhanVien = "NV004",
-                   ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Chưa hoàn thành",
-                   MaDatPhong = "DP004"
-               },
-               new ChiTietDichVu
-               {
-                   MaDichVu = "DV005",
-                   MaKhachHang = "KH005",
-                   SoLuong = 1,
-                   MaNhanVien = "NV005",
-                   ThoiGianDichVu = DateTime.Now,
-                   TrangThai = "Hoàn thành",
-                   MaDatPhong = "DP001"
-               }
-           );
+            
+           
 
             modelBuilder.Entity<VatTu>().HasData(
               new VatTu
@@ -621,43 +485,7 @@ namespace QuanLyKhachSan.Models
                   NhaSanXuat="Rèm xinh Bmt"
               }
           );
-            modelBuilder.Entity<ChiTietPhongVatTu>().HasData(
-               new ChiTietPhongVatTu
-               {
-                   MaVatTu = "VT001",
-                   MaPhong = "P001",
-                   SoLuong = 2,
-                   TinhTrang = "Đang sử dụng"
-               },
-             new ChiTietPhongVatTu
-             {
-                 MaVatTu = "VT002",
-                 MaPhong = "P001",
-                 SoLuong = 2,
-                 TinhTrang = "Đang sử dụng"
-             },
-              new ChiTietPhongVatTu
-              {
-                  MaVatTu = "VT003",
-                  MaPhong = "P001",
-                  SoLuong = 2,
-                  TinhTrang = "Đang sử dụng"
-              },
-             new ChiTietPhongVatTu
-             {
-                 MaVatTu = "VT004",
-                 MaPhong = "P001",
-                 SoLuong = 2,
-                 TinhTrang = "Đang sử dụng"
-             },
-             new ChiTietPhongVatTu
-             {
-                 MaVatTu = "VT005",
-                 MaPhong = "P001",
-                 SoLuong = 2,
-                 TinhTrang = "Tạm ngừng"
-             }
-            );
+           
         }
     }
 }

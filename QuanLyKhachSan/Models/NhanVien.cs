@@ -40,8 +40,6 @@ namespace QuanLyKhachSan.Models
         [StringLength(20)]
         public string TinhTrang {  get; set; }
         [StringLength(30)]
-        public string TenDangNhap {  get; set; }
-        [StringLength(30)]
         [DataType(DataType.Password)]
         public string MatKhau {  get; set; }
 

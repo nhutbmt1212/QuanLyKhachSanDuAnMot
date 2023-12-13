@@ -56,7 +56,6 @@ namespace QuanLyKhachSan.Controllers
                 images.Add(new ImageLink { Url = relativePath });
             }
             phong.TinhTrang = "Đang hoạt động";
-            phong.KhuVuc = "A";
 
             phong.ImageLinks = images;
 
@@ -66,32 +65,6 @@ namespace QuanLyKhachSan.Controllers
             return RedirectToAction("TrangChuPhong", "Phong");
         }
 
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> SuaAnh(string phongId, List<string> editedImageUrls)
-        //{
-        //    var phong = await _db.Phong
-        //        .Include(p => p.ImageLinks)
-        //        .FirstOrDefaultAsync(p => p.MaPhong == phongId);
-
-        //    if (phong == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    // Update the existing images with the edited URLs
-        //    phong.ImageLinks.Clear();
-
-        //    foreach (var editedImageUrl in editedImageUrls)
-        //    {
-        //        phong.ImageLinks.Add(new ImageLink { Url = editedImageUrl });
-        //    }
-
-        //    await _db.SaveChangesAsync();
-
-        //    return View("Index");
-        //}
         [HttpPost]
         public async Task<IActionResult> SuaPhong([FromForm] Phong phong, [FromForm] List<IFormFile> Imageurl)
         {
@@ -114,7 +87,6 @@ namespace QuanLyKhachSan.Controllers
             qr_Phong.MaLoaiPhong = phong.MaLoaiPhong;
             qr_Phong.NgayTao = phong.NgayTao;
             qr_Phong.TinhTrang = "Đang hoạt động";
-            qr_Phong.KhuVuc = "A";
 
             qr_Phong.ImageLinks = images;
 

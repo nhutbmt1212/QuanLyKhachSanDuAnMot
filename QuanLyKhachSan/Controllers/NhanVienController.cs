@@ -188,7 +188,6 @@ namespace QuanLyKhachSan.Controllers
                 dataTable.Columns.Add("Chức Vụ");
                 dataTable.Columns.Add("Ngày Vào Làm");
                 dataTable.Columns.Add("Tình trạng");
-                dataTable.Columns.Add("Tên đăng nhập");
                 dataTable.Columns.Add("Mật khẩu");
                 dataTable.Columns.Add("Ảnh nhân viên");
                 dataTable.Columns.Add("Email");
@@ -207,11 +206,10 @@ namespace QuanLyKhachSan.Controllers
                     dataRow[7] = nv.ChucVu;
                     dataRow[8] = nv.NgayVaoLam;
                     dataRow[9] = nv.TinhTrang;
-                    dataRow[10] = nv.TenDangNhap;
-                    dataRow[11] = nv.MatKhau;
-                    dataRow[12] = nv.AnhNhanVienBase64;
-                    dataRow[13] = nv.Email;
-                    dataRow[14] = nv.NgayDangKy.ToShortDateString();
+                    dataRow[10] = nv.MatKhau;
+                    dataRow[11] = nv.AnhNhanVienBase64;
+                    dataRow[12] = nv.Email;
+                    dataRow[13] = nv.NgayDangKy.ToShortDateString();
                     dataTable.Rows.Add(dataRow);
                 }
 
@@ -295,7 +293,6 @@ namespace QuanLyKhachSan.Controllers
                             NhanVien.ChucVu=ChucVu;
                             NhanVien.NgayVaoLam = NgayVaoLam;
                             NhanVien.TinhTrang = TinhTrang;
-                            NhanVien.TenDangNhap = TenDangNhap;
                             NhanVien.MatKhau = MatKhau;
                             NhanVien.AnhNhanVienBase64 = AnhNhanVienBase64;
                             NhanVien.Email = Email;
@@ -313,7 +310,6 @@ namespace QuanLyKhachSan.Controllers
                                 ChucVu=ChucVu,
                                 NgayVaoLam=NgayVaoLam,
                                 TinhTrang=TinhTrang,
-                                TenDangNhap=TenDangNhap,
                                 MatKhau=MatKhau,
                                 AnhNhanVienBase64=AnhNhanVienBase64,
                                 Email=Email
@@ -384,7 +380,6 @@ namespace QuanLyKhachSan.Controllers
             foreach (var nv in nhanvien)
             {
                 table.AddCell(new Phrase(nv.MaNhanVien.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.TenDangNhap.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.CCCD.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString(), contentFont));
@@ -393,7 +388,6 @@ namespace QuanLyKhachSan.Controllers
                 table.AddCell(new Phrase(nv.ChucVu.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.NgayVaoLam.ToShortDateString(), contentFont));
                 table.AddCell(new Phrase(nv.TinhTrang.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.TenDangNhap.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.MatKhau.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.AnhNhanVienBase64.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.Email.ToString(), contentFont));
@@ -434,18 +428,6 @@ namespace QuanLyKhachSan.Controllers
         private bool SoDienThoaiExists(string sodienthoai)
         {
             return _db.NhanVien.Any(nv => nv.SoDienThoai == sodienthoai);
-        }
-
-        [HttpGet]
-        public JsonResult CheckTenDangNhap(string tendangnhap)
-        {
-            bool exists = TenDangNhapExists(tendangnhap);
-            return Json(new { exists = exists });
-        }
-
-        private bool TenDangNhapExists(string tendangnhap)
-        {          
-            return _db.NhanVien.Any(nv => nv.TenDangNhap == tendangnhap);
         }
 
         [HttpGet]

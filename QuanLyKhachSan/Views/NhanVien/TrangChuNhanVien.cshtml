@@ -305,7 +305,6 @@
                         <th scope="col" class="align-middle text-center thead_ngaysinh">Ngày Sinh</th>
                         <th scope="col" class="align-middle text-center thead_chucvu">Chức Vụ</th>
                         <th scope="col" class="align-middle text-center thead_ngayvaolam">Ngày Vào Làm</th>
-                        <th scope="col" class="align-middle text-center thead_tendangnhap">Tên đăng nhập</th>
                         <th scope="col" class="align-middle text-center thead_matkhau">Mật khẩu</th>
                         <th scope="col" class="align-middle text-center thead_tinhtrang" hidden>Tình trạng</th>
                         <th scope="col" class="align-middle text-center thead_xuly">Xử lý</th>
@@ -320,7 +319,7 @@
                         @foreach (var nv in Model)
                         {
                             stt = stt + 1;
-                        <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()" data-tendangnhap="@nv.TenDangNhap" data-matkhau="@nv.MatKhau" data-tinhtrang="@nv.TinhTrang">
+                        <tr data-ma-nv="@nv.MaNhanVien" data-ten-nv="@nv.TenNhanVien" data-email="@nv.Email" data-dia-chi="@nv.DiaChi" data-so-dien-thoai="@nv.SoDienThoai" data-cccd="@nv.CCCD" data-gioi-tinh="@nv.GioiTinh" data-ngay-sinh="@nv.NgaySinh.ToShortDateString()" data-ngay-dang-ky="@nv.NgayDangKy.ToShortDateString()" data-chuc-vu="@nv.ChucVu" data-ngay-vao-lam="@nv.NgayVaoLam.ToShortDateString()" data-matkhau="@nv.MatKhau" data-tinhtrang="@nv.TinhTrang">
                             <td style="padding:23px 0px 15px 8px;" hidden><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                             <td class="employee-info-column">
                                     @stt
@@ -345,7 +344,6 @@
                             <td class="employee-info-column tbody_ngaysinh">@nv.NgaySinh.ToShortDateString()</td>
                             <td class="employee-info-column tbody_chucvu">@nv.ChucVu</td>
                             <td class="employee-info-column tbody_ngayvaolam">@nv.NgayVaoLam.ToShortDateString()</td>
-                            <td class="employee-info-column tbody_tendangnhap">@nv.TenDangNhap</td>
                             <td class="employee-info-column tbody_matkhau">@nv.MatKhau</td>
                             <td class="employee-info-column text-success" id="tbody_tinhtrang" hidden>@nv.TinhTrang</td>
 
