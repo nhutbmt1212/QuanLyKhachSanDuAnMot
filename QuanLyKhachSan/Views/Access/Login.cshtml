@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    <section>
+    <section style="display:flex;">
         <div class="form-box">
             <div class="form-value">
                 <form id="loginForm" method="post" asp-controller="Access" asp-action="Login" onsubmit="return handleLogin()">
-                    <img src="~/UploadImage/Screenshot_2_preview_rev_1.png" alt="">
+                    <img src="~/css/Screenshot_7_preview_rev_1.png" alt="">
                     <h2>ĐĂNG NHẬP</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
@@ -33,7 +33,7 @@
                             <input type="checkbox">Nhớ mật khẩu <a style="margin-left: 75px;" href="javascript:void(0);" onclick="showPopupQuenMK()">Quên mật khẩu?</a>
                         </label>
                     </div>
-                    <button type="submit" value="Login">Đăng nhập</button>
+                    <button type="submit" value="Login" style="border-radius:5px;">Đăng nhập</button>
                     <div class="register">
                         <p>Bạn chưa có tài khoản? <a asp-action="GiaoDienDangKy" asp-controller="Access">Đăng ký</a></p>
                     </div>
