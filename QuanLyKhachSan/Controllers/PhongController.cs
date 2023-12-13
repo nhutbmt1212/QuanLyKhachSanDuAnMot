@@ -142,7 +142,7 @@ namespace QuanLyKhachSan.Controllers
                 _db.Phong.Update(qr_maPhong);
                 _db.SaveChanges();
             }
-            return RedirectToAction("TrangChuPhong");
+            return RedirectToAction("TrangChuPhong","Phong");
         }
     }
 

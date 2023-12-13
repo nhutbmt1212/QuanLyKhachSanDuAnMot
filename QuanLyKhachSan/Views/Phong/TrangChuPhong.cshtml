@@ -318,7 +318,7 @@
                                     <a class="dropdown-item check_checkbox"  id="btn_Sua" onclick="HienThiAnhSuaPhong('@phong.MaPhong')">Sửa</a>
                                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
                                         {
-                                        <a class="dropdown-item" id="xoa-phong" >Xóa</a>
+                                        <a class="dropdown-item" id="xoa-phong" onclick="XoaPhong('@phong.MaPhong')" >Xóa</a>
                                         }
                                 </div>
                             </div>

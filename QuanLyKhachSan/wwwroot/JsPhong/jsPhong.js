@@ -11,12 +11,6 @@ function closeForm() {
 
 }
 
-//editPopup
-
-//document.getElementById('btn_Sua').addEventListener('click', function () {
-//    document.getElementById('myFormEdit').style.display = "block";
-
-//});
 function CloseFormEdit() {
     document.getElementById('myFormEdit').style.display = "none";
 
@@ -51,13 +45,9 @@ getValue.addEventListener('click', function (e) {
     document.querySelector('.maphongedit').value = maphong;
     document.querySelector('.maloaiphongedit').value = maLoaiPhong;
     document.querySelector('.tinhtrangedit').value = tinhTrang;
+    document.querySelector('.ngaytaoedit').value = ngayTao;
 
-  
-    var ngayTaoParts = ngayTao.split('/');
-    var ngaySinhFormatted = ngayTaoParts[2] + '-' + ngayTaoParts[1] + '-' + ngayTaoParts[0];
-    document.querySelector('.ngaytaoedit').value = ngaySinhFormatted;
 
-  
 });
 document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
 
@@ -173,7 +163,7 @@ function ThemPhong() {
         processData: false,
         contentType: false,
         success: function (result) {
-            console.log(result);
+            
             arrLinkAnh = [];
             arrImagePreviewing = [];
             location.reload();
@@ -240,7 +230,7 @@ function appendImagePreview(LinkAnh, index) {
     } else {
         imgElement.src = LinkAnh;
     }
-    console.log(LinkAnh);
+   
     imgElement.alt = "Image Edit Preview";
 
     const nutXoa = document.createElement('button');
@@ -276,7 +266,7 @@ function XoaAnhSuaPhong(index) {
             url: "/Phong/XoaAnhSuaPhong",
             data: { MaPhong: MaPhong, ImageUrl: ImageUrl },
             success: function (result) {
-                console.log(result);
+                
                 arrImagePreviewingEdit.splice(index, 1);
                 capNhatAnhPreviewSuaPhong();
             },
@@ -319,9 +309,23 @@ function SuaPhong() {
         processData: false,
         contentType: false,
         success: function (result) {
-            console.log(result);
+            
             arrLinkAnhEdit = [];
             arrImagePreviewingEdit = [];
+            location.reload();
+        },
+        error: function (error) {
+            console.error(error);
+        }
+    });
+}
+
+function XoaPhong(MaPhong) {
+    $.ajax({
+        type: "POST",
+        url: "/Phong/XoaPhong",
+        data: { 'MaPhong': MaPhong },
+        success: function (result) {
             location.reload();
         },
         error: function (error) {
