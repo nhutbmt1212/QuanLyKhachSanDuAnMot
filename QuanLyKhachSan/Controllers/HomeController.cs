@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using QuanLyKhachSan.Models;
+using Microsoft.Extensions.Hosting;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -24,12 +25,12 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Login","Access");
+            return RedirectToAction("Login", "Access");
         }
         [HttpPost]
         public IActionResult LayTinhTrangPhong()
         {
-            var phongDaDat = _db.Phong.Select(x => x.TinhTrang== "Đang hoạt động").Count();
+            var phongDaDat = _db.DatPhong.Count(x => x.TinhTrang != "Đã thanh toán");
             var soluongphong = _db.Phong.Count();
 
             var PhongTrong = soluongphong - phongDaDat;
@@ -63,34 +64,81 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(doanhThuTheoThang);
         }
-        [HttpGet]
-        public IActionResult LayThuNhapTheoNam()
-        {
-            var thanhTien = _db.HoaDon.Sum(s => s.SoTienThanhToan);
 
-            return Json(thanhTien);
-        }
-        [HttpGet]
-        public IActionResult LayThuNhapTheoThang(int year, int month)
-        {
-            // Giả sử dbContext là một instance của DbContext của bạn
-            var thanhtien = _db.HoaDon
-                .Where(hd => hd.ThoiGianThanhToan.Year == year && hd.ThoiGianThanhToan.Month == month)
-                .Sum(hd => hd.SoTienThanhToan);
-
-            // Trả về tổng thu nhập dưới dạng JSON
-            return Json(thanhtien);
-        }
         [HttpPost]
         public IActionResult LaySoLuongKhachHang()
         {
-            
+
             var soluongkhachahng = _db.KhachHang.Count();
 
-       
+
 
             // Trả về dữ liệu dưới dạng JSON
             return Json(new { soluongkhachahng = soluongkhachahng });
         }
+        [HttpPost]
+        public IActionResult GetServiceDetails()
+        {
+            var query = from chiTiet in _db.ChiTietDichVu
+                        join dichVu in _db.DichVu on chiTiet.MaDichVu equals dichVu.MaDichVu
+                        group new { chiTiet, dichVu } by new { dichVu.TenDichVu } into grouped
+                        select new
+                        {
+                            TenDichVu = grouped.Key.TenDichVu,
+                            TongSoLuong = grouped.Sum(x => x.chiTiet.SoLuong),
+                            TongTien = grouped.Sum(x => x.chiTiet.SoLuong * x.dichVu.GiaTien)
+                        };
+
+            return Json(query);
+        }
+        [HttpPost]
+        public IActionResult LayLoaiPhong()
+        {
+            var query = from phong in _db.Phong
+                        join loaiPhong in _db.LoaiPhong on phong.MaLoaiPhong equals loaiPhong.MaLoaiPhong
+                        join datPhong in _db.DatPhong on phong.MaPhong equals datPhong.MaPhong
+                        group new { phong, loaiPhong, datPhong } by new { loaiPhong.TenLoaiPhong } into grouped
+                        select new
+                        {
+                            TenLoaiPhong = grouped.Key.TenLoaiPhong,
+                            SoLuong = grouped.Count(),
+                            TongTien = grouped.Sum(x => x.datPhong.TongTienPhong)
+                        };
+
+            return Json(query);
+        }
+        [HttpPost]
+
+        public IActionResult DemNhanVienHoatDong()
+        {
+            // Đếm tổng số nhân viên với tình trạng là "Hoat Dong"
+            var tongNhanVien = _db.NhanVien.Count(x => x.TinhTrang == "Hoạt động");
+
+            // Đếm số nhân viên nam với tình trạng là "Hoat Dong"
+            var nhanVienNam = _db.NhanVien.Count(x => x.GioiTinh == "Nam" && x.TinhTrang == "Hoạt động");
+
+            // Đếm số nhân viên nữ với tình trạng là "Hoat Dong"
+            var nhanVienNu = tongNhanVien - nhanVienNam;
+
+            return Json(new { tongNhanVien = tongNhanVien, nhanVienNam = nhanVienNam, nhanVienNu = nhanVienNu });
+        }
+
+        [HttpPost]
+        public IActionResult LayGioiTinhKhachHang()
+        {
+            // Đếm tổng số khách hàng với tình trạng không phải là "Ngừng hoạt động"
+            var TongKhachHang = _db.KhachHang.Count(x => x.TinhTrang == "Hoạt động");
+
+
+
+            // Đếm số khách hàng nữ với tình trạng không phải là "Ngừng hoạt động"
+            var khachHangNu = _db.KhachHang.Count(x => x.GioiTinh == "Nữ" && x.TinhTrang == "Hoạt động");
+            // Đếm số khách hàng nam với tình trạng không phải là "Ngừng hoạt động"
+            var khachHangNam = TongKhachHang - khachHangNu;
+            return Json(new { TongKhachHang = TongKhachHang, khachHangNam = khachHangNam, khachHangNu = khachHangNu });
+        }
+
+
+
     }
 }
