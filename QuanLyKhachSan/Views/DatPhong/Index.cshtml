@@ -66,28 +66,46 @@
                 <div class="options-container">
                     <div class="options-btn">&#8226;&#8226;&#8226;</div>
                     <div class="options-menu">
-                        <div class="option" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</div>
-                        <div class="option">Thêm dịch vụ</div>
+                    
                        
                         @if (isReservationApproved)
-                        {
+                        {    <div class="option">Thêm dịch vụ</div>
                             <div class="option" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</div>
 
                         }
+                        else
+                        {
+                            <div class="option" onclick="showSearchBar('@phong.MaPhong')">Đặt phòng</div>
+                        }
                     </div>
                 </div>
-                <img src="https://hoangtibaclieu.com/files/tin/36/jpg/meo-trang-tri-phong-khach-chuan.jpg"
-                     alt="Room 1 Image">
+                @if (phong.ImageLinks != null && phong.ImageLinks.Any())
+                {
+                    <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail" />
+                }
+                else
+                {
+                    <p>No images available</p>
+                }
                 <div class="details">
                     <div class="status-badge">
-                        <span class="status-text status-available">Trống</span>
+                        @if (isReservationApproved)
+                        {
+                            <span class="trangthai text-danger status-text status-available">Đã được thuê</span>
+                        }
+                        else
+                        {
+                            
+                            <span class="status-text status-available trangthai">Trống</span>
+                        }
+                        
                     </div>
                     <h4><span class="maphong">@phong.MaPhong</span> - 
                         <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
                     </h4>
-                    <p>@qr_GiaPhong_MaPhong.GiaTheoGio VND/Giờ - @qr_GiaPhong_MaPhong.GiaPhongTheoNgay VND/Ngày</p>
-                    <p>Tối đa: @qr_GiaPhong_MaPhong.SoLuongNguoiLon Người lớn - @qr_GiaPhong_MaPhong.SoLuongTreEm Trẻ em</p>
-                    <button class="book-button">Đặt phòng</button>
+                    <span>@qr_GiaPhong_MaPhong.GiaTheoGio VND/Giờ - @qr_GiaPhong_MaPhong.GiaPhongTheoNgay VND/Ngày</span>
+                    <span>Tối đa: @qr_GiaPhong_MaPhong.SoLuongNguoiLon Người lớn - @qr_GiaPhong_MaPhong.SoLuongTreEm Trẻ em</span>
+                    <button class="book-button" onclick="showSearchBar('@phong.MaPhong')" style="margin-top:20px;">Đặt phòng</button>
                 </div>
             </div>
         }
