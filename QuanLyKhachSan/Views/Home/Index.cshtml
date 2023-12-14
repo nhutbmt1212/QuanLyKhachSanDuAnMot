@@ -12,6 +12,8 @@
 		text-align: center; /* Căn đều ở giữa */
 	}
 
+	
+
 </style>
 <main>
 	<ul class="box-info">
@@ -60,21 +62,21 @@
 			<div class="head">
 				<h3>Tình trạng phòng</h3>
 			</div>
-			<div class="col-xl-7 col-lg-7">
+			<div class="col-xl-12 col-lg-12">
 				<div class="card shadow mb-4">
 					<!-- Card Body -->
 					<div class="card-body" style="width: 350px;">
 
 						<div class="chart-pie pt-4 pb-2">
 							<canvas id="myPieChart" class="pieChart"></canvas>
-						</div>
-						<div class="mt-4 text-center small" style="font-size:1em">
+						</div>	
+						<div class="mt-4 text-center small" style="font-size:1em;margin-left:50px;font-weight:700">
 							<span class="mr-2">
-								<i class="fas fa-circle text-primary"></i>Phòng trống(<span id="phongTrong"></span>)
+								<i class="fas fa-circle text-primary"></i>Phòng trống: <span id="phongTrong"></span>
 							</span>
 							<span class="mr-2">
-								<i class="fas fa-circle text-success"></i> Đang thuê(<span id="phongDaDat"> </span>
-								)
+								<i class="fas fa-circle text-success"></i> Đang thuê: <span id="phongDaDat"> </span>
+								
 							</span>
 
 						</div>
@@ -118,6 +120,7 @@
 					</div>
 				</div>
 			</div>
+			</div>
 
 
 
@@ -134,12 +137,12 @@
 						<div class="card-body" style="width: 350px;">
 							<div class="chart-area">
 								<canvas id="myPieChartKhachHang" class="pieChart"></canvas>
-								<div class="mt-4 text-center small" style="font-size:1em">
+							<div class="mt-4 text-center small" style="font-size:1em;margin-left:120px;font-weight:700">
 									<span class="mr-2">
-										<i class="fas fa-circle text-primary"></i>Nam(<span id="KhachHangNam"></span>)
+										<i class="fas fa-circle text-primary"></i>Nam: <span id="KhachHangNam"></span>
 									</span>
 									<span class="mr-2">
-										<i class="fas fa-circle text-success"></i> Nữ(<span id="KhachHangNu"></span>)
+										<i class="fas fa-circle text-success"></i>Nữ: <span id="KhachHangNu"></span>
 									</span>
 
 								</div>
@@ -150,7 +153,7 @@
 
 			</div>
 
-			<div class="order">
+			<div class="order" >
 				<div class="head">
 					<h3>Tổng quan nhân viên</h3>
 				</div>
@@ -161,12 +164,12 @@
 						<div class="card-body" style="width: 350px;">
 							<div class="chart-area">
 								<canvas id="myPieChartNhanVien" class="pieChart"></canvas>
-								<div class="mt-4 text-center small" style="font-size:1em">
-									<span class="mr-2">
-										<i class="fas fa-circle text-primary"></i>Nam(<span id="NhanVienNam"></span>)
+							<div class="mt-4 text-center small" style="font-size:1em ;font-weight:700">
+								<span class="ml-4" style="margin-left:120px; margin-top:30px">
+										<i class="fas fa-circle text-primary"></i>Nam: <span id="NhanVienNam"></span>
 									</span>
 									<span class="mr-2">
-										<i class="fas fa-circle text-success"></i> Nữ(<span id="NhanVienNu"></span>)
+										<i class="fas fa-circle text-success"></i>Nữ:<span id="NhanVienNu"></span>
 									</span>
 
 								</div>
@@ -253,11 +256,12 @@
 	})
 		.then(response => response.json())
 		.then(data => {
+			console.log(data);
 			// data chính là đối tượng JSON mà bạn trả về từ hàm LayTinhTrangPhong
-			var PhongTrong = data.PhongTrong;
+			var PhongTrong = data.phongTrong;
 			var phongDaDat = data.phongDaDat;
-			document.getElementById('phongDaDat').innerText = data.phongDaDat;
-			document.getElementById('phongTrong').innerText = data.PhongTrong;
+			document.getElementById('phongDaDat').innerText = phongDaDat;
+			document.getElementById('phongTrong').innerText = PhongTrong;
 			// Cập nhật biểu đồ của bạn ở đây
 			// Ví dụ:
 			var ctx = document.getElementById('myPieChart').getContext('2d');
@@ -270,7 +274,7 @@
 						backgroundColor: [
 							'rgba(54, 162, 235, 0.2)',
 							'rgba(255, 206, 86, 0.2)'
-						],
+						], 
 						borderColor: [
 							'rgba(54, 162, 235, 1)',
 							'rgba(255, 206, 86, 1)'

@@ -131,7 +131,7 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> GuiMail(string Email)
         {
             var existEmailNhanVien = _db.NhanVien.FirstOrDefault(s => s.Email == Email);
-            var existEmailKhachHang = _db.NhanVien.FirstOrDefault(s => s.Email == Email);
+            var existEmailKhachHang = _db.KhachHang.FirstOrDefault(s => s.Email == Email);
             if(existEmailKhachHang != null)
             {
                 string MaXacNhan;
