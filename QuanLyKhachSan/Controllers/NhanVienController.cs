@@ -274,14 +274,13 @@ namespace QuanLyKhachSan.Controllers
                         DateTime NgayVaoLam;
                         DateTime.TryParse(worksheet.Cells[row, 9].Value.ToString().Trim(), out NgayVaoLam);
                         var TinhTrang = worksheet.Cells[row, 10].Value.ToString().Trim();
-                        var TenDangNhap = worksheet.Cells[row, 11].Value.ToString();
-                        var MatKhau = worksheet.Cells[row, 12].Value.ToString();
-                        var AnhNhanVienBase64 = worksheet.Cells[row, 13].Value.ToString().Trim();
-                        var Email = worksheet.Cells[row, 14].Value.ToString().Trim();
+                        var MatKhau = worksheet.Cells[row, 11].Value.ToString();
+                        var AnhNhanVienBase64 = worksheet.Cells[row, 12].Value.ToString().Trim();
+                        var Email = worksheet.Cells[row, 13].Value.ToString().Trim();
                         var NhanVien = _db.NhanVien.FirstOrDefault(nv => nv.MaNhanVien == MaNhanVien);
                         
                         DateTime NgayDangKy;
-                        DateTime.TryParse(worksheet.Cells[row, 15].Value.ToString().Trim(), out NgayDangKy);
+                        DateTime.TryParse(worksheet.Cells[row, 14].Value.ToString().Trim(), out NgayDangKy);
                         if (NhanVien != null)
                         {
                             NhanVien.TenNhanVien = TenNhanVien;

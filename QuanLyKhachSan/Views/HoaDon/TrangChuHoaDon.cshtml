@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model List<QuanLyKhachSan.Models.HoaDon>
+@inject ApplicationDbContext _db;
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -16,7 +18,7 @@
             padding: 0;
             min-height: 900px;
         }
-
+        
         table {
             border-collapse: collapse;
             width: 100%;
@@ -123,20 +125,35 @@
             <th>Tên nhân viên</th>
             <th>Xử lý</th>
         </tr>
-        <tr>
-            <td>STT</td>
-            <td>HD0001</td>
-            <td>P0001-Phòng đơn</td>
-            <td>Nguyễn Văn A</td>
-            <td>0123123123</td>
-            <td>01/01/2023 00:00:00</td>
-            <td>01/01/2023 00:00:00</td>
-            <td>NV002 - Nguyễn Thị B</td>
+        @{
+            int i = 0;
+        }
+        @foreach (var hoadon in Model)
+        { var qr_DatPhong = _db.DatPhong.FirstOrDefault(s => s.MaDatPhong == hoadon.MaDatPhong);
+            var qr_Phong = _db.Phong.FirstOrDefault(s => s.MaPhong == qr_DatPhong.MaPhong);
+            var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == qr_Phong.MaLoaiPhong);
+            var qr_KhachHang = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == qr_DatPhong.MaKhachHang);
+            var qr_NhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == qr_DatPhong.MaNhanVien);
+            i = i + 1;
+            <tr>
+            
+               
+
+            <td>@i</td>
+            <td>@hoadon.MaHoaDon</td>
+            <td>@qr_DatPhong.MaPhong - @qr_LoaiPhong.TenLoaiPhong</td>
+            <td>@qr_KhachHang.TenKhachHang</td>
+            <td>@qr_KhachHang.SoDienThoai</td>
+            <td>@qr_DatPhong.NgayNhan</td>
+            <td>@qr_DatPhong.NgayTra</td>
+            <td>@qr_NhanVien.MaNhanVien - @qr_NhanVien.TenNhanVien</td>
             <td>
-                <button class="action-btn accept-btn" onclick="openPopup()">Xem</button>
+                <button class="action-btn accept-btn" id="XemHoaDon" onclick="XemChiTietHoaDon('@hoadon.MaHoaDon')">Xem</button>
                 <button class="action-btn details-btn">Xuất</button>
             </td>
-        </tr>
+            
+            </tr>
+            }
     </table>
 
 
@@ -147,6 +164,10 @@
         </div>
         <div class="content">
             <table class="table">
+                <tr>
+                    <th>Mã hóa đơn</th>
+                    <td id="MaHoaDon_ChiTiet">{{maDatPhong}}</td>
+                </tr>
                 <tr>
                     <th>Mã đặt phòng</th>
                     <td id="MaDatPhong_ChiTiet">{{maDatPhong}}</td>
@@ -225,24 +246,12 @@
 
 
             <div class="button-container">
-                <button class="action-btn cancel-btn" onclick="closePopup()">Đóng</button>
+                <button class="action-btn cancel-btn"  onclick="closePopup()">Đóng</button>
                 <button class="action-btn details-btn" onclick="huyDatPhong()">In hóa đơn</button>
             </div>
         </div>
     </div>
-    <script>
-        function openPopup(maDatPhong) {
-
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('overlay').style.display = 'block';
-            populatePopupWithData(data);
-            getChiTietDichVu(maDatPhong);
-        }
-
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('overlay').style.display = 'none';
-        }
+    <script src="~/js//JsHoaDon.js">
     </script>
 
 </body>
