@@ -104,6 +104,7 @@ namespace QuanLyKhachSan.Controllers
 
         public IActionResult ThongTinDatPhong()
         {
+            
             return View("ThongTinDatPhong");
         }
 

@@ -2,6 +2,14 @@
     Layout = null;
 
 }
+@inject ApplicationDbContext _db;
+@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+    var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+    var TenNguoiDung = User.FindFirst(ClaimTypes.Name)?.Value;
+    var MaNguoiDung = User.FindFirst(ClaimTypes.Surname)?.Value;
+}
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -36,11 +44,26 @@
             <ul>
                 <!-- <li><a class="active" href="#">Trang chủ</a></li>
                 <li><a href="#">Đặt chỗ nghỉ</a></li> -->
-                <li>
-                    <a asp-action="Login" asp-controller="Access">Đăng nhập </a>
-                </li>
-                <li><p style="  font-size: 18px; font-weight: 500;">|</p></li>
-                <li><a href="#">Đăng ký</a></li>
+                @if (userName == null)
+                {
+                    <li>
+                        <a asp-action="Login" asp-controller="Access">Đăng nhập </a>
+                    </li>
+                    <li>
+                        <p style="  font-size: 18px; font-weight: 500;">|</p>
+                    </li>
+                    <li><a asp-action="GiaoDienDangKy" asp-controller="Access">Đăng ký</a></li>
+                }
+                else
+                {
+                    <li>Xin chào! @TenNguoiDung</li>
+                    <li>
+                        <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Trở về trang quản lý</a>
+                    </li>
+                    <li>
+                        <a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a>
+                    </li>
+                }
             </ul>
         </nav>
 
@@ -51,47 +74,167 @@
                 <div class="col-md-6">
                     <section id="thong-tin-nguoi-dat-phong">
                         <h2>Thông tin người đặt phòng</h2>
-                        <div class="form-group">
-                            <label>Tên khách hàng</label>
-                            <input class="form-control" name="tenkhachhang" id="inputFieldTenKH" placeholder="Nhập họ và tên" style='text-transform:uppercase' />
-                            <span id="errorTenKH" style="color: red;"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Giới tính</label>
-                            <select class="form-select" name="gioitinh" id="gioitinh">
-                                <option value="Nam">
-                                    Nam
-                                </option>
-                                <option value="Nữ">
-                                    Nữ
-                                </option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Số điện thoại</label>
-                            <input class="form-control" name="sodienthoai" id="inputFieldSDT" maxlength="10" placeholder="Nhập số điện thoại" />
-                            <span id="errorSDT" style="color: red;"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input class="form-control" name="email" id="inputFieldEmail" placeholder="Nhập email" />
-                            <span id="errorEmail" style="color: red;"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>CCCD</label>
-                            <input class="form-control" name="cccd" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
-                            <span id="errorCCCD" style="color: red;"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Ngày sinh</label>
-                            <input class="form-control" type="date" name="ngaysinh" id="inputFieldNgaySinh" />
-                            <span id="errorNgaySinh" style="color: red;"></span>
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input class="form-control" name="diachi" id="inputFieldDiaChi" maxlength="50" />
-                            <span id="errorDiaChi" style="color: red;"></span>
-                        </div>
+                        
+                            <input value="@MaNguoiDung" hidden />
+                        @{
+                            var qr_NhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == MaNguoiDung);
+                            var qr_KhachHang = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == MaNguoiDung);
+                            if (qr_NhanVien != null)
+                            {
+
+                                <div class="form-group">  
+                                    <label>Tên khách hàng</label>
+                                    <input class="form-control" value="@qr_NhanVien.TenNhanVien" name="tenkhachhang" id="inputFieldTenKH" placeholder="Nhập họ và tên" style='text-transform:uppercase' />
+                                    <span id="errorTenKH" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Giới tính</label>
+                                    @if(qr_NhanVien.GioiTinh == "Nam")
+                                    {
+                                        <select class="form-select" name="gioitinh" id="gioitinh">
+                                            <option value="Nam">
+                                                Nam
+                                            </option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="form-select" name="gioitinh" id="gioitinh">
+                                            <option value="Nữ">
+                                                Nữ
+                                            </option>
+                                        </select>
+                                    }
+                                   
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input class="form-control" value="@qr_NhanVien.SoDienThoai" name="sodienthoai" id="inputFieldSDT" maxlength="10" placeholder="Nhập số điện thoại" />
+                                    <span id="errorSDT" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" name="email" value="@qr_NhanVien.Email" id="inputFieldEmail" placeholder="Nhập email" />
+                                    <span id="errorEmail" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>CCCD</label>
+                                    <input class="form-control" name="cccd" value="@qr_NhanVien.CCCD" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
+                                    <span id="errorCCCD" style="color: red;"></span>
+                                </div>
+
+                                var ngaysinhnhanvien = qr_NhanVien.NgaySinh.ToString("yyyy-MM-dd");
+
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input class="form-control" type="date" value="@ngaysinhnhanvien" name="ngaysinh" id="inputFieldNgaySinh" />
+                                    <span id="errorNgaySinh" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input class="form-control" name="diachi" id="inputFieldDiaChi" value="@qr_NhanVien.DiaChi" maxlength="50" />
+                                    <span id="errorDiaChi" style="color: red;"></span>
+                                </div>
+                            }
+                            else if (qr_KhachHang != null)
+                            {
+
+                                <div class="form-group">
+                                    <label>Tên khách hàng</label>
+                                    <input class="form-control" value="@qr_KhachHang.TenKhachHang" name="tenkhachhang" id="inputFieldTenKH" placeholder="Nhập họ và tên" style='text-transform:uppercase' />
+                                    <span id="errorTenKH" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Giới tính</label>
+                                    @if (qr_KhachHang.GioiTinh == "Nam")
+                                    {
+                                        <select class="form-select" name="gioitinh" id="gioitinh">
+                                            <option value="Nam">
+                                                Nam
+                                            </option>
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="form-select" name="gioitinh" id="gioitinh">
+                                            <option value="Nữ">
+                                                Nữ
+                                            </option>
+                                        </select>
+                                    }
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input class="form-control" value="@qr_KhachHang.SoDienThoai" name="sodienthoai" id="inputFieldSDT" maxlength="10" placeholder="Nhập số điện thoại" />
+                                    <span id="errorSDT" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" value="@qr_KhachHang.Email" name="email" id="inputFieldEmail" placeholder="Nhập email" />
+                                    <span id="errorEmail" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>CCCD</label>
+                                    <input class="form-control" value="@qr_KhachHang.CCCD" name="cccd" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
+                                    <span id="errorCCCD" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input class="form-control"  type="datetime-local" name="ngaysinh" id="inputFieldNgaySinh" />
+                                    <span id="errorNgaySinh" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input class="form-control" value="@qr_KhachHang.DiaChi" name="diachi" id="inputFieldDiaChi" maxlength="50" />
+                                    <span id="errorDiaChi" style="color: red;"></span>
+                                </div>
+                            }
+                            else
+                            {
+
+                                <div class="form-group">
+                                    <label>Tên khách hàng</label>
+                                    <input class="form-control" name="tenkhachhang" id="inputFieldTenKH" placeholder="Nhập họ và tên" style='text-transform:uppercase' />
+                                    <span id="errorTenKH" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Giới tính</label>
+                                    <select class="form-select" name="gioitinh" id="gioitinh">
+                                        <option value="Nam">
+                                            Nam
+                                        </option>
+                                        <option value="Nữ">
+                                            Nữ
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Số điện thoại</label>
+                                    <input class="form-control" name="sodienthoai" id="inputFieldSDT" maxlength="10" placeholder="Nhập số điện thoại" />
+                                    <span id="errorSDT" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input class="form-control" name="email" id="inputFieldEmail" placeholder="Nhập email" />
+                                    <span id="errorEmail" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>CCCD</label>
+                                    <input class="form-control" name="cccd" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
+                                    <span id="errorCCCD" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Ngày sinh</label>
+                                    <input class="form-control" type="date" name="ngaysinh" id="inputFieldNgaySinh" />
+                                    <span id="errorNgaySinh" style="color: red;"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Địa chỉ</label>
+                                    <input class="form-control" name="diachi" id="inputFieldDiaChi" maxlength="50" />
+                                    <span id="errorDiaChi" style="color: red;"></span>
+                                </div>
+                            }
+                        }
                     </section>
                 </div>
                 <div class="col-md-6">
