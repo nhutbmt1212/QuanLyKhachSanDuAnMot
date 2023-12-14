@@ -7,7 +7,7 @@ namespace QuanLyKhachSan.Models
         [Key]
         [StringLength(6)]
         public string MaLoaiPhong { get; set; }
-        [StringLength(20)]
+        [StringLength(30)]
         public string TenLoaiPhong { get; set; }
         public int GiaTheoGio { get; set; }
         public int GiaPhongTheoNgay { get; set; }

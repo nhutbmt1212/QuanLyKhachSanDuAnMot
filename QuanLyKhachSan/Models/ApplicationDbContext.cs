@@ -209,7 +209,7 @@ namespace QuanLyKhachSan.Models
                     GiaPhongTheoNgay = 100000,
                     PhuThuTraMuon = 20000,
                     SoLuongNguoiLon = 1,
-                    SoLuongTreEm = 0
+                    SoLuongTreEm = 2
                 },
                 new LoaiPhong
                 {
@@ -219,7 +219,7 @@ namespace QuanLyKhachSan.Models
                     GiaPhongTheoNgay = 150000,
                     PhuThuTraMuon = 25000,
                     SoLuongNguoiLon = 2,
-                    SoLuongTreEm = 1
+                    SoLuongTreEm = 3
                 },
                 new LoaiPhong
                 {
@@ -249,8 +249,58 @@ namespace QuanLyKhachSan.Models
                     GiaPhongTheoNgay = 300000,
                     PhuThuTraMuon = 40000,
                     SoLuongNguoiLon = 2,
-                    SoLuongTreEm = 0
-                }
+                    SoLuongTreEm = 2
+                },
+                new LoaiPhong
+                {
+                    MaLoaiPhong = "LP0006",
+                    TenLoaiPhong = "Phòng 3 Deluxe",
+                    GiaTheoGio = 500000,
+                    GiaPhongTheoNgay = 1000000,
+                    PhuThuTraMuon = 60000,
+                    SoLuongNguoiLon = 4,
+                    SoLuongTreEm = 4
+                },
+                 new LoaiPhong
+                 {
+                     MaLoaiPhong = "LP0007",
+                     TenLoaiPhong = "Phòng Suite Grand",
+                     GiaTheoGio = 600000,
+                     GiaPhongTheoNgay = 1000000,
+                     PhuThuTraMuon = 70000,
+                     SoLuongNguoiLon = 4,
+                     SoLuongTreEm = 4
+                 },
+                  new LoaiPhong
+                  {
+                      MaLoaiPhong = "LP0008",
+                      TenLoaiPhong = "Phòng Suite Executive",
+                      GiaTheoGio = 700000,
+                      GiaPhongTheoNgay = 1000000,
+                      PhuThuTraMuon = 60000,
+                      SoLuongNguoiLon = 3,
+                      SoLuongTreEm = 4
+                  }, new LoaiPhong
+                  {
+                      MaLoaiPhong = "LP0009",
+                      TenLoaiPhong = "Phòng Suite Royal",
+                      GiaTheoGio = 900000,
+                      GiaPhongTheoNgay = 1300000,
+                      PhuThuTraMuon = 80000,
+                      SoLuongNguoiLon = 7,
+                      SoLuongTreEm = 5
+                  },
+                   new LoaiPhong
+                   {
+                       MaLoaiPhong = "LP0010",
+                       TenLoaiPhong = "Deluxe King Room",
+                       GiaTheoGio = 600000,
+                       GiaPhongTheoNgay = 1200000,
+                       PhuThuTraMuon = 60000,
+                       SoLuongNguoiLon = 2,
+                       SoLuongTreEm = 2
+                   }
+
             );
 
             modelBuilder.Entity<Phong>().HasData(
@@ -286,6 +336,41 @@ namespace QuanLyKhachSan.Models
                 {
                     MaPhong = "P00005",
                     MaLoaiPhong = "LP0005",
+                    NgayTao = DateTime.Now,
+                    TinhTrang = "Đang hoạt động",
+                },
+                new Phong
+                {
+                    MaPhong = "P00006",
+                    MaLoaiPhong = "LP0006",
+                    NgayTao = DateTime.Now,
+                    TinhTrang = "Đang hoạt động",
+                },
+                new Phong
+                {
+                    MaPhong = "P00007",
+                    MaLoaiPhong = "LP0007",
+                    NgayTao = DateTime.Now,
+                    TinhTrang = "Đang hoạt động",
+                },
+                new Phong
+                {
+                    MaPhong = "P00008",
+                    MaLoaiPhong = "LP0008",
+                    NgayTao = DateTime.Now,
+                    TinhTrang = "Đang hoạt động",
+                },
+                new Phong
+                {
+                    MaPhong = "P00009",
+                    MaLoaiPhong = "LP0001",
+                    NgayTao = DateTime.Now,
+                    TinhTrang = "Đang hoạt động",
+                },
+                new Phong
+                {
+                    MaPhong = "P00010",
+                    MaLoaiPhong = "LP0002",
                     NgayTao = DateTime.Now,
                     TinhTrang = "Đang hoạt động",
                 }
@@ -381,6 +466,180 @@ namespace QuanLyKhachSan.Models
                      ImageLinkId= 15,
                      Url = "HLC-112_dv5czy_horizontal_qliyr2_horizontal.webp",
                      MaPhong = "P00005"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 16,
+                     Url = "Phong3Deluxe1.1.JPG",
+                     MaPhong = "P00006"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 17,
+                     Url = "Phong3Deluxe1.2.JPG",
+                     MaPhong = "P00006"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 18,
+                     Url = "Phong3Deluxe1.3.JPG",
+                     MaPhong = "P00006"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 19,
+                     Url = "Phong3Deluxe1.4.JPG",
+                     MaPhong = "P00006"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 20,
+                     Url = "Phong3Deluxe1.5.JPG",
+                     MaPhong = "P00006"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 21,
+                     Url = "PhongSuiteGrand1.1.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 22,
+                     Url = "PhongSuiteGrand1.2.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 23,
+                     Url = "PhongSuiteGrand1.3.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 24,
+                     Url = "PhongSuiteGrand1.4.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 25,
+                     Url = "PhongSuiteGrand1.5.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 26,
+                     Url = "PhongSuiteGrand1.6.JPG",
+                     MaPhong = "P00007"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 27,
+                     Url = "PhongSuiteExecutive1.3.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 28,
+                     Url = "PhongSuiteExecutive1.1.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 29,
+                     Url = "PhongSuiteExecutive1.2.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 30,
+                     Url = "PhongSuiteExecutive1.4.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 31,
+                     Url = "PhongSuiteExecutive1.5.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 32,
+                     Url = "PhongSuite1.3.webp",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 33,
+                     Url = "PhongSuite1.2.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 34,
+                     Url = "PhongSuite1.4.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 35,
+                     Url = "PhongSuite1.1.JPG",
+                     MaPhong = "P00008"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 36,
+                     Url = "PhongDoi1.2.JPG",
+                     MaPhong = "P00009"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 37,
+                     Url = "PhongDoi1.1.JPG",
+                     MaPhong = "P00009"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 38,
+                     Url = "PhongDoi1.3.JPG",
+                     MaPhong = "P00009"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 39,
+                     Url = "PhongDoi1.4.JPG",
+                     MaPhong = "P00009"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 40,
+                     Url = "PhongDon1.5.JPG",
+                     MaPhong = "P00010"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 41,
+                     Url = "PhongDon1.1.JPG",
+                     MaPhong = "P00010"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 42,
+                     Url = "PhongDon1.2.JPG",
+                     MaPhong = "P00010"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 43,
+                     Url = "PhongDon1.3.JPG",
+                     MaPhong = "P00010"
+                 },
+                 new ImageLink
+                 {
+                     ImageLinkId= 44,
+                     Url = "PhongDon1.4.JPG",
+                     MaPhong = "P00010"
                  }
                 );
 
