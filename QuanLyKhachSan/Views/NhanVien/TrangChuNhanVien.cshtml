@@ -24,7 +24,6 @@
                 justify-content: center;
                 justify-items: center;
             }
-           
         </style>
     </head>
     <body>
@@ -48,7 +47,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Mã Nhân Viên</label>
-                            <input class="form-control" name="manhanvien" id="inputFieldMaNV" maxlength="6" readonly placeholder="Mã nhân viên tự động"/>
+                            <input class="form-control" name="manhanvien" id="inputFieldMaNV" maxlength="6" readonly placeholder="Mã nhân viên tự động" />
                         </div>
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
@@ -133,7 +132,7 @@
                             <label for="formFile" class="form-label">Ảnh nhân viên</label>
                             <input type="file" id="formFile" name="anhnhanvien" id="inputFieldAnh" onchange="previewImage()" accept="image/*"> <br />
                             <span id="errorAnh" style="color: red;"></span>
-                            <img src=""  id="preview">
+                            <img src="" id="preview">
                         </div>
                     </div>
                 </div>
@@ -227,9 +226,9 @@
                             <span id="errorEditNgaySinh" style="color: red;"></span>
                         </div>
                         @* <div class="form-group">
-                            <label>Ngày đăng ký</label>
-                            <input class="form-control ngayDangKyEdit" type="date" name="NgayDangKy" read />
-                        </div> *@
+                    <label>Ngày đăng ký</label>
+                    <input class="form-control ngayDangKyEdit" type="date" name="NgayDangKy" read />
+                    </div> *@
                         <div class="form-group">
                             <label>Ngày vào làm</label>
                             <input class="form-control ngayVaoLamEdit" type="date" name="NgayVaoLam" id="inputEditNgayVaoLam" />
@@ -257,23 +256,28 @@
                 </div>
             </form>
         </div>
-      
-
-        <form method="post" enctype="multipart/form-data" asp-controller="NhanVien" asp-action="Import">
-            <div class="form-group">
-                <div class="col-md-10">
-                    <p>Chọn file Excel để upload:</p>
-                    <input type="file" name="formFile"  />
-                </div>
+        <div id="overlayUploadExcel" class="overlayUploadExcel"></div>
+        <div id="uploadPopup" class="popupUploadExcel">
+            <div class="popup-contentUploadExcel">
+                <span class="closeUploadExcel" onclick="closePopup()">&times;</span>
+                <form method="post" enctype="multipart/form-data" asp-controller="NhanVien" asp-action="Import">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <p>Chọn file Excel để upload:</p>
+                            <input type="file" name="formFile" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <button type="submit" value="Upload" class="btn btn-primary">Upload</button>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <button type="submit" value="Upload" class="btn btn-primary">Upload</button>
-                </div>
-            </div>
-        </form>
+        </div>
         <div class="row">
-            <a class="btn btn-success mb-3 ml-3" id="btn_exportPDF" asp-controller="NhanVien" asp-action="ExportPDF">Export to PDF</a>
+            <button class="btn btn-primary text-white mb-3 ml-3" id="uploadBtn">Upload Excel</button>
+            <a class="btn btn-success mb-3 ml-2" id="btn_exportPDF" asp-controller="NhanVien" asp-action="ExportPDF">Export to PDF</a>
             <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="NhanVien" asp-action="ExportExcel">Export to Excel</a>
         </div>
 
@@ -286,7 +290,7 @@
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
             </div>
         </div>
-      
+
         <div id="detailNhanVien">
             <table class="table table-striped table-bordered " id="table_detail" style="border:1px solid #343A40">
 
@@ -443,7 +447,24 @@
                 });
             });
         </script>
-      
+
+        @* UploadExcel *@
+        <script>
+            function openPopup() {
+                document.getElementById('uploadPopup').style.display = 'block';
+                document.getElementById('overlayUploadExcel').style.display = 'block';
+            }
+
+            function closePopup() {
+                document.getElementById('uploadPopup').style.display = 'none';
+                document.getElementById('overlayUploadExcel').style.display = 'none';
+            }
+
+            function uploadExcel() {
+                closePopup();
+            }
+            document.getElementById('uploadBtn').addEventListener('click', openPopup);
+        </script>
 
     </body>
     </html>

@@ -109,7 +109,7 @@
                             <option value="Ngưng hoạt động">
                                 Ngưng hoạt động
                             </option>
-                        </select>                  
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -135,22 +135,30 @@
 
 
 
-
-    <form method="post" enctype="multipart/form-data" asp-controller="DichVu" asp-action="Import">
-        <div class="form-group">
-            <div class="col-md-10">
-                <p>Chọn file Excel để upload:</p>
-                <input type="file" name="formFile" />
-            </div>
+    <div id="overlayUploadExcel" class="overlayUploadExcel"></div>
+    <div id="uploadPopup" class="popupUploadExcel">
+        <div class="popup-contentUploadExcel">
+            <span class="closeUploadExcel" onclick="closePopup()">&times;</span>
+            <form method="post" enctype="multipart/form-data" asp-controller="DichVu" asp-action="Import">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <p>Chọn file Excel để upload:</p>
+                        <input type="file" name="formFile" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-primary" value="Upload" />
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="form-group">
-            <div class="col-md-10">
-                <input type="submit" class="btn btn-primary" value="Upload" />
-            </div>
-        </div>
-    </form>
-    <a class="btn btn-success mb-3" id="btn_exportPDF" asp-controller="DichVu" asp-action="ExportPDF" >Export to PDF</a>
-    <a class="btn btn-success mb-3" id="btn_export" asp-controller="DichVu" asp-action="ExportExcel">Export to Excel</a>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary text-white mb-3 ml-3" id="uploadBtn">Upload Excel</button>
+        <a class="btn btn-success mb-3 ml-2" id="btn_exportPDF" asp-controller="DichVu" asp-action="ExportPDF">Export to PDF</a>
+        <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="DichVu" asp-action="ExportExcel">Export to Excel</a>
+    </div>
 
     <!-- Nút Thêm Dịch Vụ -->
     <div class="row">
@@ -188,11 +196,11 @@
                     }
                     @foreach (var dv in Model)
                     {
-                        stt +=1 ;
-                        <tr data-ma-dv="@dv.MaDichVu" data-ten-dv="@dv.TenDichVu" data-donViTinh="@dv.DonViTinh" data-giaTien="@dv.GiaTien" data-tinhTrang="@dv.TinhTrang" data-gioBatDauDichVu="@dv.GioBatDauDichVu" data-gioKetThucDichVu="@dv.GioKetThucDichVu">
+                        stt +=1;
+                    <tr data-ma-dv="@dv.MaDichVu" data-ten-dv="@dv.TenDichVu" data-donViTinh="@dv.DonViTinh" data-giaTien="@dv.GiaTien" data-tinhTrang="@dv.TinhTrang" data-gioBatDauDichVu="@dv.GioBatDauDichVu" data-gioKetThucDichVu="@dv.GioKetThucDichVu">
                         <td hidden><input type="checkbox" name="checkBox_Name" class="tbody_checkbox" onclick="KiemTraCheckBox()" /></td>
                         <td class="employee-info-column">
-                        @stt
+                                @stt
                         </td>
                         <td class="employee-info-column">
                             <div class="row">
@@ -222,23 +230,23 @@
                         </td>
                     </tr>
                     }
-                </tbody>
-                </form>
-            </table>
-        </div>
+            </tbody>
+            </form>
+        </table>
+    </div>
 
-        <!-- Các Thư Viện JavaScript Cần Thiết -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-                crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-                crossorigin="anonymous"></script>
-        <script src="~/JsDichVu/dichvu.js"></script>
-        <script src="~/Folder_KiemLoiInput/ErrorDichVu.js"></script>
+    <!-- Các Thư Viện JavaScript Cần Thiết -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/JsDichVu/dichvu.js"></script>
+    <script src="~/Folder_KiemLoiInput/ErrorDichVu.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -283,5 +291,23 @@
             });
         });
     </script>
-    </body>
-    </html>
+
+    @* UploadExcel *@
+    <script>
+        function openPopup() {
+            document.getElementById('uploadPopup').style.display = 'block';
+            document.getElementById('overlayUploadExcel').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('uploadPopup').style.display = 'none';
+            document.getElementById('overlayUploadExcel').style.display = 'none';
+        }
+
+        function uploadExcel() {
+            closePopup();
+        }
+        document.getElementById('uploadBtn').addEventListener('click', openPopup);
+    </script>
+</body>
+</html>
