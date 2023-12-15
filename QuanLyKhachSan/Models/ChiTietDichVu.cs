@@ -15,11 +15,18 @@ namespace QuanLyKhachSan.Models
         [StringLength(6)]
         public string MaKhachHang { get; set; }
 
+        [Key, Column(Order = 2)]
+        [StringLength(6)]
+        public string MaDatPhong { get; set; }
+
         [ForeignKey("MaDichVu")]
         public DichVu DichVu { get; set; }
 
         [ForeignKey("MaKhachHang")]
         public KhachHang KhachHang { get; set; }
+
+        [ForeignKey("MaDatPhong")]
+        public DatPhong DatPhong { get; set; }
 
         public int SoLuong { get; set; }
 
@@ -33,9 +40,6 @@ namespace QuanLyKhachSan.Models
 
         [StringLength(30)]
         public string TrangThai { get; set; }
-        [StringLength(6)]
-        [ForeignKey("MaDatPhong")]
-        public DatPhong DatPhong { get; set; }
-        public string MaDatPhong { get; set; }
+
     }
 }

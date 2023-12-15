@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace QuanLyKhachSan.Migrations
 {
     /// <inheritdoc />
-    public partial class addAllToDB : Migration
+    public partial class AddAllToDb : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -262,11 +262,11 @@ namespace QuanLyKhachSan.Migrations
                 {
                     MaDichVu = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
                     MaKhachHang = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    MaDatPhong = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
                     SoLuong = table.Column<int>(type: "int", nullable: false),
                     MaNhanVien = table.Column<string>(type: "nvarchar(6)", nullable: true),
                     ThoiGianDichVu = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TrangThai = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
-                    MaDatPhong = table.Column<string>(type: "nvarchar(6)", nullable: false)
+                    TrangThai = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -313,11 +313,11 @@ namespace QuanLyKhachSan.Migrations
                 columns: new[] { "MaKhachHang", "CCCD", "DiaChi", "Email", "GioiTinh", "MatKhau", "NgayDangKy", "NgaySinh", "SoDienThoai", "TenKhachHang", "TinhTrang" },
                 values: new object[,]
                 {
-                    { "KH001", "123456789012", "123 Nguyen Van X, Quan 1, TP.HCM", "khachhang1@example.com", "Nam", "password1", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7555), new DateTime(1992, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "123456789", "Nguyen Van X", "Hoạt động" },
-                    { "KH002", "987654321098", "456 Tran Thi Y, Quan 2, TP.HCM", "khachhang2@example.com", "Nữ", "password2", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7558), new DateTime(1995, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "987654321", "Tran Thi Y", "Hoạt động" },
-                    { "KH003", "111223344055", "789 Le Van Z, Quan 3, TP.HCM", "khachhang3@example.com", "Nam", "password3", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7560), new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "111223344", "Le Van Z", "Hoạt động" },
-                    { "KH004", "555666777044", "101 Pham Thi K, Quan 4, TP.HCM", "khachhang4@example.com", "Nữ", "password4", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7562), new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "555666777", "Pham Thi K", "Hoạt động" },
-                    { "KH005", "999888777033", "202 Hoang Van M, Quan 5, TP.HCM", "khachhang5@example.com", "Nam", "password5", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7564), new DateTime(1985, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "999888777", "Hoang Van M", "Ngừng hoạt động" }
+                    { "KH001", "123456789012", "123 Nguyen Van X, Quan 1, TP.HCM", "khachhang1@example.com", "Nam", "password1", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9928), new DateTime(1992, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), "123456789", "Nguyen Van X", "Hoạt động" },
+                    { "KH002", "987654321098", "456 Tran Thi Y, Quan 2, TP.HCM", "khachhang2@example.com", "Nữ", "password2", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9931), new DateTime(1995, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), "987654321", "Tran Thi Y", "Hoạt động" },
+                    { "KH003", "111223344055", "789 Le Van Z, Quan 3, TP.HCM", "khachhang3@example.com", "Nam", "password3", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9933), new DateTime(1988, 10, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "111223344", "Le Van Z", "Hoạt động" },
+                    { "KH004", "555666777044", "101 Pham Thi K, Quan 4, TP.HCM", "khachhang4@example.com", "Nữ", "password4", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9935), new DateTime(1990, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "555666777", "Pham Thi K", "Hoạt động" },
+                    { "KH005", "999888777033", "202 Hoang Van M, Quan 5, TP.HCM", "khachhang5@example.com", "Nam", "password5", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9937), new DateTime(1985, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "999888777", "Hoang Van M", "Ngừng hoạt động" }
                 });
 
             migrationBuilder.InsertData(
@@ -342,11 +342,11 @@ namespace QuanLyKhachSan.Migrations
                 columns: new[] { "MaNhanVien", "AnhNhanVienBase64", "CCCD", "ChucVu", "DiaChi", "Email", "GioiTinh", "MatKhau", "NgayDangKy", "NgaySinh", "NgayVaoLam", "SoDienThoai", "TenNhanVien", "TinhTrang" },
                 values: new object[,]
                 {
-                    { "NV001", "UploadImage\\profileStaff.jpg", "123456789012", "Quản lý", "123 Nguyen Van A, Quan 1, TP.HCM", "nhanvien1@example.com", "Nam", "password1", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7442), new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7451), "123456789", "Nguyen Van A", "Hoạt động" },
-                    { "NV002", "UploadImage\\profileStaff2.jpg", "987654321098", "Nhân viên", "456 Tran Thi B, Quan 2, TP.HCM", "nhanvien2@example.com", "Nữ", "password2", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7462), new DateTime(1995, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7463), "987654321", "Tran Thi B", "Hoạt động" },
-                    { "NV003", "UploadImage\\profileStaff3.jpg", "111223344055", "Nhân viên", "789 Le Van C, Quan 3, TP.HCM", "nhanvien3@example.com", "Nam", "password3", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7465), new DateTime(1985, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7466), "111223344", "Le Van C", "Nghỉ việc" },
-                    { "NV004", "UploadImage\\profileStaff4.jpg", "555666777044", "Quản lý", "101 Pham Thi D, Quan 4, TP.HCM", "nhanvien4@example.com", "Nữ", "password4", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7468), new DateTime(1988, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7469), "555666777", "Pham Thi D", "Hoạt động" },
-                    { "NV005", "UploadImage\\profileStaff5.webp", "999888777033", "Nhân viên", "202 Hoang Van E, Quan 5, TP.HCM", "nhanvien5@example.com", "Nam", "password5", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7471), new DateTime(1980, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7471), "999888777", "Hoang Van E", "Hoạt động" }
+                    { "NV001", "UploadImage\\profileStaff.jpg", "123456789012", "Quản lý", "123 Nguyen Van A, Quan 1, TP.HCM", "nhanvien1@example.com", "Nam", "password1", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9785), new DateTime(1990, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2021, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9797), "123456789", "Nguyen Van A", "Hoạt động" },
+                    { "NV002", "UploadImage\\profileStaff2.jpg", "987654321098", "Nhân viên", "456 Tran Thi B, Quan 2, TP.HCM", "nhanvien2@example.com", "Nữ", "password2", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9806), new DateTime(1995, 5, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2022, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9807), "987654321", "Tran Thi B", "Hoạt động" },
+                    { "NV003", "UploadImage\\profileStaff3.jpg", "111223344055", "Nhân viên", "789 Le Van C, Quan 3, TP.HCM", "nhanvien3@example.com", "Nam", "password3", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9810), new DateTime(1985, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9810), "111223344", "Le Van C", "Nghỉ việc" },
+                    { "NV004", "UploadImage\\profileStaff4.jpg", "555666777044", "Quản lý", "101 Pham Thi D, Quan 4, TP.HCM", "nhanvien4@example.com", "Nữ", "password4", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9813), new DateTime(1988, 8, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2018, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9814), "555666777", "Pham Thi D", "Hoạt động" },
+                    { "NV005", "UploadImage\\profileStaff5.webp", "999888777033", "Nhân viên", "202 Hoang Van E, Quan 5, TP.HCM", "nhanvien5@example.com", "Nam", "password5", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9816), new DateTime(1980, 12, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2019, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9817), "999888777", "Hoang Van E", "Hoạt động" }
                 });
 
             migrationBuilder.InsertData(
@@ -354,11 +354,11 @@ namespace QuanLyKhachSan.Migrations
                 columns: new[] { "MaVatTu", "NgayThem", "NhaSanXuat", "TenVatTu", "TinhTrangVatTu" },
                 values: new object[,]
                 {
-                    { "VT001", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7703), "Nội Thất Minh Nhật", "Giường", "." },
-                    { "VT002", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7705), "Cửa Hàng Đồ Gỗ Minh Quốc", "Bàn", "." },
-                    { "VT003", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7706), "Cửa Hàng Đồ Gỗ Minh Quốc", "Ghế", "." },
-                    { "VT004", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7707), "Đèn trang chí Lan Anh", "Đèn ngủ", "." },
-                    { "VT005", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7708), "Rèm xinh Bmt", "Rèm", "." }
+                    { "VT001", new DateTime(2023, 12, 15, 17, 59, 5, 788, DateTimeKind.Local).AddTicks(113), "Nội Thất Minh Nhật", "Giường", "Đang hoạt động" },
+                    { "VT002", new DateTime(2023, 12, 15, 17, 59, 5, 788, DateTimeKind.Local).AddTicks(115), "Cửa Hàng Đồ Gỗ Minh Quốc", "Bàn", "Đang hoạt động" },
+                    { "VT003", new DateTime(2023, 12, 15, 17, 59, 5, 788, DateTimeKind.Local).AddTicks(116), "Cửa Hàng Đồ Gỗ Minh Quốc", "Ghế", "Đang hoạt động" },
+                    { "VT004", new DateTime(2023, 12, 15, 17, 59, 5, 788, DateTimeKind.Local).AddTicks(118), "Đèn trang thí Lan Anh", "Đèn ngủ", "Ngưng hoạt động" },
+                    { "VT005", new DateTime(2023, 12, 15, 17, 59, 5, 788, DateTimeKind.Local).AddTicks(119), "Rèm xinh Bmt", "Rèm", "Đang hoạt động" }
                 });
 
             migrationBuilder.InsertData(
@@ -366,16 +366,16 @@ namespace QuanLyKhachSan.Migrations
                 columns: new[] { "MaPhong", "MaLoaiPhong", "NgayTao", "TinhTrang" },
                 values: new object[,]
                 {
-                    { "P00001", "LP0001", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7597), "Đang hoạt động" },
-                    { "P00002", "LP0002", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7599), "Đang hoạt động" },
-                    { "P00003", "LP0003", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7600), "Đang hoạt động" },
-                    { "P00004", "LP0004", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7602), "Đang hoạt động" },
-                    { "P00005", "LP0005", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7603), "Đang hoạt động" },
-                    { "P00006", "LP0006", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7604), "Đang hoạt động" },
-                    { "P00007", "LP0007", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7604), "Đang hoạt động" },
-                    { "P00008", "LP0008", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7605), "Đang hoạt động" },
-                    { "P00009", "LP0001", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7606), "Đang hoạt động" },
-                    { "P00010", "LP0002", new DateTime(2023, 12, 14, 13, 22, 49, 287, DateTimeKind.Local).AddTicks(7607), "Đang hoạt động" }
+                    { "P00001", "LP0001", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9976), "Đang hoạt động" },
+                    { "P00002", "LP0002", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9979), "Đang hoạt động" },
+                    { "P00003", "LP0003", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9980), "Đang hoạt động" },
+                    { "P00004", "LP0004", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9981), "Đang hoạt động" },
+                    { "P00005", "LP0005", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9982), "Đang hoạt động" },
+                    { "P00006", "LP0006", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9983), "Đang hoạt động" },
+                    { "P00007", "LP0007", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9984), "Đang hoạt động" },
+                    { "P00008", "LP0008", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9985), "Đang hoạt động" },
+                    { "P00009", "LP0001", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9986), "Đang hoạt động" },
+                    { "P00010", "LP0002", new DateTime(2023, 12, 15, 17, 59, 5, 787, DateTimeKind.Local).AddTicks(9989), "Đang hoạt động" }
                 });
 
             migrationBuilder.InsertData(
