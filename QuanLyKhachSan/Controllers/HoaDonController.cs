@@ -24,6 +24,8 @@ namespace QuanLyKhachSan.Controllers
             var qr_LoaiPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == qr_Phong.MaLoaiPhong);
             var qr_KhachHang = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == qr_DatPhong.MaKhachHang);
             var qr_NhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == qr_DatPhong.MaNhanVien);
+         
+
             return Json(new {qr_HoaDon, qr_DatPhong,qr_Phong,qr_LoaiPhong,qr_KhachHang,qr_NhanVien});
         }
     }

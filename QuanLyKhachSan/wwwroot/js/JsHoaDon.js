@@ -25,6 +25,20 @@ function XemChiTietHoaDon(MaHoaDon) {
             $('#HinhThucDatPhong_ChiTiet').text(result.qr_DatPhong.hinhThucDatPhong);
             $('#CCCD_ChiTiet').text(result.qr_KhachHang.cccd);
             $('#SoDienThoai_ChiTiet').text(result.qr_KhachHang.soDienThoai);
+            $('#Email_ChiTiet').text(result.qr_KhachHang.email);
+            $('#LoaiPhong_ChiTiet').text(result.qr_LoaiPhong.tenLoaiPhong);
+            if ($('#HinhThucDatPhong_ChiTiet').text() == "Gio") {
+                $('#GiaPhong_ChiTiet').text(result.qr_LoaiPhong.giaTheoGio);
+            }
+            else {
+                $('#GiaPhong_ChiTiet').text(result.qr_LoaiPhong.giaPhongTheoNgay);
+            }
+
+            $('#ThoiGianNhanPhong_ChiTiet').text(result.qr_DatPhong.ngayNhan);
+            $('#ThoiGianTraPhong_ChiTiet').text(result.qr_DatPhong.ngayTra);
+
+
+            $('#TongTien_ChiTiet').text(result.qr_DatPhong.tongTienPhong);
 
         },
         error: function () {
