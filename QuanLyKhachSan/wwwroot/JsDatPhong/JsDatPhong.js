@@ -333,7 +333,7 @@ function TongTienDatPhong() {
 
 document.getElementById('NhanPhong_PopUp').addEventListener('click', DatPhong);
 function DatPhong() {
-    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc()) {
+    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc() || !checkErrors() ) {
         console.log("Other validations failed");
         return;
     } else {
@@ -517,36 +517,45 @@ function validateKhachTraTruoc() {
         return true;
     }
 }
+async function checkErrors() {
+    let ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
+    let ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
+    let maPhong = document.getElementById('MaPhong_PopUp_DatPhong').textContent;
 
-//function validateBookingDates(callback) {
-//    var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
-//    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
-//    var ngayTra = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
+    console.log(ngayNhan, ngayTra, maPhong);
 
-//    $.ajax({
-//        url: '/DatPhong/GetBookingDates',
-//        type: 'GET',
-//        data: { maPhong: maPhong },
-//        success: function (data) {
-//            var bookingDates = data.bookingDates;
-//            for (var i = 0; i < bookingDates.length; i++) {
-//                var existingNgayNhan = new Date(bookingDates[i].ngayNhan);
-//                var existingNgayTra = new Date(bookingDates[i].ngayTra);
-//                if ((ngayNhan >= existingNgayNhan && ngayNhan < existingNgayTra) || (ngayTra > existingNgayNhan && ngayTra <= existingNgayTra)) {
-//                    document.getElementById('errorNgayNhan').textContent = 'Ngày nhận và ngày trả bị trùng với khung giờ đã đặt phòng của phòng này';
-//                    document.getElementById('errorNgayTra').textContent = 'Ngày nhận và ngày trả bị trùng với khung giờ đã đặt phòng của phòng này';
-//                    callback(false); 
-//                    return;
-//                }
-//            }
-//            document.getElementById('errorNgayNhan').textContent = '';
-//            document.getElementById('errorNgayTra').textContent = '';
-//            callback(true); // Pass the result to the callback
-//        },
-//        error: function (error) {
-//            console.error(error);
-//            callback(false); // Pass the result to the callback
-//        }
-//    });
-//}
+    $.ajax({
+        url: '/DatPhong/CheckNgayDatPhong',
+        type: 'POST',
+       
+        data: {
+            ngayNhanMoi: ngayNhan,
+            ngayTraMoi: ngayTra,
+            maPhongMoi: maPhong
+        },
+        success: function (datPhongTrung) {
+            console.log(datPhongTrung);
+            if (!datPhongTrung) {
+                alert("Có");
+                return false; // Có người đã đặt phòng
+            } else {
+                alert("Không");
+                return true; // Không có ai đặt phòng
+            }
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error('HTTP error', textStatus);
+            return false;
+        }
+    });
+
+
+}
+
+
+
+
+
+
+
 
