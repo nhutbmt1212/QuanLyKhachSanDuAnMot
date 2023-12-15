@@ -106,8 +106,8 @@
             $("#errorEditGioKT").text("");
         }
     });
-    
-   
+
+
 
 
 
@@ -137,7 +137,7 @@
         } else if (inputValueDVT.trim() === "") {
             $("#errorDVT").text("Đơn vị tính không được chứa toàn khoảng trắng.");
             event.preventDefault();
-        } else if (inputValue.length < 2) {
+        } else if (inputValueDVT.length < 2) {
             $("#errorDVT").text("Độ dài ít nhất 2 ký tự.");
             event.preventDefault();
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueDVT)) {
@@ -152,7 +152,7 @@
         } else if (!isValidGiaTheoGio(gia)) {
             $("#errorGia").text("Giá theo giờ không hợp lệ.");
             event.preventDefault();
-        } 
+        }
 
         validateGioBD();
         validateGioKT();
@@ -162,6 +162,48 @@
             event.preventDefault();
         }
     });
+    $("#myFormEdit").submit(function (event) {
+
+        var inputValueTenNV = $("#inputEditTenDV").val();
+        if (inputValueTenNV.length === 0) {
+            $("#errorEditTenDV").text("Tên dịch vụ không được để trống.");
+            event.preventDefault();
+        } else if (inputValueTenNV.trim() === "") {
+            $("#errorEditTenDV").text("Tên dịch vụ không được chứa toàn khoảng trắng.");
+            event.preventDefault();
+        } else if (inputValueTenNV.length === 0) {
+            $("#errorEditTenDV").text("Tên dịch vụ không được để trống.");
+            event.preventDefault();
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
+            $("#errorEditTenDV").text("Tên dịch vụ chỉ được chứa chữ cái và khoảng trắng.");
+            event.preventDefault();
+        }
+
+        var inputValueDVT = $("#inputEditDVT").val();
+        if (inputValueDVT.length === 0) {
+            $("#errorEditDVT").text("Đơn vị tính không được để trống.");
+            event.preventDefault();
+        } else if (inputValueDVT.trim() === "") {
+            $("#errorEditDVT").text("Đơn vị tính không được chứa toàn khoảng trắng.");
+            event.preventDefault();
+        } else if (inputValueDVT.length < 2) {
+            $("#errorEditDVT").text("Độ dài ít nhất 2 ký tự.");
+            event.preventDefault();
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueDVT)) {
+            $("#errorEditDVT").text("Đơn vị tính chỉ được chứa chữ cái và khoảng trắng.");
+            event.preventDefault();
+        }
+
+        var giaEdit = $("#inputEditGia").val();
+        if (giaEdit.length === 0) {
+            $("#errorEditGia").text("Giá theo giờ không được để trống.");
+            event.preventDefault();
+        } else if (!isValidGiaTheoGio(giaEdit)) {
+            $("#errorEditGia").text("Giá theo giờ không hợp lệ.");
+            event.preventDefault();
+        }  
+    });
+
     function isValidGiaTheoGio(giaTheoGio) {
         var giaTheoGioRegex = /^\d+$/;
 
@@ -186,5 +228,5 @@
             $("#errorGioKT").text("");
         }
     }
-  
+
 });

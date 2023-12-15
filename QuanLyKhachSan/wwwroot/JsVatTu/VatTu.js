@@ -43,7 +43,7 @@ function OpenFormEdit(maVatTu, tenVatTu, nhaSanXuat, tinhTrangVatTu, ngayThem) {
     document.getElementById("TinhTrangVatTuEdit").value = tinhTrangVatTu;
 
     // Chuyển định dạng ngày
-    var formattedDate = ngayThem.replace(" ", "T");
-    document.getElementById("NgayThemEdit").value = formattedDate;
+   /* var formattedDate = ngayThem.replace(" ", "T");*/
+    document.getElementById("NgayThemEdit").value = ngayThem;
     console.log(ngayThem)
 }
