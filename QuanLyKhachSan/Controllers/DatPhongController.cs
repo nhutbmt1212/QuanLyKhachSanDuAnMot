@@ -164,14 +164,29 @@ namespace QuanLyKhachSan.Controllers
             TempData["SwalTitle"] = "Thanh toán thành công";
             return RedirectToAction("Index","DatPhong");
         }
-        public IActionResult GetBookingDates(string maPhong)
+       
+        [HttpPost]
+        public IActionResult CheckNgayDatPhong(DateTime ngayNhanMoi, DateTime ngayTraMoi, string maPhongMoi)
         {
-            var bookingDates =  _db.DatPhong
-                .Where(dp => dp.MaPhong == maPhong)
-                .Select(dp => new { dp.NgayNhan, dp.NgayTra })
-                .ToList();
+            var datPhongs = _db.DatPhong.ToList();
 
-            return Json(new { bookingDates });
+            var result = datPhongs.SelectMany(dp =>
+                Enumerable.Range(0, 1 + (dp.NgayTra - dp.NgayNhan).Days)
+                    .Select(offset => new
+                    {
+                        MaDatPhong = dp.MaDatPhong,
+                        NgayNhan = dp.NgayNhan,
+                        NgayDuocThue = dp.NgayNhan.AddDays(offset),
+                        NgayTra = dp.NgayTra
+                    })
+                ).ToList();
+
+            var datPhongTrung = result.Any(r => r.MaDatPhong == maPhongMoi &&
+                ((ngayNhanMoi.Date >= r.NgayNhan.Date && ngayNhanMoi.Date <= r.NgayTra.Date) ||
+                (ngayTraMoi.Date >= r.NgayNhan.Date && ngayTraMoi.Date <= r.NgayTra.Date)));
+
+            return Json(!datPhongTrung);
         }
+
     }
 }

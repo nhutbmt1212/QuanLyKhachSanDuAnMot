@@ -57,13 +57,11 @@ function XemChiTietDichVu(MaHoaDon) {
         url: '/HoaDon/LayThongTinDichVu',
         data: { 'MaHoaDon': MaHoaDon },
         success: function (result) {
-            console.log(result);
             var dichVuChiTietTable = $('#DichVuCon');
 
             dichVuChiTietTable.empty();
 
             result.dichVuChiTiet.forEach(function (item) {
-                console.log(item)
                 var row = '<tr>' +
                     '<td>' + item.maDichVu + '</td>' +
                     '<td>' + item.dichVu.tenDichVu + '</td>' +
@@ -73,8 +71,6 @@ function XemChiTietDichVu(MaHoaDon) {
 
                 dichVuChiTietTable.append(row);
             });
-
-          
         },
         error: function () {
         }
