@@ -707,7 +707,7 @@ namespace QuanLyKhachSan.Models
               {
                   MaVatTu = "VT001",
                   TenVatTu = "Giường",
-                  TinhTrangVatTu = ".",
+                  TinhTrangVatTu = "Đang hoạt động",
                   NgayThem = DateTime.Now,
                   NhaSanXuat="Nội Thất Minh Nhật"
               },
@@ -715,7 +715,7 @@ namespace QuanLyKhachSan.Models
               {
                   MaVatTu = "VT002",
                   TenVatTu = "Bàn",
-                  TinhTrangVatTu = ".",
+                  TinhTrangVatTu = "Đang hoạt động",
                   NgayThem = DateTime.Now,
                   NhaSanXuat="Cửa Hàng Đồ Gỗ Minh Quốc"
               },
@@ -723,7 +723,7 @@ namespace QuanLyKhachSan.Models
               {
                   MaVatTu = "VT003",
                   TenVatTu = "Ghế",
-                  TinhTrangVatTu = ".",
+                  TinhTrangVatTu = "Đang hoạt động",
                   NgayThem = DateTime.Now,
                   NhaSanXuat="Cửa Hàng Đồ Gỗ Minh Quốc"
               },
@@ -731,15 +731,15 @@ namespace QuanLyKhachSan.Models
               {
                   MaVatTu = "VT004",
                   TenVatTu = "Đèn ngủ",
-                  TinhTrangVatTu = ".",
+                  TinhTrangVatTu = "Ngưng hoạt động",
                   NgayThem = DateTime.Now,
-                  NhaSanXuat="Đèn trang chí Lan Anh"
+                  NhaSanXuat="Đèn trang thí Lan Anh"
               },
               new VatTu
               {
                   MaVatTu = "VT005",
                   TenVatTu = "Rèm",
-                  TinhTrangVatTu = ".",
+                  TinhTrangVatTu = "Đang hoạt động",
                   NgayThem = DateTime.Now,
                   NhaSanXuat="Rèm xinh Bmt"
               }
