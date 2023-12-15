@@ -12,11 +12,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Add custom CSS or additional stylesheets here -->
-    <!-- (Include additional head elements) -->
 </head>
 
 <body>
+    <style>
+        .form-popup {
+            display: none;
+            border: 3px solid #f1f1f1;
+            z-index: 9;
+        }
+
+        .form-container {
+            max-width: 100%;
+            padding: 10px;
+            background-color: white;
+        }
+    </style>
+
+    <div class="form-popup mb-2" id="myForm">
+        <form class="form-container" id="myFormContainer">
+            <h1 style="font-family:Roboto;">Sửa đặt phòng</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Mã đặt phòng</label>
+                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                        <span id="errorMaP" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Mã phòng</label>
+                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                        </select>
+                        <span id="errorChonLP" style="color: red;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mã khách hàng</label>
+                        <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
+                        <span id="errorNgayTao" style="color: red;"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Ngày nhận</label>
+                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                        <span id="errorMaP" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Ngày trả</label>
+                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                        </select>
+                        <span id="errorChonLP" style="color: red;"></span>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-6">
+                            <label>Sl Người lớn</label>
+                            <input class="form-control" name="soLuongNguoiLon" type="text"
+                                   id="inputFieldSoLuongNguoiLon" />
+                            <span id="errorSoLuongNguoiLon" style="color: red;"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Sl Trẻ em</label>
+                            <input class="form-control" name="soLuongTreEm" type="text"
+                                   id="inputFieldSoLuongTreEm" />
+                            <span id="errorSoLuongTreEm" style="color: red;"></span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Hình thức đặt phòng</label>
+                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                        <span id="errorMaP" style="color: red;"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Tổng tiền phòng</label>
+                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                        </select>
+                        <span id="errorChonLP" style="color: red;"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mã nhân viên</label>
+                        <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
+                        <span id="errorNgayTao" style="color: red;"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div id="ChonDichVu" class="mt-4">
+                    </div>
+                    <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
+                        <i class="bi bi-plus"></i> Thêm dịch vụ
+                    </button>
+                </div>
+                <div class="col-md-4">
+                    <label>Tiền phòng</label>
+                    <span id="TongTienPhong">0.00</span>
+                    <br/>
+                    <label>Tiền dịch vụ</label>
+                    <span id="TongTienDichVuDaDat">0.00</span>
+                    <br />
+                    <label>Tổng tiền</label>
+                    <span id="TongTien">0.00</span>
+                    <div id="TongDichVuDaDat" style="display:none;"></div>
+
+                </div>
+                <div class="col-md-4">
+                   
+                </div>
+                <div class="col-md-4">
+                    
+                </div>
+            </div>
+
+            <div class="clearfix">
+                <button class="btn align-middle m-2 w-25 btn-success " style="min-width:200px" type="submit"
+                        onclick="ThemPhong()">
+                    Sửa đặt phòng
+                </button>
+                <button type="button" class="btn btn-danger align-middle m-2 w-0  cancel"
+                        onclick="closeForm()">
+                    Đóng
+                </button>
+            </div>
+        </form>
+    </div>
     <!-- Breadcrumb and other structural elements if needed -->
     <div class="container mt-3">
         <h2 class="mb-4">Quản lý đặt phòng</h2>
@@ -95,36 +218,178 @@
                                         }
                                     }
                                 </table>
-
-
                             </td>
                             <td>@Html.DisplayFor(m => item.TongTienPhong)</td>
 
                             <td>@Html.DisplayFor(m => item.MaNhanVien)</td>
                             <td>@Html.DisplayFor(m => item.TinhTrang)</td>
                             <td>@Html.DisplayFor(m => item.SoTienTraTruoc)</td>
-                        
-                                <td>
-                                <button class="btn btn-primary btn-sm" onclick="editReservation('@item.MaDatPhong')">Sửa</button>
+                            <td>
+                                <button class="btn btn-primary btn-sm" id="btn_suaPhong">Sửa đặt phòng</button>
 
-                                <button class="btn btn-danger btn-sm"
-                                        onclick="deleteReservation('@item.MaDatPhong')">
-                                    Xóa
+                                <button class="btn btn-danger btn-sm" onclick="deleteReservation('@item.MaDatPhong')">
+                                    Hủy đặt phòng
                                 </button>
-                                </td>
-                          
-
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
-  
+
+
+    <script>
+        var btn_them = document.getElementById('btn_suaPhong');
+        btn_them.addEventListener('click', openForm);
+        function openForm() {
+            document.getElementById("myForm").style.display = "block";
+            
+        }
+    </script>
+
+    <script>
+        var arrDichVuDaChon = [];
+        var counter = -1;
+
+        document.getElementById('AddThemDichVu').addEventListener('click', ThemDichVu);
+
+        function ThemDichVu() {
+            counter++;
+
+            var url = '/TrangChuKhachHang/LayDanhSachDichVu';
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                success: function (data) {
+                    var options = '';
+
+                    $.each(data, function (index, itemDichVu) {
+                        if (!arrDichVuDaChon.includes(itemDichVu.maDichVu)) {
+                            options += `<option value="${itemDichVu.maDichVu}" class="optionChonDichVu">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
+                        }
+                    });
+
+                    var node = `
+                            <div class="row" id="id_DichVu${counter}">
+                                <div class="col-lg-7" style="margin-bottom:5px;">
+                                    <select class="form-control w-100" id="themdichvuselect${counter}" onchange="DichVuDaChon(${counter})">
+                                        ${options}
+                                    </select>
+                                </div>
+                                <div class="col-lg-3">
+                                    <input type="number" class="form-control w-100" id="soLuongDichVu${counter}" onchange="ThayDoiSoLuongDichVu(${counter})" min="1" value="1">
+                                </div>
+                                <div class="col-2">
+                                    <button id="XoaSelectDichVu${counter}" class="btn btn-outline-danger" onclick="XoaSelectDichVu(${counter})">
+                                        <i class="bi bi-trash3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+
+                    $('#ChonDichVu').append(node);
+                    var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + counter).value;
+                    arrDichVuDaChon[counter] = dichVuDaChonTheoId;
+
+                    $('#themdichvuselect' + counter).focus(function () {
+                        $(this).find('.optionChonDichVu').each(function () {
+                            if (arrDichVuDaChon.includes($(this).val())) {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
+                            }
+                        });
+                    });
+
+                    if (arrDichVuDaChon.filter(function (e) { return e }).length == data.length) {
+                        document.getElementById('AddThemDichVu').style.display = 'none';
+                    }
+
+                    var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
+                    var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
+                    var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
+                    $('#TongDichVuDaDat').append(nodeServices);
+                    TinhTienDichVu();
+                },
+                error: function (error) {
+                    console.error('Error fetching data:', error);
+                }
+            });
+        }
+
+        function TinhTienDichVu() {
+            var ThanhTienMaDichVu = [];
+            var arrSoLuongDichVu = [];
+
+            $('span[id^="tongTenDichVuDaDat"]').each(function () {
+                ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+            });
+
+            $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
+                arrSoLuongDichVu.push($(this).text().split(": ")[1]);
+            });
+
+            $.ajax({
+                url: '/TrangChuKhachHang/TinhTienDichVu',
+                type: 'POST',
+                data: { 'arrMaDichVu': ThanhTienMaDichVu, 'arrSoLuongDichVu': arrSoLuongDichVu },
+                traditional: true,
+                success: function (result) {
+                    console.log(result)
+                    document.getElementById('TongTienDichVuDaDat').innerText = result;
+                    // TongTienDatPhong();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error calculating service charges:', error);
+                }
+            });
+        }
+
+        function DichVuDaChon(id) {
+            var dichVuDaChonTheoId = document.getElementById('themdichvuselect' + id).value;
+
+            if (arrDichVuDaChon[id] == "") {
+                console.log("Mảng rỗng");
+            } else {
+                var dichVuDaChon = document.getElementById('themdichvuselect' + id).value;
+                var soLuongDichVu = document.getElementById('soLuongDichVu' + id).value;
+
+                var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + id;
+                var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
+
+                document.getElementById(tongTextTenDichVuDaDat).innerText = `Tên dịch vụ: ${dichVuDaChon} | `;
+                tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${soLuongDichVu}`;
+                arrDichVuDaChon[id] = dichVuDaChonTheoId;
+                TinhTienDichVu();
+            }
+        }
+
+        function ThayDoiSoLuongDichVu(id) {
+            var SoLuongDichVuDaThayDoi = document.getElementById('soLuongDichVu' + id).value;
+            var tongTextSoLuongDichVuDaDat = document.getElementById("tongSoLuongDichVuDaDat" + id);
+            tongTextSoLuongDichVuDaDat.innerText = `Số lượng: ${SoLuongDichVuDaThayDoi}`;
+            TinhTienDichVu();
+        }
+
+        function XoaSelectDichVu(idSelect) {
+            var idTongTheDichVu = 'id_DichVu' + idSelect;
+            document.getElementById(idTongTheDichVu).remove();
+            arrDichVuDaChon[idSelect] = "";
+            document.getElementById('AddThemDichVu').style.display = 'block';
+            var tongTextTenDichVuDaDat = "tongTenDichVuDaDat" + idSelect;
+            var tongTextSoLuongDaDat = "tongSoLuongDichVuDaDat" + idSelect;
+            var breakTongDichVu = "breakDichVu" + idSelect;
+            document.getElementById(tongTextSoLuongDaDat).remove();
+            document.getElementById(tongTextTenDichVuDaDat).remove();
+            document.getElementById(breakTongDichVu).remove();
+            TinhTienDichVu();
+        }
+    </script>
 
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 
