@@ -72,20 +72,35 @@ getValue.addEventListener('click', function (e) {
     //convert time
     var ngaySinhParts = ngaySinhNv.split('/');
     var ngaySinhFormatted = ngaySinhParts[2] + '-' + ngaySinhParts[1] + '-' + ngaySinhParts[0];
-    document.querySelector('.ngaySinhEdit').value = ngaySinhFormatted; document.querySelector('.manvEdit').value = MaNv;
+    document.querySelector('.ngaySinhEdit').value = ngaySinhFormatted;
+    document.querySelector('.manvEdit').value = MaNv;
 
 
-    var ngayDangKyParts = ngayDangKyNv.split('/');
-    var ngayDangKyFormatted = ngayDangKyParts[2] + '-' + ngayDangKyParts[1] + '-' + ngayDangKyParts[0];
-    document.querySelector('.ngayDangKyEdit').value = ngayDangKyFormatted;
+    //var ngayDangKyParts = ngayDangKyNv.split('/');
+    //var ngayDangKyFormatted = ngayDangKyParts[2] + '-' + ngayDangKyParts[1] + '-' + ngayDangKyParts[0];
+    //document.querySelector('.ngayDangKyEdit').value = ngayDangKyFormatted;
 
     document.querySelector('.chucVuEdit').value = chucVuNv;
 
-
-    var ngayVaoLamParts = ngayVaoLamNv.split('/');
-    var ngayVaoLamFomatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
-    document.querySelector('.ngayVaoLamEdit').value = ngayVaoLamFomatted;
+    var ngayVaoLamNv = "14/12/2021";
+    formatAndSetDate(ngayVaoLamNv);
 });
+function formatAndSetDate(ngayVaoLamNv) {
+    // Split the date string
+    var ngayVaoLamParts = ngayVaoLamNv.split('/');
+
+    // Check if the date string is in the expected format
+    if (ngayVaoLamParts.length === 3) {
+        // Format the date as "yyyy-MM-dd"
+        var ngayVaoLamFormatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
+
+        // Set the formatted date to the input field
+        document.querySelector('.ngayVaoLamEdit').value = ngayVaoLamFormatted;
+    } else {
+        // Handle invalid date format (you may display an error message or take appropriate action)
+        console.error('Invalid date format: ' + ngayVaoLamNv);
+    }
+}
 document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
 
 function TickedAllCheckBox() {

@@ -12,10 +12,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-
-<body>
+    <!-- Add custom CSS or additional stylesheets here -->
+    <!-- (Include additional head elements) -->
     <style>
+        .popup-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(66, 64, 64, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .popup-content {
+            width: 100%;
+            height: 80%;
+            max-width: 60vw;
+            /* Giới hạn chiều rộng tối đa */
+            background-color: white;
+            padding: 25px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            overflow-y: auto;
+            max-height: 130vw;
+            /* hoặc giá trị phù hợp khác */
+            overflow-y: auto;
+        }
+
+        .close-icon {
+            position: absolute;
+            font-size: 20px;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .popup button {
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* CSS để tạo popup */
+        .overlayDV {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Mờ đen với độ trong suốt 0.5 */
+            z-index: 1;
+        }
+
+        .popupDV {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            z-index: 2;
+            max-height: 80%; /* Đặt chiều cao tối đa để tránh tràn màn hình */
+            overflow-y: auto;
+            /* Z-index lớn hơn so với lớp mờ */
+        }
+
         .form-popup {
             display: none;
             border: 3px solid #f1f1f1;
@@ -28,118 +100,10 @@
             background-color: white;
         }
     </style>
+</head>
 
-    <div class="form-popup mb-2" id="myForm">
-        <form class="form-container" id="myFormContainer">
-            <h1 style="font-family:Roboto;">Sửa đặt phòng</h1>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Mã đặt phòng</label>
-                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
-                        <span id="errorMaP" style="color: red;"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Mã phòng</label>
-                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
-                        </select>
-                        <span id="errorChonLP" style="color: red;"></span>
-                    </div>
+<body>
 
-                    <div class="form-group">
-                        <label>Mã khách hàng</label>
-                        <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
-                        <span id="errorNgayTao" style="color: red;"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Ngày nhận</label>
-                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
-                        <span id="errorMaP" style="color: red;"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Ngày trả</label>
-                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
-                        </select>
-                        <span id="errorChonLP" style="color: red;"></span>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="col-md-6">
-                            <label>Sl Người lớn</label>
-                            <input class="form-control" name="soLuongNguoiLon" type="text"
-                                   id="inputFieldSoLuongNguoiLon" />
-                            <span id="errorSoLuongNguoiLon" style="color: red;"></span>
-                        </div>
-                        <div class="col-md-6">
-                            <label>Sl Trẻ em</label>
-                            <input class="form-control" name="soLuongTreEm" type="text"
-                                   id="inputFieldSoLuongTreEm" />
-                            <span id="errorSoLuongTreEm" style="color: red;"></span>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label>Hình thức đặt phòng</label>
-                        <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
-                        <span id="errorMaP" style="color: red;"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>Tổng tiền phòng</label>
-                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
-                        </select>
-                        <span id="errorChonLP" style="color: red;"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Mã nhân viên</label>
-                        <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
-                        <span id="errorNgayTao" style="color: red;"></span>
-                    </div>
-                </div>
-
-                <div class="col-md-12">
-                    <div id="ChonDichVu" class="mt-4">
-                    </div>
-                    <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
-                        <i class="bi bi-plus"></i> Thêm dịch vụ
-                    </button>
-                </div>
-                <div class="col-md-4">
-                    <label>Tiền phòng</label>
-                    <span id="TongTienPhong">0.00</span>
-                    <br/>
-                    <label>Tiền dịch vụ</label>
-                    <span id="TongTienDichVuDaDat">0.00</span>
-                    <br />
-                    <label>Tổng tiền</label>
-                    <span id="TongTien">0.00</span>
-                    <div id="TongDichVuDaDat" style="display:none;"></div>
-
-                </div>
-                <div class="col-md-4">
-                   
-                </div>
-                <div class="col-md-4">
-                    
-                </div>
-            </div>
-
-            <div class="clearfix">
-                <button class="btn align-middle m-2 w-25 btn-success " style="min-width:200px" type="submit"
-                        onclick="ThemPhong()">
-                    Sửa đặt phòng
-                </button>
-                <button type="button" class="btn btn-danger align-middle m-2 w-0  cancel"
-                        onclick="closeForm()">
-                    Đóng
-                </button>
-            </div>
-        </form>
-    </div>
     <!-- Breadcrumb and other structural elements if needed -->
     <div class="mt-3">
         <section>
@@ -148,9 +112,120 @@
                 <li class="breadcrumb-item active" aria-current="page">Quản lý đặt phòng</li>
             </ol>
         </section>
+
+
+        <div class="form-popup mb-2" id="myForm">
+            <form class="form-container" id="myFormContainer">
+                <h1 style="font-family:Roboto;">Sửa đặt phòng</h1>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Mã đặt phòng</label>
+                            <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                            <span id="errorMaP" style="color: red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Mã phòng</label>
+                            <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                            </select>
+                            <span id="errorChonLP" style="color: red;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mã khách hàng</label>
+                            <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
+                            <span id="errorNgayTao" style="color: red;"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Ngày nhận</label>
+                            <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                            <span id="errorMaP" style="color: red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày trả</label>
+                            <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                            </select>
+                            <span id="errorChonLP" style="color: red;"></span>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <label>Sl Người lớn</label>
+                                <input class="form-control" name="soLuongNguoiLon" type="text"
+                                       id="inputFieldSoLuongNguoiLon" />
+                                <span id="errorSoLuongNguoiLon" style="color: red;"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Sl Trẻ em</label>
+                                <input class="form-control" name="soLuongTreEm" type="text"
+                                       id="inputFieldSoLuongTreEm" />
+                                <span id="errorSoLuongTreEm" style="color: red;"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Hình thức đặt phòng</label>
+                            <input class="form-control" name="maphong" id="inputFieldMaP" maxlength="6" />
+                            <span id="errorMaP" style="color: red;"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Tổng tiền phòng</label>
+                            <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                            </select>
+                            <span id="errorChonLP" style="color: red;"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mã nhân viên</label>
+                            <input class="form-control" name="ngaytao" type="text" id="inputFieldNgayTao" />
+                            <span id="errorNgayTao" style="color: red;"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div id="ChonDichVu" class="mt-4">
+                        </div>
+                        <button type="button" class="btn btn-outline-success" id="AddThemDichVu">
+                            <i class="bi bi-plus"></i> Thêm dịch vụ
+                        </button>
+                    </div>
+                    <div class="col-md-4">
+                        <label>Tiền phòng</label>
+                        <span id="TongTienPhong">0.00</span>
+                        <br />
+                        <label>Tiền dịch vụ</label>
+                        <span id="TongTienDichVuDaDat">0.00</span>
+                        <br />
+                        <label>Tổng tiền</label>
+                        <span id="TongTien">0.00</span>
+                        <div id="TongDichVuDaDat" style="display:none;"></div>
+
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                    <div class="col-md-4">
+                    </div>
+                </div>
+
+                <div class="clearfix">
+                    <button class="btn align-middle m-2 w-25 btn-success " style="min-width:200px" type="submit"
+                            onclick="ThemPhong()">
+                        Sửa đặt phòng
+                    </button>
+                    <button type="button" class="btn btn-danger align-middle m-2 w-0  cancel"
+                            onclick="closeForm()">
+                        Đóng
+                    </button>
+                </div>
+            </form>
+        </div>
+
         <div class="row">
             <div class="col-sm-4">
-
             </div>
             <div class="col-sm-6">
                 <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
@@ -167,8 +242,8 @@
                         <th scope="col">Phòng</th>
                         <th scope="col">Ngày nhận</th>
                         <th scope="col">Ngày trả</th>
-                        <th scope="col">Số người lớn</th>
-                        <th scope="col">Số trẻ em</th>
+                        <th scope="col">Số lượng người lớn</th>
+                        <th scope="col">Số lượng trẻ em</th>
                         <th scope="col">Hình thức đặt</th>
                         <th scope="col">Dịch vụ</th>
                         <th scope="col">Tổng tiền phòng</th>
@@ -180,7 +255,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @{
+
+                  @{
                         var stt = 0;
                     }
                     @foreach (var item in Model)
@@ -196,63 +272,58 @@
                             <td>@Html.DisplayFor(m => item.SoLuongNguoiLon)</td>
                             <td>@Html.DisplayFor(m => item.SoLuongTreEm)</td>
                             <td>@Html.DisplayFor(m => item.HinhThucDatPhong)</td>
-                            <td>
-                                <table>
-                                    @{
-                                        var qr_DichVuChiTiet = _db.ChiTietDichVu
-                                        .Where(s => s.MaDatPhong == item.MaDatPhong)
-                                        .ToList();
+                        <td>
+                              
+                            <a href="#" onclick="openPopup('@item.MaDatPhong')">Chi tiết</a>
+                            <div id="overlayDV" class="overlayDV"></div>
+                            <div id="myPopupDV" class="popupDV">
+                                <h4>Dịch vụ phòng @item.MaPhong</h4>
+                                    <table class="table">
 
-                                        // Assuming ChiTietDichVu contains properties named SoLuong and DonGia
-                                        var maDichVuList = qr_DichVuChiTiet.Select(c => c.MaDichVu).ToList();
+                                        <thead>
 
-                                        var qr_DichVu = _db.DichVu
-                                        .Where(s => maDichVuList.Contains(s.MaDichVu))
-                                        .ToList();
-                                    }
-                                    <tr>
-                                        <th>Mã dịch vụ</th>
-                                        <th>Tên dịch vụ</th>
-                                        <th>Số lượng</th>
-                                        <th>Đơn giá</th>
-                                    </tr>
-                                    @foreach (var dichvuChiTiet in qr_DichVuChiTiet)
-                                    {
-                                        var dichvu = qr_DichVu.FirstOrDefault(d => d.MaDichVu == dichvuChiTiet.MaDichVu);
-
-                                        if (dichvu != null)
-                                        {
                                             <tr>
-                                                <td>@dichvu.MaDichVu</td>
-                                                <td>@dichvu.TenDichVu</td>
-                                                <td>@dichvuChiTiet.SoLuong</td>
-                                                <td>@dichvu.GiaTien</td>
-                                            </tr>
-                                        }
-                                    }
-                                </table>
-                            </td>
-                            <td>@Html.DisplayFor(m => item.TongTienPhong)</td>
 
+                                                <th>Mã dịch vụ</th>
+
+                                                <th>Tên dịch vụ</th>
+
+                                                <th>Giá dịch vụ</th>
+
+                                                <th>Số lượng dịch vụ</th>
+
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody id="DichVuCon">
+                                        </tbody>
+
+                                    </table>
+                                <a class="btn btn-danger mt-3" href="#" onclick="closePopup()">Đóng</a>
+                            </div>
+                        </td>
+                            <td>@Html.DisplayFor(m => item.TongTienPhong)</td>
                             <td>@Html.DisplayFor(m => item.MaNhanVien)</td>
                             <td>@Html.DisplayFor(m => item.TinhTrang)</td>
                             <td>@Html.DisplayFor(m => item.SoTienTraTruoc)</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm" id="btn_suaPhong">Sửa đặt phòng</button>
+                        <td>
+                                <button class="btn btn-primary btn-sm" id="btn_suaPhong"
+                                    >
+                                Sửa
+                            </button>
 
-                                <button class="btn btn-danger btn-sm" onclick="deleteReservation('@item.MaDatPhong')">
-                                    Hủy đặt phòng
-                                </button>
-                            </td>
-                        </tr>
+                            <button class="btn btn-danger btn-sm" onclick="deleteReservation('')">
+                                Xóa
+                            </button>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
         </div>
     </div>
-
-
-  <script src="~/js/JsQuanLyDatPhong.js"></script>
+    <script src="~/js/JsQuanLyDatPhong.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -271,6 +342,48 @@
                 $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
             });
         });
+    </script>
+    <script>
+        function openPopup(MaDatPhong) {
+            var overlay = document.getElementById("overlayDV");
+            var popup = document.getElementById("myPopupDV");
+
+            overlay.style.display = "block";
+            popup.style.display = "block";
+
+            $.ajax({
+                type: 'POST',
+                url: '/QuanLyDatPhong/LayThongTinDichVu',
+                data: { 'MaDatPhong': MaDatPhong },
+                success: function (result) {
+                    var dichVuChiTietTable = $('#DichVuCon');
+
+                    dichVuChiTietTable.empty();
+
+                    result.dichVuChiTiet.forEach(function (item) {
+                        var row = '<tr>' +
+                            '<td>' + item.maDichVu + '</td>' +
+                            '<td>' + item.dichVu.tenDichVu + '</td>' +
+                            '<td>' + item.dichVu.giaTien + '</td>' +
+                            '<td>' + item.soLuong + '</td>' +
+                            '</tr>';
+
+                        dichVuChiTietTable.append(row);
+                    });
+                },
+                error: function () {
+                }
+            });
+        }
+
+        function closePopup() {
+            var overlay = document.getElementById("overlayDV");
+            var popup = document.getElementById("myPopupDV");
+
+            overlay.style.display = "none";
+            popup.style.display = "none";
+        }
+
     </script>
 
 </body>
