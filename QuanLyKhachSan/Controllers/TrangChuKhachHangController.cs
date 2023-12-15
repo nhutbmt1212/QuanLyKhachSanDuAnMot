@@ -58,6 +58,7 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> LayDanhSachDichVu()
         {
             var qr_ListDichVu = _db.DichVu.ToList();
+            
             return Json(qr_ListDichVu);
         }
         [HttpGet]
