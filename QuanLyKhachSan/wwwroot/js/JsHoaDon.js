@@ -17,28 +17,30 @@ function XemChiTietHoaDon(MaHoaDon) {
         data: { 'MaHoaDon': MaHoaDon },
         success: function (result) {
             console.log(result);
-            $('#MaDatPhong_ChiTiet').text(result.qr_DatPhong.maDatPhong);
-            $('#MaPhong_ChiTiet').text(result.qr_Phong.maPhong);
-            $('#MaKhachHang_ChiTiet').text(result.qr_KhachHang.maKhachHang);
-            $('#TenKhachHang_ChiTiet').text(result.qr_KhachHang.tenKhachHang);
-            $('#SoLuongNguoiLon_ChiTiet').text(result.qr_LoaiPhong.soLuongNguoiLon + " người lớn - " + result.qr_LoaiPhong.soLuongTreEm + " trẻ em");
-            $('#HinhThucDatPhong_ChiTiet').text(result.qr_DatPhong.hinhThucDatPhong);
-            $('#CCCD_ChiTiet').text(result.qr_KhachHang.cccd);
-            $('#SoDienThoai_ChiTiet').text(result.qr_KhachHang.soDienThoai);
-            $('#Email_ChiTiet').text(result.qr_KhachHang.email);
-            $('#LoaiPhong_ChiTiet').text(result.qr_LoaiPhong.tenLoaiPhong);
+            $('#MaDatPhong_ChiTiet').text(result.datPhong.maDatPhong);
+            $('#MaPhong_ChiTiet').text(result.phong.maPhong);
+            $('#MaKhachHang_ChiTiet').text(result.khachHang.maKhachHang);
+            $('#TenKhachHang_ChiTiet').text(result.khachHang.tenKhachHang);
+            $('#SoLuongNguoiLon_ChiTiet').text(result.loaiPhong.soLuongNguoiLon + " người lớn - " + result.loaiPhong.soLuongTreEm + " trẻ em");
+            $('#HinhThucDatPhong_ChiTiet').text(result.datPhong.hinhThucDatPhong);
+            $('#CCCD_ChiTiet').text(result.khachHang.cccd);
+            $('#SoDienThoai_ChiTiet').text(result.khachHang.soDienThoai);
+            $('#Email_ChiTiet').text(result.khachHang.email);
+            $('#LoaiPhong_ChiTiet').text(result.loaiPhong.tenLoaiPhong);
             if ($('#HinhThucDatPhong_ChiTiet').text() == "Gio") {
-                $('#GiaPhong_ChiTiet').text(result.qr_LoaiPhong.giaTheoGio);
+                $('#GiaPhong_ChiTiet').text(result.loaiPhong.giaTheoGio);
             }
             else {
-                $('#GiaPhong_ChiTiet').text(result.qr_LoaiPhong.giaPhongTheoNgay);
+                $('#GiaPhong_ChiTiet').text(result.loaiPhong.giaPhongTheoNgay);
             }
 
-            $('#ThoiGianNhanPhong_ChiTiet').text(result.qr_DatPhong.ngayNhan);
-            $('#ThoiGianTraPhong_ChiTiet').text(result.qr_DatPhong.ngayTra);
+            $('#ThoiGianNhanPhong_ChiTiet').text(result.datPhong.ngayNhan);
+            $('#ThoiGianTraPhong_ChiTiet').text(result.datPhong.ngayTra);
 
 
-            $('#TongTien_ChiTiet').text(result.qr_DatPhong.tongTienPhong);
+            $('#TongTien_ChiTiet').text(result.datPhong.tongTienPhong);
+            XemChiTietDichVu(MaHoaDon); 
+
 
         },
         error: function () {
@@ -47,4 +49,34 @@ function XemChiTietHoaDon(MaHoaDon) {
 
     });
 
+}
+
+function XemChiTietDichVu(MaHoaDon) {
+    $.ajax({
+        type: 'POST',
+        url: '/HoaDon/LayThongTinDichVu',
+        data: { 'MaHoaDon': MaHoaDon },
+        success: function (result) {
+            console.log(result);
+            var dichVuChiTietTable = $('#DichVuCon');
+
+            dichVuChiTietTable.empty();
+
+            result.dichVuChiTiet.forEach(function (item) {
+                console.log(item)
+                var row = '<tr>' +
+                    '<td>' + item.maDichVu + '</td>' +
+                    '<td>' + item.dichVu.tenDichVu + '</td>' +
+                    '<td>' + item.dichVu.giaTien + '</td>' +
+                    '<td>' + item.soLuong + '</td>' +
+                    '</tr>';
+
+                dichVuChiTietTable.append(row);
+            });
+
+          
+        },
+        error: function () {
+        }
+    });
 }
