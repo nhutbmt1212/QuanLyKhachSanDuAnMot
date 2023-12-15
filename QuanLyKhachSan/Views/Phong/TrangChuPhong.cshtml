@@ -157,7 +157,6 @@
     </section>
     <!-- Popup Thêm Phòng -->
     <div class="form-popup mb-2" id="myForm">
-    <div class="form-popup mb-2" id="myForm">
         <form class="form-container" id="myFormContainer">
             <h1 style="font-family:Roboto;">Thêm phòng</h1>
             <div class="row">
@@ -187,15 +186,15 @@
                         <span id="errorNgayTao" style="color: red;"></span>
                     </div>
                 </div>
-             
-             
+
+
                 <div class="col-md-12">
                     <div class="form-group">
                         <div class="image-selection">
                             <label for="ImageUrl">Chọn ảnh:</label>
                             <input type="file" id="addInputImage" multiple onchange="XuLyAnhDaChon(this)">
                         </div>
-                        <div  id="addImagePreviewContainer" class="col-md-12"></div>
+                        <div id="addImagePreviewContainer" class="col-md-12"></div>
                     </div>
 
                 </div>
@@ -215,7 +214,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Mã phòng</label>
-                        <input class="form-control maphongedit" name="maphong" readonly/>
+                        <input class="form-control maphongedit" name="maphong" readonly />
                     </div>
                     <div class="form-group">
                         <label>Tên loại phòng</label>
@@ -248,12 +247,12 @@
                         </div>
                     </div>
 
-                    <div  id="editImagePreviewContainer"></div>
+                    <div id="editImagePreviewContainer"></div>
                 </div>
             </div>
             <div class="clearfix">
                 <button type="button" class="btn float-right m-2 w-25  cancel " onclick="CloseFormEdit()">Đóng</button>
-                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px" id="editButton" >Sửa phòng</button>
+                <button type="submit" class="btn float-right m-2 w-25 " style="min-width:200px" id="editButton">Sửa phòng</button>
             </div>
         </form>
     </div>
@@ -316,10 +315,10 @@
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item check_checkbox"  id="btn_Sua" onclick="HienThiAnhSuaPhong('@phong.MaPhong')">Sửa</a>
+                                    <a class="dropdown-item check_checkbox" id="btn_Sua" onclick="HienThiAnhSuaPhong('@phong.MaPhong')">Sửa</a>
                                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
                                         {
-                                        <a class="dropdown-item" id="xoa-phong" onclick="XoaPhong('@phong.MaPhong')" >Xóa</a>
+                                        <a class="dropdown-item" id="xoa-phong" onclick="XoaPhong('@phong.MaPhong')">Xóa</a>
                                         }
                                 </div>
                             </div>
@@ -347,7 +346,6 @@
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 <script>
     function showSwalToast(icon, title) {
         const Toast = Swal.mixin({
@@ -373,7 +371,7 @@
     if (swalIcon && swalTitle) {
         showSwalToast(swalIcon, swalTitle);
     }
- 
+
 </script>
 <script>
     $(document).ready(function () {
