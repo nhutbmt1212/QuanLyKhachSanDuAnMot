@@ -1,9 +1,4 @@
 ﻿
-
-   
-
-
-
         var arrDichVuDaChon = [];
         var counter = -1;
 
@@ -14,18 +9,15 @@
 
 
             var TongMaDichVu = [];
-         
             $('span[id^="tongTenDichVuDaDat"]').each(function () {
                 TongMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
             });
-          
             var url = '/TrangChuKhachHang/LayDanhSachDichVu';
             $.ajax({
                 url: url,
                 type: 'GET',
                 success: function (data) {
                     var options = '';
-                    
                     $.each(data, function (index, itemDichVu) {
                         if (!arrDichVuDaChon.includes(itemDichVu.maDichVu) && !TongMaDichVu.includes(itemDichVu.maDichVu)) {
                             options += `<option value="${itemDichVu.maDichVu}" class="optionChonDichVu">${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
@@ -67,7 +59,6 @@
                     if (arrDichVuDaChon.filter(function (e) { return e }).length == data.length) {
                         document.getElementById('AddThemDichVu').style.display = 'none';
                     }
-
                     var dichVuDaChon = document.getElementById('themdichvuselect' + counter).value;
                     var soLuongDichVu = document.getElementById('soLuongDichVu' + counter).value;
                     var nodeServices = `<br id="breakDichVu${counter}"/><span id="tongTenDichVuDaDat${counter}">Tên dịch vụ: ${dichVuDaChon} | </span><span id="tongSoLuongDichVuDaDat${counter}">Số lượng: ${soLuongDichVu}</span>`;
@@ -77,6 +68,10 @@
                     if (data.length == arrDichVuDaChon.length) {
                         document.getElementById('AddThemDichVu').style.display = 'none';
                     }
+                    //cộng 1 là khi thêm mới 1 dịch vụ. Tự động cộng và truyền tham số.
+                    var dem = TongMaDichVu.length + 1;
+                    console.log(dem);
+                    DemSlDichVu(dem);
                 },
                 error: function (error) {
                     console.error('Error fetching data:', error);
@@ -195,7 +190,7 @@ function XemChiTietDichVu(MaDatPhong) {
                     dem.push(1);
                     // Call ThemDichVuEdit with the parameters
                     ThemDichVuEdit(item.maDichVu, item.soLuong);
-                    DemSlDichVu(dem);
+                    DemSlDichVu(dem.length);
                 });
             }
            
@@ -221,11 +216,18 @@ function ThemDichVuEdit(maDichVu, soLuong) {
             
 
             var options = '';
+            var TongMaDichVu = [];
+            $('span[id^="tongTenDichVuDaDat"]').each(function () {
+                TongMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+            });
 
             $.each(data, function (index, itemDichVu) {
-                var isSelected = arrDichVuDaChonedit.includes(itemDichVu.maDichVu);
-                options += `<option value="${itemDichVu.maDichVu}" class="optionChonDichVu" ${isSelected ? 'selected' : ''}>${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
+                if (!TongMaDichVu.includes(itemDichVu.maDichVu)) {
+                    var isSelected = arrDichVuDaChonedit.includes(itemDichVu.maDichVu);
+                    options += `<option value="${itemDichVu.maDichVu}" class="optionChonDichVu" ${isSelected ? 'selected' : ''}>${itemDichVu.tenDichVu} - ${itemDichVu.giaTien}/ ${itemDichVu.donViTinh}</option>`;
+                }
             });
+
 
             var node = `
                 <div class="row" id="id_DichVu${countedit}">
@@ -254,14 +256,20 @@ function ThemDichVuEdit(maDichVu, soLuong) {
 
            
             dichVuSelect.focus(function () {
+                var TongMaDichVu = [];
+                $('span[id^="tongTenDichVuDaDat"]').each(function () {
+                    TongMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+                });
+
                 $(this).find('.optionChonDichVu').each(function () {
-                    if (arrDichVuDaChonedit.includes($(this).val())) {
+                    if (TongMaDichVu.includes($(this).val())) {
                         $(this).hide();
                     } else {
                         $(this).show();
                     }
                 });
             });
+
 
             if (arrDichVuDaChonedit.length == data.length) {
                 $('#AddThemDichVu').hide();
@@ -293,8 +301,7 @@ function DemSlDichVu(dem) {
         type: "POST",
         url: '/QuanLyDatPhong/TongDichVu',
         success: function (result) {
-            console.log(result, dem.length);
-            if (result == dem.length) {
+            if (result == dem) {
                 document.getElementById('AddThemDichVu').style.display = 'none';
 
             }
