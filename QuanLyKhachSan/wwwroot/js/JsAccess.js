@@ -18,6 +18,9 @@ $(document).ready(function () {
 
                     $("#confirmationSection").show();
                     alert("Email đã được gửi thành công!");
+
+                    document.getElementById('emailQuenMk').readOnly = true;
+                    document.getElementById('btnGuiMail').hidden = true;
                 } else {
                     alert("Gửi email không thành công. Vui lòng thử lại!");
                 }
@@ -36,6 +39,8 @@ $(document).ready(function () {
 
         if (MaXacNhanInput === confirmationCode) {
             console.log('Đúng');
+            document.getElementById('confirmationCode').readOnly = true;
+            document.getElementById('btnXacNhan').hidden = true;
             $('#PasswordSection').show();
         } else {
             console.log('Sai');
