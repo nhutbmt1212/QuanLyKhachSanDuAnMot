@@ -152,14 +152,14 @@
                     <div class="col-md-1 mb-3 so-phong mx-auto">
                         <label for="sophong">SL người lớn</label>
                         <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-                            <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required />
+                            <input type="number" id="SlNguoiLon" class="form-control" value="1" min="1" required onkeypress="return event.charCode >= 48" onblur="if(this.value=='' || this.value==0){this.value='1'}"  />
                         </div>
                     </div>
 
                     <div class="col-md-1 mb-1 so-phong mx-auto">
                         <label for="sophong">SL trẻ em</label>
                         <div class="input-group date" id="ngaytraPicker" data-target-input="nearest">
-                            <input type="number" id="SlTreEm" class="form-control" value="1" min="1" required />
+                            <input type="number" id="SlTreEm" class="form-control" value="1" min="0" onkeypress="return event.charCode >= 48" onblur="if(this.value==''){this.value='0'}" required />
                         </div>
                     </div>
 
