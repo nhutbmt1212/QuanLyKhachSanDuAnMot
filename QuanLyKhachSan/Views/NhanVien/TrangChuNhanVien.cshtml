@@ -149,7 +149,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Mã Nhân Viên</label>
-                            <input class="form-control manvEdit" name="MaNhanVien" readonly />
+                            <input class="form-control manvEdit" name="MaNhanVien" id="inputEditMaNhanVien"  readonly />
                         </div>
                         <div class="form-group">
                             <label>Tên Nhân Viên</label>
@@ -227,7 +227,15 @@
 
                         <div class="form-group">
                             <label>Tình trạng</label>
-                            <input class="form-control tinhTrangEdit" name="TinhTrang" />
+                            <select class="form-control tinhTrangEdit" name="TinhTrang">
+                                <option value="Hoạt động">
+                                    Đang hoạt động
+                                </option>
+                                <option value="Nghỉ việc">
+                                    Đã nghỉ việc
+                                </option>
+                            </select>
+                            
                         </div>
                         <div class="form-group">
 
