@@ -25,7 +25,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult TrangChuNhanVien()
         {
-            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!="Đã xóa").ToList();
+            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!= "Nghỉ việc").ToList();
             return View(listNhanVien);
         }
 
@@ -441,6 +441,39 @@ namespace QuanLyKhachSan.Controllers
             return _db.NhanVien.Any(nv => nv.CCCD == cccd);
         }
         #endregion
+        [HttpGet]
+        public JsonResult CheckEditCCCD(string cccd, string nhanVienId)
+        {
+            bool exists = CCCDeditExists(cccd, nhanVienId);
+            return Json(new { exists = exists });
+        }
+
+        private bool CCCDeditExists(string cccd, string nhanVienId)
+        {
+            return _db.NhanVien.Any(nv => nv.CCCD == cccd && nv.MaNhanVien != nhanVienId);
+        }
+        [HttpGet]
+        public JsonResult CheckEditEmail(string email, string nhanVienId)
+        {
+            bool exists = EmailEditExists(email, nhanVienId);
+            return Json(new { exists = exists });
+        }
+
+        private bool EmailEditExists(string email, string nhanVienId)
+        {
+            return _db.NhanVien.Any(nv => nv.Email == email && nv.MaNhanVien != nhanVienId);
+        }
+        [HttpGet]
+        public JsonResult CheckEditSoDienThoai(string soDienThoai, string nhanVienId)
+        {
+            bool exists = SoDienThoaiEditExists(soDienThoai, nhanVienId);
+            return Json(new { exists = exists });
+        }
+
+        private bool SoDienThoaiEditExists(string soDienThoai, string nhanVienId)
+        {
+            return _db.NhanVien.Any(nv => nv.SoDienThoai == soDienThoai && nv.MaNhanVien != nhanVienId);
+        }
 
         public IActionResult LichSuHoatDong()
         {

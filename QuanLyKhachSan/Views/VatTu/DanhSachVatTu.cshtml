@@ -21,7 +21,7 @@
     <!-- Popup - Thêm Vật tư -->
     <div class="form-popup mb-2" id="myForm">
         <!-- Form Thêm Vật tư -->
-        <form class="form-container" method="post" enctype="multipart/form-data">
+        <form class="form-container" method="post" enctype="multipart/form-data" id="myForm">
             <h1 style="font-family:Roboto;">Thêm vật tư</h1>
             <div class="row">
                 <div class="col-md-4">
@@ -44,7 +44,15 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Tình trạng vật tư</label>
-                        <input class="form-control" name="tinhtrangvattu" id="inputFieldTinhTrangVT" />
+                        <select class="form-control" name="tinhtrangvattu" id="inputFieldTinhTrangVT">
+                            <option value="Hoạt động">
+                               Hoạt dộng
+                            </option>
+                            <option value="Hư hỏng">
+                                Hư hỏng
+                            </option>
+                        </select>
+                        
                         <span id="errorTinhTrangVT" style="color: red;"></span>
                     </div>
 
@@ -70,19 +78,27 @@
                     </div>
                     <div class="form-group">
                         <label>Tên vật tư</label>
-                        <input class="form-control tenvattuEdit" id="TenVatTuEdit" name="TenVatTu" id="inputEditTenVT" />
+                        <input class="form-control tenvattuEdit" name="TenVatTu" id="inputEditTenVT" />
                         <span id="errorEditTenVT" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Nhà sản xuất</label>
-                        <input class="form-control nhasanxuatEdit" id="NhaSanXuatEdit" name="NhaSanXuat" id="inputEditNhaSX" />
+                        <input class="form-control nhasanxuatEdit"  name="NhaSanXuat" id="inputEditNhaSX" />
                         <span id="errorEditNhaSX" style="color: red;"></span>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Tình trạng vật tư</label>
-                        <input class="form-control tinhtrangvattuEdit" id="TinhTrangVatTuEdit" name="TinhTrangVatTu" id="inputEditTinhTrangVT" />
+                        <select class="form-control tinhtrangvattuEdit " name="TinhTrangVatTu" id="TinhTrangVatTuEdit">
+                            <option value="Hoạt động">
+                                Hoạt dộng
+                            </option>
+                            <option value="Hư hỏng">
+                                Hư hỏng
+                            </option>
+                        </select>
+                     
                         <span id="errorEditTinhTrangVT" style="color: red;"></span>
                     </div>
                     <div class="form-group">

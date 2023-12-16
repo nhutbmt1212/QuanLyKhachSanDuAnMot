@@ -53,17 +53,19 @@
         });
 
 
-    $("#inputEditEmail").on("focusout", function () {
+        $("#inputEditEmail").on("focusout", function () {
+            var manhavienedit = document.getElementById('inputEditMaNhanVien').value;
+            console.log(manhavienedit);
         var emailValue = $(this).val();
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailValue.length === 0) {
-            $("#errorEditEmail").text("Email không được để trống.");
-        } else if (!isValidEmail(emailValue)) {
-            $("#errorEditEmail").text("Email không hợp lệ.");
-        } else {
-            $("#errorEditEmail").text("");
-        }
+            if (emailValue.length === 0) {
+                $("#errorEditEmail").text("Email không được để trống.");
+            } else if (!isValidEmail(emailValue)) {
+                $("#errorEditEmail").text("Email không hợp lệ.");
+            } else {
+                $("#errorEditEmail").text("");
+            }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input địa chỉ
     $("#inputFieldDiaChi").on("focusout", function () {
@@ -119,17 +121,20 @@
         });
 
     
-    $("#inputEditSDT").on("focusout", function () {
-        var sdtValue = $(this).val();
+     
 
-        if (sdtValue.length === 0) {
-            $("#errorEditSDT").text("Số điện thoại không được để trống.");
-        } else if (!isValidSDT(sdtValue)) {
-            $("#errorEditSDT").text("Số điện thoại không hợp lệ.");
-        } else {
-            $("#errorEditSDT").text("");
-        }
-    });
+        $("#inputEditSDT").on("focusout", function () {
+            if (sdtValue.length === 0) {
+                $("#errorEditSDT").text("Số điện thoại không được để trống.");
+
+            } else if (!isValidSDT(sdtValue)) {
+                $("#errorEditSDT").text("Số điện thoại không hợp lệ.");
+
+            } else {
+                $("#errorEditSDT").text("");
+            }
+        });
+
     // Bắt sự kiện khi người dùng rời khỏi ô input CCCD
         $("#inputFieldCCCD").on("focusout", function () {
             var cccdValue = $(this).val();
@@ -156,16 +161,22 @@
         });
 
 
+        var cccdValue = $("#inputEditCCCD").val();
+        var cccdExists = false;
+        var manhavienedit = document.getElementById('inputEditMaNhanVien').value;
+
         $("#inputEditCCCD").on("focusout", function () {
-        var cccdValue = $(this).val();
-        if (cccdValue.length === 0) {
-            $("#errorEditCCCD").text("CCCD không được để trống.");
-        } else if (!isValidCCCD(cccdValue)) {
-            $("#errorEditCCCD").text("CCCD không hợp lệ.");
-        } else {
-            $("#errorEditCCCD").text("");
-        }
-    });
+            if (cccdValue.length === 0) {
+                $("#errorEditCCCD").text("CCCD không được để trống.");
+
+            } else if (!isValidCCCD(cccdValue)) {
+                $("#errorEditCCCD").text("CCCD không hợp lệ.");
+
+            } else {
+                $("#errorEditCCCD").text("CCCD không hợp lệ.");
+            }
+        });
+
 
     // Bắt sự kiện khi người dùng rời khỏi ô input mật khẩu
     $("#inputFieldMK").on("focusout", function () {
@@ -268,7 +279,9 @@
 
     // Bắt sự kiện khi form được submit
     $("#myForm").submit(function (event) {
-
+        //if ($("#errorEmail").text != null || $("#errorEmail").text || !null || $("#errorSDT").text != null ) {
+        //    event.preventDefault();
+        //}
 
         var inputValueTenNV = $("#inputFieldTenNV").val();
         if (inputValueTenNV.length === 0) {
@@ -287,16 +300,33 @@
 
 
         var emailValue = $("#inputFieldEmail").val();
+        var emailExists = false;
+
         if (emailValue.length === 0) {
             $("#errorEmail").text("Email không được để trống.");
             event.preventDefault();
         } else if (!isValidEmail(emailValue)) {
             $("#errorEmail").text("Địa chỉ email không hợp lệ.");
             event.preventDefault();
-        } else if (!isValidEmail(emailValue)) {
-            $("#errorEmail").text("Email không hợp lệ.");
-            event.preventDefault();
+        } else {
+            $.ajax({
+                url: '/NhanVien/CheckEmail',
+                type: 'GET',
+                data: { email: emailValue },
+                async: false,
+                success: function (data) {
+                    if (data.exists) {
+                        $("#errorEmail").text("Email đã tồn tại trong hệ thống.");
+                        emailExists = true;
+                    }
+                }
+            });
+
+            if (emailExists) {
+                event.preventDefault();
+            }
         }
+
 
         var diaChiValue = $("#inputFieldDiaChi").val();
         if (diaChiValue.length === 0) {
@@ -313,22 +343,72 @@
        
 
         var sdtValue = $("#inputFieldSDT").val();
+        var sdtExists = false;
+
         if (sdtValue.length === 0) {
             $("#errorSDT").text("Số điện thoại không được để trống.");
             event.preventDefault();
         } else if (!isValidSDT(sdtValue)) {
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
             event.preventDefault();
+        } else {
+            $.ajax({
+                url: '/NhanVien/CheckSoDienThoai',
+                type: 'GET',
+                data: { sodienthoai: sdtValue },
+                async: false,
+                success: function (data) {
+                    if (data.exists) {
+                        $("#errorSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
+                        sdtExists = true;
+                    } else {
+                        $("#errorSDT").text("");
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+            if (sdtExists) {
+                event.preventDefault();
+            }
         }
 
+
         var cccdValue = $("#inputFieldCCCD").val();
+        var cccdExists = false;
+
         if (cccdValue.length === 0) {
             $("#errorCCCD").text("CCCD không được để trống.");
             event.preventDefault();
         } else if (!isValidCCCD(cccdValue)) {
             $("#errorCCCD").text("CCCD không hợp lệ.");
             event.preventDefault();
+        } else {
+            $.ajax({
+                url: '/NhanVien/CheckCCCD',
+                type: 'GET',
+                data: { cccd: cccdValue },
+                async: false,
+                success: function (data) {
+                    if (data.exists) {
+                        $("#errorCCCD").text("CCCD đã tồn tại trong hệ thống.");
+                        cccdExists = true;
+                    } else {
+                        $("#errorCCCD").text("");
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+            if (cccdExists) {
+                event.preventDefault();
+            }
         }
+
 
         var matKhauValue = $("#inputFieldMK").val();
         if (matKhauValue.length === 0) {
@@ -394,16 +474,19 @@
 
 
             var emailValue = $("#inputEditEmail").val();
+            var emailExists = false;
+
             if (emailValue.length === 0) {
                 $("#errorEditEmail").text("Email không được để trống.");
                 event.preventDefault();
             } else if (!isValidEmail(emailValue)) {
                 $("#errorEditEmail").text("Địa chỉ email không hợp lệ.");
                 event.preventDefault();
-            } else if (!isValidEmail(emailValue)) {
-                $("#errorEditEmail").text("Email không hợp lệ.");
-                event.preventDefault();
             }
+          
+            
+            
+
 
             var diaChiValue = $("#inputEditDiaChi").val();
             if (diaChiValue.length === 0) {
@@ -420,6 +503,8 @@
          
 
             var sdtValue = $("#inputEditSDT").val();
+            var sdtExists = false;
+
             if (sdtValue.length === 0) {
                 $("#errorEditSDT").text("Số điện thoại không được để trống.");
                 event.preventDefault();
@@ -427,8 +512,33 @@
                 $("#errorEditSDT").text("Số điện thoại không hợp lệ.");
                 event.preventDefault();
             }
+            //} else {
+            //    $.ajax({
+            //        url: '/NhanVien/CheckEditSoDienThoai',
+            //        type: 'GET',
+            //        data: { sodienthoai: sdtValue },
+            //        async: false,
+            //        success: function (data) {
+            //            if (data.exists) {
+            //                $("#errorEditSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
+            //                sdtExists = true;
+            //            } else {
+            //                $("#errorEditSDT").text("");
+            //            }
+            //        },
+            //        error: function (error) {
+            //            console.error(error);
+            //        }
+            //    });
+
+            //    if (sdtExists) {
+            //        event.preventDefault();
+            //    }
+            //}
 
             var cccdValue = $("#inputEditCCCD").val();
+            var cccdExists = false;
+
             if (cccdValue.length === 0) {
                 $("#errorEditCCCD").text("CCCD không được để trống.");
                 event.preventDefault();
@@ -436,6 +546,30 @@
                 $("#errorEditCCCD").text("CCCD không hợp lệ.");
                 event.preventDefault();
             }
+            //} else {
+            //    $.ajax({
+            //        url: '/NhanVien/CheckEditCCCD',
+            //        type: 'GET',
+            //        data: { cccd: cccdValue },
+            //        async: false,
+            //        success: function (data) {
+            //            if (data.exists) {
+            //                $("#errorEditCCCD").text("CCCD đã tồn tại trong hệ thống.");
+            //                cccdExists = true;
+            //            } else {
+            //                $("#errorEditCCCD").text("");
+            //            }
+            //        },
+            //        error: function (error) {
+            //            console.error(error);
+            //        }
+            //    });
+
+            //    if (cccdExists) {
+            //        event.preventDefault();
+            //    }
+            //}
+
 
             var matKhauValue = $("#inputEditMK").val();
             if (matKhauValue.length === 0) {
