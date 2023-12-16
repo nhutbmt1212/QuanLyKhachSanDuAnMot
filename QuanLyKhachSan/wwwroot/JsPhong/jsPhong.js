@@ -44,7 +44,8 @@ getValue.addEventListener('click', function (e) {
 
     document.querySelector('.maphongedit').value = maphong;
     document.querySelector('.maloaiphongedit').value = maLoaiPhong;
-    document.querySelector('.tinhtrangedit').value = tinhTrang;
+    document.querySelector('#inputEditTinhTrang').value = tinhTrang;
+    console.log(tinhTrang);
     document.querySelector('.ngaytaoedit').value = ngayTao;
 
 
