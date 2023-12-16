@@ -115,7 +115,7 @@ function openPopupThanhToan(maPhong) {
             var ngayTraPhong = new Date(result.qr_MaDatPhongTheoNgayGioHienTai.ngayTra);
             var duration = 0;
             var giaPhong = 0;
-            if (hinhThuc === 'Ngay') {
+            if (hinhThuc === 'Ngày') {
                 duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60 * 24);
                 giaPhong = result.qr_LoaiPhongTheoMaPhong.giaPhongTheoNgay;
             } else {
@@ -314,7 +314,7 @@ function TinhTongTienPhong() {
     var ngayNhanPhong = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
     var ngayTraPhong = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
     var duration = 0;
-    if (hinhThuc === 'Ngay') {
+    if (hinhThuc === 'Ngày') {
         duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60 * 24);
     } else {
         duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60);

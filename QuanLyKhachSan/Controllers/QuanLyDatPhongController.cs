@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.Finance.Implementations;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
@@ -13,13 +12,13 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var qr_DatPhong = _db.DatPhong.ToList();
+            var qr_DatPhong = _db.DatPhong.Where(s => s.TinhTrang != "Đã thanh toán" && s.TinhTrang != "Chờ xử lý").ToList();
             return View(qr_DatPhong);
         }
         [HttpPost]
         public IActionResult LayThongTinDichVu(string MaDatPhong)
         {
-            
+
 
             var qr_DichVuChiTiet = _db.ChiTietDichVu
                 .Where(s => s.MaDatPhong == MaDatPhong)
@@ -31,15 +30,16 @@ namespace QuanLyKhachSan.Controllers
                 .Where(s => maDichVuList.Contains(s.MaDichVu))
                 .ToList();
 
-            
 
-            return Json(new {qr_DichVuChiTiet,qr_DichVu});
+
+            return Json(new { qr_DichVuChiTiet, qr_DichVu });
         }
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult LayThongTinDatPhong(string MaDatPhong) {
+        public IActionResult LayThongTinDatPhong(string MaDatPhong)
+        {
             var qr_DatPhong = _db.DatPhong.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
-           
+
             return Json(new { qr_DatPhong });
         }
 
@@ -84,10 +84,24 @@ namespace QuanLyKhachSan.Controllers
             return Json(new { qr_LoaiPhong });
         }
         [HttpPost]
-        public IActionResult suaDatPhong(List<string> ThanhTienMaDichVu, List<string> arrSoLuongDichVu, string maDatPhongValue, string maPhongValue, string maKhachHangValue, DateTime ngayNhanValue, DateTime ngayTraValue, int soLuongNguoiLonValue, int soLuongTreEmValue, string hinhThucDatPhongValue, string maNhanVienValue, int khachTraTruocValue, int tongtienPhongValue)
+        public IActionResult suaDatPhong(
+     List<string> ThanhTienMaDichVu,
+     List<string> arrSoLuongDichVu,
+     string maDatPhongValue,
+     string maPhongValue,
+     string maKhachHangValue,
+     DateTime ngayNhanValue,
+     DateTime ngayTraValue,
+     int soLuongNguoiLonValue,
+     int soLuongTreEmValue,
+     string hinhThucDatPhongValue,
+     string maNhanVienValue,
+     int khachTraTruocValue,
+     int tongtienPhongValue,
+     string tinhTrangValue)
         {
-
-            var DatPhong = new DatPhong
+            // Firstly, update booking information
+            var datPhong = new DatPhong
             {
                 MaDatPhong = maDatPhongValue,
                 MaKhachHang = maKhachHangValue,
@@ -99,50 +113,49 @@ namespace QuanLyKhachSan.Controllers
                 HinhThucDatPhong = hinhThucDatPhongValue,
                 TongTienPhong = tongtienPhongValue,
                 MaNhanVien = maNhanVienValue,
-                TinhTrang = "Đã được duyệt",
+                TinhTrang = tinhTrangValue,
                 SoTienTraTruoc = khachTraTruocValue
             };
-            _db.DatPhong.Update(DatPhong);
-            // Lấy tất cả dịch vụ từ cơ sở dữ liệu
-            var allServices = _db.ChiTietDichVu.Where(s => s.MaDatPhong == maDatPhongValue).Select(s => s.MaDichVu).ToList();
-
-            // Xóa dịch vụ không còn trong mảng
-            foreach (var service in allServices)
+            _db.DatPhong.Update(datPhong);
+            // Process the services
+            var existingServices = _db.ChiTietDichVu.Where(s => s.MaDatPhong == maDatPhongValue).ToList();
+            foreach (var serviceId in ThanhTienMaDichVu)
             {
-                if (!ThanhTienMaDichVu.Contains(service))
+                var serviceIndex = ThanhTienMaDichVu.IndexOf(serviceId);
+                var serviceQuantity = int.Parse(arrSoLuongDichVu[serviceIndex]);
+                var existingService = existingServices.FirstOrDefault(s => s.MaDichVu == serviceId);
+                if (existingService != null)
                 {
-                    var serviceToRemove = _db.ChiTietDichVu.FirstOrDefault(s => s.MaDichVu == service && s.MaDatPhong == maDatPhongValue);
-                    _db.ChiTietDichVu.Remove(serviceToRemove);
+                    // Update existing service quantity
+                    existingService.SoLuong = serviceQuantity;
                 }
-            }
-
-            // Thêm dịch vụ mới từ mảng
-            for (int i = 0; i < ThanhTienMaDichVu.Count; i++)
-            {
-                if (!allServices.Contains(ThanhTienMaDichVu[i]))
+                else
                 {
+                    // Add the new service
                     var newService = new ChiTietDichVu
                     {
-                        MaDichVu = ThanhTienMaDichVu[i],
-                        MaKhachHang= maKhachHangValue,
-                        SoLuong = int.Parse(arrSoLuongDichVu[i]),
+                        MaDichVu = serviceId,
+                        MaKhachHang = maKhachHangValue,
                         MaDatPhong = maDatPhongValue,
+                        SoLuong = serviceQuantity,
                         MaNhanVien = maNhanVienValue,
-                        ThoiGianDichVu =DateTime.Now,
-                        TrangThai="Hoạt động"
-                        // Đặt các trường khác ở đây
+                        ThoiGianDichVu = DateTime.Now, // Set the time accordingly
+                        TrangThai = "Hoạt động" // Set the status accordingly 
                     };
                     _db.ChiTietDichVu.Add(newService);
                 }
             }
-
-           
-
-            // Lưu thay đổi
+            // Remove services that are not present anymore
+            var servicesToRemove = existingServices.Where(s => !ThanhTienMaDichVu.Contains(s.MaDichVu)).ToList();
+            foreach (var serviceToRemove in servicesToRemove)
+            {
+                _db.ChiTietDichVu.Remove(serviceToRemove);
+            }
+            // Save all changes
             _db.SaveChanges();
-
             return RedirectToAction("Index", "QuanLyDatPhong");
         }
+
 
     }
 }

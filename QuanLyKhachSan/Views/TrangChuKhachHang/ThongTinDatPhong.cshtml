@@ -146,7 +146,18 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Giới tính</label>
-                                    @if (qr_KhachHang.GioiTinh == "Nam")
+                                    @if (qr_KhachHang.GioiTinh == null)
+                                    {
+                                        <select class="form-select" name="gioitinh" id="gioitinh">
+                                            <option value="Nam">
+                                                Nam
+                                            </option>
+                                            <option value="Nữ">
+                                                Nữ
+                                            </option>
+                                        </select>
+                                    }
+                                    else if (qr_KhachHang.GioiTinh == "Nam")
                                     {
                                         <select class="form-select" name="gioitinh" id="gioitinh">
                                             <option value="Nam">
@@ -178,10 +189,11 @@
                                     <input class="form-control" value="@qr_KhachHang.CCCD" name="cccd" id="inputFieldCCCD" maxlength="12" placeholder="Nhập CCCD" />
                                     <span id="errorCCCD" style="color: red;"></span>
                                 </div>
+
+                                string formattedDate = qr_KhachHang.NgaySinh.HasValue ? qr_KhachHang.NgaySinh.Value.Date.ToString("yyyy-MM-dd") : "";
                                 <div class="form-group">
                                     <label>Ngày sinh</label>
-                                    <input class="form-control"  type="datetime-local" name="ngaysinh" id="inputFieldNgaySinh" />
-                                    <span id="errorNgaySinh" style="color: red;"></span>
+                                    <input class="form-control" type="date" value="@formattedDate" name="ngaysinh" id="inputFieldNgaySinh" />
                                 </div>
                                 <div class="form-group">
                                     <label>Địa chỉ</label>

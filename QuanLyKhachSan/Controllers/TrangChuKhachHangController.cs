@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
+using System.Security.Claims;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -15,7 +16,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s=>s.TinhTrang!="Đã xóa").ToList();
+            var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s => s.TinhTrang != "Đã xóa").ToList();
             ViewBag.DanhSachPhong = listPhong;
             var listLoaiPhong = _db.LoaiPhong.ToList();
             ViewBag.DanhSachLoaiPhong = listLoaiPhong;
@@ -58,7 +59,7 @@ namespace QuanLyKhachSan.Controllers
         public async Task<IActionResult> LayDanhSachDichVu()
         {
             var qr_ListDichVu = _db.DichVu.ToList();
-            
+
             return Json(qr_ListDichVu);
         }
         [HttpGet]
@@ -105,7 +106,7 @@ namespace QuanLyKhachSan.Controllers
 
         public IActionResult ThongTinDatPhong()
         {
-            
+
             return View("ThongTinDatPhong");
         }
 
@@ -128,70 +129,184 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult DatPhong(string TenKhachHang, string GioiTinh, string sdt, string email, DateTime ngaysinh, string diachi, string cccd, DateTime NgayNhan, DateTime NgayTra, string MaPhong, int SoLuongNguoiLon, int SoLuongTreEm, int TongTien, List<int> arrSoLuongDichVu, List<string> arrMaDichVu)
         {
             Random random = new Random();
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            string maKhachHang = new string(Enumerable.Repeat(chars, 6)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-
-            var khachHang = new KhachHang
+            var MaNguoiDungDangNhap = User.FindFirst(ClaimTypes.Surname)?.Value;
+            var qr_KhachHang = _db.KhachHang.FirstOrDefault(s => s.MaKhachHang == MaNguoiDungDangNhap);
+            //Trường hợp khách mới đăng ký chưa có thông tin đăng nhập
+            if (qr_KhachHang != null && qr_KhachHang.SoDienThoai == null && qr_KhachHang.CCCD == null)
             {
-                MaKhachHang = maKhachHang,
-                TenKhachHang = TenKhachHang,
-                SoDienThoai = sdt,
-                DiaChi = diachi,
-                CCCD = cccd,
-                NgaySinh = ngaysinh,
-                GioiTinh = GioiTinh,
-                Email = email,
-                TinhTrang = "Đang hoạt động",
-                MatKhau = maKhachHang,
-                NgayDangKy = DateTime.Now
-            };
-            _db.KhachHang.Add(khachHang);
-            const string chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            string MaDatPhong = new string(Enumerable.Repeat(chars1, 6)
-                .Select(s => s[random.Next(s.Length)]).ToArray());
-            var DatPhong = new DatPhong
-            {
-                MaDatPhong = MaDatPhong,
-                MaKhachHang = maKhachHang,
-                MaPhong = MaPhong,
-                NgayNhan = NgayNhan,
-                NgayTra = NgayTra,
-                SoLuongNguoiLon = SoLuongNguoiLon,
-                SoLuongTreEm = SoLuongTreEm,
-                HinhThucDatPhong = "Ngay",
-                TongTienPhong = TongTien,
-                MaNhanVien = null,
-                TinhTrang = "Chờ xử lý",
-                SoTienTraTruoc = 0
-            };
-            _db.DatPhong.Add(DatPhong);
-            if (arrMaDichVu !=null || arrSoLuongDichVu !=null)
-            {
+                qr_KhachHang.TenKhachHang = TenKhachHang;
+                qr_KhachHang.SoDienThoai = sdt;
+                qr_KhachHang.DiaChi = diachi;
+                qr_KhachHang.CCCD = cccd;
+                qr_KhachHang.NgaySinh = ngaysinh;
+                qr_KhachHang.GioiTinh = GioiTinh;
+                qr_KhachHang.Email = email;
+                qr_KhachHang.TinhTrang = "Đang hoạt động";
+                qr_KhachHang.MatKhau = qr_KhachHang.MaKhachHang;
+                qr_KhachHang.NgayDangKy = DateTime.Now;
 
+                _db.SaveChanges();
+                const string chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string MaDatPhong = new string(Enumerable.Repeat(chars1, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
 
-                for (int i = 0; i < arrMaDichVu.Count; i++)
+                var DatPhong = new DatPhong
                 {
-                    var maDichVu = arrMaDichVu[i];
-                    var SoLuongDichVu = arrSoLuongDichVu[i];
+                    MaDatPhong = MaDatPhong,
+                    MaKhachHang = qr_KhachHang.MaKhachHang,
+                    MaPhong = MaPhong,
+                    NgayNhan = NgayNhan,
+                    NgayTra = NgayTra,
+                    SoLuongNguoiLon = SoLuongNguoiLon,
+                    SoLuongTreEm = SoLuongTreEm,
+                    HinhThucDatPhong = "Ngay",
+                    TongTienPhong = TongTien,
+                    MaNhanVien = null,
+                    TinhTrang = "Chờ xử lý",
+                    SoTienTraTruoc = 0
+                };
+                _db.DatPhong.Add(DatPhong);
 
-                    var DichVu = new ChiTietDichVu
+
+                if (arrMaDichVu != null && arrSoLuongDichVu != null)
+                {
+                    for (int i = 0; i < arrMaDichVu.Count; i++)
                     {
-                        MaDichVu = maDichVu,
-                        MaKhachHang = maKhachHang,
-                        SoLuong = SoLuongDichVu,
-                        MaNhanVien = null,
-                        ThoiGianDichVu = DateTime.Now,
-                        TrangThai = "Hoạt động",
-                        MaDatPhong = MaDatPhong
-                    };
-                    _db.ChiTietDichVu.Add(DichVu);
+                        var maDichVu = arrMaDichVu[i];
+                        var SoLuongDichVu = arrSoLuongDichVu[i];
+
+                        var DichVu = new ChiTietDichVu
+                        {
+                            MaDichVu = maDichVu,
+                            MaKhachHang = qr_KhachHang.MaKhachHang,
+                            SoLuong = SoLuongDichVu,
+                            MaNhanVien = null,
+                            ThoiGianDichVu = DateTime.Now,
+                            TrangThai = "Hoạt động",
+                            MaDatPhong = MaDatPhong
+                        };
+                        _db.ChiTietDichVu.Add(DichVu);
+                    }
                 }
+                _db.SaveChanges();
             }
-            _db.SaveChanges();
-            return RedirectToAction("Index","TrangChuKhachHang");
+            //Khách hàng đăng nhập đã có sẵn thông tin thì sẽ chỉ đặt phòng cho khách hàng đó và không lưu thông tin khách hàng nữa
+            else if (qr_KhachHang != null && qr_KhachHang.SoDienThoai != null && qr_KhachHang.CCCD != null)
+            {
+                const string chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string MaDatPhong = new string(Enumerable.Repeat(chars1, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                var DatPhong = new DatPhong
+                {
+                    MaDatPhong = MaDatPhong,
+                    MaKhachHang = qr_KhachHang.MaKhachHang,
+                    MaPhong = MaPhong,
+                    NgayNhan = NgayNhan,
+                    NgayTra = NgayTra,
+                    SoLuongNguoiLon = SoLuongNguoiLon,
+                    SoLuongTreEm = SoLuongTreEm,
+                    HinhThucDatPhong = "Ngay",
+                    TongTienPhong = TongTien,
+                    MaNhanVien = null,
+                    TinhTrang = "Chờ xử lý",
+                    SoTienTraTruoc = 0
+                };
+                _db.DatPhong.Add(DatPhong);
+
+
+                if (arrMaDichVu != null && arrSoLuongDichVu != null)
+                {
+                    for (int i = 0; i < arrMaDichVu.Count; i++)
+                    {
+                        var maDichVu = arrMaDichVu[i];
+                        var SoLuongDichVu = arrSoLuongDichVu[i];
+
+                        var DichVu = new ChiTietDichVu
+                        {
+                            MaDichVu = maDichVu,
+                            MaKhachHang = qr_KhachHang.MaKhachHang,
+                            SoLuong = SoLuongDichVu,
+                            MaNhanVien = null,
+                            ThoiGianDichVu = DateTime.Now,
+                            TrangThai = "Hoạt động",
+                            MaDatPhong = MaDatPhong
+                        };
+                        _db.ChiTietDichVu.Add(DichVu);
+                    }
+                }
+                _db.SaveChanges();
+            }
+            //Khách hàng chưa đăng nhập nhập thông tin. Kiểm tra nếu email tồn tại trong hệ thống thì bắt đăng nhập
+            else if (qr_KhachHang == null)
+            {
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string maKhachHang = new string(Enumerable.Repeat(chars, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+                var khachHang = new KhachHang
+                {
+                    MaKhachHang = maKhachHang,
+                    TenKhachHang = TenKhachHang,
+                    SoDienThoai = sdt,
+                    DiaChi = diachi,
+                    CCCD = cccd,
+                    NgaySinh = ngaysinh,
+                    GioiTinh = GioiTinh,
+                    Email = email,
+                    TinhTrang = "Đang hoạt động",
+                    MatKhau = maKhachHang,
+                    NgayDangKy = DateTime.Now
+                };
+                _db.KhachHang.Add(khachHang);
+                _db.SaveChanges();
+                const string chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                string MaDatPhong = new string(Enumerable.Repeat(chars1, 6)
+                    .Select(s => s[random.Next(s.Length)]).ToArray());
+
+                var DatPhong = new DatPhong
+                {
+                    MaDatPhong = MaDatPhong,
+                    MaKhachHang = maKhachHang,
+                    MaPhong = MaPhong,
+                    NgayNhan = NgayNhan,
+                    NgayTra = NgayTra,
+                    SoLuongNguoiLon = SoLuongNguoiLon,
+                    SoLuongTreEm = SoLuongTreEm,
+                    HinhThucDatPhong = "Ngay",
+                    TongTienPhong = TongTien,
+                    MaNhanVien = null,
+                    TinhTrang = "Chờ xử lý",
+                    SoTienTraTruoc = 0
+                };
+                _db.DatPhong.Add(DatPhong);
+                if (arrMaDichVu != null && arrSoLuongDichVu != null)
+                {
+                    for (int i = 0; i < arrMaDichVu.Count; i++)
+                    {
+                        var maDichVu = arrMaDichVu[i];
+                        var SoLuongDichVu = arrSoLuongDichVu[i];
+
+                        var DichVu = new ChiTietDichVu
+                        {
+                            MaDichVu = maDichVu,
+                            MaKhachHang = maKhachHang,
+                            SoLuong = SoLuongDichVu,
+                            MaNhanVien = null,
+                            ThoiGianDichVu = DateTime.Now,
+                            TrangThai = "Hoạt động",
+                            MaDatPhong = MaDatPhong
+                        };
+                        _db.ChiTietDichVu.Add(DichVu);
+                    }
+                }
+                _db.SaveChanges();
+            }
+
+
+
+
+            return RedirectToAction("Index", "TrangChuKhachHang");
+
         }
-
-
     }
 }

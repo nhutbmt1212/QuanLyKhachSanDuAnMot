@@ -170,6 +170,7 @@ function HienThiThongTinDatPhong(MaDatPhong) {
             $('#inputFieldTongTienPhong').val(result.qr_DatPhong.tongTienPhong);
             $('#inputFieldMaNhanVien').val(result.qr_DatPhong.maNhanVien);
             $('#inputFieldKhachTraTruoc').val(result.qr_DatPhong.soTienTraTruoc);
+            $('#inputFieldTinhTrang').val(result.qr_DatPhong.tinhTrang);
 
 
             TinhTongTienPhong();
@@ -400,7 +401,7 @@ function SuaDatPhong() {
     var maNhanVienValue = $('#inputFieldMaNhanVien').val();
     var khachTraTruocValue = $('#inputFieldKhachTraTruoc').val();
     var tongtienPhongValue = $('#TongTienPhong').text();
-  
+    var tinhTrangValue = $('#inputFieldTinhTrang').val();
     $.ajax({
         type: 'POST',
         url: '/QuanLyDatPhong/suaDatPhong',
@@ -417,7 +418,9 @@ function SuaDatPhong() {
             'hinhThucDatPhongValue': hinhThucDatPhongValue,
             'maNhanVienValue': maNhanVienValue,
             'khachTraTruocValue': parseInt(khachTraTruocValue),
-            'tongtienPhongValue': parseInt(tongtienPhongValue)
+            'tongtienPhongValue': parseInt(tongtienPhongValue),
+            'tinhTrangValue': tinhTrangValue
+           
         },
         success: function (response) {
             // Xử lý khi yêu cầu thành công

@@ -41,37 +41,58 @@
 
         @foreach (var phong in Model)
         {
-            
+            var currentDate = DateTime.Now;
+
+            var reservations = _db.DatPhong
+            .Where(dp =>
+            dp.MaPhong == phong.MaPhong &&
+            dp.TinhTrang != "Chờ xử lý" &&
+            dp.TinhTrang != "Đã thanh toán" &&
+            dp.NgayNhan <= currentDate &&
+            dp.NgayTra > currentDate)
+            .ToList();
+
+            var isRoomAvailable = !reservations.Any();
+
+            string roomStatus = isRoomAvailable ? "Trống" : reservations.First().TinhTrang;
+
+            string displayStatus;
+            string cssClass;
+
+            switch (roomStatus)
+            {
+                case "Đã được duyệt":
+                    displayStatus = "Đã được duyệt";
+                    cssClass = "text-primary";
+                    break;
+                case "Chờ check in":
+                    displayStatus = "Chờ check in";
+                    cssClass = "status-check-in";
+                    break;
+                case "Đang ở":
+                    displayStatus = "Đang ở";
+                    cssClass = "text-info";
+                    break;
+                case "Chờ check out":
+                    displayStatus = "Chờ check out";
+                    cssClass = "text-warning";
+                    break;
+                default:
+                    displayStatus = "Trống";
+                    cssClass = "status-available";
+                    break;
+            }
+
+            var qr_GiaPhong_MaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == phong.MaLoaiPhong);
+
             <div class="room">
-                @{
-                    var currentDate = DateTime.Now;
-                    var isReservationApproved = _db.DatPhong.Any(dp =>
-                    dp.MaPhong == phong.MaPhong &&
-                    dp.TinhTrang == "Đã được duyệt" &&
-                    dp.NgayNhan <= currentDate &&
-                    dp.NgayTra > currentDate
-                    );
-                }
-               @*  @if (isReservationApproved)
-                {
-                    <span class="trangthai text-white" style="background-color:red;">Đã được thuê</span>
-                }
-                else
-                {
-                    <span class="trangthai">Trống</span>
-                } *@
-                @{
-                    var qr_GiaPhong_MaPhong = _db.LoaiPhong.FirstOrDefault(s => s.MaLoaiPhong == phong.MaLoaiPhong);
-                }
                 <div class="options-container">
                     <div class="options-btn">&#8226;&#8226;&#8226;</div>
                     <div class="options-menu">
-                    
-                       
-                        @if (isReservationApproved)
-                        {    <div class="option">Thêm dịch vụ</div>
+                        @if (displayStatus =="Chờ check out")
+                        {
+                            <div class="option">Thêm dịch vụ</div>
                             <div class="option" onclick="openPopupThanhToan('@phong.MaPhong')">Thanh toán</div>
-
                         }
                         else
                         {
@@ -79,6 +100,7 @@
                         }
                     </div>
                 </div>
+
                 @if (phong.ImageLinks != null && phong.ImageLinks.Any())
                 {
                     <img src="~/UploadImage/@phong.ImageLinks.First().Url" alt="First Image" class="img_detail" />
@@ -87,20 +109,13 @@
                 {
                     <p>No images available</p>
                 }
+
                 <div class="details">
                     <div class="status-badge">
-                        @if (isReservationApproved)
-                        {
-                            <span class="trangthai text-danger status-text status-available">Đã được thuê</span>
-                        }
-                        else
-                        {
-                            
-                            <span class="status-text status-available trangthai">Trống</span>
-                        }
-                        
+                        <span class="status-text @cssClass">@displayStatus</span>
                     </div>
-                    <h4><span class="maphong">@phong.MaPhong</span> - 
+                    <h4>
+                        <span class="maphong">@phong.MaPhong</span> -
                         <span class="loaiphong">@qr_GiaPhong_MaPhong.TenLoaiPhong</span>
                     </h4>
                     <span>@qr_GiaPhong_MaPhong.GiaTheoGio VND/Giờ - @qr_GiaPhong_MaPhong.GiaPhongTheoNgay VND/Ngày</span>
@@ -109,6 +124,7 @@
                 </div>
             </div>
         }
+
         <div class="popup-overlay" id="popupOverlay">
             <div class="popup-content">
                 <div class="row">
