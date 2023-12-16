@@ -1,4 +1,7 @@
-﻿
+﻿function closeForm() {
+    document.getElementById('myForm').style.display = 'none';
+
+}
         var arrDichVuDaChon = [];
         var counter = -1;
 
@@ -99,7 +102,7 @@
                 success: function (result) {
                 
                     document.getElementById('TongTienDichVuDaDat').innerText = result;
-                    // TongTienDatPhong();
+                    TinhTongTienPhong();
                 },
                 error: function (xhr, status, error) {
                     console.error('Error calculating service charges:', error);
@@ -148,12 +151,14 @@
         }
 
 function HienThiThongTinDatPhong(MaDatPhong) {
+    arrDichVuDaChon = [];
     document.getElementById("myForm").style.display = "block";
     $.ajax({
         type: "POST",
         url: '/QuanLyDatPhong/LayThongTinDatPhong',
         data: { 'MaDatPhong': MaDatPhong },
         success: function (result) {
+            $('#TongTienDichVuDaDat').text(0);
             $('#inputFieldMaDatPhong').val(result.qr_DatPhong.maDatPhong);
             $('#inputFieldMaPhong').val(result.qr_DatPhong.maPhong);
             $('#inputFieldMaKhachHang').val(result.qr_DatPhong.maKhachHang);
@@ -164,8 +169,12 @@ function HienThiThongTinDatPhong(MaDatPhong) {
             $('#inputFieldHinhThucDatPhong').val(result.qr_DatPhong.hinhThucDatPhong);
             $('#inputFieldTongTienPhong').val(result.qr_DatPhong.tongTienPhong);
             $('#inputFieldMaNhanVien').val(result.qr_DatPhong.maNhanVien);
+            $('#inputFieldKhachTraTruoc').val(result.qr_DatPhong.soTienTraTruoc);
 
+
+            TinhTongTienPhong();
             XemChiTietDichVu(MaDatPhong);
+
         },
         error: function () {
 
@@ -184,6 +193,7 @@ function XemChiTietDichVu(MaDatPhong) {
 
             if (result.qr_DichVuChiTiet != "") {
 
+                
 
                 var dem = [];
                 $.each(result.qr_DichVuChiTiet, function (index, item) {
@@ -270,21 +280,12 @@ function ThemDichVuEdit(maDichVu, soLuong) {
                 });
             });
 
-
             if (arrDichVuDaChonedit.length == data.length) {
                 $('#AddThemDichVu').hide();
             }
-
             var nodeServices = `<br id="breakDichVu${countedit}"/><span id="tongTenDichVuDaDat${countedit}">Tên dịch vụ: ${maDichVu} | </span><span id="tongSoLuongDichVuDaDat${countedit}">Số lượng: ${soLuong}</span>`;
             $('#TongDichVuDaDat').append(nodeServices);
-
             TinhTienDichVu();
-
-            //if (data.length == arrDichVuDaChonedit.length) {
-            //    document.getElementById('AddThemDichVu').style.display = 'none';
-            //}
-
-         
         },
         error: function (error) {
             console.error('Error fetching data:', error);
@@ -301,7 +302,6 @@ function DemSlDichVu(dem) {
         type: "POST",
         url: '/QuanLyDatPhong/TongDichVu',
         success: function (result) {
-            console.log(dem, result);
             if (result == dem) {
                 document.getElementById('AddThemDichVu').style.display = 'none';
 
@@ -323,4 +323,110 @@ function SuaDatPhong() {
         TongMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
     });
     console.log(TongMaDichVu);
+}
+
+$(document).ready(function () {
+    // Attach the change event to the input fields
+    $('#inputFieldNgayNhan, #inputFieldNgayTra, #inputFieldHinhThucDatPhong').change(function () {
+        TinhTongTienPhong(); // Call the function when any of the input fields change
+    });
+});
+
+function TinhTongTienPhong() {
+    console.log(1);
+    var MaPhong = document.getElementById('inputFieldMaPhong').value;
+    var hinhThuc = document.getElementById('inputFieldHinhThucDatPhong').value;
+    var ngayNhanPhong = new Date(document.getElementById('inputFieldNgayNhan').value);
+    var ngayTraPhong = new Date(document.getElementById('inputFieldNgayTra').value);
+    var duration = 0;
+    if (hinhThuc === 'Ngay') {
+        duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60 * 24);
+    } else {
+        duration = (ngayTraPhong - ngayNhanPhong) / (1000 * 60 * 60);
+    }
+    $.ajax({
+        type: 'POST',
+        url: '/QuanLyDatPhong/TinhTienPhong',
+        data: {
+            'MaPhong': MaPhong
+        },
+        success: function (result1) {
+            var giaPhong;
+            if (hinhThuc === 'Ngày') {
+                giaPhong = result1.qr_LoaiPhong.giaPhongTheoNgay;
+            }
+            else {
+                giaPhong = result1.qr_LoaiPhong.giaTheoGio;
+
+            }
+            var totalAmount = giaPhong * duration;
+            
+            document.getElementById('TongTienPhong').innerText = totalAmount.toFixed(2);
+
+            var TongTienDichVuElement = document.getElementById('TongTienDichVuDaDat');
+            var TongTienDichVu = parseFloat(TongTienDichVuElement.innerText);
+
+            var tongTienElement = document.getElementById('TongTien');
+
+            var sum = totalAmount + TongTienDichVu;
+
+            tongTienElement.innerText = sum.toFixed(2);
+        },
+        error: function () {
+            console.log('error');
+        }
+    });
+}
+
+function SuaDatPhong() {
+    var ThanhTienMaDichVu = [];
+    var arrSoLuongDichVu = [];
+
+    $('span[id^="tongTenDichVuDaDat"]').each(function () {
+        ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+    });
+
+    $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
+        arrSoLuongDichVu.push($(this).text().split(": ")[1]);
+    });
+    var maDatPhongValue =  $('#inputFieldMaDatPhong').val();
+    var maPhongValue =  $('#inputFieldMaPhong').val();
+    var maKhachHangValue = $('#inputFieldMaKhachHang').val();
+    var ngayNhanValue = $('#inputFieldNgayNhan').val();
+    var ngayTraValue =$('#inputFieldNgayTra').val();
+    var soLuongNguoiLonValue =  $('#inputFieldSoLuongNguoiLon').val();
+    var soLuongTreEmValue =  $('#inputFieldSoLuongTreEm').val();
+    var hinhThucDatPhongValue = $('#inputFieldHinhThucDatPhong').val();
+    var maNhanVienValue = $('#inputFieldMaNhanVien').val();
+    var khachTraTruocValue = $('#inputFieldKhachTraTruoc').val();
+    var tongtienPhongValue = $('#TongTienPhong').text();
+  
+    $.ajax({
+        type: 'POST',
+        url: '/QuanLyDatPhong/suaDatPhong',
+        data: {
+            'ThanhTienMaDichVu': ThanhTienMaDichVu,
+            'arrSoLuongDichVu': arrSoLuongDichVu,
+            'maDatPhongValue': maDatPhongValue,
+            'maPhongValue': maPhongValue,
+            'maKhachHangValue': maKhachHangValue,
+            'ngayNhanValue': ngayNhanValue,
+            'ngayTraValue': ngayTraValue,
+            'soLuongNguoiLonValue': soLuongNguoiLonValue,
+            'soLuongTreEmValue': soLuongTreEmValue,
+            'hinhThucDatPhongValue': hinhThucDatPhongValue,
+            'maNhanVienValue': maNhanVienValue,
+            'khachTraTruocValue': parseInt(khachTraTruocValue),
+            'tongtienPhongValue': parseInt(tongtienPhongValue)
+        },
+        success: function (response) {
+            // Xử lý khi yêu cầu thành công
+          
+        },
+        error: function (error) {
+            // Xử lý khi có lỗi xảy ra
+            console.log(error);
+        }
+    });
+
 }

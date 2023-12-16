@@ -12,6 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <!-- Add custom CSS or additional stylesheets here -->
     <!-- (Include additional head elements) -->
     <style>
@@ -169,13 +171,23 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Hình thức đặt phòng</label>
-                            <input class="form-control" name="maphong" id="inputFieldHinhThucDatPhong" maxlength="6" />
+                            @* <input class="form-control" name="maphong" id="inputFieldHinhThucDatPhong" maxlength="6" /> *@
+                            <select class="form-control" name="maphong" id="inputFieldHinhThucDatPhong">
+                                <option value="Giờ">Giờ</option>
+                                <option value="Ngày">Ngày</option>
+                            </select>
                             <span id="errorMaP" style="color: red;"></span>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" hidden>
                             <label>Tổng tiền phòng</label>
                             <input class="form-control" name="maloaiphong" id="inputFieldTongTienPhong" readonly/>
                    
+                            <span id="errorChonLP" style="color: red;"></span>
+                        </div>
+                        <div class="form-group" >
+                            <label>Tiền khách trả trước</label>
+                            <input class="form-control" name="maloaiphong" id="inputFieldKhachTraTruoc"/>
+
                             <span id="errorChonLP" style="color: red;"></span>
                         </div>
 
@@ -212,7 +224,7 @@
                 </div>
 
                 <div class="clearfix">
-                    <a class="btn align-middle m-2 w-25 btn-success " style="min-width:200px" type="submit"
+                    <a class="btn align-middle m-2 w-25 btn-success " style="min-width:200px" 
                             onclick="SuaDatPhong()">
                         Sửa đặt phòng
                     </a>

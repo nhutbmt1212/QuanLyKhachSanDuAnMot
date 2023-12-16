@@ -81,7 +81,7 @@ namespace QuanLyKhachSan.Controllers
                 SoLuongNguoiLon = tongNguoiLon,
                 SoLuongTreEm = tongTreEm,
                 HinhThucDatPhong = hinhThuc,
-                TongTienPhong = tongCong,
+                TongTienPhong = tongTienPhong,
                 MaNhanVien = MaNhanVienDatPhong,
                 TinhTrang = "Đã được duyệt",
                 SoTienTraTruoc = soTienTraTruoc,
