@@ -135,12 +135,12 @@
                     </div>
                     <div class="form-group">
                         <label>Số người lớn</label>
-                        <input class="form-control" name="soluongnguoilon" id="inputFieldNguoiLon" type="number" />
+                        <input class="form-control" name="soluongnguoilon" id="inputFieldNguoiLon" type="number" value="1" min="1   " onkeypress="return event.charCode >= 48" onblur="if(this.value=='' || this.value==0){this.value='1'}" />
                         <span id="errorNguoiLon" style="color: red;"></span>
                     </div>
                     <div class="form-group">
                         <label>Số trẻ em</label>
-                        <input class="form-control" name="soluongtreem" id="inputFieldTreEm" type="number"/>
+                        <input class="form-control" name="soluongtreem" id="inputFieldTreEm" type="number" value="1" min="0" onkeypress="return event.charCode >= 48" onblur="if(this.value==''){this.value='0'}" />
                         <span id="errorTreEm" style="color: red;"></span>
                     </div>
                 </div>
