@@ -197,7 +197,7 @@
             $("#errorNguoiLon").text("Số lượng người lớn không được để trống.");
             event.preventDefault();
         } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
-            $("#errorGiaTheoGio").text("Số lượng người lớn không hợp lệ.");
+            $("#errorNguoiLon").text("Số lượng người lớn không hợp lệ.");
             event.preventDefault();
         } 
         // Lấy giá trị từ ô input
@@ -206,7 +206,7 @@
             $("#errorTreEm").text("Số lượng trẻ em không được để trống.");
             event.preventDefault();
         } else if (!isValidGiaTheoGio(giaTheoGioValue)) {
-            $("#errorGiaTheoGio").text("Số lượng trẻ em không hợp lệ.");
+            $("#errorTreEm").text("Số lượng trẻ em không hợp lệ.");
             event.preventDefault();
         } 
     });

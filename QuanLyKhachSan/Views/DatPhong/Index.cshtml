@@ -150,8 +150,8 @@
                         <div class="form-group">
                             <label for="hinhThuc">Hình thức</label>
                             <select class="form-control" name="hinhThuc" id="hinhThuc_PopUpDatPhong">
-                                <option value="Ngay">Ngày</option>
-                                <option value="Gio" selected>Giờ</option>
+                                <option value="Ngày">Ngày</option>
+                                <option value="Giờ" selected>Giờ</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -169,7 +169,7 @@
 
                         <div class="form-group">
                             <label for="tongNguoiLon">Tổng số người lớn (Tối đa: <span id="SoNgLonToiDaPopUp_DatPhong"></span>)</label>
-                            <input type="text" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
+                            <input type="number" class="form-control" name="tongNguoiLon" min="1" value="1" id="tongNguoiLon" required>
                             <span id="errorTongSoNguoiLon" style="color: red;"></span>
 
                         </div>
@@ -184,7 +184,7 @@
                         </div>
                         <div class="form-group">
                             <label for="tongTreEm">Tổng số trẻ em (Tối đa: <span id="SoTreEmToiDaPopUp_DatPhong"></span>)</label>
-                            <input type="text" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required>
+                            <input type="number" class="form-control" name="tongTreEm" id="tongTreEm" min="1" value="1" required>
                             <span id="errorTongSoTreEm" style="color: red;"></span>
 
                         </div>

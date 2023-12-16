@@ -20,8 +20,8 @@
                     <h2>ĐĂNG NHẬP</h2>
                     <div class="inputbox">
                         <ion-icon name="mail-outline"></ion-icon>
-                        <input type="text" required name="TenDangNhap">
-                        <label>Email/Số điện thoại</label>
+                        <input type="email" required name="TenDangNhap">
+                        <label>Email</label>
                     </div>
                     <div class="inputbox">
                         <ion-icon name="lock-closed-outline"></ion-icon>
@@ -62,7 +62,7 @@
             <div id="confirmationSection" style="display: none;">
                 <div class="form-group">
                     <label for="confirmationCode">Mã xác nhận:</label>
-                    <input type="text" name="ConfirmationCode" class="form-control" id="confirmationCode" required>
+                    <input type="number" name="ConfirmationCode" class="form-control" id="confirmationCode" required>
                 </div>
                 <button type="button" class="btn btn-primary" id="btnXacNhan">Xác nhận</button>
             </div>

@@ -54,7 +54,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-2),
                    AnhNhanVienBase64 = "UploadImage\\profileStaff.jpg",
-                   TinhTrang = "Hoạt động",
+                   TinhTrang = "Đang hoạt động",
                    MatKhau = "password1"
                },
                new NhanVien
@@ -71,7 +71,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-1),
                    AnhNhanVienBase64 = "UploadImage\\profileStaff2.jpg",
-                   TinhTrang = "Hoạt động",
+                   TinhTrang = "Đang hoạt động",
                    MatKhau = "password2"
                },
                new NhanVien
@@ -105,7 +105,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Quản lý",
                    NgayVaoLam = DateTime.Now.AddYears(-5),
                    AnhNhanVienBase64 = "UploadImage\\profileStaff4.jpg",
-                   TinhTrang = "Hoạt động",
+                   TinhTrang = "Đang hoạt động",
                    MatKhau = "password4"
                },
                new NhanVien
@@ -122,7 +122,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-4),
                    AnhNhanVienBase64 = "UploadImage\\profileStaff5.webp",
-                   TinhTrang = "Hoạt động",
+                   TinhTrang = "Đang hoạt động",
                    MatKhau = "password5"
                }
         );
@@ -138,7 +138,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1992, 3, 15),
                     GioiTinh = "Nam",
                     Email = "khachhang1@example.com",
-                    TinhTrang = "Hoạt động",
+                    TinhTrang = "Đang hoạt động",
                     MatKhau = "password1",
                     NgayDangKy = DateTime.Now
                 },
@@ -152,7 +152,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1995, 7, 20),
                     GioiTinh = "Nữ",
                     Email = "khachhang2@example.com",
-                    TinhTrang = "Hoạt động",
+                    TinhTrang = "Đang hoạt động",
                     MatKhau = "password2",
                     NgayDangKy = DateTime.Now
                 },
@@ -166,7 +166,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1988, 10, 5),
                     GioiTinh = "Nam",
                     Email = "khachhang3@example.com",
-                    TinhTrang = "Hoạt động",
+                    TinhTrang = "Đang hoạt động",
                     MatKhau = "password3",
                     NgayDangKy = DateTime.Now
                 },
@@ -180,7 +180,7 @@ namespace QuanLyKhachSan.Models
                     NgaySinh = new DateTime(1990, 12, 25),
                     GioiTinh = "Nữ",
                     Email = "khachhang4@example.com",
-                    TinhTrang = "Hoạt động",
+                    TinhTrang = "Đang hoạt động",
                     MatKhau = "password4",
                     NgayDangKy = DateTime.Now
                 },

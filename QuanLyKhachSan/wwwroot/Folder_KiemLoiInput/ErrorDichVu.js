@@ -128,6 +128,9 @@
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
             $("#errorTenDV").text("Tên dịch vụ chỉ được chứa chữ cái và khoảng trắng.");
             event.preventDefault();
+        } else if (inputValueTenNV.length < 3) {
+            $("#errorTenDV").text("Độ dài ít nhất 3 ký tự.");
+            event.preventDefault();
         }
 
         var inputValueDVT = $("#inputFieldDVT").val();
@@ -176,6 +179,9 @@
             event.preventDefault();
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
             $("#errorEditTenDV").text("Tên dịch vụ chỉ được chứa chữ cái và khoảng trắng.");
+            event.preventDefault();
+        } else if (inputValueTenNV.length < 3) {
+            $("#errorEditTenDV").text("Độ dài ít nhất 3 ký tự.");
             event.preventDefault();
         }
 

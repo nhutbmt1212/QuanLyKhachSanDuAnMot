@@ -56,7 +56,6 @@ getValue.addEventListener('click', function (e) {
     var ngayDangKyNv = row.dataset.ngayDangKy;
     var chucVuNv = row.dataset.chucVu;
     var ngayVaoLamNv = row.dataset.ngayVaoLam;
-    var tenDangNhapNv = row.dataset.tendangnhap;
     var matKhauNv = row.dataset.matkhau;
     var tinhTrangNv = row.dataset.tinhtrang;
     document.querySelector('.manvEdit').value = MaNv;
@@ -66,7 +65,6 @@ getValue.addEventListener('click', function (e) {
     document.querySelector('.soDienThoaiEdit').value = sdtNv;
     document.querySelector('.cccdEdit').value = cccdNv;
     document.querySelector('.gioiTinhEdit').value = gioiTinhNv;
-    document.querySelector('.tenDangNhapEdit').value = tenDangNhapNv;
     document.querySelector('.matKhauEdit').value = matKhauNv;
     document.querySelector('.tinhTrangEdit').value = tinhTrangNv;
     //convert time

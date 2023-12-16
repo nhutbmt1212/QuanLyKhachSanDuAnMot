@@ -88,47 +88,9 @@
             $("#errorEditiaChi").text("");
         }
     });
-    // Bắt sự kiện khi người dùng rời khỏi ô input tên đăng nhập
-        $("#inputFieldTenDangNhap").on("focusout", function () {
-            var tendangnhapValue = $(this).val();
 
-            if (tendangnhapValue.length === 0) {
-                $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-            } else if (tendangnhapValue.length < 5) {
-                $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-            } else if (!isValidTenDangNhap(tendangnhapValue)) {
-                $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-            } else {
-                // Gửi yêu cầu đến API để kiểm tra tên đăng nhập
-                $.ajax({
-                    url: '/NhanVien/CheckTenDangNhap',  // Đường dẫn đến API của bạn
-                    type: 'GET',
-                    data: { tendangnhap: tendangnhapValue },
-                    success: function (data) {
-                        if (data.exists) {
-                            $("#errorTenDangNhap").text("Tên đăng nhập đã tồn tại trong hệ thống.");
-                        } else {
-                            $("#errorTenDangNhap").text("");
-                        }
-                    }
-                });
-            }
-        });
 
-    $("#inputEditTenDangNhap").on("focusout", function () {
-        var tendangnhapValue = $(this).val();
-
-        if (tendangnhapValue.length === 0) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không được để trống.");
-        }
-        else if (tendangnhapValue.length < 5) {
-            $("#errorEditTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-        } else {
-            $("#errorEditTenDangNhap").text("");
-        }
-    });
+   
     // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại
         $("#inputFieldSDT").on("focusout", function () {
             var sdtValue = $(this).val();
@@ -348,17 +310,7 @@
             event.preventDefault();
         }
 
-        var tendangnhapValue = $("#inputFieldTenDangNhap").val();
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-            event.preventDefault();
-        } else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-            event.preventDefault();
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-            event.preventDefault();
-        }
+       
 
         var sdtValue = $("#inputFieldSDT").val();
         if (sdtValue.length === 0) {
@@ -465,17 +417,7 @@
                 event.preventDefault();
             }
 
-            var tendangnhapValue = $("#inputEditTenDangNhap").val();
-            if (tendangnhapValue.length === 0) {
-                $("#errorEditTenDangNhap").text("Tên đăng nhập không được để trống.");
-                event.preventDefault();
-            } else if (tendangnhapValue.length < 5) {
-                $("#errorEditTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-                event.preventDefault();
-            } else if (!isValidTenDangNhap(tendangnhapValue)) {
-                $("#errorEditTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-                event.preventDefault();
-            }
+         
 
             var sdtValue = $("#inputEditSDT").val();
             if (sdtValue.length === 0) {
