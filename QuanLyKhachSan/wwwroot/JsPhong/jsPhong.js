@@ -41,14 +41,11 @@ getValue.addEventListener('click', function (e) {
     var maLoaiPhong = row.dataset.maLoaiPhong;
     var ngayTao = row.dataset.ngayTao;
     var tinhTrang = row.dataset.tinhTrang;
-
+    console.log(tinhTrang);
     document.querySelector('.maphongedit').value = maphong;
     document.querySelector('.maloaiphongedit').value = maLoaiPhong;
-    document.querySelector('#inputEditTinhTrang').value = tinhTrang;
-    console.log(tinhTrang);
     document.querySelector('.ngaytaoedit').value = ngayTao;
-
-
+    document.querySelector('.tinhtrangedit').value = tinhTrang.trim();
 });
 document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
 
