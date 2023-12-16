@@ -15,12 +15,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(
         )
     );
 //start write code authentication
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(option =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
     {
-        option.LoginPath = "/Access/Login";
-        option.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+        options.LoginPath = "/Access/Login";
+        options.ExpireTimeSpan = TimeSpan.FromDays(365); // Set to a longer duration or use a persistent cookie
+        options.SlidingExpiration = true; // Set to true if you want sliding expiration
+        options.Cookie.IsEssential = true; // Consider the cookie essential for GDPR compliance
     });
 
 var app = builder.Build();

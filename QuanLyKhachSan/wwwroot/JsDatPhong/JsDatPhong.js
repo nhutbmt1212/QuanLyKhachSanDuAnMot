@@ -354,7 +354,7 @@ function DatPhong() {
     var ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
     var tongNguoiLon = document.getElementById('tongNguoiLon').value;
     var tongTreEm = document.getElementById('tongTreEm').value;
-        var tongTienPhong = document.getElementById('TongTien').innerText;
+        var tongTienPhong = document.getElementById('TongTienPhong').innerText;
     var khachTraTruoc = document.getElementById('khachTraTruoc').value;
     var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
         console.log(tongTienPhong);
@@ -370,7 +370,7 @@ function DatPhong() {
             'ngayTra': ngayTra,
             'tongNguoiLon': tongNguoiLon,
             'tongTreEm': tongTreEm,
-            'tongCong': parseInt(tongTienPhong),
+            'tongTienPhong': parseInt(tongTienPhong),
             'soTienTraTruoc': khachTraTruoc,
             'maPhong': maPhong
         },
