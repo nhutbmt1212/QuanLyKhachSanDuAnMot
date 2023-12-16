@@ -296,11 +296,12 @@ function ThemDichVuEdit(maDichVu, soLuong) {
 
 function DemSlDichVu(dem) {
 
-
+    
     $.ajax({
         type: "POST",
         url: '/QuanLyDatPhong/TongDichVu',
         success: function (result) {
+            console.log(dem, result);
             if (result == dem) {
                 document.getElementById('AddThemDichVu').style.display = 'none';
 
@@ -315,4 +316,11 @@ function DemSlDichVu(dem) {
             console.log('error');
         }
     });
+}
+function SuaDatPhong() {
+    var TongMaDichVu = [];
+    $('span[id^="tongTenDichVuDaDat"]').each(function () {
+        TongMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+    });
+    console.log(TongMaDichVu);
 }

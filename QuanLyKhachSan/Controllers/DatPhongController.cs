@@ -60,7 +60,7 @@ namespace QuanLyKhachSan.Controllers
             return Json(tongTien);
         }
         [HttpPost]
-        public IActionResult DatPhongNhanh(List<string> arrMaDichVu, List<int> arrSoLuongDichVu, string maKhachHang, string hinhThuc, DateTime ngayNhan, DateTime ngayTra, int tongNguoiLon, int tongTreEm, int tongCong, int soTienTraTruoc,string maPhong)
+        public IActionResult DatPhongNhanh(List<string> arrMaDichVu, List<int> arrSoLuongDichVu, string maKhachHang, string hinhThuc, DateTime ngayNhan, DateTime ngayTra, int tongNguoiLon, int tongTreEm, int tongTienPhong, int soTienTraTruoc,string maPhong)
         {
             Random random = new Random();
 
