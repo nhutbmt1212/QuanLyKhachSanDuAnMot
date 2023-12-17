@@ -70,6 +70,7 @@ getValue.addEventListener('click', function (e) {
     var matKhau = row.dataset.matkhau;
     var tinhTrang = row.dataset.tinhtrang;
     var email = row.dataset.email;
+    var ngayDangKy = row.dataset.NgayDangKy
     console.log(gioiTinh);
     document.querySelector('.MaKhachHangEdit').value = MaKh;
     document.querySelector('.TenKhachHangEdit').value = TenKh;
@@ -80,7 +81,7 @@ getValue.addEventListener('click', function (e) {
     document.querySelector('.EmailEdit').value = email;
     document.querySelector('.TinhTrangEdit').value = tinhTrang;
     document.querySelector('.MatKhauEdit').value = matKhau;
-    console.log(gioiTinh);
+    document.querySelector('.NgayDangKyEdit').value = ngayDangKy;
     //convert time
     var ngaySinhParts = ngaySinh.split('/');
     var ngaySinhFormatted = ngaySinhParts[2] + '-' + ngaySinhParts[1] + '-' + ngaySinhParts[0];

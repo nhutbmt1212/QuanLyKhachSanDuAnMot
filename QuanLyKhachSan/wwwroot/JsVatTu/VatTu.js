@@ -38,8 +38,8 @@ function OpenFormEdit(maVatTu, tenVatTu, nhaSanXuat, tinhTrangVatTu, ngayThem) {
 
     // Điền thông tin của vật tư vào các input
     document.getElementById("MaVatTuEdit").value = maVatTu;
-    document.getElementById("TenVatTuEdit").value = tenVatTu.trim();
-    document.getElementById("NhaSanXuatEdit").value = nhaSanXuat.trim();
+    document.getElementById("inputEditTenVT").value = tenVatTu.trim();
+    document.getElementById("inputEditNhaSX").value = nhaSanXuat.trim();
     document.getElementById("TinhTrangVatTuEdit").value = tinhTrangVatTu;
 
     // Chuyển định dạng ngày

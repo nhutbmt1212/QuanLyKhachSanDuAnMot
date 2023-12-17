@@ -88,7 +88,7 @@ namespace QuanLyKhachSan.Models
                    ChucVu = "Nhân viên",
                    NgayVaoLam = DateTime.Now.AddYears(-3),
                    AnhNhanVienBase64 = "UploadImage\\profileStaff3.jpg",
-                   TinhTrang = "Nghỉ việc",
+                   TinhTrang = "Đã nghỉ việc",
                    MatKhau = "password3"
                },
                new NhanVien
