@@ -79,7 +79,9 @@
                             <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_employeeName" asp-for="TenNhanVien" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                   <br />
+                            <span  id="ErrorEmployeeName" style="color:red;font-weight:700;"></span>
+                            <button class="btn btn-success edit-mode-input" id="tennhanvien" style="display: none;"
                                     onclick="saveEdit('employeeName')">
                                 Lưu
                             </button>
@@ -94,6 +96,7 @@
                             <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_phoneNumber" asp-for="SoDienThoai" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
+                            <span id="ErrorEmployeePhoneNumber" style="color:red;font-weight:700;"></span>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('phoneNumber')">
                                 Lưu
@@ -109,6 +112,7 @@
                             <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_cccd" asp-for="CCCD" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
+                            <span id="ErrorEmployeemCCCD" style="color:red;font-weight:700;"></span>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('cccd')">
                                 Lưu
@@ -124,6 +128,7 @@
                             <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
                             <input type="email" id="editedValue_email" asp-for="Email" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
+                            <span id="ErrorEmployeemEmail" style="color:red;font-weight:700;"></span>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('email')">
                                 Lưu
@@ -164,6 +169,7 @@
                             <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_address" asp-for="DiaChi" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
+                            <span id="ErrorEmployeemDiaChi" style="color:red;font-weight:700;"></span>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('address')">
                                 Lưu
@@ -186,6 +192,7 @@
                             <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
                             <input type="password" id="editedValue_password" asp-for="MatKhau" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
+                            <span id="ErrorEmployeemPassWord" style="color:red;font-weight:700;"></span>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('password')">
                                 Lưu
@@ -214,7 +221,7 @@
         </form>
     </div>
     <script src="~/js/JsHoSo.js"></script>
-
+    <script src="~/Folder_KiemLoiInput//ErorrHoSoNhanVien.js"></script>
 
 </body>
 
