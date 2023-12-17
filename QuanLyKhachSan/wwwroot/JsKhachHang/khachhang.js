@@ -39,7 +39,22 @@ function hidePopUpAddNhanVien() {
 
 //take data from table and fill to form popup edit employee
 var getValue = document.querySelector('#table_detail');
+function formatAndSetDate(ngaysinh) {
+    // Split the date string
+    var ngayVaoLamParts = ngayVaoLamNv.split('/');
 
+    // Check if the date string is in the expected format
+    if (ngayVaoLamParts.length === 3) {
+        // Format the date as "yyyy-MM-dd"
+        var ngayVaoLamFormatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
+
+        // Set the formatted date to the input field
+        document.querySelector('.inputEditNgaySinh').value = ngayVaoLamFormatted;
+    } else {
+        // Handle invalid date format (you may display an error message or take appropriate action)
+        console.error('Invalid date format: ' + ngayVaoLamNv);
+    }
+}
 getValue.addEventListener('click', function (e) {
     const cell = e.target.closest('td');
     if (!cell) { return; }

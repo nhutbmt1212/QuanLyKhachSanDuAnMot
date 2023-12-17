@@ -80,7 +80,7 @@ getValue.addEventListener('click', function (e) {
 
     document.querySelector('.chucVuEdit').value = chucVuNv;
 
-    var ngayVaoLamNv = "14/12/2021";
+        
     formatAndSetDate(ngayVaoLamNv);
 });
 function formatAndSetDate(ngayVaoLamNv) {

@@ -1,15 +1,29 @@
 ﻿$(document).ready(function () {
-    $("#inputEditTenNV").on("focusout", function () {
+    $("#inputFieldTenKH").on("focusout", function () {
         var inputValue = $(this).val();
-
+        console.log(inputValue);
         if (inputValue.length < 3) {
-            $("#errorTenNV").text("Độ dài ít nhất 3 ký tự.");
+            $("#errorTenKH").text("Độ dài ít nhất 3 ký tự.");
         } else if (inputValue.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
-            $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+            $("#errorTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
         } else {
-            $("#errorTenNV").text("");
+            $("#errorTenKH").text("");
+        }
+    });
+
+    $("#inputEditTenKH").on("focusout", function () {
+        var inputValue = $(this).val();
+        console.log(inputValue);
+        if (inputValue.length < 3) {
+            $("#errorEditTenKH").text("Độ dài ít nhất 3 ký tự.");
+        } else if (inputValue.length === 0) {
+            $("#errorEditTenKH").text("Tên khách hàng không được để trống.");
+        } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValue)) {
+            $("#errorEditTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
+        } else {
+            $("#errorEditTenKH").text("");
         }
     });
     // Bắt sự kiện khi người dùng rời khỏi ô input email
@@ -17,7 +31,7 @@
     $("#inputFieldEmail").on("focusout", function () {
         var emailValue = $(this).val();
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+        console.log(emailValue);
         if (emailValue.length === 0) {
             $("#errorEmail").text("Email không được để trống.");
         } else if (!emailRegex.test(emailValue)) {
@@ -25,7 +39,7 @@
         } else {
 
             $.ajax({
-                url: '/NhanVien/CheckEmail',  // Đường dẫn đến API của bạn
+                url: '/KhachHang/CheckEmail',  // Đường dẫn đến API của bạn
                 type: 'GET',
                 data: { email: emailValue },
                 success: function (data) {
@@ -75,47 +89,7 @@
             $("#errorEditiaChi").text("");
         }
     });
-    // Bắt sự kiện khi người dùng rời khỏi ô input tên đăng nhập
-    $("#inputFieldTenDangNhap").on("focusout", function () {
-        var tendangnhapValue = $(this).val();
-
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-        } else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-        } else {
-            // Gửi yêu cầu đến API để kiểm tra tên đăng nhập
-            $.ajax({
-                url: '/NhanVien/CheckTenDangNhap',  // Đường dẫn đến API của bạn
-                type: 'GET',
-                data: { tendangnhap: tendangnhapValue },
-                success: function (data) {
-                    if (data.exists) {
-                        $("#errorTenDangNhap").text("Tên đăng nhập đã tồn tại trong hệ thống.");
-                    } else {
-                        $("#errorTenDangNhap").text("");
-                    }
-                }
-            });
-        }
-    });
-
-    $("#inputEditTenDangNhap").on("focusout", function () {
-        var tendangnhapValue = $(this).val();
-
-        if (tendangnhapValue.length === 0) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không được để trống.");
-        }
-        else if (tendangnhapValue.length < 5) {
-            $("#errorEditTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-        } else {
-            $("#errorEditTenDangNhap").text("");
-        }
-    });
+    
     // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại
     $("#inputFieldSDT").on("focusout", function () {
         var sdtValue = $(this).val();
@@ -166,7 +140,7 @@
         } else {
             // Gửi yêu cầu đến API để kiểm tra CCCD
             $.ajax({
-                url: '/NhanVien/CheckCCCD',  // Đường dẫn đến API của bạn
+                url: '/KhachHang/CheckCCCD',  // Đường dẫn đến API của bạn
                 type: 'GET',
                 data: { cccd: cccdValue },
                 success: function (data) {
@@ -228,7 +202,7 @@
         } else if (!isValidNgaySinh(ngaySinhValue)) {
             $("#errorNgaySinh").text("Ngày sinh không hợp lệ.");
         } else if (!isOldEnough(ngaySinhValue)) {
-            $("#errorNgaySinh").text("Nhân viên phải đủ 15 tuổi trở lên.");
+            $("#errorNgaySinh").text("Khách hàng phải đủ 18 tuổi trở lên.");
         } else {
             $("#errorNgaySinh").text("");
         }
@@ -241,49 +215,13 @@
         } else if (!isValidNgaySinh(ngaySinhValue)) {
             $("#errorEditNgaySinh").text("Ngày sinh không hợp lệ.");
         } else if (!isOldEnough(ngaySinhValue)) {
-            $("#errorEditNgaySinh").text("Nhân viên phải đủ 15 tuổi trở lên.");
+            $("#errorEditNgaySinh").text("Khách hàng phải đủ 18 tuổi trở lên.");
         } else {
             $("#errorEditNgaySinh").text("");
         }
     });
-    // Bắt sự kiện khi người dùng rời khỏi ô input ngày vào làm
-    $("#inputFieldNgayVaoLam").on("focusout", function () {
-        var ngayVaoLamValue = $(this).val();
-
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được để trống.");
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
-        } else {
-            $("#errorNgayVaoLam").text("");
-        }
-    });
-    $("#inputEditNgayVaoLam").on("focusout", function () {
-        var ngayVaoLamValue = $(this).val();
-
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được để trống.");
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
-        } else {
-            $("#errorNgayVaoLam").text("");
-        }
-    });
-    // Bắt sự kiện khi người dùng chọn ảnh
-    $("#formFile").on("change", function () {
-        var fileInput = $(this)[0];
-
-        if (!fileInput.files.length) {
-            $("#errorAnh").text("Vui lòng chọn một ảnh.");
-        } else {
-            $("#errorAnh").text("");
-        }
-    });
-
+   
+ 
 
 
 
@@ -295,23 +233,24 @@
     $("#myForm").submit(function (event) {
 
 
-        var inputValueTenNV = $("#inputFieldTenNV").val();
+        var inputValueTenNV = $("#inputFieldTenKH").val();
         if (inputValueTenNV.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
         } else if (inputValueTenNV.trim() === "") {
-            $("#errorTenNV").text("Tên nhân viên không được chứa toàn khoảng trắng.");
+            $("#errorTenKH").text("Tên khách hàng không được chứa toàn khoảng trắng.");
             event.preventDefault();
         } else if (inputValueTenNV.length === 0) {
-            $("#errorTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
-            $("#errorTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+            $("#errorTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
             event.preventDefault();
         }
 
 
         var emailValue = $("#inputFieldEmail").val();
+        var emailExists = false;
         if (emailValue.length === 0) {
             $("#errorEmail").text("Email không được để trống.");
             event.preventDefault();
@@ -321,6 +260,23 @@
         } else if (!isValidEmail(emailValue)) {
             $("#errorEmail").text("Email không hợp lệ.");
             event.preventDefault();
+        } else {
+            $.ajax({
+                url: '/NhanVien/CheckEmail',
+                type: 'GET',
+                data: { email: emailValue },
+                async: false,
+                success: function (data) {
+                    if (data.exists) {
+                        $("#errorEmail").text("Email đã tồn tại trong hệ thống.");
+                        emailExists = true;
+                    }
+                }
+            });
+
+            if (emailExists) {
+                event.preventDefault();
+            }
         }
 
         var diaChiValue = $("#inputFieldDiaChi").val();
@@ -335,35 +291,72 @@
             event.preventDefault();
         }
 
-        var tendangnhapValue = $("#inputFieldTenDangNhap").val();
-        if (tendangnhapValue.length === 0) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không được để trống.");
-            event.preventDefault();
-        } else if (tendangnhapValue.length < 5) {
-            $("#errorTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-            event.preventDefault();
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-            event.preventDefault();
-        }
+       
 
         var sdtValue = $("#inputFieldSDT").val();
+        var sdtExists = false;
         if (sdtValue.length === 0) {
             $("#errorSDT").text("Số điện thoại không được để trống.");
             event.preventDefault();
         } else if (!isValidSDT(sdtValue)) {
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
             event.preventDefault();
+        } else {
+            $.ajax({
+                url: '/NhanVien/CheckSoDienThoai',
+                type: 'GET',
+                data: { sodienthoai: sdtValue },
+                async: false,
+                success: function (data) {
+                    if (data.exists) {
+                        $("#errorSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
+                        sdtExists = true;
+                    } else {
+                        $("#errorSDT").text("");
+                    }
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+
+            if (sdtExists) {
+                event.preventDefault();
+            }
         }
 
+
+      
+
         var cccdValue = $("#inputFieldCCCD").val();
+        var cccdExists = false; // Khởi tạo biến ở đây
         if (cccdValue.length === 0) {
             $("#errorCCCD").text("CCCD không được để trống.");
             event.preventDefault();
         } else if (!isValidCCCD(cccdValue)) {
             $("#errorCCCD").text("CCCD không hợp lệ.");
             event.preventDefault();
+        } else {
+            // Gửi yêu cầu đến API để kiểm tra CCCD
+            $.ajax({
+                url: '/KhachHang/CheckCCCD',  // Đường dẫn đến API của bạn
+                type: 'GET',
+                data: { cccd: cccdValue },
+                success: function (data) {
+                    if (data.exists) {
+                        cccdExists = true;
+                        $("#errorCCCD").text("CCCD đã tồn tại trong hệ thống.");
+                    } else {
+                        $("#errorCCCD").text("");
+                    }
+                }
+            });
+            if (cccdExists) {
+                event.preventDefault();
+            }
         }
+
+
 
         var matKhauValue = $("#inputFieldMK").val();
         if (matKhauValue.length === 0) {
@@ -385,45 +378,31 @@
             $("#errorNgaySinh").text("Ngày sinh không hợp lệ.");
             event.preventDefault();
         } else if (!isOldEnough(ngaySinhValue)) {
-            $("#errorNgaySinh").text("Nhân viên phải đủ 15 tuổi trở lên.");
+            $("#errorNgaySinh").text("Khách hàng phải đủ 18 tuổi trở lên.");
             event.preventDefault();
         }
 
-        var ngayVaoLamValue = $("#inputFieldNgayVaoLam").val();
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được để trống.");
-            event.preventDefault();
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-            event.preventDefault();
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
-            event.preventDefault();
-        }
+       
 
-        var fileInput = $("#formFile")[0];
-        if (!fileInput.files.length) {
-            $("#errorAnh").text("Vui lòng chọn một ảnh.");
-            event.preventDefault();
-        }
+      
     });
 
 
     $("#myFormEdit").submit(function (event) {
 
 
-        var inputValueTenNV = $("#inputEditTenNV").val();
+        var inputValueTenNV = $("#inputEditTenKH").val();
         if (inputValueTenNV.length === 0) {
-            $("#errorEditTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorEditTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
         } else if (inputValueTenNV.trim() === "") {
-            $("#errorEditTenNV").text("Tên nhân viên không được chứa toàn khoảng trắng.");
+            $("#errorEditTenKH").text("Tên khách hàng không được chứa toàn khoảng trắng.");
             event.preventDefault();
         } else if (inputValueTenNV.length === 0) {
-            $("#errorEditTenNV").text("Tên nhân viên không được để trống.");
+            $("#errorEditTenKH").text("Tên khách hàng không được để trống.");
             event.preventDefault();
         } else if (/[^a-zA-ZÀ-Ỹà-ỹ ]/.test(inputValueTenNV)) {
-            $("#errorEditTenNV").text("Tên nhân viên chỉ được chứa chữ cái và khoảng trắng.");
+            $("#errorEditTenKH").text("Tên khách hàng chỉ được chứa chữ cái và khoảng trắng.");
             event.preventDefault();
         }
 
@@ -452,17 +431,7 @@
             event.preventDefault();
         }
 
-        var tendangnhapValue = $("#inputEditTenDangNhap").val();
-        if (tendangnhapValue.length === 0) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không được để trống.");
-            event.preventDefault();
-        } else if (tendangnhapValue.length < 5) {
-            $("#errorEditTenDangNhap").text("Độ dài ít nhất 5 ký tự.");
-            event.preventDefault();
-        } else if (!isValidTenDangNhap(tendangnhapValue)) {
-            $("#errorEditTenDangNhap").text("Tên đăng nhập không hợp lệ.");
-            event.preventDefault();
-        }
+      
 
         var sdtValue = $("#inputEditSDT").val();
         if (sdtValue.length === 0) {
@@ -506,17 +475,7 @@
             event.preventDefault();
         }
 
-        var ngayVaoLamValue = $("#inputEditNgayVaoLam").val();
-        if (ngayVaoLamValue.length === 0) {
-            $("#errorEditNgayVaoLam").text("Ngày vào làm không được để trống.");
-            event.preventDefault();
-        } else if (!isValidNgayVaoLam(ngayVaoLamValue)) {
-            $("#errorEditNgayVaoLam").text("Ngày vào làm không hợp lệ.");
-            event.preventDefault();
-        } else if (isGreaterThan7Days(ngayVaoLamValue)) {
-            $("#errorEditNgayVaoLam").text("Ngày vào làm không được lớn hơn ngày hiện tại quá 7 ngày.");
-            event.preventDefault();
-        }
+   
     });
 
 
@@ -568,7 +527,7 @@
         var today = new Date();
         var age = today.getFullYear() - ngaySinhDate.getFullYear();
 
-        if (age > 15 || (age === 15 && today.getMonth() > ngaySinhDate.getMonth())) {
+        if (age > 18 || (age === 18 && today.getMonth() > ngaySinhDate.getMonth())) {
             return true;
         } else {
             return false;

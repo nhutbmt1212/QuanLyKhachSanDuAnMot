@@ -132,7 +132,7 @@ function validateEmail() {
             if (isValid) {
                 $("#errorEmail").text("");
             } else {
-                $("#errorEmail").text("Email đã tồn tại.");
+                $("#errorEmail").text("Email đã có trong hệ thống.Vui lòng đăng nhập.");
             }
             return isValid;
         });
