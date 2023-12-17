@@ -1,8 +1,16 @@
 ﻿@using System.Security.Claims;
 @{
     var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
-
+    var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
 }
+@if (User.Identity.IsAuthenticated && userRole != "Quản lý" )
+{
+    Layout = null;
+    <partial name="../Shared/404Error.cshtml" />
+    return;
+}
+@using System.Security.Claims;
+
 @model List<QuanLyKhachSan.Models.Phong>
 <!DOCTYPE html>
 <html lang="en">
