@@ -333,56 +333,61 @@ function TongTienDatPhong() {
 
 document.getElementById('NhanPhong_PopUp').addEventListener('click', DatPhong);
 function DatPhong() {
-    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc()  ) {
-        console.log("Other validations failed");
-        return;
-    } else {
-        console.log("Validation passed! Submitting data...");
+    validateNgayTra().then(function (result) {
+        if (!result || !validateMaKhachHang() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc()) {
+            console.log("Validation failed");
+            return;
+        } else {
+            console.log("Validation passed! Submitting data...");
 
-    var ThanhTienMaDichVu = [];
-    var arrSoLuongDichVu = [];
-    $('span[id^="tongTenDichVuDaDat"]').each(function () {
-        ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
-    });
-    $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
-        arrSoLuongDichVu.push($(this).text().split(": ")[1]);
-    });
-    var maKhachHangDatPhong = document.getElementById('MaKhachHangDatPhong').value;
-    var maKhachHang = maKhachHangDatPhong.split('|')[0].trim();
-    var hinhThuc = document.getElementById('hinhThuc_PopUpDatPhong').value;
-    var ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
-    var ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
-    var tongNguoiLon = document.getElementById('tongNguoiLon').value;
-    var tongTreEm = document.getElementById('tongTreEm').value;
-        var tongTienPhong = document.getElementById('TongTienPhong').innerText;
-    var khachTraTruoc = document.getElementById('khachTraTruoc').value;
-    var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
-        console.log(tongTienPhong);
-    $.ajax({
-        url: '/DatPhong/DatPhongNhanh',
-        type: 'POST',
-        data: {
-            'arrMaDichVu': ThanhTienMaDichVu,
-            'arrSoLuongDichVu': arrSoLuongDichVu,
-            'maKhachHang': maKhachHang,
-            'hinhThuc': hinhThuc,
-            'ngayNhan': ngayNhan,
-            'ngayTra': ngayTra,
-            'tongNguoiLon': tongNguoiLon,
-            'tongTreEm': tongTreEm,
-            'tongTienPhong': parseInt(tongTienPhong),
-            'soTienTraTruoc': khachTraTruoc,
-            'maPhong': maPhong
-        },
-        traditional: true,
-        success: function (result) {
-            window.location.href = '/DatPhong/Index';
-        },
-        error: function (xhr, status, error) {
+            var ThanhTienMaDichVu = [];
+            var arrSoLuongDichVu = [];
+            $('span[id^="tongTenDichVuDaDat"]').each(function () {
+                ThanhTienMaDichVu.push($(this).text().split(": ")[1].split(" | ")[0]);
+            });
+            $('span[id^="tongSoLuongDichVuDaDat"]').each(function () {
+                arrSoLuongDichVu.push($(this).text().split(": ")[1]);
+            });
+            var maKhachHangDatPhong = document.getElementById('MaKhachHangDatPhong').value;
+            var maKhachHang = maKhachHangDatPhong.split('|')[0].trim();
+            var hinhThuc = document.getElementById('hinhThuc_PopUpDatPhong').value;
+            var ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
+            var ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
+            var tongNguoiLon = document.getElementById('tongNguoiLon').value;
+            var tongTreEm = document.getElementById('tongTreEm').value;
+            var tongTienPhong = document.getElementById('TongTienPhong').innerText;
+            var khachTraTruoc = document.getElementById('khachTraTruoc').value;
+            var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
+            console.log(tongTienPhong);
+            $.ajax({
+                url: '/DatPhong/DatPhongNhanh',
+                type: 'POST',
+                data: {
+                    'arrMaDichVu': ThanhTienMaDichVu,
+                    'arrSoLuongDichVu': arrSoLuongDichVu,
+                    'maKhachHang': maKhachHang,
+                    'hinhThuc': hinhThuc,
+                    'ngayNhan': ngayNhan,
+                    'ngayTra': ngayTra,
+                    'tongNguoiLon': tongNguoiLon,
+                    'tongTreEm': tongTreEm,
+                    'tongTienPhong': parseInt(tongTienPhong),
+                    'soTienTraTruoc': khachTraTruoc,
+                    'maPhong': maPhong
+                },
+                traditional: true,
+                success: function (result) {
+                    window.location.href = '/DatPhong/Index';
+                },
+                error: function (xhr, status, error) {
+                }
+            });
         }
+    }).catch(function (error) {
+        console.log("Validation failed");
     });
-    }
 }
+
 function ThanhToan() {
     var maDatPhong = document.getElementById('maDatPhongThanhToan_PopUp').innerText;
     var tongTienDichVu = document.getElementById('tongTienPhongThanhToan_PopUp').innerText;
@@ -433,32 +438,53 @@ function validateMaKhachHang() {
     }
 }
 
-function validateNgayNhan() {
-    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
-    var now = new Date();
-    if (ngayNhan < now) {
-        document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
-        return false;
-    }
-    else {
-        document.getElementById('errorNgayNhan').textContent = '';
-        return true;
-    }
-}
 
 function validateNgayTra() {
-    var ngayNhan = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
-    var ngayTra = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
-    var chenhlechthoigian = ngayTra - ngayNhan;
-    var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
-    if (chenhlechgio <= 3) {
-        document.getElementById('errorNgayTra').textContent = "Thời gian đặt phòng phải lớn hơn 3 giờ";
-        return false;
-    } else {
-        document.getElementById('errorNgayTra').textContent = '';
-        return true;
-    }
+    return new Promise((resolve, reject) => {
+        var today = new Date();
+        var ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
+        var ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
+        var maPhong = $('#MaPhong_PopUp_DatPhong').text();
+        var chenhlechthoigian = ngayTra - ngayNhan;
+        var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
+        if (ngayNhan < today) {
+            document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
+            reject(false);
+        }
+        else if (chenhlechgio <= 3) {
+            document.getElementById('errorNgayTra').textContent = "Thời gian đặt phòng phải lớn hơn 3 giờ";
+            reject(false);
+        }
+        else {
+            $.ajax({
+                type: 'POST',
+                url: '/DatPhong/KiemTraNgayNhanVaTra',
+                data: {
+                    'NgayNhan': ngayNhan,
+                    'NgayTra': ngayTra,
+                    'MaPhong': maPhong
+                },
+                success: function (result) {
+                    if (result != null) {
+                        document.getElementById('errorNgayNhan').textContent = result;
+                        document.getElementById('errorNgayTra').textContent = result;
+                        reject(false);
+                    }
+                    else {
+                        document.getElementById('errorNgayNhan').textContent = "";
+                        document.getElementById('errorNgayTra').textContent = "";
+                        resolve(true);
+                    }
+                },
+                error: function () {
+                    console.log('lỗi');
+                    reject(false);
+                }
+            });
+        }
+    });
 }
+
 function validateTongNguoiLon() {
     var tongNguoiLon = document.getElementById('tongNguoiLon').value;
     var soLuongNguoiLonToiDa = document.getElementById('SoNgLonToiDaPopUp_DatPhong').innerText;
@@ -519,11 +545,3 @@ function validateKhachTraTruoc() {
         return true;
     }
 }
-
-
-
-
-
-
-
-
