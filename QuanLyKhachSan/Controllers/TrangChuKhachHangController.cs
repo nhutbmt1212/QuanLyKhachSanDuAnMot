@@ -159,7 +159,7 @@ namespace QuanLyKhachSan.Controllers
                     NgayTra = NgayTra,
                     SoLuongNguoiLon = SoLuongNguoiLon,
                     SoLuongTreEm = SoLuongTreEm,
-                    HinhThucDatPhong = "Ngay",
+                    HinhThucDatPhong = "Ngày",
                     TongTienPhong = TongTien,
                     MaNhanVien = null,
                     TinhTrang = "Chờ xử lý",
@@ -206,7 +206,7 @@ namespace QuanLyKhachSan.Controllers
                     NgayTra = NgayTra,
                     SoLuongNguoiLon = SoLuongNguoiLon,
                     SoLuongTreEm = SoLuongTreEm,
-                    HinhThucDatPhong = "Ngay",
+                    HinhThucDatPhong = "Ngày",
                     TongTienPhong = TongTien,
                     MaNhanVien = null,
                     TinhTrang = "Chờ xử lý",
@@ -272,7 +272,7 @@ namespace QuanLyKhachSan.Controllers
                     NgayTra = NgayTra,
                     SoLuongNguoiLon = SoLuongNguoiLon,
                     SoLuongTreEm = SoLuongTreEm,
-                    HinhThucDatPhong = "Ngay",
+                    HinhThucDatPhong = "Ngày",
                     TongTienPhong = TongTien,
                     MaNhanVien = null,
                     TinhTrang = "Chờ xử lý",
@@ -305,7 +305,7 @@ namespace QuanLyKhachSan.Controllers
 
 
 
-            return Json(new { success = true, redirectUrl = Url.Action("Index", "TrangChuKhachHang") });
+            return Json(new { success = true, redirectTo = Url.Action("Index", "TrangChuKhachHang") });
         }
     }
 }

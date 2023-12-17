@@ -275,7 +275,22 @@ $(document).ready(function () {
                     arrMaDichVu: arrMaDichVu
                 },
                 success: function (response) {
-                    window.location.href = response.redirectUrl;
+                    console.log('AJAX request successful');
+                    console.log(response);
+
+                    // Check if the response indicates success
+                    if (response.success) {
+                        console.log('Redirecting to /TrangChuKhachHang/Index');
+
+                        // Check if there is a redirectTo value in the response
+                        if (response.redirectTo) {
+                            window.location.href = response.redirectTo;
+                        } else {
+                            console.error('Redirect URL not provided in the response');
+                        }
+                    } else {
+                        console.error('Booking failed:', response.message);
+                    }
                 },
                 error: function (error) {
                     console.error('Error:', error);
@@ -284,3 +299,5 @@ $(document).ready(function () {
         }
     });
 });
+
+
