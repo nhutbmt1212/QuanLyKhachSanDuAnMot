@@ -380,7 +380,12 @@ function TinhTongTienPhong() {
 }
 
 function SuaDatPhong() {
-
+  validateNgayTra().then(function (result) {
+        if (!result) {
+            console.log("Validation failed");
+            return;
+        }
+        else {
     var ThanhTienMaDichVu = [];
     var arrSoLuongDichVu = [];
 
@@ -404,12 +409,7 @@ function SuaDatPhong() {
     var khachTraTruocValue = $('#inputFieldKhachTraTruoc').val();
     var tongtienPhongValue = $('#TongTienPhong').text();
     var tinhTrangValue = $('#inputFieldTinhTrang').val();
-    validateNgayTra().then(function (result) {
-        if (!result) {
-            console.log("Validation failed");
-            return;
-        }
-        else {
+  
             $.ajax({
                 type: 'POST',
                 url: '/QuanLyDatPhong/suaDatPhong',
@@ -431,7 +431,7 @@ function SuaDatPhong() {
 
                 },
                 success: function (response) {
-                    // Xử lý khi yêu cầu thành công
+                    
 
                 },
                 error: function (error) {
@@ -439,6 +439,7 @@ function SuaDatPhong() {
                     console.log(error);
                 }
             });
+            location.reload();
         }
     }).catch(function (error) {
         console.log("Validation failed");
@@ -465,13 +466,17 @@ function XoaDatPhong(MaDatPhong) {
 function validateNgayTra() {
     return new Promise((resolve, reject) => {
         var today = new Date();
-        var maDatPhong = document.getElementById('inputFieldMaDatPhong');
+        var maDatPhong = document.getElementById('inputFieldMaDatPhong').value;
         var ngayNhan = document.getElementById('inputFieldNgayNhan').value;
         var ngayTra = document.getElementById('inputFieldNgayTra').value;
-        var maPhong = $('#inputFieldMaPhong').text();
-        var chenhlechthoigian = ngayTra - ngayNhan;
+        var ngayNhanTinhGio = new Date(document.getElementById('inputFieldNgayNhan').value);
+        var ngayTraTinhGio = new Date(document.getElementById('inputFieldNgayTra').value);
+        var maPhong = $('#inputFieldMaPhong').val();
+        
+        var chenhlechthoigian = ngayTraTinhGio - ngayNhanTinhGio;
+        console.log(ngayNhan);
         var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
-        if (ngayNhan < today) {
+        if (ngayNhanTinhGio < today) {
             document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
             reject(false);
         }
@@ -490,13 +495,12 @@ function validateNgayTra() {
                     'MaDatPhong': maDatPhong
                 },
                 success: function (result) {
+                    
                     if (result != null) {
-                        document.getElementById('errorNgayNhan').textContent = result;
                         document.getElementById('errorNgayTra').textContent = result;
                         reject(false);
                     }
                     else {
-                        document.getElementById('errorNgayNhan').textContent = "";
                         document.getElementById('errorNgayTra').textContent = "";
                         resolve(true);
                     }
