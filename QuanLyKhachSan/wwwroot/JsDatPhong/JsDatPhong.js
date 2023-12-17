@@ -439,7 +439,8 @@ function validateNgayNhan() {
     if (ngayNhan < now) {
         document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
         return false;
-    } else {
+    }
+    else {
         document.getElementById('errorNgayNhan').textContent = '';
         return true;
     }

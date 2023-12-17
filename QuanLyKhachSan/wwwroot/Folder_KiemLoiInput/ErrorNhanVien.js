@@ -124,6 +124,7 @@
      
 
         $("#inputEditSDT").on("focusout", function () {
+            var sdtValue = $(this).val();
             if (sdtValue.length === 0) {
                 $("#errorEditSDT").text("Số điện thoại không được để trống.");
 

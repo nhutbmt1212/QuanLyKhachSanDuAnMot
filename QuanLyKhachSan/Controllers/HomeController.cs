@@ -30,7 +30,7 @@ namespace QuanLyKhachSan.Controllers
         [HttpPost]
         public IActionResult LayTinhTrangPhong()
         {
-            var phongDaDat = _db.DatPhong.Count(x => x.NgayNhan < DateTime.Now && x.NgayTra > DateTime.Now && x.TinhTrang== "Đã được duyệt");
+            var phongDaDat = _db.DatPhong.Count(x => x.NgayNhan < DateTime.Now && x.NgayTra > DateTime.Now && x.TinhTrang== "Đã được duyệt" || x.TinhTrang== "Chờ check out" || x.TinhTrang== "Chờ check in");
             var soluongphong = _db.Phong.Count(x => x.TinhTrang == "Đang hoạt động");
 
             var PhongTrong = soluongphong - phongDaDat;
