@@ -281,9 +281,10 @@ function ThemDichVuEdit(maDichVu, soLuong) {
                 });
             });
 
-            if (arrDichVuDaChonedit.length == data.length) {
+            if (TongMaDichVu.length + 1 == data.length) {
                 $('#AddThemDichVu').hide();
             }
+          
             var nodeServices = `<br id="breakDichVu${countedit}"/><span id="tongTenDichVuDaDat${countedit}">Tên dịch vụ: ${maDichVu} | </span><span id="tongSoLuongDichVuDaDat${countedit}">Số lượng: ${soLuong}</span>`;
             $('#TongDichVuDaDat').append(nodeServices);
             TinhTienDichVu();
@@ -476,11 +477,8 @@ function validateNgayTra() {
         var chenhlechthoigian = ngayTraTinhGio - ngayNhanTinhGio;
         console.log(ngayNhan);
         var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
-        if (ngayNhanTinhGio < today) {
-            document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
-            reject(false);
-        }
-        else if (chenhlechgio <= 3) {
+     
+         if (chenhlechgio <= 3) {
             document.getElementById('errorNgayTra').textContent = "Thời gian đặt phòng phải lớn hơn 3 giờ";
             reject(false);
         }

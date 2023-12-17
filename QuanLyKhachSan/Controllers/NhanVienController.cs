@@ -83,7 +83,7 @@ namespace QuanLyKhachSan.Controllers
                     }
                 }
 
-                // Lưu đường dẫn tương đối của file vào cơ sở dữ liệu
+
                 nv.MaNhanVien = GenerateRandomCode();
                 nv.AnhNhanVienBase64 = Path.Combine("UploadImage", nv.AnhNhanVien.FileName);
                 nv.TinhTrang = "Đang hoạt động";

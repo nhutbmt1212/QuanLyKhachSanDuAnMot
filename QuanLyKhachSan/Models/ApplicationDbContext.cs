@@ -44,7 +44,7 @@ namespace QuanLyKhachSan.Models
                {
                    MaNhanVien = "NV001",
                    TenNhanVien = "Nguyen Van A",
-                   SoDienThoai = "123456789",
+                   SoDienThoai = "0123456789",
                    DiaChi = "123 Nguyen Van A, Quan 1, TP.HCM",
                    CCCD = "123456789012",
                    NgaySinh = new DateTime(1990, 1, 1),
@@ -61,7 +61,7 @@ namespace QuanLyKhachSan.Models
                {
                    MaNhanVien = "NV002",
                    TenNhanVien = "Tran Thi B",
-                   SoDienThoai = "987654321",
+                   SoDienThoai = "0987654321",
                    DiaChi = "456 Tran Thi B, Quan 2, TP.HCM",
                    CCCD = "987654321098",
                    NgaySinh = new DateTime(1995, 5, 5),
@@ -78,7 +78,7 @@ namespace QuanLyKhachSan.Models
                {
                    MaNhanVien = "NV003",
                    TenNhanVien = "Le Van C",
-                   SoDienThoai = "111223344",
+                   SoDienThoai = "0111223344",
                    DiaChi = "789 Le Van C, Quan 3, TP.HCM",
                    CCCD = "111223344055",
                    NgaySinh = new DateTime(1985, 10, 10),
@@ -95,7 +95,7 @@ namespace QuanLyKhachSan.Models
                {
                    MaNhanVien = "NV004",
                    TenNhanVien = "Pham Thi D",
-                   SoDienThoai = "555666777",
+                   SoDienThoai = "0555666777",
                    DiaChi = "101 Pham Thi D, Quan 4, TP.HCM",
                    CCCD = "555666777044",
                    NgaySinh = new DateTime(1988, 8, 8),
@@ -112,7 +112,7 @@ namespace QuanLyKhachSan.Models
                {
                    MaNhanVien = "NV005",
                    TenNhanVien = "Hoang Van E",
-                   SoDienThoai = "999888777",
+                   SoDienThoai = "0999888777",
                    DiaChi = "202 Hoang Van E, Quan 5, TP.HCM",
                    CCCD = "999888777033",
                    NgaySinh = new DateTime(1980, 12, 12),
@@ -132,7 +132,7 @@ namespace QuanLyKhachSan.Models
                 {
                     MaKhachHang = "KH001",
                     TenKhachHang = "Nguyen Van X",
-                    SoDienThoai = "123456789",
+                    SoDienThoai = "0123456789",
                     DiaChi = "123 Nguyen Van X, Quan 1, TP.HCM",
                     CCCD = "123456789012",
                     NgaySinh = new DateTime(1992, 3, 15),
@@ -146,7 +146,7 @@ namespace QuanLyKhachSan.Models
                 {
                     MaKhachHang = "KH002",
                     TenKhachHang = "Tran Thi Y",
-                    SoDienThoai = "987654321",
+                    SoDienThoai = "0987654321",
                     DiaChi = "456 Tran Thi Y, Quan 2, TP.HCM",
                     CCCD = "987654321098",
                     NgaySinh = new DateTime(1995, 7, 20),
@@ -160,7 +160,7 @@ namespace QuanLyKhachSan.Models
                 {
                     MaKhachHang = "KH003",
                     TenKhachHang = "Le Van Z",
-                    SoDienThoai = "111223344",
+                    SoDienThoai = "0111223344",
                     DiaChi = "789 Le Van Z, Quan 3, TP.HCM",
                     CCCD = "111223344055",
                     NgaySinh = new DateTime(1988, 10, 5),
@@ -174,7 +174,7 @@ namespace QuanLyKhachSan.Models
                 {
                     MaKhachHang = "KH004",
                     TenKhachHang = "Pham Thi K",
-                    SoDienThoai = "555666777",
+                    SoDienThoai = "0555666777",
                     DiaChi = "101 Pham Thi K, Quan 4, TP.HCM",
                     CCCD = "555666777044",
                     NgaySinh = new DateTime(1990, 12, 25),
@@ -188,7 +188,7 @@ namespace QuanLyKhachSan.Models
                 {
                     MaKhachHang = "KH005",
                     TenKhachHang = "Hoang Van M",
-                    SoDienThoai = "999888777",
+                    SoDienThoai = "0999888777",
                     DiaChi = "202 Hoang Van M, Quan 5, TP.HCM",
                     CCCD = "999888777033",
                     NgaySinh = new DateTime(1985, 5, 1),
