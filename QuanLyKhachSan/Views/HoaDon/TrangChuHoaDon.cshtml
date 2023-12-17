@@ -15,7 +15,6 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            max-height: 900px;
         }
         
         table {
@@ -71,9 +70,11 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 5px;
             padding: 20px;
-            z-index: 1;
+           z-index:1;
+            max-width: 80%;
+            width:auto;
             max-height: 80vh;
-            overflow-x:auto;
+            overflow-y:auto;
         }
 
         .overlay {
@@ -285,8 +286,10 @@
             </div>
         </div>
     </div>
-    <script src="~/js//JsHoaDon.js">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-Jj23aKkvJAAKwnCd1hjjLcq12iVl3BRm4v2Uqc4NHfgtFZjxrxFUBWGlH2iMQL" crossorigin="anonymous"></script>
+    <script src="~/js/JsHoaDon.js"></script>
     <script>
         $(document).ready(function () {
             // Sự kiện khi nhập liệu vào ô tìm kiếm

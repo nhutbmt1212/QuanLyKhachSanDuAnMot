@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using QuanLyKhachSan.Models;
 using System.Data;
+using System.Security.Claims;
 
 namespace QuanLyKhachSan.Controllers
 {
@@ -22,6 +23,20 @@ namespace QuanLyKhachSan.Controllers
         {
             var listKhachHang = _db.KhachHang.Where(s=>s.TinhTrang!="Đã xóa").ToList();
             return View(listKhachHang);
+        }
+
+        public IActionResult HoSoKhachHang()
+        {
+            var MaKhachHang = User.FindFirst(ClaimTypes.Surname)?.Value;
+            var qr_KhachHang = _db.KhachHang.FirstOrDefault(a=>a.MaKhachHang==MaKhachHang);
+
+            return View(qr_KhachHang);
+        }
+
+        [HttpPost]
+        public IActionResult LuuThongTinHoSo(KhachHang kh)
+        {
+            return View();
         }
         public IActionResult XoaKhachHang(string id)
         {

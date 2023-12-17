@@ -1,27 +1,14 @@
-﻿@model QuanLyKhachSan.Models.NhanVien
+﻿@model QuanLyKhachSan.Models.KhachHang
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <title>Nhân Viên Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Hồ sơ khách hàng</title>
     <style>
-
-        img {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 10px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 5px;
-            cursor: pointer;
-        }
 
         .edit-mode .display-mode {
             display: none;
@@ -49,44 +36,24 @@
 </head>
 
 <body>
-    <section>
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Tổng quan</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Hồ sơ</li>
-        </ol>
-    </section>
-
     <div class="container">
-        <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ nhân viên</h2>
-        <form asp-action="LuuThongTinHoSo" asp-controller="NhanVien" method="post" enctype="multipart/form-data">
-        <div class="row">
-            <div class="col-md-2">
-                <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">
-                <label for="imageInput">
-                    <img id="previewImage"
-                         src="~/@Model.AnhNhanVienBase64"
-                         alt="avata">
-                </label>
-
-                </div>
-
-                <div class="col-md-8">
+        <h2>Hồ sơ</h2>
+        <form asp-action="LuuThongTinHoSo" asp-controller="KhachHang" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-6">
                     <ul class="list-group">
-                        <!-- Tên Nhân Viên -->
-                        <li class="list-group-item display-mode" id="employeeNameItem">
-                            <strong>Tên Nhân Viên:</strong>
-                            <span class="display-mode" id="employeeName">@Model.TenNhanVien</span>
-                            <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
-                            <input type="text" id="editedValue_employeeName" asp-for="TenNhanVien" class="form-control edit-mode-input mb-1"
+
+                        <!-- Tên khach hang-->
+                        <li class="list-group-item display-mode" id="customerName">
+                            <strong>Tên khách hàng:</strong>
+                            <span class="display-mode" id="customerName">@Model.TenKhachHang</span>
+                            <a href="#" onclick="editMode('customerName')">Chỉnh Sửa</a>
+                            <input type="text" id="editedValue_customerName" asp-for="TenKhachHang" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                                   <br />
-                            <span  id="ErrorEmployeeName" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" id="tennhanvien" style="display: none;"
-                                    onclick="saveEdit('employeeName')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('customerName')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                               onclick="cancelEdit('employeeName')">Hủy</a>
+                               onclick="cancelEdit('customerName')">Hủy</a>
                         </li>
 
                         <!-- Số Điện Thoại -->
@@ -96,11 +63,8 @@
                             <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_phoneNumber" asp-for="SoDienThoai" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <span id="ErrorEmployeePhoneNumber" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('phoneNumber')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('phoneNumber')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('phoneNumber')">Hủy</a>
                         </li>
@@ -112,11 +76,8 @@
                             <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_cccd" asp-for="CCCD" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <span id="ErrorEmployeemCCCD" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('cccd')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('cccd')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('cccd')">Hủy</a>
                         </li>
@@ -128,11 +89,8 @@
                             <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
                             <input type="email" id="editedValue_email" asp-for="Email" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <span id="ErrorEmployeemEmail" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('email')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('email')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('email')">Hủy</a>
                         </li>
@@ -147,19 +105,15 @@
                                 <option value="Nữ">Nữ</option>
                             </select>
                             <a href="#" onclick="editMode('gender')">Chỉnh Sửa</a>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('gender')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('gender')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('gender')">Hủy</a>
                         </li>
-
-                        <!-- Ngày Sinh -->
                         <li class="list-group-item display-mode non-editable" id="dobItem">
                             <strong>Ngày Sinh:</strong>
-                            <span class="display-mode" id="dob">@Model.NgaySinh</span>
-                            <!-- This field is non-editable -->
+                            <span class="display-mode" id="dob">01/01/1990</span>
+
                         </li>
 
                         <!-- Địa Chỉ -->
@@ -169,20 +123,10 @@
                             <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_address" asp-for="DiaChi" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <span id="ErrorEmployeemDiaChi" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('address')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('address')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('address')">Hủy</a>
-                        </li>
-
-                        <!-- Chức Vụ -->
-                        <li class="list-group-item display-mode non-editable" id="positionItem">
-                            <strong>Chức Vụ:</strong>
-                            <span class="display-mode" id="position">@Model.ChucVu</span>
-                            <!-- This field is non-editable -->
                         </li>
 
                         <!-- Mật Khẩu -->
@@ -192,36 +136,64 @@
                             <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
                             <input type="password" id="editedValue_password" asp-for="MatKhau" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
-                            <span id="ErrorEmployeemPassWord" style="color:red;font-weight:700;"></span>
-                            <button class="btn btn-success edit-mode-input" style="display: none;"
-                                    onclick="saveEdit('password')">
-                                Lưu
-                            </button>
+                            <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
+                               onclick="saveEdit('password')">Lưu</a>
                             <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
                                onclick="cancelEdit('password')">Hủy</a>
-                        </li>
-
-                        <!-- Ngày Vào Làm -->
-                        <li class="list-group-item display-mode non-editable" id="startDateItem">
-                            <strong>Ngày Vào Làm:</strong>
-                            <span class="display-mode" id="startDate">@Model.NgayVaoLam</span>
-                            <!-- This field is non-editable -->
                         </li>
 
                         <!-- Ngày Đăng Ký -->
                         <li class="list-group-item display-mode non-editable" id="registrationDateItem">
                             <strong>Ngày Đăng Ký:</strong>
                             <span class="display-mode" id="registrationDate">@Model.NgayDangKy</span>
-                            <!-- This field is non-editable -->
                         </li>
                     </ul>
                 </div>
-
             </div>
         </form>
     </div>
-    <script src="~/js/JsHoSo.js"></script>
-    <script src="~/Folder_KiemLoiInput//ErorrHoSoNhanVien.js"></script>
+
+    <script>
+        var editingField = null;
+
+        function editMode(fieldId) {
+            if (editingField) {
+                return;
+            }
+
+            editingField = fieldId;
+
+            document.getElementById(fieldId + 'Item').classList.add('edit-mode');
+
+            var currentValue = document.getElementById(fieldId).innerText;
+            document.getElementById('editedValue_' + fieldId).value = currentValue;
+
+            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'inline-block';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'inline-block';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'inline-block';
+
+            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'none';
+        }
+
+        function saveEdit(fieldId) {
+            var editedValue = document.getElementById('editedValue_' + fieldId).value;
+            document.getElementById(fieldId).innerText = editedValue;
+            cancelEdit(fieldId);
+        }
+
+        function cancelEdit(fieldId) {
+            document.getElementById(fieldId + 'Item').classList.remove('edit-mode');
+
+            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'none';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'none';
+            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'none';
+            document.getElementById('editedValue_' + fieldId).value = '';
+
+            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'inline-block';
+
+            editingField = null;
+        }
+    </script>
 
 </body>
 
