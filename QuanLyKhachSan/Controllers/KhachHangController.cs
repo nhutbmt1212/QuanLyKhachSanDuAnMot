@@ -329,8 +329,8 @@ namespace QuanLyKhachSan.Controllers
 
             return _db.KhachHang.Any(nv => nv.Email == email);
         }
-        [HttpGet]
-        public JsonResult CheckSoDienThoai(string sodienthoai)
+        [HttpPost]
+        public IActionResult CheckSoDienThoai(string sodienthoai)
         {
 
             bool exists = SoDienThoaiExists(sodienthoai);
@@ -339,12 +339,14 @@ namespace QuanLyKhachSan.Controllers
             return Json(new { exists = exists });
         }
 
+        //[HttpGet]
+
         private bool SoDienThoaiExists(string sodienthoai)
         {
 
             return _db.KhachHang.Any(nv => nv.SoDienThoai == sodienthoai);
         }
-        [HttpGet]
+      
        
         [HttpGet]
         public JsonResult CheckCCCD(string cccd)

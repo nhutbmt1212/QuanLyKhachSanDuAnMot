@@ -93,7 +93,7 @@
     // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại
     $("#inputFieldSDT").on("focusout", function () {
         var sdtValue = $(this).val();
-
+        console.log(sdtValue);
         if (sdtValue.length === 0) {
             $("#errorSDT").text("Số điện thoại không được để trống.");
         } else if (!isValidSDT(sdtValue)) {

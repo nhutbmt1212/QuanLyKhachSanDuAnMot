@@ -208,6 +208,24 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
             return Ok();
         }
+        [HttpGet]
+        public JsonResult CheckEmail(string email)
+        {
+            bool exists = EmailExistsInNhanVien(email) || EmailExistsInKhachHang(email);
+
+            return Json(new { exists = exists });
+        }
+
+        private bool EmailExistsInNhanVien(string email)
+        {
+            return _db.NhanVien.Any(nv => nv.Email == email);
+        }
+
+        private bool EmailExistsInKhachHang(string email)
+        {
+            return _db.KhachHang.Any(kh => kh.Email == email);
+        }
+
 
     }
 }
