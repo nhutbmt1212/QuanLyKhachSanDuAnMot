@@ -67,15 +67,17 @@
     /* Popup Style */
     .popup-container {
         display: none;
-        position: absolute;
-        top: 220%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        position: fixed;
+        top: 15%;
+        left: 30%;
+        /* transform: translate(-50%, -50%); */
         background-color: #fff;
+        height:80vh;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 20px;
         z-index: 1000;
+        overflow-y:auto;
     }
 
     .overlay {
