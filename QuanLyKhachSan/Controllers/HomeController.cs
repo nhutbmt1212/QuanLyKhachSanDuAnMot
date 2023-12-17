@@ -137,8 +137,51 @@ namespace QuanLyKhachSan.Controllers
             var khachHangNam = TongKhachHang - khachHangNu;
             return Json(new { TongKhachHang = TongKhachHang, khachHangNam = khachHangNam, khachHangNu = khachHangNu });
         }
+        [HttpPost]
+        public IActionResult LayDoanhThuTheoNam()
+        {
+            // Giả sử _db là một đối tượng DbContext trong Entity Framework
+            var hoaDons = _db.HoaDon.ToList();
 
+            // Khởi tạo biến doanhThuTheoNam
+            decimal doanhThuTheoNam = 0;
 
+            foreach (var hoaDon in hoaDons)
+            {
+                // Kiểm tra nếu hóa đơn được tạo trong năm hiện tại
+                if (hoaDon.ThoiGianThanhToan.Year == DateTime.Now.Year)
+                {
+                    // Cộng dồn doanh thu vào doanhThuTheoNam
+                    doanhThuTheoNam += hoaDon.SoTienThanhToan;
+                }
+            }
 
-    }
+            // Trả về dữ liệu dưới dạng JSON
+            return Json(new { doanhThuTheoNam = doanhThuTheoNam });
+        }
+
+		[HttpPost]
+		public IActionResult LayPhongDaThue()
+		{
+			// Giả sử _db là một đối tượng DbContext trong Entity Framework
+			var datPhong = _db.DatPhong.Where(x => x.TinhTrang != "Đã hủy").ToList();
+
+			// Khởi tạo biến doanhThuTheoNam
+			decimal phongDathue = 0;
+
+			foreach (var dp in datPhong)
+			{
+				// Kiểm tra nếu hóa đơn được tạo trong năm hiện tại
+				if (dp.NgayTra.Year == DateTime.Now.Year)
+				{
+					// Cộng dồn doanh thu vào doanhThuTheoNam
+					phongDathue +=1;
+				}
+			}
+
+			// Trả về dữ liệu dưới dạng JSON
+			return Json(new { phongDaThue = phongDathue });
+		}
+
+	}
 }

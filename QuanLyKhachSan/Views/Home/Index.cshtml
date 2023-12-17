@@ -47,7 +47,7 @@
 		<li>
 			<i class='bx bxs-calendar-check'></i>
 			<span class="text">
-				<h3>43</h3>
+				<h4 id="PhongDaThue">43</h4>
 				<p>Phòng đã thuê</p>
 			</span>
 		</li>
@@ -494,3 +494,37 @@
 
 
 </script>
+<script>
+	var doanhthu = 0;
+	fetch('/Home/LayDoanhThuTheoNam', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(response => response.json())
+		.then(data => {
+			doanhthu = data.doanhThuTheoNam;
+			console.log(data.doanhThuTheoNam); // In doanh thu theo năm lên console
+			document.getElementById('TongThuNhap').textContent = doanhthu.toLocaleString('vi-VN');
+		})
+		.catch(error => console.log(error));
+</script>
+
+<script>
+	var phongDaThue = 0;
+	fetch('/Home/LayPhongDaThue', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	})
+		.then(response => response.json())
+		.then(data => {
+			phongDaThue = data.phongDaThue;
+			console.log(data.phongDaThue); // In số phòng đã thuê lên console
+			document.getElementById('PhongDaThue').textContent = phongDaThue;
+		})
+		.catch(error => console.log(error));
+</script>
+
