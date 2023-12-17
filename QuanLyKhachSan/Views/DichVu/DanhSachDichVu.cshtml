@@ -3,7 +3,7 @@
     var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
     var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
 }
-@if (User.Identity.IsAuthenticated && userRole != "Quản lý")
+@if (User.Identity.IsAuthenticated && userRole != "Quản lý" && userRole != "Nhân viên")
 {
     Layout = null;
     <partial name="../Shared/404Error.cshtml" />
@@ -166,17 +166,24 @@
             </form>
         </div>
     </div>
+    @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+    {
     <div class="row">
         <button class="btn btn-primary text-white mb-3 ml-3" id="uploadBtn">Upload Excel</button>
         <a class="btn btn-success mb-3 ml-2" id="btn_exportPDF" asp-controller="DichVu" asp-action="ExportPDF">Export to PDF</a>
         <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="DichVu" asp-action="ExportExcel">Export to Excel</a>
     </div>
-
+    }
     <!-- Nút Thêm Dịch Vụ -->
     <div class="row">
+    
         <div class="col-sm-4">
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+            {
             <a class="btn btn-primary mb-2 text-white" id="btn_themDv" onclick="openForm()">Thêm dịch vụ</a>
+            }
         </div>
+ 
         <div class="col-sm-6">
             <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">
         </div>
@@ -196,7 +203,10 @@
                     <th scope="col" class="align-middle ">Tình trạng</th>
                     <th scope="col" class="align-middle ">Giờ BD phục vụ</th>
                     <th scope="col" class="align-middle ">Giờ KT phục vụ</th>
+                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+    {
                     <th scope="col" class="align-middle  thead_xuly">Xử lý</th>
+    }
                 </tr>
             </thead>
 
@@ -228,19 +238,21 @@
                         <td class="employee-info-column">@dv.TinhTrang</td>
                         <td class="employee-info-column">@dv.GioBatDauDichVu</td>
                         <td class="employee-info-column">@dv.GioKetThucDichVu</td>
-
-                        <td style="font-size:20px" class="employee-info-column-button">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: rgba(0, 0, 0, 0);">
-                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
-                                </button>
-                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
-                                    <a class="dropdown-item" asp-action="XoaDichVu" asp-controller="DichVu" asp-route-id="@dv.MaDichVu">Xóa</a>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
+                            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+                            {
+                                <td style="font-size:20px" class="employee-info-column-button">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: rgba(0, 0, 0, 0);">
+                                            <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item check_checkbox" onclick="OpenFormEdit()" id="btn_Sua">Sửa</a>
+                                            <a class="dropdown-item" asp-action="XoaDichVu" asp-controller="DichVu" asp-route-id="@dv.MaDichVu">Xóa</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            }
+                        </tr>
                     }
             </tbody>
             </form>

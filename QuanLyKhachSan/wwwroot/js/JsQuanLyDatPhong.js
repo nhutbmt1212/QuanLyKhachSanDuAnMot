@@ -433,3 +433,17 @@ function SuaDatPhong() {
     });
 
 }
+function XoaDatPhong(MaDatPhong) {
+    $.ajax({
+        type: "POST",
+        url: '/QuanLyDatPhong/HuyDatPhong',
+        data: { 'MaDatPhong': MaDatPhong },
+        success: function () {
+
+        },
+        error: function () {
+            console.log('lỗi');
+        }
+
+    });
+}
