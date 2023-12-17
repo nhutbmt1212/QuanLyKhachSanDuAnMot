@@ -53,15 +53,14 @@
             </div>
             <ul>
                 <li><a class="active" asp-action="Index" asp-controller="TrangChuKhachHang">Trang chủ</a></li>
-                <li><a href="#">Đặt chỗ nghỉ</a></li>
+                <li><a class="smooth-scroll" href="#PhanTimKiemPhong">Tìm kiếm phòng</a></li>
             </ul>
             <input type="checkbox" id="click">
             <label for="click" class="menu-btn">
                 <i class="fas fa-bars" style="color: black;"></i>
             </label>
             <ul>
-                <!-- <li><a class="active" href="#">Trang chủ</a></li>
-                <li><a href="#">Đặt chỗ nghỉ</a></li> -->
+              
                 @if (userName == null)
                 {
                     <li>
@@ -86,7 +85,6 @@
             </ul>
         </nav>
 
-        @* style="overflow:hidden" *@
 
 
 
@@ -115,22 +113,10 @@
             </div>
 
             <!-- Phần tìm kiếm phòng -->
-            <div class="sreach-room position-sticky top-0">
+            <div id="PhanTimKiemPhong" class="sreach-room">
                 <h2 class="p-2">Tìm phòng</h2>
                 <div class="address row">
-               @*      <div class="col-md-2 mb-3 mx-auto ">
-                        <label for="validationDefaultUsername">Địa chỉ khách sạn</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend2">
-                                    <i class="bi bi-geo-alt-fill"></i>
-                                </span>
-                            </div>
-                            <input type="text" class="form-control" id="validationDefaultUsername"
-                                   aria-describedby="inputGroupPrepend2" value="Nguyễn Tất Thành, Tp BMT" required>
-                        </div>
-                    </div> *@
-
+           
                     <div class="col-md-2 mb-3 mx-auto">
                         <label for="ngaynhan">Ngày nhận </label>
                         <div class="input-group date" id="ngaynhanPicker" data-target-input="nearest">
@@ -199,7 +185,7 @@
                             }
 
                             <div class="room-info">
-                                <h3>@phong.MaPhong - <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span></h3>
+                                <h3>@phong.MaPhong  - <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span></h3>
                                 <span id="@phong.MaPhong" class="room-type"></span>
                               @*   <span>
                                     <i class="fa-solid fa-bed"></i> Loại phòng: <span id="loaiPhong-@phong.MaPhong">Hai giường đơn</span>
@@ -208,7 +194,7 @@
 
                                 <span>
                                     <span>
-                                        <i class="fa-regular fa-money-bill-1"></i> <span id="pricetheogio-@phong.MaPhong" class="room-price"
+                                        <i class="fa-regular fa-money-bill-1" ></i> <span id="pricetheogio-@phong.MaPhong" class="room-price"
                                                                                               style="color:#ffc107;font-weight:700;"></span> VND/Giờ
                                     </span> | <span>
                                         <i class="fa-regular fa-money-bill-1"></i> <span id="pricetheongay-@phong.MaPhong"
@@ -245,8 +231,35 @@
                                         </select>
 
                                     </div>
-                                  
-
+                                    @* xem vat tu *@
+                                    <ul class="details-list">
+                                        <li>
+                                            <a class="btn-details" onclick="XemVatTu(this)">Xem chi tiết vật tư</a>
+                                            <div class="overlay" id="overlay1"></div>
+                                            <div class="details-container" id="detailsContainer1">
+                                                <span class="close-btn" onclick="DongXemVatTu(this)"><i class="bi bi-x-lg"></i></span>
+                                                <h4>Thông tin chi tiết</h4>
+                                                <div class="inventory-items">
+                                                    <div class="inventory-item">
+                                                        <p>Đèn bàn: 2 cái</p>
+                                                    </div>
+                                                    <div class="inventory-item">
+                                                        <p>Ghế: 4 cái</p>
+                                                    </div>
+                                                    <div class="inventory-item">
+                                                        <p>Đèn bàn: 2 cái</p>
+                                                    </div>
+                                                    <div class="inventory-item">
+                                                        <p>Ghế: 4 cái</p>
+                                                    </div>
+                                                    <div class="inventory-item">
+                                                        <p>Đèn bàn: 2 cái</p>
+                                                    </div>
+                                                </div>
+                                                <button class="btn btn-danger" onclick="DongXemVatTu(this)">Đóng</button>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                                 <a class="btn btn-warning" onclick="DatPhong('@phong.MaPhong')" >Chọn phòng</a>
 
@@ -254,10 +267,9 @@
                         </div>
                     }
                 </div>
+
                 <div class="col-md-4">
-                    @* <div class="infor-detail  position-sticky " style="top:85px">
-                    *@
-                    <div class="infor-detail ">
+                    <div class="infor-detail sticky-top" style="top:20px; max-height: 90vh; overflow-y: auto;">
                         <div class="infor-booked-room">
                             <h3>Thông tin đặt phòng</h3>
                             <hr />
@@ -299,6 +311,8 @@
                 </div>
             </div>
         </div>
+     
+
     </div>
 </body>
 <footer class="text-center text-lg-start text-white" style="background-color: #1c2331">

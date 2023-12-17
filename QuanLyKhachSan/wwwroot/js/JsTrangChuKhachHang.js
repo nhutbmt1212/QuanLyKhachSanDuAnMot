@@ -151,8 +151,9 @@ document.getElementById('TimKiemPhong').onclick = function () {
             success: function (result) {
                 var maPhongDaDatList = result.maPhongDaDatList.map(r => r.trim().toUpperCase());
                 var PhongKhongdieuKien = result.qr_PhongKhongDatTieuChuan.map(r => r.trim().toUpperCase());
+                console.log(maPhongDaDatList, PhongKhongdieuKien);
                 $('.room-detail').each(function () {
-                    var maPhong = $(this).find('h3').text().split('|')[0].trim().toUpperCase(); // Convert to uppercase and trim
+                    var maPhong = $(this).find('h3').text().split('-')[0].trim().toUpperCase();                    console.log(maPhong);// Convert to uppercase and trim
                     if (maPhongDaDatList.includes(maPhong) || PhongKhongdieuKien.includes(maPhong)) {
                         $(this).hide();
                         reportPhong.style.display = "none";
@@ -193,7 +194,6 @@ document.getElementById('TimKiemPhong').onclick = function () {
                 if ($('.room-detail:visible').length == 0) {
                     room_infor.style.display = "none";
                     reportPhong.style.display = "block";
-
                 }
 
             },
@@ -473,3 +473,51 @@ function DatPhongKhachSan() {
     }
 
 }
+
+
+
+
+// xem vật tư
+
+
+function XemVatTu(button) {
+    var detailsContainer = $(button).closest('li').find('.details-container');
+    var overlay = $(button).closest('li').find('.overlay');
+
+    detailsContainer.show();
+    overlay.show();
+}
+
+function DongXemVatTu(button) {
+    var detailsContainer = $(button).closest('li').find('.details-container');
+    var overlay = $(button).closest('li').find('.overlay');
+
+    detailsContainer.hide();
+    overlay.hide();
+}
+
+
+
+
+//lướt xuống tìm kiếm phòng
+document.addEventListener("DOMContentLoaded", function () {
+    var scrollLinks = document.querySelectorAll('.smooth-scroll');
+
+    scrollLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            var targetId = this.getAttribute('href').substring(1);
+            var targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                var offset = targetElement.offsetTop;
+
+                window.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+});

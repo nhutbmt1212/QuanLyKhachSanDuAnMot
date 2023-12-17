@@ -79,7 +79,7 @@ namespace QuanLyKhachSan.Controllers
 
                              };
 
-            var qr_PhongKhongDatTieuChuan = join_Phong.Where(s => s.SlNguoiLon < SoLuongNguoiLon || s.SlTreEm < SoLuongTreEm)
+            var qr_PhongKhongDatTieuChuan = join_Phong.Where(s => s.SlNguoiLon < SoLuongNguoiLon || s.SlTreEm < SoLuongTreEm )
                                                       .Select(s => s.MaPhong)
                                                       .ToList();
 

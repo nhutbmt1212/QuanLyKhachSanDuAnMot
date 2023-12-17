@@ -5,12 +5,13 @@
     box-sizing: border-box;
 }
 
-#body{
-    background:gray;
-    height:auto;
+#body {
+    background: #F0F0F0;
+    height: auto;
+    padding-bottom: 20px;
 }
 header {
-    background-color: #007bff;
+    background-color: #008bff;
     color: white;
     padding: 1em;
     text-align: center;
@@ -240,3 +241,7 @@ input[type="checkbox"] {
         font-size: 40px;
         font-weight: 700;
     }
+
+#myForm {
+    margin-bottom: 50px;
+}
