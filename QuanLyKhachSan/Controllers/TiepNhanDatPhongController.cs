@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QuanLyKhachSan.Models;
@@ -7,6 +8,7 @@ using System.Security.Claims;
 
 namespace QuanLyKhachSan.Controllers
 {
+    [Authorize]
     public class TiepNhanDatPhongController : Controller
     {
 

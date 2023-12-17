@@ -86,7 +86,7 @@
                     transition: all .3s ease;
                 }
 
-        #content .profile .profile-link a:hover {
+        .profile .profile-link a:hover {
             background: var(--grey);
             text-decoration: none;
         }
@@ -124,10 +124,15 @@
                 else
                 {
                     <div class="profile">
+                        <span>Xin chào! @TenNguoiDung</span>
                         <img src="https://cdn.gogeticon.net/files/1925428/fa0cbc2764f70113bf2fad3905933545.png">
                         <ul class="profile-link">
-                            <li><a asp-action="HoSoKhachHang" asp-controller="KhachHang"><i class='bx bxs-user-circle icon'></i> Hồ sơ</a></li>
-                            <li><a asp-action="LogOut" asp-controller="Home"> <i class='bx bxs-log-out'></i> Đăng xuất</a></li>
+                            @if (userRole == "Nhân viên" || userRole =="Quản lý")
+                            {
+                                 <li><a asp-action="Index" asp-controller="Home" style="margin-left:9px">Quản lý</a></li>
+                            }
+                           
+                            <li><a asp-action="LogOut" asp-controller="Home"><i class='bx bxs-log-out'></i> Đăng xuất</a></li>
                         </ul>
                     </div>
 

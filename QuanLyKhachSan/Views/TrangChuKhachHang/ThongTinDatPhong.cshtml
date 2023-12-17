@@ -25,7 +25,57 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     
     <title>Thông tin đặt phòng</title>
+    <style>
+        .profile {
+            position: relative;
+        }
 
+            .profile img {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                object-fit: cover;
+                cursor: pointer;
+                z-index: 999;
+            }
+
+            .profile .profile-link {
+                position: absolute;
+                top: calc(100% + 10px);
+                right: 0;
+                background: var(--light);
+                padding: 10px 0;
+                box-shadow: 4px 4px 16px rgba(0, 0, 0, .1);
+                border-radius: 10px;
+                width: 160px;
+                opacity: 0;
+                pointer-events: none;
+                transition: all .3s ease;
+            }
+
+                .profile .profile-link.show {
+                    opacity: 1;
+                    background: white;
+                    pointer-events: visible;
+                    top: 100%;
+                    z-index: 999;
+                }
+
+                .profile .profile-link a {
+                    padding: 10px 16px;
+                    display: flex;
+                    grid-gap: 10px;
+                    font-size: 14px;
+                    color: var(--dark);
+                    align-items: center;
+                    transition: all .3s ease;
+                }
+
+                    .profile .profile-link a:hover {
+                        background: var(--grey);
+                        text-decoration: none;
+                    }
+    </style>
 </head>
 
 <body>
@@ -58,13 +108,18 @@
                 }
                 else
                 {
-                    <li>Xin chào! @TenNguoiDung</li>
-                    <li>
-                        <a class="btn btn-primary" asp-action="Index" asp-controller="Home">Trở về trang quản lý</a>
-                    </li>
-                    <li>
-                        <a asp-action="LogOut" asp-controller="TrangChuKhachHang" class="btn btn-danger">Đăng xuất</a>
-                    </li>
+                    <div class="profile">
+                        <span>Xin chào! @TenNguoiDung</span>
+                        <img src="https://cdn.gogeticon.net/files/1925428/fa0cbc2764f70113bf2fad3905933545.png">
+                        <ul class="profile-link">
+                            @if (userRole == "Nhân viên" || userRole == "Quản lý")
+                            {
+                                <li><a asp-action="Index" asp-controller="Home">Quản lý</a></li>
+                            }
+
+                            <li><a asp-action="LogOut" asp-controller="Home"><i class='bx bxs-log-out'></i> Đăng xuất</a></li>
+                        </ul>
+                    </div>
                 }
             </ul>
         </nav>
@@ -334,7 +389,17 @@
 
         </form>
     </div>
+    <script>
+        // PROFILE DROPDOWN
+        const profile = document.querySelector('nav .profile');
+        const imgProfile = profile.querySelector('img');
+        const dropdownProfile = profile.querySelector('.profile-link');
 
+        imgProfile.addEventListener('click', function () {
+            dropdownProfile.classList.toggle('show');
+        })
+
+    </script>
     <script src="~/js/ThongTinDatPhong.js"></script>
     <script src="~/Folder_KiemLoiInput/ErrorThongTinDatPhong.js"></script>
 </body>

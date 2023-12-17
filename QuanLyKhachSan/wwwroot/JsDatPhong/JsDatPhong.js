@@ -39,7 +39,7 @@ function showSearchBar(MaPhong) {
 
             document.getElementById('hinhThuc_PopUpDatPhong').onchange = function () {
                 var hinhthuc = document.getElementById('hinhThuc_PopUpDatPhong').value;
-                if (hinhthuc == 'Ngay') {
+                if (hinhthuc == 'Ngày') {
                     document.getElementById('giaPhong_PopUpDatPhong').value = data.qr_LoaiPhong.giaPhongTheoNgay;
                 }
                 else {

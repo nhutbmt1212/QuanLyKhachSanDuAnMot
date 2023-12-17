@@ -7,9 +7,11 @@ using QuanLyKhachSan.Models;
 using System;
 using System.Data;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace QuanLyKhachSan.Controllers
 {
+    [Authorize]
     public class VatTuController : Controller
     {
         private readonly ApplicationDbContext _db;
