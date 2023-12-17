@@ -76,38 +76,43 @@ namespace QuanLyKhachSan.Controllers
             // Trả về dữ liệu dưới dạng JSON
             return Json(new { soluongkhachahng = soluongkhachahng });
         }
-        [HttpPost]
-        public IActionResult GetServiceDetails()
-        {
-            var query = from chiTiet in _db.ChiTietDichVu
-                        join dichVu in _db.DichVu on chiTiet.MaDichVu equals dichVu.MaDichVu
-                        group new { chiTiet, dichVu } by new { dichVu.TenDichVu } into grouped
-                        select new
-                        {
-                            TenDichVu = grouped.Key.TenDichVu,
-                            TongSoLuong = grouped.Sum(x => x.chiTiet.SoLuong),
-                            TongTien = grouped.Sum(x => x.chiTiet.SoLuong * x.dichVu.GiaTien)
-                        };
+		[HttpPost]
+		public IActionResult GetServiceDetails()
+		{
+			var query = from chiTiet in _db.ChiTietDichVu
+						join dichVu in _db.DichVu on chiTiet.MaDichVu equals dichVu.MaDichVu
+						join datPhong in _db.DatPhong on chiTiet.MaDatPhong equals datPhong.MaDatPhong
+						where datPhong.TinhTrang != "Đã hủy"
+						group new { chiTiet, dichVu } by new { dichVu.TenDichVu } into grouped
+						select new
+						{
+							TenDichVu = grouped.Key.TenDichVu,
+							TongSoLuong = grouped.Sum(x => x.chiTiet.SoLuong),
+							TongTien = grouped.Sum(x => x.chiTiet.SoLuong * x.dichVu.GiaTien)
+						};
 
-            return Json(query);
-        }
-        [HttpPost]
-        public IActionResult LayLoaiPhong()
-        {
-            var query = from phong in _db.Phong
-                        join loaiPhong in _db.LoaiPhong on phong.MaLoaiPhong equals loaiPhong.MaLoaiPhong
-                        join datPhong in _db.DatPhong on phong.MaPhong equals datPhong.MaPhong
-                        group new { phong, loaiPhong, datPhong } by new { loaiPhong.TenLoaiPhong } into grouped
-                        select new
-                        {
-                            TenLoaiPhong = grouped.Key.TenLoaiPhong,
-                            SoLuong = grouped.Count(),
-                            TongTien = grouped.Sum(x => x.datPhong.TongTienPhong)
-                        };
+			return Json(query);
+		}
 
-            return Json(query);
-        }
-        [HttpPost]
+		[HttpPost]
+		public IActionResult LayLoaiPhong()
+		{
+			var query = from phong in _db.Phong
+						join loaiPhong in _db.LoaiPhong on phong.MaLoaiPhong equals loaiPhong.MaLoaiPhong
+						join datPhong in _db.DatPhong on phong.MaPhong equals datPhong.MaPhong
+						where datPhong.TinhTrang != "Đã hủy"
+						group new { phong, loaiPhong, datPhong } by new { loaiPhong.TenLoaiPhong } into grouped
+						select new
+						{
+							TenLoaiPhong = grouped.Key.TenLoaiPhong,
+							SoLuong = grouped.Count(),
+							TongTien = grouped.Sum(x => x.datPhong.TongTienPhong)
+						};
+
+			return Json(query);
+		}
+
+		[HttpPost]
 
         public IActionResult DemNhanVienHoatDong()
         {
