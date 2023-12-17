@@ -175,13 +175,15 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <label>Sl Người lớn</label>
-                                <input class="form-control" name="soLuongNguoiLon" type="number"
-                                       id="inputFieldSoLuongNguoiLon" />
+                                <input class="form-control" name="soLuongNguoiLon" 
+                                       id="inputFieldSoLuongNguoiLon" type="number" min="1" required onkeypress="return event.charCode >= 48" onblur="if(this.value=='' || this.value==0){this.value='1'}"  />
+
+
                                 <span id="errorSoLuongNguoiLon" style="color: red;"></span>
                             </div>
                             <div class="col-md-6">
                                 <label>Sl Trẻ em</label>
-                                <input class="form-control" name="soLuongTreEm" type="number"
+                                <input class="form-control" name="soLuongTreEm" type="number" min="0" required onkeypress="return event.charCode >= 48" onblur="if(this.value=='' ){this.value='0'}"
                                        id="inputFieldSoLuongTreEm" />
                                 <span id="errorSoLuongTreEm" style="color: red;"></span>
                             </div>
@@ -206,7 +208,7 @@
                         </div>
                         <div class="form-group" >
                             <label>Tiền khách trả trước</label>
-                            <input class="form-control" name="maloaiphong" id="inputFieldKhachTraTruoc"/>
+                            <input class="form-control" name="maloaiphong" id="inputFieldKhachTraTruoc" type="number" min="0" required onkeypress="return event.charCode >= 48" onblur="if(this.value=='' ){this.value='0'}" />
 
                             <span id="errorChonLP" style="color: red;"></span>
                         </div>
