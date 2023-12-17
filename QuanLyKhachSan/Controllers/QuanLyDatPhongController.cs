@@ -14,7 +14,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult Index()
         {
-            var qr_DatPhong = _db.DatPhong.Where(s => s.TinhTrang != "Đã thanh toán" && s.TinhTrang != "Chờ xử lý").ToList();
+            var qr_DatPhong = _db.DatPhong.Where(s => s.TinhTrang != "Đã thanh toán" && s.TinhTrang != "Chờ xử lý" && s.TinhTrang !="Hủy đặt phòng").ToList();
             return View(qr_DatPhong);
         }
         [HttpPost]
@@ -151,7 +151,13 @@ namespace QuanLyKhachSan.Controllers
                 _db.SaveChanges();
             return RedirectToAction("Index", "QuanLyDatPhong");
         }
-
-
+        [HttpPost]
+        public IActionResult HuyDatPhong(string MaDatPhong)
+        {
+            var qr_MaDatPhong = _db.DatPhong.FirstOrDefault(s => s.MaDatPhong == MaDatPhong);
+            qr_MaDatPhong.TinhTrang = "Hủy đặt phòng";
+            _db.SaveChanges();
+            return RedirectToAction("Index", "QuanLyDatPhong");
+        }
     }
 }

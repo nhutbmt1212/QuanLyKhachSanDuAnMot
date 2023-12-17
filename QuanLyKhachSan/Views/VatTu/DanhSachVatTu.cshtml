@@ -126,37 +126,41 @@
         </form>
     </div>
 
+    @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+    {
 
-
-    <div id="overlayUploadExcel" class="overlayUploadExcel"></div>
-    <div id="uploadPopup" class="popupUploadExcel">
-        <div class="popup-contentUploadExcel">
-            <span class="closeUploadExcel" onclick="closePopup()">&times;</span>
-            <form method="post" enctype="multipart/form-data" asp-controller="VatTu" asp-action="Import">
-                <div class="form-group">
-                    <div class="col-md-10">
-                        <p>Chọn file Excel để upload:</p>
-                        <input type="file" name="formFile" />
+        <div id="overlayUploadExcel" class="overlayUploadExcel"></div>
+        <div id="uploadPopup" class="popupUploadExcel">
+            <div class="popup-contentUploadExcel">
+                <span class="closeUploadExcel" onclick="closePopup()">&times;</span>
+                <form method="post" enctype="multipart/form-data" asp-controller="VatTu" asp-action="Import">
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <p>Chọn file Excel để upload:</p>
+                            <input type="file" name="formFile" />
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-12">
-                        <input type="submit" class="btn btn-primary" value="Upload" />
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary" value="Upload" />
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <button class="btn btn-primary text-white mb-3 ml-3" id="uploadBtn">Upload Excel</button>
-        <a class="btn btn-success mb-3 ml-2" id="btn_exportPDF" asp-controller="VatTu" asp-action="ExportPDF">Export to PDF</a>
-        <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="VatTu" asp-action="ExportExcel">Export to Excel</a>
-    </div>
-
+        <div class="row">
+            <button class="btn btn-primary text-white mb-3 ml-3" id="uploadBtn">Upload Excel</button>
+            <a class="btn btn-success mb-3 ml-2" id="btn_exportPDF" asp-controller="VatTu" asp-action="ExportPDF">Export to PDF</a>
+            <a class="btn btn-success mb-3 ml-2" id="btn_export" asp-controller="VatTu" asp-action="ExportExcel">Export to Excel</a>
+        </div>
+    }
     <!-- Nút Thêm vật tư -->
     <div class="row">
         <div class="col-sm-4">
+              @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+    {
             <a class="btn btn-primary mb-2 text-white w-50" id="btn_themvt" onclick="openForm()">Thêm vật tư</a>
+    }
         </div>
         <div class="col-sm-6">
             <input type="text" id="searchInput" class="form-control mb-3" placeholder="Tìm kiếm">

@@ -69,7 +69,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên") 
             {
                 <li>
                     <a asp-action="DanhSachDichVu" asp-controller="DichVu">
@@ -78,7 +78,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" )
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên" )
             {
                 <li>
                     <a asp-action="DanhSachVatTu" asp-controller="VatTu">
