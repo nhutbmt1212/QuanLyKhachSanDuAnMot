@@ -35,21 +35,21 @@
         } else if (!emailRegex.test(emailValue)) {
             $("#errorQuenMatKhauEmail").text("Email không hợp lệ.");
         } else {
-            $("#errorQuenMatKhauEmail").text(" ");
-        } $.ajax({
-            url: '/KhachHang/CheckEmail',  // Đường dẫn đến API của bạn
-            type: 'GET',
-            data: { email: emailValue },
-            success: function (data) {
-                if (data.exists) {
-                    ("#errorEmail").text("");
-                    
-                } else {
-                    $
-                    $("#errorEmail").text("Email không tồn tại trong hệ thống.");
+            $.ajax({
+                url: '/Access/CheckEmail',  // Đường dẫn đến API của bạn
+                type: 'GET',
+                data: { email: emailValue },
+                success: function (data) {
+                    if (data.exists) {
+                        ("#errorQuenMatKhauEmail").text("");
+
+                    } else {
+                        $
+                        $("#errorQuenMatKhauEmail").text("Email không tồn tại trong hệ thống.");
+                    }
                 }
-            }
-        });
+            });
+        } 
     });
     $("#passwordMoi").on("focusout", function () {
         var matKhauValue = $(this).val();

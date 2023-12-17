@@ -307,5 +307,48 @@ namespace QuanLyKhachSan.Controllers
 
             return Json(new { success = true, redirectTo = Url.Action("Index", "TrangChuKhachHang") });
         }
+        [HttpPost]
+        public IActionResult CheckSoDienThoai(string sodienthoai)
+        {
+
+            bool exists = SoDienThoaiExists(sodienthoai);
+
+
+            return Json(new { exists = exists });
+        }
+        private bool SoDienThoaiExists(string sodienthoai)
+        {
+
+            return _db.KhachHang.Any(nv => nv.SoDienThoai == sodienthoai);
+        }
+        [HttpGet]
+        public JsonResult CheckCCCD(string cccd)
+        {
+
+            bool exists = CCCDExists(cccd);
+
+
+            return Json(new { exists = exists });
+        }
+
+        private bool CCCDExists(string cccd)
+        {
+
+            return _db.KhachHang.Any(nv => nv.CCCD == cccd);
+        }
+        [HttpGet]
+        public JsonResult CheckEmail(string email)
+        {
+
+            bool exists = EmailExists(email);
+
+            return Json(new { exists = exists });
+        }
+
+        private bool EmailExists(string email)
+        {
+
+            return _db.KhachHang.Any(nv => nv.Email == email);
+        }
     }
 }
