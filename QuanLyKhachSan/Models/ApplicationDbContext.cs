@@ -26,7 +26,7 @@ namespace QuanLyKhachSan.Models
         {
             // Cấu hình khóa chính tổng hợp cho ChiTietDichVu
             modelBuilder.Entity<ChiTietDichVu>()
-                .HasKey(c => new { c.MaDichVu, c.MaKhachHang });
+                .HasKey(c => new { c.MaDichVu, c.MaKhachHang,c.MaDatPhong });
             modelBuilder.Entity<ChiTietPhongVatTu>()
                 .HasKey(c => new { c.MaVatTu, c.MaPhong });
             modelBuilder.Entity<ChiTietDichVu>()
