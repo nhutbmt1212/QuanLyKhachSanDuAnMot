@@ -12,8 +12,7 @@
             $("#errorTenKH").text("");
         }
     });
-    // Bắt sự kiện khi người dùng rời khỏi ô input email
-    // Bắt sự kiện khi người dùng rời khỏi ô input email
+   
     $("#inputFieldEmail").on("focusout", function () {
         var emailValue = $(this).val();
         var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -40,18 +39,7 @@
     });
 
 
-    $("#inputEditEmail").on("focusout", function () {
-        var emailValue = $(this).val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (emailValue.length === 0) {
-            $("#errorEditEmail").text("Email không được để trống.");
-        } else if (!isValidEmail(emailValue)) {
-            $("#errorEditEmail").text("Email không hợp lệ.");
-        } else {
-            $("#errorEditEmail").text("");
-        }
-    });
+   
     // Bắt sự kiện khi người dùng rời khỏi ô input địa chỉ
     $("#inputFieldDiaChi").on("focusout", function () {
         var diaChiValue = $(this).val();
@@ -64,29 +52,18 @@
             $("#errorDiaChi").text("");
         }
     });
-    $("#inputEditDiaChi").on("focusout", function () {
-        var diaChiValue = $(this).val();
-
-        if (diaChiValue.length < 3) {
-            $("#errorEditiaChi").text("Độ dài ít nhất 3 ký tự.");
-        } else if (diaChiValue.length === 0) {
-            $("#errorEditiaChi").text("Địa chỉ không được để trống.");
-        } else {
-            $("#errorEditiaChi").text("");
-        }
-    });
-
+    
     // Bắt sự kiện khi người dùng rời khỏi ô input số điện thoại
     $("#inputFieldSDT").on("focusout", function () {
         var sdtValue = $(this).val();
-
+        console.log(sdtValue);
         if (sdtValue.length === 0) {
             $("#errorSDT").text("Số điện thoại không được để trống.");
         } else if (!isValidSDT(sdtValue)) {
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
         } else {
             $.ajax({
-                url: '/NhanVien/CheckSoDienThoai',  // Đường dẫn đến API của bạn
+                url: '/KhachHang/CheckSoDienThoai',  // Đường dẫn đến API của bạn
                 type: 'GET',
                 data: { sodienthoai: sdtValue },
                 success: function (data) {
@@ -97,24 +74,14 @@
                     }
                 },
                 error: function (error) {
-                    console.error(error);
+                    console.log(error);
                 }
             });
         }
     });
 
 
-    $("#inputEditSDT").on("focusout", function () {
-        var sdtValue = $(this).val();
-
-        if (sdtValue.length === 0) {
-            $("#errorEditSDT").text("Số điện thoại không được để trống.");
-        } else if (!isValidSDT(sdtValue)) {
-            $("#errorEditSDT").text("Số điện thoại không hợp lệ.");
-        } else {
-            $("#errorEditSDT").text("");
-        }
-    });
+    
     // Bắt sự kiện khi người dùng rời khỏi ô input CCCD
     $("#inputFieldCCCD").on("focusout", function () {
         var cccdValue = $(this).val();
@@ -141,44 +108,10 @@
     });
 
 
-    $("#inputEditCCCD").on("focusout", function () {
-        var cccdValue = $(this).val();
-        if (cccdValue.length === 0) {
-            $("#errorEditCCCD").text("CCCD không được để trống.");
-        } else if (!isValidCCCD(cccdValue)) {
-            $("#errorEditCCCD").text("CCCD không hợp lệ.");
-        } else {
-            $("#errorEditCCCD").text("");
-        }
-    });
+  
 
     // Bắt sự kiện khi người dùng rời khỏi ô input mật khẩu
-    $("#inputFieldMK").on("focusout", function () {
-        var matKhauValue = $(this).val();
-
-        if (matKhauValue.length === 0) {
-            $("#errorMK").text("Mật khẩu không được để trống.");
-        } else if (matKhauValue.length < 6) {
-            $("#errorMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
-        } else if (!isValidMatKhau(matKhauValue)) {
-            $("#errorMK").text("Mật khẩu phải bao gồm chữ và số.");
-        } else {
-            $("#errorMK").text("");
-        }
-    });
-    $("#inputEditMK").on("focusout", function () {
-        var matKhauValue = $(this).val();
-
-        if (matKhauValue.length === 0) {
-            $("#errorEditMK").text("Mật khẩu không được để trống.");
-        } else if (matKhauValue.length < 6) {
-            $("#errorEditMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
-        } else if (!isValidMatKhau(matKhauValue)) {
-            $("#errorEditMK").text("Mật khẩu phải bao gồm chữ và số.");
-        } else {
-            $("#errorEditMK").text("");
-        }
-    });
+   
     // Bắt sự kiện khi người dùng rời khỏi ô input ngày sinh
     $("#inputFieldNgaySinh").on("focusout", function () {
         var ngaySinhValue = $(this).val();
@@ -193,19 +126,7 @@
             $("#errorNgaySinh").text("");
         }
     });
-    $("#inputEditNgaySinh").on("focusout", function () {
-        var ngaySinhValue = $(this).val();
-
-        if (ngaySinhValue.length === 0) {
-            $("#errorEditNgaySinh").text("Ngày sinh không được để trống.");
-        } else if (!isValidNgaySinh(ngaySinhValue)) {
-            $("#errorEditNgaySinh").text("Ngày sinh không hợp lệ.");
-        } else if (!isOldEnough(ngaySinhValue)) {
-            $("#errorEditNgaySinh").text("Khách hàng phải đủ 18 tuổi trở lên.");
-        } else {
-            $("#errorEditNgaySinh").text("");
-        }
-    });
+    
 
 
 

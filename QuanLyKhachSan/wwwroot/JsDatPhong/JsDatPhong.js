@@ -333,7 +333,7 @@ function TongTienDatPhong() {
 
 document.getElementById('NhanPhong_PopUp').addEventListener('click', DatPhong);
 function DatPhong() {
-    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc() || !checkErrors() ) {
+    if (!validateMaKhachHang() || !validateNgayNhan() || !validateNgayTra() || !validateTongNguoiLon() || !validateTongTreEm() || !validateKhachTraTruoc()  ) {
         console.log("Other validations failed");
         return;
     } else {
@@ -517,40 +517,6 @@ function validateKhachTraTruoc() {
         document.getElementById('errorKhachTraTruoc').textContent = '';
         return true;
     }
-}
-async function checkErrors() {
-    let ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
-    let ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
-    let maPhong = document.getElementById('MaPhong_PopUp_DatPhong').textContent;
-
-    console.log(ngayNhan, ngayTra, maPhong);
-
-    $.ajax({
-        url: '/DatPhong/CheckNgayDatPhong',
-        type: 'POST',
-       
-        data: {
-            ngayNhanMoi: ngayNhan,
-            ngayTraMoi: ngayTra,
-            maPhongMoi: maPhong
-        },
-        success: function (datPhongTrung) {
-            console.log(datPhongTrung);
-            if (!datPhongTrung) {
-                alert("Có");
-                return false; // Có người đã đặt phòng
-            } else {
-                alert("Không");
-                return true; // Không có ai đặt phòng
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.error('HTTP error', textStatus);
-            return false;
-        }
-    });
-
-
 }
 
 

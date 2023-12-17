@@ -100,7 +100,7 @@
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
         } else {
             $.ajax({
-                url: '/NhanVien/CheckSoDienThoai',  // Đường dẫn đến API của bạn
+                url: '/KhachHang/CheckSoDienThoai',  // Đường dẫn đến API của bạn
                 type: 'GET',
                 data: { sodienthoai: sdtValue },
                 success: function (data) {
@@ -262,7 +262,7 @@
             event.preventDefault();
         } else {
             $.ajax({
-                url: '/NhanVien/CheckEmail',
+                url: '/KhachHang/CheckEmail',
                 type: 'GET',
                 data: { email: emailValue },
                 async: false,
@@ -303,7 +303,7 @@
             event.preventDefault();
         } else {
             $.ajax({
-                url: '/NhanVien/CheckSoDienThoai',
+                url: '/KhachHang/CheckSoDienThoai',
                 type: 'GET',
                 data: { sodienthoai: sdtValue },
                 async: false,

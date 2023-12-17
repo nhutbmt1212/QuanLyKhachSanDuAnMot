@@ -22,7 +22,7 @@ $(document).ready(function () {
                     document.getElementById('emailQuenMk').readOnly = true;
                     document.getElementById('btnGuiMail').hidden = true;
                 } else {
-                    alert("Gửi email không thành công. Vui lòng thử lại!");
+                    alert("Email không có trong hệ thống. Vui lòng thử lại!");
                 }
             },
             error: function () {
