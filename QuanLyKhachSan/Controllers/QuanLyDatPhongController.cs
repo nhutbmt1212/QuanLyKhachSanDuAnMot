@@ -137,8 +137,8 @@ namespace QuanLyKhachSan.Controllers
                         MaDatPhong = maDatPhongValue,
                         SoLuong = serviceQuantity,
                         MaNhanVien = maNhanVienValue,
-                        ThoiGianDichVu = DateTime.Now, 
-                        TrangThai = "Hoạt động" 
+                        ThoiGianDichVu = DateTime.Now,
+                        TrangThai = "Hoạt động"
                     };
                     _db.ChiTietDichVu.Add(newService);
                 }
@@ -148,8 +148,8 @@ namespace QuanLyKhachSan.Controllers
             {
                 _db.ChiTietDichVu.Remove(serviceToRemove);
             }
-                _db.SaveChanges();
-            return RedirectToAction("Index", "QuanLyDatPhong");
+            _db.SaveChanges();
+            return Json(new { success = true });
         }
         [HttpPost]
         public IActionResult HuyDatPhong(string MaDatPhong)
