@@ -1,30 +1,30 @@
 ﻿$(document).ready(function () {
     
-    $("#inputFieldEmail").on("focusout", function () {
-        var emailValue = $(this).val();
-        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //$("#inputFieldEmail").on("focusout", function () {
+    //    var emailValue = $(this).val();
+    //    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailValue.length === 0) {
-            $("#errorEmail").text("Email không được để trống.");
-        } else if (!emailRegex.test(emailValue)) {
-            $("#errorEmail").text("Email không hợp lệ.");
-        } else {
-            $("#errorEmail").text(" ");
-        }
-    });
-    $("#inputFieldMK").on("focusout", function () {
-        var matKhauValue = $(this).val();
+    //    if (emailValue.length === 0) {
+    //        $("#errorEmail").text("Email không được để trống.");
+    //    } else if (!emailRegex.test(emailValue)) {
+    //        $("#errorEmail").text("Email không hợp lệ.");
+    //    } else {
+    //        $("#errorEmail").text(" ");
+    //    }
+    //});
+    //$("#inputFieldMK").on("focusout", function () {
+    //    var matKhauValue = $(this).val();
 
-        if (matKhauValue.length === 0) {
-            $("#errorMK").text("Mật khẩu không được để trống.");
-        } else if (matKhauValue.length < 6) {
-            $("#errorMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
-        } else if (!isValidMatKhau(matKhauValue)) {
-            $("#errorMK").text("Mật khẩu phải bao gồm chữ và số.");
-        } else {
-            $("#errorMK").text("");
-        }
-    });
+    //    if (matKhauValue.length === 0) {
+    //        $("#errorMK").text("Mật khẩu không được để trống.");
+    //    } else if (matKhauValue.length < 6) {
+    //        $("#errorMK").text("Mật khẩu phải có ít nhất 6 ký tự.");
+    //    } else if (!isValidMatKhau(matKhauValue)) {
+    //        $("#errorMK").text("Mật khẩu phải bao gồm chữ và số.");
+    //    } else {
+    //        $("#errorMK").text("");
+    //    }
+    //});
   
     $("#emailQuenMk").on("focusout", function () {
         var emailValue = $(this).val();
@@ -41,7 +41,7 @@
                 data: { email: emailValue },
                 success: function (data) {
                     if (data.exists) {
-                        ("#errorQuenMatKhauEmail").text("");
+                        $("#errorQuenMatKhauEmail").text("");
 
                     } else {
                         $

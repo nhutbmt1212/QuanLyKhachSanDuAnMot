@@ -117,10 +117,10 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult DemNhanVienHoatDong()
         {
             // Đếm tổng số nhân viên với tình trạng là "Hoat Dong"
-            var tongNhanVien = _db.NhanVien.Count(x => x.TinhTrang == "Hoạt động" || x.TinhTrang == "Hoat Dong");
+            var tongNhanVien = _db.NhanVien.Count(x => x.TinhTrang == "Đang hoạt động" || x.TinhTrang == "Hoat Dong");
 
             // Đếm số nhân viên nam với tình trạng là "Hoat Dong"
-            var nhanVienNam = _db.NhanVien.Count(x => x.GioiTinh == "Nam" && x.TinhTrang == "Hoạt động" || x.TinhTrang== "Hoat Dong");
+            var nhanVienNam = _db.NhanVien.Count(x => x.GioiTinh == "Nam" && x.TinhTrang == "Đang hoạt động" || x.TinhTrang== "Hoat Dong");
 
             // Đếm số nhân viên nữ với tình trạng là "Hoat Dong"
             var nhanVienNu = tongNhanVien - nhanVienNam;
@@ -132,12 +132,12 @@ namespace QuanLyKhachSan.Controllers
         public IActionResult LayGioiTinhKhachHang()
         {
             // Đếm tổng số khách hàng với tình trạng không phải là "Ngừng hoạt động"
-            var TongKhachHang = _db.KhachHang.Count(x => x.TinhTrang == "Hoạt động" || x.TinhTrang== "Đang hoạt động");
+            var TongKhachHang = _db.KhachHang.Count(x => x.TinhTrang == "Đang hoạt động" || x.TinhTrang== "Đang hoạt động");
 
 
 
             // Đếm số khách hàng nữ với tình trạng không phải là "Ngừng hoạt động"
-            var khachHangNu = _db.KhachHang.Count(x => x.GioiTinh == "Nữ" && x.TinhTrang == "Hoạt động" || x.TinhTrang == "Đang hoạt động");
+            var khachHangNu = _db.KhachHang.Count(x => x.GioiTinh== "Nữ" && x.TinhTrang== "Đang hoạt động");
             // Đếm số khách hàng nam với tình trạng không phải là "Ngừng hoạt động"
             var khachHangNam = TongKhachHang - khachHangNu;
             return Json(new { TongKhachHang = TongKhachHang, khachHangNam = khachHangNam, khachHangNu = khachHangNu });
