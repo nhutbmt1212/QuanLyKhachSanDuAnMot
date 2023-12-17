@@ -1,4 +1,15 @@
 ﻿@using System.Security.Claims;
+@{
+	var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+	var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+}
+@if (User.Identity.IsAuthenticated && userRole != "Quản lý" && User.Identity.IsAuthenticated && userRole != "Nhân viên")
+{
+	Layout = null;
+	<partial name="../Shared/404Error.cshtml" />
+	return;
+}
+@using System.Security.Claims;
 <style>
 	.card-body {
 		display: block;
@@ -17,6 +28,7 @@
 </style>
 <main>
 	<ul class="box-info">
+		@if (User.Identity.IsAuthenticated && userRole == "Quản lý" ){
 		<li>
 			<i class='bx bxs-dollar-circle'></i>
 			<span class="text">
@@ -24,6 +36,7 @@
 				<p>Tổng thu nhập</p>
 			</span>
 		</li>
+		}
 		<li>
 			<i class='bx bxs-group'></i>
 			<span class="text">
@@ -40,24 +53,26 @@
 		</li>
 	</ul>
 	<div class="table-data">
-
-		<div class="order">
-			<div class="head">
-				<h3>Tổng quan thu nhập</h3>
-			</div>
-			<hr>
-			<div class="col-xl-7 col-lg-7">
-				<div class="card shadow mb-4">
-					<!-- Card Body -->
-					<div class="card-body">
-						<div class="chart-area">
-							<canvas id="myAreaChart"></canvas>
+		@if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+		{
+			<div class="order">
+				<div class="head">
+					<h3>Tổng quan thu nhập</h3>
+				</div>
+				<hr>
+				<div class="col-xl-7 col-lg-7">
+					<div class="card shadow mb-4">
+						<!-- Card Body -->
+						<div class="card-body">
+							<div class="chart-area">
+								<canvas id="myAreaChart"></canvas>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 
-		</div>
+			</div>
+		}
 		<div class="todo">
 			<div class="head">
 				<h3>Tình trạng phòng</h3>
@@ -87,6 +102,8 @@
 		</div>
 
 	</div>
+			@if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+		{
 	<div class="table-data">
 		<div class="order">
 			<div class="head">
@@ -122,9 +139,10 @@
 			</div>
 			</div>
 
-
+		
 
 		</div>
+	}
 		<div class="table-data">
 			<div class="order">
 				<div class="head">
@@ -152,7 +170,8 @@
 				</div>
 
 			</div>
-
+				@if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+		{
 			<div class="order" >
 				<div class="head">
 					<h3>Tổng quan nhân viên</h3>
@@ -179,6 +198,7 @@
 				</div>
 
 			</div>
+			}
 		</div>
 
 

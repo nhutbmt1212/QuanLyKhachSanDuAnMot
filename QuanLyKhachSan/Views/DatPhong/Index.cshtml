@@ -1,5 +1,18 @@
-﻿    @model List<QuanLyKhachSan.Models.Phong>
+﻿@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+    var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+}
+@if (User.Identity.IsAuthenticated && userRole != "Quản lý" && User.Identity.IsAuthenticated && userRole !="Nhân viên")
+{
+    Layout = null;
+    <partial name="../Shared/404Error.cshtml" />
+    return;
+}
+ @model List<QuanLyKhachSan.Models.Phong>
+
 @inject ApplicationDbContext _db
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +37,9 @@
 
 
 </head>
+
 <body>
+
     <section>
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Tổng quan</a></li>
@@ -482,3 +497,4 @@
     </script>
 </body>
 </html>
+

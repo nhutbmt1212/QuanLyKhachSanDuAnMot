@@ -1,4 +1,15 @@
-﻿@model List<QuanLyKhachSan.Models.HoaDon>
+﻿@using System.Security.Claims;
+@{
+    var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
+    var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+}
+@if (User.Identity.IsAuthenticated && userRole != "Quản lý" )
+{
+    Layout = null;
+    <partial name="../Shared/404Error.cshtml" />
+    return;
+}
+@model List<QuanLyKhachSan.Models.HoaDon>
 @inject ApplicationDbContext _db;
 <!DOCTYPE html>
 <html lang="en">

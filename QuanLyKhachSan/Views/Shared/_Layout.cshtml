@@ -51,7 +51,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
             {
                 <li>
                     <a asp-action="TrangChuPhong" asp-controller="Phong">
@@ -69,7 +69,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
             {
                 <li>
                     <a asp-action="DanhSachDichVu" asp-controller="DichVu">
@@ -78,7 +78,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" )
             {
                 <li>
                     <a asp-action="DanhSachVatTu" asp-controller="VatTu">
@@ -87,7 +87,7 @@
                     </a>
                 </li>
             }
-            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
             {
                 <li>
                     <a asp-action="DanhSachKhachHang" asp-controller="KhachHang">
@@ -104,19 +104,27 @@
                         <span class="text">Tiếp nhận đặt phòng</span>
                     </a>
                 </li>
+            }
+               @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+            {
                 <li>
                     <a asp-action="Index" asp-controller="DatPhong">
                         <i class='bx bxs-hotel'></i>
                         <span class="text">Đặt phòng</span>
                     </a>
                 </li>
-                <li>
+            }
+               @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
+            { 
+            <li>
                     <a asp-action="Index" asp-controller="QuanLyDatPhong">
                         <i class='bx bxs-hotel'></i>
                         <span class="text">Quản lý đặt phòng</span>
                     </a>
                 </li>
-
+            }
+               @if (User.Identity.IsAuthenticated && userRole == "Quản lý" )
+            {
                 <li>
                     <a asp-action="TrangChuHoaDon" asp-controller="HoaDon">
                         <i class='bx bxs-receipt'></i>
