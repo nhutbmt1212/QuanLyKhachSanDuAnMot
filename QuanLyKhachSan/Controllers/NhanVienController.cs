@@ -479,7 +479,11 @@ namespace QuanLyKhachSan.Controllers
         {
             return View();
         }
-
+        [HttpPost]
+        public IActionResult LuuThongTinHoSo(NhanVien nv)
+        {
+            return View();
+        }
     }
 
 

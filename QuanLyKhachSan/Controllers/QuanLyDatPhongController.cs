@@ -100,7 +100,6 @@ namespace QuanLyKhachSan.Controllers
      int tongtienPhongValue,
      string tinhTrangValue)
         {
-            // Firstly, update booking information
             var datPhong = new DatPhong
             {
                 MaDatPhong = maDatPhongValue,
@@ -117,7 +116,6 @@ namespace QuanLyKhachSan.Controllers
                 SoTienTraTruoc = khachTraTruocValue
             };
             _db.DatPhong.Update(datPhong);
-            // Process the services
             var existingServices = _db.ChiTietDichVu.Where(s => s.MaDatPhong == maDatPhongValue).ToList();
             foreach (var serviceId in ThanhTienMaDichVu)
             {
@@ -126,12 +124,10 @@ namespace QuanLyKhachSan.Controllers
                 var existingService = existingServices.FirstOrDefault(s => s.MaDichVu == serviceId);
                 if (existingService != null)
                 {
-                    // Update existing service quantity
                     existingService.SoLuong = serviceQuantity;
                 }
                 else
                 {
-                    // Add the new service
                     var newService = new ChiTietDichVu
                     {
                         MaDichVu = serviceId,
@@ -139,20 +135,18 @@ namespace QuanLyKhachSan.Controllers
                         MaDatPhong = maDatPhongValue,
                         SoLuong = serviceQuantity,
                         MaNhanVien = maNhanVienValue,
-                        ThoiGianDichVu = DateTime.Now, // Set the time accordingly
-                        TrangThai = "Hoạt động" // Set the status accordingly 
+                        ThoiGianDichVu = DateTime.Now, 
+                        TrangThai = "Hoạt động" 
                     };
                     _db.ChiTietDichVu.Add(newService);
                 }
             }
-            // Remove services that are not present anymore
             var servicesToRemove = existingServices.Where(s => !ThanhTienMaDichVu.Contains(s.MaDichVu)).ToList();
             foreach (var serviceToRemove in servicesToRemove)
             {
                 _db.ChiTietDichVu.Remove(serviceToRemove);
             }
-            // Save all changes
-            _db.SaveChanges();
+                _db.SaveChanges();
             return RedirectToAction("Index", "QuanLyDatPhong");
         }
 

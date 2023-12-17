@@ -254,8 +254,6 @@ $(document).ready(function () {
 
             var arrSoLuongDichVu = JSON.parse(sessionStorage.getItem('arrSoLuongDichVu'));
             var arrMaDichVu = JSON.parse(sessionStorage.getItem('arrMaDichVu'));
-            console.log(arrSoLuongDichVu, arrMaDichVu);
-
             $.ajax({
                 type: 'POST',
                 url: `/TrangChuKhachHang/DatPhong`,
@@ -277,8 +275,7 @@ $(document).ready(function () {
                     arrMaDichVu: arrMaDichVu
                 },
                 success: function (response) {
-                    console.log(response);
-                    //window.location.href = '/TrangChuKhachHang/Index';
+                    window.location.href = response.redirectUrl;
                 },
                 error: function (error) {
                     console.error('Error:', error);

@@ -305,8 +305,7 @@ namespace QuanLyKhachSan.Controllers
 
 
 
-            return RedirectToAction("Index", "TrangChuKhachHang");
-
+            return Json(new { success = true, redirectUrl = Url.Action("Index", "TrangChuKhachHang") });
         }
     }
 }

@@ -57,6 +57,7 @@
 
     <div class="container">
         <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ nhân viên</h2>
+        <form asp-action="LuuThongTinHoSo" asp-controller="NhanVien" method="post" enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-2">
                 <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">
@@ -68,111 +69,148 @@
 
             </div>
 
-            <div class="col-md-8">
-                <ul class="list-group">
-                    <li class="list-group-item display-mode" id="employeeNameItem">
-                        <strong>Tên Nhân Viên:</strong>
-                        <span class="display-mode" id="employeeName">@Model.TenNhanVien</span>
-                        <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
-                        <input type="text" id="editedValue_employeeName" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('employeeName')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('employeeName')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode" id="phoneNumberItem">
-                        <strong>Số Điện Thoại:</strong>
-                        <span class="display-mode" id="phoneNumber">@Model.SoDienThoai</span>
-                        <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
-                        <input type="text" id="editedValue_phoneNumber" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('phoneNumber')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('phoneNumber')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode" id="cccdItem">
-                        <strong>CCCD:</strong>
-                        <span class="display-mode" id="cccd">@Model.CCCD</span>
-                        <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
-                        <input type="text" id="editedValue_cccd" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('cccd')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('cccd')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode" id="emailItem">
-                        <strong>Email:</strong>
-                        <span class="display-mode" id="email">@Model.Email</span>
-                        <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
-                        <input type="email" id="editedValue_email" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('email')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('email')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode" id="genderItem">
-                        <strong>Giới Tính:</strong>
-                        <span class="display-mode" id="gender">@Model.GioiTinh</span>
-                        <select id="editedValue_gender" class="form-control edit-mode-input mb-1"
-                                style="display: none;">
-                            <option value="Nam">Nam</option>
-                            <option value="Nữ">Nữ</option>
-                        </select>
-                        <a href="#" onclick="editMode('gender')">Chỉnh Sửa</a>
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('gender')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('gender')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode non-editable" id="dobItem">
-                        <strong>Ngày Sinh:</strong>
-                        <span class="display-mode" id="dob">@Model.NgaySinh</span>
-                        <!-- This field is non-editable -->
-                    </li>
-                    <li class="list-group-item display-mode" id="addressItem">
-                        <strong>Địa Chỉ:</strong>
-                        <span class="display-mode" id="address">@Model.DiaChi</span>
-                        <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
-                        <input type="text" id="editedValue_address" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('address')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('address')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode non-editable" id="positionItem">
-                        <strong>Chức Vụ:</strong>
-                        <span class="display-mode" id="position">@Model.ChucVu</span>
-                        <!-- This field is non-editable -->
-                    </li>
-                    <li class="list-group-item display-mode" id="passwordItem">
-                        <strong>Mật Khẩu:</strong>
-                        <span class="display-mode" id="password">@Model.MatKhau</span>
-                        <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
-                        <input type="password" id="editedValue_password" class="form-control edit-mode-input mb-1"
-                               style="display: none;">
-                        <a href="#" class="btn btn-success edit-mode-input" style="display: none;"
-                           onclick="saveEdit('password')">Lưu</a>
-                        <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
-                           onclick="cancelEdit('password')">Hủy</a>
-                    </li>
-                    <li class="list-group-item display-mode non-editable" id="startDateItem">
-                        <strong>Ngày Vào Làm:</strong>
-                        <span class="display-mode" id="startDate">@Model.NgayVaoLam</span>
-                        <!-- This field is non-editable -->
-                    </li>
-                    <li class="list-group-item display-mode non-editable" id="registrationDateItem">
-                        <strong>Ngày Đăng Ký:</strong>
-                        <span class="display-mode" id="registrationDate">@Model.NgayDangKy</span>
-                        <!-- This field is non-editable -->
-                    </li>
-                </ul>
-            </div>
+                <div class="col-md-8">
+                    <ul class="list-group">
+                        <!-- Tên Nhân Viên -->
+                        <li class="list-group-item display-mode" id="employeeNameItem">
+                            <strong>Tên Nhân Viên:</strong>
+                            <span class="display-mode" id="employeeName">@Model.TenNhanVien</span>
+                            <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
+                            <input type="text" id="editedValue_employeeName" asp-for="TenNhanVien" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('employeeName')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('employeeName')">Hủy</a>
+                        </li>
+
+                        <!-- Số Điện Thoại -->
+                        <li class="list-group-item display-mode" id="phoneNumberItem">
+                            <strong>Số Điện Thoại:</strong>
+                            <span class="display-mode" id="phoneNumber">@Model.SoDienThoai</span>
+                            <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
+                            <input type="text" id="editedValue_phoneNumber" asp-for="SoDienThoai" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('phoneNumber')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('phoneNumber')">Hủy</a>
+                        </li>
+
+                        <!-- CCCD -->
+                        <li class="list-group-item display-mode" id="cccdItem">
+                            <strong>CCCD:</strong>
+                            <span class="display-mode" id="cccd">@Model.CCCD</span>
+                            <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
+                            <input type="text" id="editedValue_cccd" asp-for="CCCD" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('cccd')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('cccd')">Hủy</a>
+                        </li>
+
+                        <!-- Email -->
+                        <li class="list-group-item display-mode" id="emailItem">
+                            <strong>Email:</strong>
+                            <span class="display-mode" id="email">@Model.Email</span>
+                            <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
+                            <input type="email" id="editedValue_email" asp-for="Email" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('email')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('email')">Hủy</a>
+                        </li>
+
+                        <!-- Giới Tính -->
+                        <li class="list-group-item display-mode" id="genderItem">
+                            <strong>Giới Tính:</strong>
+                            <span class="display-mode" id="gender">@Model.GioiTinh</span>
+                            <select id="editedValue_gender" asp-for="GioiTinh" class="form-control edit-mode-input mb-1"
+                                    style="display: none;">
+                                <option value="Nam">Nam</option>
+                                <option value="Nữ">Nữ</option>
+                            </select>
+                            <a href="#" onclick="editMode('gender')">Chỉnh Sửa</a>
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('gender')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('gender')">Hủy</a>
+                        </li>
+
+                        <!-- Ngày Sinh -->
+                        <li class="list-group-item display-mode non-editable" id="dobItem">
+                            <strong>Ngày Sinh:</strong>
+                            <span class="display-mode" id="dob">@Model.NgaySinh</span>
+                            <!-- This field is non-editable -->
+                        </li>
+
+                        <!-- Địa Chỉ -->
+                        <li class="list-group-item display-mode" id="addressItem">
+                            <strong>Địa Chỉ:</strong>
+                            <span class="display-mode" id="address">@Model.DiaChi</span>
+                            <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
+                            <input type="text" id="editedValue_address" asp-for="DiaChi" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('address')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('address')">Hủy</a>
+                        </li>
+
+                        <!-- Chức Vụ -->
+                        <li class="list-group-item display-mode non-editable" id="positionItem">
+                            <strong>Chức Vụ:</strong>
+                            <span class="display-mode" id="position">@Model.ChucVu</span>
+                            <!-- This field is non-editable -->
+                        </li>
+
+                        <!-- Mật Khẩu -->
+                        <li class="list-group-item display-mode" id="passwordItem">
+                            <strong>Mật Khẩu:</strong>
+                            <span class="display-mode" id="password">@Model.MatKhau</span>
+                            <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
+                            <input type="password" id="editedValue_password" asp-for="MatKhau" class="form-control edit-mode-input mb-1"
+                                   style="display: none;">
+                            <button class="btn btn-success edit-mode-input" style="display: none;"
+                                    onclick="saveEdit('password')">
+                                Lưu
+                            </button>
+                            <a href="#" class="btn btn-secondary edit-mode-input" style="display: none;"
+                               onclick="cancelEdit('password')">Hủy</a>
+                        </li>
+
+                        <!-- Ngày Vào Làm -->
+                        <li class="list-group-item display-mode non-editable" id="startDateItem">
+                            <strong>Ngày Vào Làm:</strong>
+                            <span class="display-mode" id="startDate">@Model.NgayVaoLam</span>
+                            <!-- This field is non-editable -->
+                        </li>
+
+                        <!-- Ngày Đăng Ký -->
+                        <li class="list-group-item display-mode non-editable" id="registrationDateItem">
+                            <strong>Ngày Đăng Ký:</strong>
+                            <span class="display-mode" id="registrationDate">@Model.NgayDangKy</span>
+                            <!-- This field is non-editable -->
+                        </li>
+                    </ul>
+                </div>
+
         </div>
+        </form>
     </div>
 
     <script>
