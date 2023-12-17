@@ -13,10 +13,9 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
-            min-height: 900px;
+            max-height: 900px;
         }
         
         table {
@@ -65,7 +64,7 @@
         .popup-container {
             display: none;
             position: absolute;
-             top: 120%; 
+             top: 50%; 
             left: 50%;
             transform: translate(-50%, -50%);
             background-color: #fff;
@@ -125,18 +124,20 @@
         </div>
     </div>
 
-    <table>
+    <table class="table table-striped table-bordered" id="table_detail" style="border:1px solid #343A40">
+        <thead class="thead-dark ">
         <tr>
-            <th>#</th>
-            <th>Mã hóa đơn</th>
-            <th>Mã Phòng-Loại phòng</th>
-            <th>Tên khách hàng</th>
-            <th>Số điện thoại</th>
-            <th>Thời gian nhận phòng</th>
-            <th>Thời gian trả phòng</th>
-            <th>Tên nhân viên</th>
-            <th>Xử lý</th>
+                <th scope="col" class="text-center">#</th>
+                <th scope="col" class="text-center">Mã hóa đơn</th>
+                <th scope="col" class="text-center">Mã Phòng-Loại phòng</th>
+                <th scope="col" class="text-center">Tên khách hàng</th>
+                <th scope="col" class="text-center">Số điện thoại</th>
+                <th scope="col" class="text-center">Thời gian nhận phòng</th>
+                <th scope="col" class="text-center">Thời gian trả phòng</th>
+                <th scope="col" class="text-center">Tên nhân viên</th>
+                <th scope="col" class="text-center">Xử lý</th>
         </tr>
+        </thead>
         @{
             int i = 0;
         }
@@ -288,19 +289,22 @@
     </script>
     <script>
         $(document).ready(function () {
+            // Sự kiện khi nhập liệu vào ô tìm kiếm
             $("#searchInput").on("keyup", function () {
                 var value = $(this).val().toLowerCase();
-                $("table tbody tr").filter(function () {
+
+                // Lọc các hàng trong bảng
+                $("table#table_detail tbody tr").filter(function () {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
                 });
             });
 
-            // Bắt sự kiện thay đổi giá trị trong dropdown "Show"
             $('select[name="example_length"]').on('change', function () {
                 var selectedValue = $(this).val();
-                $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
+                $('#formExample').submit();
             });
         });
     </script>
+
 </body>
 </html>
