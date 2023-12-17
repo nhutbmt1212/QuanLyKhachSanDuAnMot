@@ -159,5 +159,39 @@ namespace QuanLyKhachSan.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index", "QuanLyDatPhong");
         }
+        [HttpPost]
+		public IActionResult KiemTraNgayNhanVaTra(DateTime NgayNhan, DateTime NgayTra, string MaPhong,string MaDatPhong)
+        {
+            string result = null;
+
+            var qr_Phong = _db.DatPhong.Where(s => s.MaPhong == MaPhong && s.MaDatPhong !=MaDatPhong).ToList();
+            //check ngày nhận nằm trong khung giờ đã được đặt
+            if (qr_Phong != null)
+            {
+                foreach (var phong in qr_Phong)  
+                {
+                    if (NgayNhan >= phong.NgayNhan && NgayTra <= phong.NgayTra)
+                    {
+                        result = "Khung giờ này đã có người đặt";
+                        return Json(result);
+                    }
+                    else if (NgayNhan < phong.NgayNhan && NgayTra > phong.NgayNhan)
+                    {
+                        result = "Khung giờ này đã có người đặt";
+                        return Json(result);
+                    }
+                    else if (NgayNhan > phong.NgayNhan && NgayNhan < phong.NgayTra)
+                    {
+                        result = "Khung giờ này đã có người đặt";
+                        return Json(result);
+                    }
+
+
+                }
+            }
+
+            return Json(result);
+
+        }
     }
 }
