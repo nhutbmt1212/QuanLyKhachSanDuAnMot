@@ -480,10 +480,55 @@ namespace QuanLyKhachSan.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult LuuThongTinHoSo(NhanVien nv)
+        public IActionResult LuuThongTinHoSo(string TenNhanVien, string SoDienThoai, string CCCD, string Email, string GioiTinh, string DiaChi, string MatKhau, IFormFile AnhNhanVien, [FromServices] IWebHostEnvironment hostingEnvironment)
         {
-            return View();
+            var MaNhanVien = User.FindFirst(ClaimTypes.Surname)?.Value;
+            var qr_NhanVien = _db.NhanVien.FirstOrDefault(s => s.MaNhanVien == MaNhanVien);
+
+            if (qr_NhanVien != null)
+            {
+                if (!string.IsNullOrEmpty(TenNhanVien))
+                    qr_NhanVien.TenNhanVien = TenNhanVien;
+                if (!string.IsNullOrEmpty(SoDienThoai))
+                    qr_NhanVien.SoDienThoai = SoDienThoai;
+                if (!string.IsNullOrEmpty(CCCD))
+                    qr_NhanVien.CCCD = CCCD;
+                if (!string.IsNullOrEmpty(Email))
+                    qr_NhanVien.Email = Email;
+                if (!string.IsNullOrEmpty(GioiTinh))
+                    qr_NhanVien.GioiTinh = GioiTinh;
+                if (!string.IsNullOrEmpty(DiaChi))
+                    qr_NhanVien.DiaChi = DiaChi;
+                if (!string.IsNullOrEmpty(MatKhau))
+                    qr_NhanVien.MatKhau = MatKhau;
+
+                if (AnhNhanVien != null && AnhNhanVien.Length > 0)
+                {
+                    var uploadFolder = Path.Combine(hostingEnvironment.WebRootPath, "UploadImage");
+                    if (!Directory.Exists(uploadFolder))
+                    {
+                        Directory.CreateDirectory(uploadFolder);
+                    }
+
+                    var filePath = Path.Combine(uploadFolder, AnhNhanVien.FileName);
+                    if (!System.IO.File.Exists(filePath))
+                    {
+                        using (var stream = new FileStream(filePath, FileMode.Create))
+                        {
+                            AnhNhanVien.CopyTo(stream);
+                        }
+                    }
+
+                    qr_NhanVien.AnhNhanVienBase64 = Path.Combine("UploadImage", AnhNhanVien.FileName);
+                }
+
+                _db.SaveChanges();
+            }
+
+            return RedirectToAction("HoSoNhanVien", "NhanVien");
         }
+
+
     }
 
 

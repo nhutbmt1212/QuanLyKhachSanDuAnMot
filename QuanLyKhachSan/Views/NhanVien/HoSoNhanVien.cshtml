@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <title>Nhân Viên Profile</title>
     <style>
 
@@ -57,7 +58,7 @@
 
     <div class="container">
         <h2 style="text-align:center; font-size:2.5rem; font-family:Roboto" class="mb-5">Hồ sơ nhân viên</h2>
-        <form asp-action="LuuThongTinHoSo" asp-controller="NhanVien" method="post" enctype="multipart/form-data">
+        <form  enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-2">
                 <input type="file" id="imageInput" class="form-control" accept="image/*" style="display: none;">
@@ -212,68 +213,8 @@
         </div>
         </form>
     </div>
+    <script src="~/js/JsHoSo.js"></script>
 
-    <script>
-        var editingField = null;
-
-        function editMode(fieldId) {
-            if (editingField) {
-                return;
-            }
-
-            editingField = fieldId;
-
-            document.getElementById(fieldId + 'Item').classList.add('edit-mode');
-
-            var currentValue = document.getElementById(fieldId).innerText;
-            document.getElementById('editedValue_' + fieldId).value = currentValue;
-
-            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'inline-block';
-            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'inline-block';
-            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'inline-block';
-
-            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'none';
-        }
-
-        function saveEdit(fieldId) {
-            var editedValue = document.getElementById('editedValue_' + fieldId).value;
-            document.getElementById(fieldId).innerText = editedValue;
-            cancelEdit(fieldId);
-        }
-
-        function cancelEdit(fieldId) {
-            document.getElementById(fieldId + 'Item').classList.remove('edit-mode');
-
-            document.getElementById(fieldId + 'Item').querySelector('.edit-mode-input').style.display = 'none';
-            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-success.edit-mode-input').style.display = 'none';
-            document.getElementById(fieldId + 'Item').querySelector('.btn.btn-secondary.edit-mode-input').style.display = 'none';
-            document.getElementById('editedValue_' + fieldId).value = '';
-
-            document.getElementById(fieldId + 'Item').querySelector('.display-mode a').style.display = 'inline-block';
-
-            editingField = null;
-        }
-    </script>
-
-    <script>
-        document.getElementById('imageInput').addEventListener('change', function (event) {
-            const input = event.target;
-            const previewImage = document.getElementById('previewImage');
-
-            const file = input.files[0];
-
-            if (file) {
-                const reader = new FileReader();
-
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                };
-
-                reader.readAsDataURL(file);
-            }
-            console.log(file);
-        });
-    </script>
 
 </body>
 
