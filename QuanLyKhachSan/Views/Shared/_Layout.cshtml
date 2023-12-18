@@ -84,6 +84,17 @@
                         <span class="text">Vật tư</span>
                     </a>
                 </li>
+
+            }
+            @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+            {
+                <li>
+                    <a asp-action="Index" asp-controller="ChiTietPhongVatTu">
+                        <i class='bx bxs-cog'></i>
+                        <span class="text">Vật tư - Phòng</span>
+                    </a>
+                </li>
+
             }
             @if (User.Identity.IsAuthenticated && userRole == "Quản lý" || userRole == "Nhân viên")
             {
