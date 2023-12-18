@@ -22,19 +22,19 @@
         } else if (!emailRegex.test(emailValue)) {
             $("#errorEmail").text("Email không hợp lệ.");
         } else {
-
-            $.ajax({
-                url: '/TrangChuKhachHang/CheckEmail',  // Đường dẫn đến API của bạn
-                type: 'GET',
-                data: { email: emailValue },
-                success: function (data) {
-                    if (data.exists) {
-                        $("#errorEmail").text("Email đã tồn tại.");
-                    } else {
-                        $("#errorEmail").text("");
-                    }
-                }
-            });
+            $("#errorEmail").text("");
+            //$.ajax({
+            //    url: '/TrangChuKhachHang/CheckEmail',  // Đường dẫn đến API của bạn
+            //    type: 'GET',
+            //    data: { email: emailValue },
+            //    success: function (data) {
+            //        if (data.exists) {
+            //            $("#errorEmail").text("Email đã tồn tại.");
+            //        } else {
+            //            $("#errorEmail").text("");
+            //        }
+            //    }
+            //});
         }
     });
 
@@ -61,22 +61,22 @@
             $("#errorSDT").text("Số điện thoại không được để trống.");
         } else if (!isValidSDT(sdtValue)) {
             $("#errorSDT").text("Số điện thoại không hợp lệ.");
-        } else {
-            $.ajax({
-                type: 'POST',
-                url: '/TrangChuKhachHang/CheckSoDienThoai',  // Đường dẫn đến API của bạn
-                data: { sodienthoai: sdtValue },
-                success: function (data) {
-                    if (data.exists) {
-                        $("#errorSDT").text("Số điện thoại đã tồn tại.");
-                    } else {
-                        $("#errorSDT").text("");
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
-            });
+        } else { $("#errorSDT").text("");
+            //$.ajax({
+            //    type: 'POST',
+            //    url: '/TrangChuKhachHang/CheckSoDienThoai',  // Đường dẫn đến API của bạn
+            //    data: { sodienthoai: sdtValue },
+            //    success: function (data) {
+            //        if (data.exists) {
+            //            $("#errorSDT").text("Số điện thoại đã tồn tại.");
+            //        } else {
+                       
+            //        }
+            //    },
+            //    error: function (error) {
+            //        console.log(error);
+            //    }
+            //});
         }
     });
 
@@ -91,19 +91,20 @@
         } else if (!isValidCCCD(cccdValue)) {
             $("#errorCCCD").text("CCCD không hợp lệ.");
         } else {
+            $("#errorCCCD").text("");
             // Gửi yêu cầu đến API để kiểm tra CCCD
-            $.ajax({
-                url: '/TrangChuKhachHang/CheckCCCD',  // Đường dẫn đến API của bạn
-                type: 'GET',
-                data: { cccd: cccdValue },
-                success: function (data) {
-                    if (data.exists) {
-                        $("#errorCCCD").text("CCCD đã tồn tại.");
-                    } else {
-                        $("#errorCCCD").text("");
-                    }
-                }
-            });
+            //$.ajax({
+            //    url: '/TrangChuKhachHang/CheckCCCD',  // Đường dẫn đến API của bạn
+            //    type: 'GET',
+            //    data: { cccd: cccdValue },
+            //    success: function (data) {
+            //        if (data.exists) {
+                       //$("#errorCCCD").text("CCCD đã tồn tại.");
+            //        } else {
+            //            $("#errorCCCD").text("");
+            //        }
+            //    }
+            //});
         }
     });
 
@@ -175,7 +176,7 @@
                 async: false,
                 success: function (data) {
                     if (data.exists) {
-                        $("#errorEmail").text("Email đã tồn tại .");
+                        //$("#errorEmail").text("Email đã tồn tại .");
                         emailExists = true;
                     }
                 }
@@ -216,7 +217,7 @@
                 async: false,
                 success: function (data) {
                     if (data.exists) {
-                        $("#errorSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
+                        //$("#errorSDT").text("Số điện thoại đã tồn tại trong hệ thống.");
                         sdtExists = true;
                     } else {
                         $("#errorSDT").text("");
@@ -252,7 +253,7 @@
                 success: function (data) {
                     if (data.exists) {
                         cccdExists = true;
-                        $("#errorCCCD").text("CCCD đã tồn tại trong hệ thống.");
+                        //$("#errorCCCD").text("CCCD đã tồn tại trong hệ thống.");
                     } else {
                         $("#errorCCCD").text("");
                     }

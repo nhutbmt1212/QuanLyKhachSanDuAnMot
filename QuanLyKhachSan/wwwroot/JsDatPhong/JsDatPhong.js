@@ -123,6 +123,7 @@ function openPopupThanhToan(maPhong) {
                 giaPhong = result.qr_LoaiPhongTheoMaPhong.giaTheoGio;
             }
             var tongTienPhong = giaPhong * duration;
+
             document.getElementById('tongTienPhongThanhToan_PopUp').innerText = tongTienPhong;
           
             while (table.rows.length > 1) {
@@ -358,6 +359,7 @@ function DatPhong() {
             var tongTienPhong = document.getElementById('TongTienPhong').innerText;
             var khachTraTruoc = document.getElementById('khachTraTruoc').value;
             var maPhong = document.getElementById('MaPhong_PopUp_DatPhong').innerText;
+           
             console.log(tongTienPhong);
             $.ajax({
                 url: '/DatPhong/DatPhongNhanh',
@@ -404,11 +406,13 @@ function ThanhToan() {
         },
         traditional: true,
         success: function (result) {
+            
             window.location.href = '/DatPhong/Index';
         },
         error: function (xhr, status, error) {
         }
     });
+    alert('Thanh toán thành công');
 }
 
 function TimKiemTatCa() {

@@ -88,14 +88,9 @@ function validatePhoneNumber() {
         $('#errorSDT').text('Số điện thoại phải bắt đầu bằng số 0');
         return false;
     } else {
-        return checkPhoneNumber(sdt).then(function (isValid) {
-            if (isValid) {
-                $("#errorSDT").text("");
-            } else {
-                $("#errorSDT").text("Số điện thoại đã tồn tại.");
-            }
-            return isValid;
-        });
+       
+        $("#errorSDT").text("");
+        return true;
     }
 }
 
@@ -128,14 +123,9 @@ function validateEmail() {
         $('#errorEmail').text('Email không đúng định dạng');
         return false;
     } else {
-        return checkEmail(email).then(function (isValid) {
-            if (isValid) {
+        
                 $("#errorEmail").text("");
-            } else {
-                $("#errorEmail").text("Email đã có trong hệ thống.Vui lòng đăng nhập.");
-            }
-            return isValid;
-        });
+        return true;
     }
 }
 
@@ -166,14 +156,9 @@ function validateCCCD() {
         $('#errorCCCD').text('CCCD phải có đúng 12 chữ số');
         return false;
     } else {
-        return checkCCCD(cccd).then(function (isValid) {
-            if (isValid) {
+    
                 $("#errorCCCD").text("");
-            } else {
-                $("#errorCCCD").text("CCCD đã tồn tại.");
-            }
-            return isValid;
-        });
+        return true;
     }
 }
 
@@ -275,6 +260,7 @@ $(document).ready(function () {
                     arrMaDichVu: arrMaDichVu
                 },
                 success: function (response) {
+                    alert('Đặt phòng thành công');
                     console.log('AJAX request successful');
                     console.log(response);
 

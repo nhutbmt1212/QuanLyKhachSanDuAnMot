@@ -11,7 +11,7 @@
     return;
 }
 @using System.Security.Claims;
-
+@inject ApplicationDbContext _db;
 @model List<QuanLyKhachSan.Models.Phong>
 <!DOCTYPE html>
 <html lang="en">
@@ -179,6 +179,7 @@ ngayDangKyEdit        }
                         <label>Tên loại phòng</label>
                         <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
                             <option value="">Chọn loại phòng</option>
+                          
                             @foreach (var phong in ViewBag.DanhSachLoaiPhong)
                             {
                                 <option value="@phong.MaLoaiPhong">

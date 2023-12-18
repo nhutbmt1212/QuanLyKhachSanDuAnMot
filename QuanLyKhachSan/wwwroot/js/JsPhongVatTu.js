@@ -11,6 +11,7 @@
             'SoLuong': soLuong
         },
         success: function () {
+            alert('Thêm thành công');
         },
         error: function () {
         }
