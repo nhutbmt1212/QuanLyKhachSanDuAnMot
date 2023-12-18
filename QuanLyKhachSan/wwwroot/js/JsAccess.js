@@ -51,10 +51,14 @@ $(document).ready(function () {
         var email = $("#emailQuenMk").val();
         var password = $("#passwordMoi").val();
         var confirmPassword = $("#confirmPasswordMoi").val();
-
-        if (password === confirmPassword) {
+         if (password.trim() == "") {
+            alert("Vui lòng nhập mật khẩu");
+        }
+       else if (password === confirmPassword) {
             sendNewPassword(email, password);
-        } else {
+        }
+      
+        else {
             alert("Mật khẩu mới không khớp. Vui lòng nhập lại!");
         }
     });

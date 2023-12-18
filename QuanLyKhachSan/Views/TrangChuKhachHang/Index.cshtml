@@ -305,14 +305,14 @@
                                             <div class="details-container" id="detailsContainer1">
                                                 <span class="close-btn" onclick="DongXemVatTu(this)"><i class="bi bi-x-lg"></i></span>
                                                 @{
-                                                    var qr_VatTuChiTiet = _db.ChiTietPhongVatTu.Where(s => s.MaPhong == phong.MaPhong).ToList();
+                                                    var qr_VatTuChiTiet = _db.ChiTietPhongVatTu.Where(s => s.MaPhong == phong.MaPhong && s.TinhTrang != "Đã xóa").ToList();
                                                     
                                                 }
                                                 <h4>Thông tin chi tiết</h4>
                                                 <div class="inventory-items">
                                                     @foreach (var item in qr_VatTuChiTiet)
                                                     {
-                                                     var qr_vatTu = _db.VatTu.FirstOrDefault(s => s.MaVatTu == item.MaVatTu);
+                                                     var qr_vatTu = _db.VatTu.FirstOrDefault(s => s.MaVatTu == item.MaVatTu );
                                                         
                                                         <div class="inventory-item">
                                                         <p>@qr_vatTu.TenVatTu: @item.SoLuong</p>
