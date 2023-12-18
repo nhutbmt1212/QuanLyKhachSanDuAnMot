@@ -17,7 +17,7 @@ namespace QuanLyKhachSan.Controllers
         }
         [HttpPost]
         public IActionResult ThemVatTuVaoPhong(string MaPhong, string MaVatTu, string SoLuong)
-        {
+         {
             var existingChiTietPhongVatTu = _db.ChiTietPhongVatTu
                 .FirstOrDefault(ct => ct.MaPhong == MaPhong && ct.MaVatTu == MaVatTu);
 
@@ -27,7 +27,7 @@ namespace QuanLyKhachSan.Controllers
             }
             else
             {
-                var newChiTietPhongVatTu = new ChiTietPhongVatTu
+                 var newChiTietPhongVatTu = new ChiTietPhongVatTu
                 {
                     MaPhong = MaPhong,
                     MaVatTu = MaVatTu,
@@ -39,7 +39,7 @@ namespace QuanLyKhachSan.Controllers
             }
 
             _db.SaveChanges();
-
+                
             // Chuyển hướng về trang Index của ChiTietPhongVatTu
             return RedirectToAction("Index", "ChiTietPhongVatTu");
         }

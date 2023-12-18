@@ -176,14 +176,14 @@
 
                         <div class="form-group">
                             <label>Số lượng</label>
-                            <input class="form-control" id="inputEditSoLuong" name="ngaytao" type="number" id="inputFieldNgayTao" />
+                            <input class="form-control" id="inputEditSoLuong" name="ngaytao" type="number" value="1" min="1   " onkeypress="return event.charCode >= 48" onblur="if(this.value=='' || this.value==0){this.value='1'}" />
                             <span id="errorNgayTao" style="color: red;"></span>
                         </div>
                        
                     </div>
                     <div class="col-md-4">
                         <label>Tình trạng</label>
-                        <select class="form-control" id="inputEditTinhTrang" name="maloaiphong" id="inputFieldChonLP">
+                        <select class="form-control" id="inputEditTinhTrang" name="maloaiphong" >
                             
                             <option value="Đang hoạt động">
                                 Đang hoạt động
