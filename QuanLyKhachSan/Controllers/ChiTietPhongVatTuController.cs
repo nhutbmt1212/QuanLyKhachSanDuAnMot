@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyKhachSan.Models;
 
 namespace QuanLyKhachSan.Controllers
 {
+    [Authorize]
     public class ChiTietPhongVatTuController : Controller
     {
         public readonly ApplicationDbContext _db;
