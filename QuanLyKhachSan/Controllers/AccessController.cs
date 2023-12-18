@@ -43,7 +43,7 @@ namespace QuanLyKhachSan.Controllers
 			var qr_khachhang = _db.KhachHang.FirstOrDefault(s => s.Email == TenDangNhap && s.MatKhau == MatKhau);
 			if (qr_nhanvien!=null)
 			{
-				if(qr_nhanvien.ChucVu=="Quản lý")
+				if(qr_nhanvien.ChucVu=="Quản lý" || qr_nhanvien.TinhTrang !="Đã xóa"  || qr_nhanvien.TinhTrang != "Nghỉ việc")
 				{
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
