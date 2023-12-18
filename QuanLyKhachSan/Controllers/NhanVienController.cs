@@ -347,8 +347,8 @@ namespace QuanLyKhachSan.Controllers
             float pointsForThirdhColumn = points * 1.25f;
             float pointsForConditionhColumn = points * 1.15f;
             // Tạo một bảng để lưu trữ dữ liệu khách hàng
-            PdfPTable table = new PdfPTable(15);
-            table.SetTotalWidth(new float[] { points, points, pointsForThirdhColumn, pointsForFourthColumn, pointsForThirdhColumn, pointsForThirdhColumn, points, points, pointsForThirdhColumn, pointsForConditionhColumn, points, pointsForThirdhColumn, points, points, pointsForThirdhColumn });
+            PdfPTable table = new PdfPTable(14);
+            table.SetTotalWidth(new float[] { points, points, pointsForThirdhColumn, pointsForFourthColumn, pointsForThirdhColumn, pointsForThirdhColumn, points, points, pointsForThirdhColumn, pointsForConditionhColumn, points, pointsForThirdhColumn, points, points });
 
 
             // Tạo một font
@@ -361,7 +361,7 @@ namespace QuanLyKhachSan.Controllers
             BaseColor headerBackgroundColor = new BaseColor(0, 119, 119);
 
             // Thêm tiêu đề cho các cột
-            string[] headers = { "ID", "Name", "Idpersonal", "Sex", "Day of birth", "Phone number", "Address", "Duty", "Date of entry", "Condition", "UserName", "Password", "Image", "Email", "Date of registration" };
+            string[] headers = { "ID", "Name", "Idpersonal", "Sex", "Day of birth", "Phone number", "Address", "Duty", "Date of entry", "Condition", "Password", "Image", "Email", "Date of registration" };
 
             foreach (var header in headers)
             {
@@ -376,18 +376,19 @@ namespace QuanLyKhachSan.Controllers
             foreach (var nv in nhanvien)
             {
                 table.AddCell(new Phrase(nv.MaNhanVien.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.TenNhanVien.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.CCCD.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.NgaySinh.ToShortDateString(), contentFont));
+                table.AddCell(new Phrase(nv.NgaySinh.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.SoDienThoai.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.DiaChi.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.ChucVu.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.NgayVaoLam.ToShortDateString(), contentFont));
+                table.AddCell(new Phrase(nv.GioiTinh.ToString(), contentFont));
+                table.AddCell(new Phrase(nv.NgayVaoLam.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.TinhTrang.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.MatKhau.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.AnhNhanVienBase64.ToString(), contentFont));
                 table.AddCell(new Phrase(nv.Email.ToString(), contentFont));
-                table.AddCell(new Phrase(nv.NgayDangKy.ToShortDateString(), contentFont));
+                table.AddCell(new Phrase(nv.NgayDangKy.ToString(), contentFont));
             }
 
             // Thêm bảng vào tài liệu PDF
