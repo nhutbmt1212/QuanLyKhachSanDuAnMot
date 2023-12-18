@@ -43,9 +43,9 @@ namespace QuanLyKhachSan.Models
                new NhanVien
                {
                    MaNhanVien = "NV001",
-                   TenNhanVien = "Nguyen Van A",
+                   TenNhanVien = "Nguyễn Văn A",
                    SoDienThoai = "0123456789",
-                   DiaChi = "123 Nguyen Van A, Quan 1, TP.HCM",
+                   DiaChi = "222 Quận 1, TP.HCM",
                    CCCD = "123456789012",
                    NgaySinh = new DateTime(1990, 1, 1),
                    Email = "nhanvien1@example.com",
@@ -60,9 +60,9 @@ namespace QuanLyKhachSan.Models
                new NhanVien
                {
                    MaNhanVien = "NV002",
-                   TenNhanVien = "Tran Thi B",
+                   TenNhanVien = "Trần Thị B",
                    SoDienThoai = "0987654321",
-                   DiaChi = "456 Tran Thi B, Quan 2, TP.HCM",
+                   DiaChi = "328 Quận 2, TP.HCM",
                    CCCD = "987654321098",
                    NgaySinh = new DateTime(1995, 5, 5),
                    Email = "nhanvien2@example.com",
@@ -77,9 +77,9 @@ namespace QuanLyKhachSan.Models
                new NhanVien
                {
                    MaNhanVien = "NV003",
-                   TenNhanVien = "Le Van C",
+                   TenNhanVien = "Lê Văn C",
                    SoDienThoai = "0111223344",
-                   DiaChi = "789 Le Van C, Quan 3, TP.HCM",
+                   DiaChi = "120 Hà Huy Tập, BMT",
                    CCCD = "111223344055",
                    NgaySinh = new DateTime(1985, 10, 10),
                    Email = "nhanvien3@example.com",
@@ -94,9 +94,9 @@ namespace QuanLyKhachSan.Models
                new NhanVien
                {
                    MaNhanVien = "NV004",
-                   TenNhanVien = "Pham Thi D",
+                   TenNhanVien = "Phạm Thị D",
                    SoDienThoai = "0555666777",
-                   DiaChi = "101 Pham Thi D, Quan 4, TP.HCM",
+                   DiaChi = "101 Phạm Hùng, BMT",
                    CCCD = "555666777044",
                    NgaySinh = new DateTime(1988, 8, 8),
                    Email = "nhanvien4@example.com",
@@ -111,9 +111,9 @@ namespace QuanLyKhachSan.Models
                new NhanVien
                {
                    MaNhanVien = "NV005",
-                   TenNhanVien = "Hoang Van E",
+                   TenNhanVien = "Hoàng Văn E",
                    SoDienThoai = "0999888777",
-                   DiaChi = "202 Hoang Van E, Quan 5, TP.HCM",
+                   DiaChi = "Hà Nội",
                    CCCD = "999888777033",
                    NgaySinh = new DateTime(1980, 12, 12),
                    Email = "nhanvien5@example.com",
@@ -131,9 +131,9 @@ namespace QuanLyKhachSan.Models
                 new KhachHang
                 {
                     MaKhachHang = "KH001",
-                    TenKhachHang = "Nguyen Van X",
+                    TenKhachHang = "Nguyễn Văn Hải",
                     SoDienThoai = "0123456789",
-                    DiaChi = "123 Nguyen Van X, Quan 1, TP.HCM",
+                    DiaChi = "Quận 3, TP.HCM",
                     CCCD = "123456789012",
                     NgaySinh = new DateTime(1992, 3, 15),
                     GioiTinh = "Nam",
@@ -145,9 +145,9 @@ namespace QuanLyKhachSan.Models
                 new KhachHang
                 {
                     MaKhachHang = "KH002",
-                    TenKhachHang = "Tran Thi Y",
+                    TenKhachHang = "Trần Thị Hà",
                     SoDienThoai = "0987654321",
-                    DiaChi = "456 Tran Thi Y, Quan 2, TP.HCM",
+                    DiaChi = "456 Thủ dầu một, Bình Dương",
                     CCCD = "987654321098",
                     NgaySinh = new DateTime(1995, 7, 20),
                     GioiTinh = "Nữ",
@@ -159,7 +159,7 @@ namespace QuanLyKhachSan.Models
                 new KhachHang
                 {
                     MaKhachHang = "KH003",
-                    TenKhachHang = "Le Van Z",
+                    TenKhachHang = "Lê Văn Thái",
                     SoDienThoai = "0111223344",
                     DiaChi = "789 Le Van Z, Quan 3, TP.HCM",
                     CCCD = "111223344055",
@@ -173,9 +173,9 @@ namespace QuanLyKhachSan.Models
                 new KhachHang
                 {
                     MaKhachHang = "KH004",
-                    TenKhachHang = "Pham Thi K",
+                    TenKhachHang = "Phạm Thị Thanh",
                     SoDienThoai = "0555666777",
-                    DiaChi = "101 Pham Thi K, Quan 4, TP.HCM",
+                    DiaChi = "101 Từ Liêm, Hà Nội",
                     CCCD = "555666777044",
                     NgaySinh = new DateTime(1990, 12, 25),
                     GioiTinh = "Nữ",
@@ -187,9 +187,9 @@ namespace QuanLyKhachSan.Models
                 new KhachHang
                 {
                     MaKhachHang = "KH005",
-                    TenKhachHang = "Hoang Van M",
+                    TenKhachHang = "Hoàng Văn Thanh",
                     SoDienThoai = "0999888777",
-                    DiaChi = "202 Hoang Van M, Quan 5, TP.HCM",
+                    DiaChi = "Gia Lai",
                     CCCD = "999888777033",
                     NgaySinh = new DateTime(1985, 5, 1),
                     GioiTinh = "Nam",
@@ -733,7 +733,7 @@ namespace QuanLyKhachSan.Models
                   TenVatTu = "Đèn ngủ",
                   TinhTrangVatTu = "Ngưng hoạt động",
                   NgayThem = DateTime.Now,
-                  NhaSanXuat="Đèn trang thí Lan Anh"
+                  NhaSanXuat="Đèn trang trí Lan Anh"
               },
               new VatTu
               {
