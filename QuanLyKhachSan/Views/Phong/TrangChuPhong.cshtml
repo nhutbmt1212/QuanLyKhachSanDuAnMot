@@ -326,7 +326,7 @@ ngayDangKyEdit        }
                                 <p>Phòng chưa có ảnh</p>
                                 }
                         </td>
-                        <td style="font-size:20px" class="employee-info-column-button">
+                        @* <td style="font-size:20px" class="employee-info-column-button">
                             <div class="dropdown">
                                 <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style=" background-color: rgba(0, 0, 0, 0);">
                                     <i class="bi bi-three-dots-vertical icon_threeDot"></i>
@@ -336,6 +336,20 @@ ngayDangKyEdit        }
                                         @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
                                         {
                                         <a class="dropdown-item" id="xoa-phong" onclick="XoaPhong('@phong.MaPhong')">Xóa</a>
+                                        }
+                                </div>
+                            </div>
+                        </td> *@
+                        <td style="font-size:20px" class="employee-info-column-button">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary check_checkbox_checked" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: rgba(0, 0, 0, 0);">
+                                    <i class="bi bi-three-dots-vertical icon_threeDot"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item check_checkbox" id="btn_Sua" onclick="HienThiAnhSuaPhong('@phong.MaPhong')">Sửa</a>
+                                        @if (User.Identity.IsAuthenticated && userRole == "Quản lý")
+                                        {
+                                        <a class="dropdown-item" id="xoa-phong" onclick="confirmDelete('@phong.MaPhong')">Xóa</a>
                                         }
                                 </div>
                             </div>
@@ -405,4 +419,24 @@ ngayDangKyEdit        }
             $('#formExample').submit(); // Gửi biểu mẫu khi giá trị thay đổi
         });
     });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script>
+    function confirmDelete(maPhong, tenPhong) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn?',
+            text: 'Muốn xóa ' + maPhong + ' không?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu người dùng chọn Yes, thực hiện xóa
+                window.location.href = "/Phong/XoaPhong?MaPhong=" + maPhong;
+            }
+        });
+    }
 </script>
