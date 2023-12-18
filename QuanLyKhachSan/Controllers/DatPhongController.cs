@@ -17,7 +17,7 @@ namespace QuanLyKhachSan.Controllers
 		}
 		public IActionResult Index()
 		{
-			var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s => s.TinhTrang != "Đã xóa").ToList();
+			var listPhong = _db.Phong.Include(p => p.ImageLinks).Where(s => s.TinhTrang != "Đã xóa" && s.TinhTrang !="Đang bảo trì").ToList();
 			return View(listPhong);
 		}
 

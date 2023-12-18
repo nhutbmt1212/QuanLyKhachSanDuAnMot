@@ -43,8 +43,8 @@ namespace QuanLyKhachSan.Controllers
 			var qr_khachhang = _db.KhachHang.FirstOrDefault(s => s.Email == TenDangNhap && s.MatKhau == MatKhau);
 			if (qr_nhanvien!=null)
 			{
-				if(qr_nhanvien.ChucVu=="Quản lý" || qr_nhanvien.TinhTrang !="Đã xóa"  || qr_nhanvien.TinhTrang != "Nghỉ việc")
-				{
+                if (qr_nhanvien.ChucVu == "Quản lý" && (qr_nhanvien.TinhTrang != "Đã xóa" && qr_nhanvien.TinhTrang != "Nghỉ việc"))
+                {
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Role, "Quản lý"));
                     claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
@@ -55,8 +55,8 @@ namespace QuanLyKhachSan.Controllers
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
                     return RedirectToAction("Index", "Home");
                 }
-				else if(qr_nhanvien.ChucVu=="Nhân viên")
-				{
+                else if (qr_nhanvien.ChucVu == "Nhân viên" && (qr_nhanvien.TinhTrang != "Đã xóa" && qr_nhanvien.TinhTrang != "Nghỉ việc"))
+                {
                     claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
                     claims.Add(new Claim(ClaimTypes.Role, "Nhân viên"));
                     claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
@@ -70,8 +70,8 @@ namespace QuanLyKhachSan.Controllers
                 }
 			
 			}
-			else if (qr_khachhang!=null)
-			{
+            else if (qr_khachhang != null && (qr_khachhang.TinhTrang != "Đã xóa" && qr_khachhang.TinhTrang!="Ngừng hoạt động"))
+            {
 				claims.Add(new Claim(ClaimTypes.NameIdentifier, TenDangNhap));
 				claims.Add(new Claim(ClaimTypes.Role, "Khách hàng"));
                 claims.Add(new Claim(ClaimTypes.UserData, TenDangNhap));
@@ -83,11 +83,10 @@ namespace QuanLyKhachSan.Controllers
 				await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
 				return RedirectToAction("Index", "TrangChuKhachHang");
 			}
-            else
-            {
+       
                 TempData["SwalIcon"] = "error";
                 TempData["SwalTitle"] = "Đăng nhập không thành công";
-            }
+            
 
 			
 			return View();
