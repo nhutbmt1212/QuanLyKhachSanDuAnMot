@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <style>
         .popup-overlay {
             display: none;
@@ -101,7 +102,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Tên phòng</label>
-                            <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
+                            <select class="form-control" name="maloaiphong" id="inputFieldChonPhong">
                                 <option value="">Chọn phòng</option>
                                 @{
                                     var qr_Phong = _db.Phong.ToList();
@@ -123,14 +124,12 @@
 
                         <div class="form-group">
                             <label>Tên vật tư</label>
-                            <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
-                                <option value="">Chọn vật tư</option>
+                            <select class="form-control" name="maloaiphong" id="inputFieldChonVatTu">
                                 @foreach (var vattu in qr_VatTu)
                                 {
-                                    var qr_VatTuDaTrongPhong =
-                                                   <option value="@vattu.MaVatTu">
-                                                       @vattu.MaVatTu - @vattu.TenVatTu
-                                    </option>
+                                   <option value="@vattu.MaVatTu">
+                                        @vattu.MaVatTu - @vattu.TenVatTu
+                                   </option>
                                 }
                             </select>
                             <span id="errorChonLP" style="color: red;"></span>
@@ -140,7 +139,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Số lượng</label>
-                            <input class="form-control" name="ngaytao" type="number" id="inputFieldNgayTao" />
+                            <input class="form-control" name="ngaytao" type="number" id="inputFieldSoLuong" />
                             <span id="errorNgayTao" style="color: red;"></span>
                         </div>
                     </div>
@@ -148,7 +147,7 @@
 
                 <div class="clearfix">
                     <button class="btn align-middle m-2 w-25 btn " style="min-width:200px" type="submit"
-                            onclick="ThemPhong()">
+                            onclick="ThemVatTu()">
                         Thêm vật tư vào phòng
                     </button>
                     <button type="button" class="btn align-middle m-2 w-25  cancel" onclick="closeForm()">Đóng</button>
@@ -164,12 +163,12 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Tên phòng</label>
-                            <input class="form-control" name="ngaytao" type="text" readonly />
+                            <input class="form-control" id="inputEditMaPhong" name="ngaytao" type="text" readonly />
                             <span id="errorMaP" style="color: red;"></span>
                         </div>
                         <div class="form-group">
                             <label>Tên vật tư</label>
-                            <input class="form-control" name="ngaytao" type="text" readonly />
+                            <input class="form-control" id="inputEditMaVatTu" name="ngaytao" type="text" readonly />
                             <span id="errorChonLP" style="color: red;"></span>
                         </div>
                     </div>
@@ -177,19 +176,15 @@
 
                         <div class="form-group">
                             <label>Số lượng</label>
-                            <input class="form-control" name="ngaytao" type="number" id="inputFieldNgayTao" />
+                            <input class="form-control" id="inputEditSoLuong" name="ngaytao" type="number" id="inputFieldNgayTao" />
                             <span id="errorNgayTao" style="color: red;"></span>
                         </div>
-                        <div class="form-group">
-                            <label>Ngày thêm</label>
-                            <input class="form-control" name="ngaytao" type="date" id="inputFieldNgayTao" />
-                            <span id="errorNgayTao" style="color: red;"></span>
-                        </div>
+                       
                     </div>
                     <div class="col-md-4">
                         <label>Tình trạng</label>
-                        <select class="form-control" name="maloaiphong" id="inputFieldChonLP">
-                            <option value="">Chọn tình trạng</option>
+                        <select class="form-control" id="inputEditTinhTrang" name="maloaiphong" id="inputFieldChonLP">
+                            
                             <option value="Đang hoạt động">
                                 Đang hoạt động
                             </option>
@@ -205,8 +200,8 @@
 
                 <div class="clearfix">
                     <button class="btn align-middle m-2 w-25 btn-success" id="btn-ThemvtPhong" style="min-width:200px"
-                            type="submit" onclick="SuaPhong()">
-                        Thêm phòng
+                            type="submit" onclick="SuaVatTuPhong()">
+                        Sửa vật tư
                     </button>
                     <button type="button" class="btn align-middle m-2 w-25  cancel"
                             onclick="closeFormEdit()">
@@ -262,9 +257,9 @@
                             <td>@item.TinhTrang</td>
 
                         <td>
-                            <button class="btn btn-primary btn-sm" id="btn_Sua" onclick="openFormEdit()">Sửa</button>
+                                <button class="btn btn-primary btn-sm" id="btn_Sua" onclick="SuaVatTu(this, '@item.MaPhong', '@item.MaVatTu', '@item.SoLuong', '@item.TinhTrang')">Sửa</button>
 
-                            <button class="btn btn-danger btn-sm" onclick="deleteReservation()">
+                            <button class="btn btn-danger btn-sm" onclick="XoaVatTuPhong('@item.MaVatTu', '@item.MaPhong')">
                                 Xóa
                             </button>
                             </td>
@@ -276,9 +271,9 @@
     </div>
 
 
-
+    <script src="~/js/JsPhongVatTu.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    @* <script src="https://cdn.jsdelivr.net/npm/popperjs/core@2.9.3/dist/umd/popper.min.js"></script> *@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function () {
@@ -310,16 +305,12 @@
 
         }
 
-        var btn_them = document.getElementById('btn_Sua');
-
-        function openFormEdit() {
-            document.getElementById("myFormEdit").style.display = "block";
-            btn_them.style.display = 'none';
-        }
+        var btn_sua = document.getElementById('btn_Sua');
+       
 
         function closeFormEdit() {
             document.getElementById("myFormEdit").style.display = "none";
-            btn_them.style.display = 'block';
+            // btn_sua.style.display = 'block';
 
         }
         document.getElementById('btn_themPhong').addEventListener('click', hidePopUpEditNhanVien);
