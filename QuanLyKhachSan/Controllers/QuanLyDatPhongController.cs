@@ -164,7 +164,7 @@ namespace QuanLyKhachSan.Controllers
         {
             string result = null;
 
-            var qr_Phong = _db.DatPhong.Where(s => s.MaPhong == MaPhong && s.MaDatPhong !=MaDatPhong).ToList();
+            var qr_Phong = _db.DatPhong.Where(s => s.MaPhong == MaPhong && s.MaDatPhong !=MaDatPhong && s.TinhTrang != "Hủy đặt phòng").ToList();
             //check ngày nhận nằm trong khung giờ đã được đặt
             if (qr_Phong != null)
             {

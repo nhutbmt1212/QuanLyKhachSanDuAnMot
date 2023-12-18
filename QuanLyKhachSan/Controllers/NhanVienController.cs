@@ -1,18 +1,15 @@
-﻿using Azure;
+﻿using iTextSharp.text;
+using iTextSharp.text.pdf;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
 using QuanLyKhachSan.Models;
 using System.Data;
-using OfficeOpenXml;
-using System.ComponentModel;
-using LicenseContext = OfficeOpenXml.LicenseContext;
-using iTextSharp;
-using iTextSharp.text.pdf;
-using iTextSharp.text;
 using System.Security.Claims;
+using LicenseContext = OfficeOpenXml.LicenseContext;
 
 namespace QuanLyKhachSan.Controllers
-{ 
+{
     [Authorize]
     public class NhanVienController : Controller
     {
@@ -25,9 +22,9 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult TrangChuNhanVien()
         {
-            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!= "Đã nghỉ việc" || s.TinhTrang != "Đã xóa").ToList();
+            var listNhanVien = _db.NhanVien.Where(s=> s.TinhTrang == "Đang hoạt động").ToList();
             return View(listNhanVien);
-        }
+        }   
 
         public IActionResult HoSoNhanVien()
         {
