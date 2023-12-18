@@ -2,12 +2,14 @@
 @{
 	var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
 	var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+	ViewData["Title"] = "Tổng quan khách sạn";
 }
 @if (User.Identity.IsAuthenticated && userRole != "Quản lý" && User.Identity.IsAuthenticated && userRole != "Nhân viên")
 {
 	Layout = null;
 	<partial name="../Shared/404Error.cshtml" />
 	return;
+
 }
 @using System.Security.Claims;
 <style>
@@ -23,9 +25,21 @@
 		text-align: center; /* Căn đều ở giữa */
 	}
 
-	
+	footer {
+		background-color: #f8f9fa;
+		padding: 20px 0;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		text-align: center;
+	}
+
+		footer p {
+			margin: 0;
+		}
 
 </style>
+
 <main>
 	<ul class="box-info">
 		@if (User.Identity.IsAuthenticated && userRole == "Quản lý" ){
@@ -203,6 +217,7 @@
 
 
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 	fetch('/Home/LaySoLuongKhachHang', {

@@ -70,7 +70,7 @@ getValue.addEventListener('click', function (e) {
     var matKhau = row.dataset.matkhau;
     var tinhTrang = row.dataset.tinhtrang;
     var email = row.dataset.email;
-    var ngayDangKy = row.dataset.NgayDangKy
+    var ngayDangKy = row.dataset.ngaydangky
     console.log(gioiTinh);
     document.querySelector('.MaKhachHangEdit').value = MaKh;
     document.querySelector('.TenKhachHangEdit').value = TenKh;
@@ -88,8 +88,41 @@ getValue.addEventListener('click', function (e) {
  
     document.querySelector('.NgaySinhEdit').value = ngaySinhFormatted;
 
+    console.log(ngayDangKy);
+    formatAndSetDate(ngayDangKy);
+    
    
 });
+
+function formatAndSetDate(ngayDangKy) {
+    // Check if ngayDangKy is not null or undefined
+    if (ngayDangKy) {
+        // Split the date string
+        var ngayVaoLamParts = ngayDangKy.split('/');
+
+        // Check if the date string is in the expected format
+        if (ngayVaoLamParts.length === 3) {
+            // Format the date as "yyyy-MM-dd"
+            var ngayVaoLamFormatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
+
+            // Set the formatted date to the input field
+            var inputEditNgayDangKy = document.querySelector('#inputEditNgayDangKy');
+
+            // Check if the input element exists
+            if (inputEditNgayDangKy) {
+                inputEditNgayDangKy.value = ngayVaoLamFormatted;
+            } else {
+                console.error('Input element not found: #inputEditNgayDangKy');
+            }
+        } else {
+            // Handle invalid date format (you may display an error message or take appropriate action)
+            console.error('Invalid date format: ' + ngayDangKy);
+        }
+    } else {
+        // Handle the case where ngayDangKy is null or undefined
+        console.error('ngayDangKy is null or undefined');
+    }
+}
 document.getElementById('thead_checkbox').addEventListener('click', TickedAllCheckBox);
 
 function TickedAllCheckBox() {

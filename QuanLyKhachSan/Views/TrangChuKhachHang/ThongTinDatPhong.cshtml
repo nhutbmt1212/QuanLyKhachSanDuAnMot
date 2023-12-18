@@ -10,6 +10,7 @@
     var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
     var TenNguoiDung = User.FindFirst(ClaimTypes.Name)?.Value;
     var MaNguoiDung = User.FindFirst(ClaimTypes.Surname)?.Value;
+
 }
 <!DOCTYPE html>
 <html lang="vi">
@@ -75,6 +76,19 @@
                         background: var(--grey);
                         text-decoration: none;
                     }
+
+        footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+        }
+
+            footer p {
+                margin: 0;
+            }
     </style>
 </head>
 
@@ -403,4 +417,16 @@
     <script src="~/js/ThongTinDatPhong.js"></script>
     <script src="~/Folder_KiemLoiInput/ErrorThongTinDatPhong.js"></script>
 </body>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p style="color:black">&copy; 2023 ASAP Hotel. All rights reserved.</p>
+            </div>
+            <div class="col-md-6 text-right">
+                <p style="color:black">Designed by ASAP Team</p>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>

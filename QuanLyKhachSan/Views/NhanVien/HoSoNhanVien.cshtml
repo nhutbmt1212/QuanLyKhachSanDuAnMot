@@ -2,6 +2,7 @@
 @{
     var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
     var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+    ViewData["Title"] = "Hồ sơ nhân viên";
 }
 @if (User.Identity.IsAuthenticated && userRole != "Quản lý" && User.Identity.IsAuthenticated && userRole != "Nhân viên")
 {
@@ -87,7 +88,7 @@
                         <li class="list-group-item display-mode" id="employeeNameItem">
                             <strong>Tên Nhân Viên:</strong>
                             <span class="display-mode" id="employeeName">@Model.TenNhanVien</span>
-                            <a href="#" onclick="editMode('employeeName')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('employeeName')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_employeeName" asp-for="TenNhanVien" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                                    <br />
@@ -104,7 +105,7 @@
                         <li class="list-group-item display-mode" id="phoneNumberItem">
                             <strong>Số Điện Thoại:</strong>
                             <span class="display-mode" id="phoneNumber">@Model.SoDienThoai</span>
-                            <a href="#" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('phoneNumber')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_phoneNumber" asp-for="SoDienThoai" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                             <span id="ErrorEmployeePhoneNumber" style="color:red;font-weight:700;"></span>
@@ -120,7 +121,7 @@
                         <li class="list-group-item display-mode" id="cccdItem">
                             <strong>CCCD:</strong>
                             <span class="display-mode" id="cccd">@Model.CCCD</span>
-                            <a href="#" onclick="editMode('cccd')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('cccd')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_cccd" asp-for="CCCD" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                             <span id="ErrorEmployeemCCCD" style="color:red;font-weight:700;"></span>
@@ -136,7 +137,7 @@
                         <li class="list-group-item display-mode" id="emailItem">
                             <strong>Email:</strong>
                             <span class="display-mode" id="email">@Model.Email</span>
-                            <a href="#" onclick="editMode('email')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('email')">Chỉnh Sửa</a>
                             <input type="email" id="editedValue_email" asp-for="Email" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                             <span id="ErrorEmployeemEmail" style="color:red;font-weight:700;"></span>
@@ -157,7 +158,7 @@
                                 <option value="Nam">Nam</option>
                                 <option value="Nữ">Nữ</option>
                             </select>
-                            <a href="#" onclick="editMode('gender')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('gender')">Chỉnh Sửa</a>
                             <button class="btn btn-success edit-mode-input" style="display: none;"
                                     onclick="saveEdit('gender')">
                                 Lưu
@@ -177,7 +178,7 @@
                         <li class="list-group-item display-mode" id="addressItem">
                             <strong>Địa Chỉ:</strong>
                             <span class="display-mode" id="address">@Model.DiaChi</span>
-                            <a href="#" onclick="editMode('address')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('address')">Chỉnh Sửa</a>
                             <input type="text" id="editedValue_address" asp-for="DiaChi" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                             <span id="ErrorEmployeemDiaChi" style="color:red;font-weight:700;"></span>
@@ -200,7 +201,7 @@
                         <li class="list-group-item display-mode" id="passwordItem">
                             <strong>Mật Khẩu:</strong>
                             <span class="display-mode" id="password">@Model.MatKhau</span>
-                            <a href="#" onclick="editMode('password')">Chỉnh Sửa</a>
+                            <a class="text-primary" onclick="editMode('password')">Chỉnh Sửa</a>
                             <input type="password" id="editedValue_password" asp-for="MatKhau" class="form-control edit-mode-input mb-1"
                                    style="display: none;">
                             <span id="ErrorEmployeemPassWord" style="color:red;font-weight:700;"></span>

@@ -41,11 +41,40 @@ function OpenFormEdit(maVatTu, tenVatTu, nhaSanXuat, tinhTrangVatTu, ngayThem) {
     document.getElementById("inputEditTenVT").value = tenVatTu.trim();
     document.getElementById("inputEditNhaSX").value = nhaSanXuat.trim();
     document.getElementById("TinhTrangVatTuEdit").value = tinhTrangVatTu;
-
+    console.log(ngayThem);
     // Chuyển định dạng ngày
    /* var formattedDate = ngayThem.replace(" ", "T");*/
-    document.getElementById("NgayThemEdit").value = ngayThem;
-    console.log(ngayThem)
+    //document.getElementById("NgayThemEdit").value = ngayThem;
+    formatAndSetDate(ngayThem);
+}
+function formatAndSetDate(ngayThem) {
+    // Check if ngayDangKy is not null or undefined
+    if (ngayThem) {
+        // Split the date string
+        var ngayVaoLamParts = ngayThem.split('/');
+
+        // Check if the date string is in the expected format
+        if (ngayVaoLamParts.length === 3) {
+            // Format the date as "yyyy-MM-dd"
+            var ngayVaoLamFormatted = ngayVaoLamParts[2] + '-' + ngayVaoLamParts[1] + '-' + ngayVaoLamParts[0];
+
+            // Set the formatted date to the input field
+            var inputEditNgayDangKy = document.querySelector('#NgayThemEdit');
+
+            // Check if the input element exists
+            if (inputEditNgayDangKy) {
+                inputEditNgayDangKy.value = ngayVaoLamFormatted;
+            } else {
+                console.error('Input element not found: #NgayThemEdit');
+            }
+        } else {
+            // Handle invalid date format (you may display an error message or take appropriate action)
+            console.error('Invalid date format: ' + ngayDangKy);
+        }
+    } else {
+        // Handle the case where ngayDangKy is null or undefined
+        console.error('ngayDangKy is null or undefined');
+    }
 }
 $(document).ready(function () {
     $("#inputFieldTenVT").on("focusout", function () {

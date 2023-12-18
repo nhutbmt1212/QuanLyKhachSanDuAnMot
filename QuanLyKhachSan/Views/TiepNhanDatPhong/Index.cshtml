@@ -2,6 +2,7 @@
 @{
     var userRole = User.FindFirst(ClaimTypes.Role)?.Value;
     var userName = User.FindFirst(ClaimTypes.UserData)?.Value;
+    ViewData["Title"] = "Tiếp nhận đặt phòng";
 }
 @if (User.Identity.IsAuthenticated && userRole != "Quản lý" && User.Identity.IsAuthenticated && userRole != "Nhân viên")
 {
