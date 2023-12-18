@@ -444,10 +444,12 @@ function validateNgayTra() {
         var today = new Date();
         var ngayNhan = document.getElementById('ngayNhanPhong_PopUpDatPhong').value;
         var ngayTra = document.getElementById('ngayTraPhong_PopUpDatPhong').value;
+        var ngayNhanTinhGio = new Date(document.getElementById('ngayNhanPhong_PopUpDatPhong').value);
+        var ngayTraTinhGio = new Date(document.getElementById('ngayTraPhong_PopUpDatPhong').value);
         var maPhong = $('#MaPhong_PopUp_DatPhong').text();
-        var chenhlechthoigian = ngayTra - ngayNhan;
+        var chenhlechthoigian = ngayTraTinhGio - ngayNhanTinhGio;
         var chenhlechgio = chenhlechthoigian / (1000 * 60 * 60);
-        if (ngayNhan < today) {
+        if (ngayNhanTinhGio < today) {
             document.getElementById('errorNgayNhan').textContent = 'Ngày nhận phải lớn hơn hoặc bằng giờ hiện tại';
             reject(false);
         }

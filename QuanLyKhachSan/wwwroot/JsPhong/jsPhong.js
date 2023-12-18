@@ -287,12 +287,14 @@ function SuaPhong() {
     var maphong = $(".maphongedit").val();
     var maloaiphong = $("#inputEditChonLP").val();
     var ngaytao = $("#inputEditNgayTao").val();
+    var tinhtrang = $('#inputEditTinhTrang').val();
 
     var formData = new FormData();
 
     formData.append("MaPhong", maphong);
     formData.append("MaLoaiPhong", maloaiphong);
     formData.append("NgayTao", ngaytao);
+    formData.append("TinhTrang", tinhtrang)
 
     if (arrImagePreviewingEdit.length > 0) {
         for (var i = 0; i < arrImagePreviewingEdit.length; i++) {

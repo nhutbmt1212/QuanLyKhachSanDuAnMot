@@ -86,7 +86,7 @@ namespace QuanLyKhachSan.Controllers
             }
             qr_Phong.MaLoaiPhong = phong.MaLoaiPhong;
             qr_Phong.NgayTao = phong.NgayTao;
-            qr_Phong.TinhTrang = "Đang hoạt động";
+            qr_Phong.TinhTrang = phong.TinhTrang;
 
             qr_Phong.ImageLinks = images;
 
