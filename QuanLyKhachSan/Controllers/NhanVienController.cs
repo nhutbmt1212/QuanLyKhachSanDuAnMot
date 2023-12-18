@@ -25,7 +25,7 @@ namespace QuanLyKhachSan.Controllers
         }
         public IActionResult TrangChuNhanVien()
         {
-            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!= "Nghỉ việc").ToList();
+            var listNhanVien = _db.NhanVien.Where(s=>s.TinhTrang!= "Đã nghỉ việc" || s.TinhTrang != "Đã xóa").ToList();
             return View(listNhanVien);
         }
 
